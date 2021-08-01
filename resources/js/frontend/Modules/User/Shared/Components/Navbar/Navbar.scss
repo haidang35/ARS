@@ -1,0 +1,33 @@
+.user-nav {
+    position: relative;
+    .nav-bar {
+        color: white;
+        box-shadow: none;
+        padding-top: 1em;
+        padding-left: 0;
+
+        .list-menu {
+            margin-left: 24rem;
+            .menu-item {
+                color: white;
+                font-size: 21px;
+                text-decoration: none;
+                font-weight: 400;
+                margin-right: 3rem;
+                padding-bottom: 0.3rem;
+            }
+
+            .active {
+                border-bottom: 2px solid white;
+            }
+        }
+    }
+
+    .btn-login {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        right: 20px;
+
+    }
+}

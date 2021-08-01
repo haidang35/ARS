@@ -1,0 +1,62 @@
+import React from "react";
+import { Component } from "react";
+import { Link, NavLink } from "react-router-dom";
+import "./Sidebar.scss";
+
+class SideBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    render() {
+        return (
+            <div id="sidebar" className="sidebar-admin active">
+                <div className="sidebar-wrapper active">
+                    <div className="sidebar-header">
+                        <div className="d-flex justify-content-between">
+                            <div className="logo">
+                                <Link to="" style={{textDecoration: 'none'}}>
+                                   ARS Manage
+                                </Link>
+                            </div>
+                            <div className="toggler">
+                                <a
+                                    href="#"
+                                    className="sidebar-hide d-xl-none d-block"
+                                >
+                                    <i className="bi bi-x bi-middle" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sidebar-menu">
+                        <ul className="menu">
+                            <li className="sidebar-title">Menu</li>
+                            <li className="sidebar-item  ">
+                                <NavLink to="/admin" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Dashboard</span>
+                                </NavLink>
+                                <NavLink to="/admin/flights" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Flights</span>
+                                </NavLink>
+                                <NavLink to="/admin/destinations" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Destinations</span>
+                                </NavLink>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    <button className="sidebar-toggler btn x">
+                        <i data-feather="x" />
+                    </button>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default SideBar;

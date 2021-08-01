@@ -1,0 +1,60 @@
+.user-header {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../../Public/Images/slider.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .header-content {
+        .header-left {
+            margin-top: 6rem;
+            color: white;
+            width: 33rem;
+
+            .title {
+                width: 28rem;
+                color: #ffff;
+            }
+
+            .form-check {
+                padding-left: 0;
+
+                .check-box {
+                    color: #00e5ff;
+                }
+            }
+
+            .form-input {
+                .input-field {
+                    width: 100%;
+                    color: white;
+                    font-size: 17px;
+                    margin-top: 1rem;
+                }
+
+
+            }
+
+            .date-field {
+                width: 48.3%;
+                color: white;
+                font-size: 17px;
+                margin-top: 1rem;
+                margin-right: 1rem;
+            }
+
+            .date-field-right {
+                margin-right: 0;
+            }
+
+            .btn-search-form {
+                background: rgb(238, 206, 41);
+                background: linear-gradient(90deg, rgba(238, 206, 41, 0.9612219887955182) 25%, rgba(236, 153, 27, 0.9472163865546218) 69%);
+                border-radius: 35px;
+                margin-top: 0.6rem;
+                padding: 1rem 2rem;
+                font-size: 19px;
+            }
+        }
+    }
+}

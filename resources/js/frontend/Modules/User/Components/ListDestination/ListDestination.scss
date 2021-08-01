@@ -1,0 +1,47 @@
+
+.list-destination {
+    
+    .card-content {
+        width: 35rem;
+        padding: 20px 18px;
+
+        .title {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .input-field {
+            width: 100%;
+            color: white;
+            font-size: 17px;
+            margin-top: 1rem;
+        }
+
+        .choose-country {
+            margin-top: 1rem;
+        }
+
+        .choose-destination {
+            padding: 1rem 1.5rem;
+            .list-destination {
+                padding: 0;
+                .item {
+                    list-style: none;
+                    font-size: 17px;
+                    cursor: pointer;
+                    font-weight: 500;
+                }
+
+                .item:hover {
+                    color: #10a8a8 ;
+                }
+            }
+        }
+
+        .btn-control-box {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
