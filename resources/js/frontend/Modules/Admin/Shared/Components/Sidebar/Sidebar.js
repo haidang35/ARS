@@ -46,6 +46,22 @@ class SideBar extends Component {
                                     <i className="bi bi-grid-fill" />
                                     <span>Destinations</span>
                                 </NavLink>
+                                <NavLink to="/admin/airlines" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Airlines</span>
+                                </NavLink>
+                                <NavLink to="/admin/tickets" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Tickets</span>
+                                </NavLink>
+                                <NavLink to="/admin/bookings" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Bookings</span>
+                                </NavLink>
+                                <NavLink to="/admin/passengers" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Passengers</span>
+                                </NavLink>
                                 
                             </li>
                         </ul>

@@ -1,5 +1,6 @@
 
 .list-destination {
+
     
     .card-content {
         width: 35rem;
@@ -15,6 +16,13 @@
             color: white;
             font-size: 17px;
             margin-top: 1rem;
+        }
+
+        .search-result-list {
+            overflow: hidden;
+            .list-item {
+                animation: floatDownListItem linear 500ms forwards;
+            }
         }
 
         .choose-country {
@@ -42,6 +50,15 @@
             margin-top: 1.5rem;
             display: flex;
             justify-content: flex-end;
+        }
+    }
+
+    @keyframes floatDownListItem {
+        from {
+            transform: translateY(200px);
+        }
+        to {
+            transform: translateY(0);
         }
     }
 }

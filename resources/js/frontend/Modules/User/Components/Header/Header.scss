@@ -47,6 +47,48 @@
                 margin-right: 0;
             }
 
+            .passenger-type {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                .choose-quantity {
+                    text-align: center;
+                    .title-passenger {
+                        font-size: 17px;
+                        font-weight: 500;
+                    }
+                    .content {
+                        margin-top: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #ffff;
+                        padding: 5px 0;
+                        border-radius: 6px;
+
+                        .quantity {
+                            font-size: 27px;
+                            color: white;
+                            padding: 0 20px;
+                            color: rgba(236, 153, 27, 0.9472163866);
+                        }
+
+                        .icon {
+                            width: 27px;
+                            height: 27px;
+                            cursor: pointer;
+                            color: rgba(236, 153, 27, 0.9472163866);
+
+                        }
+
+                       
+                    }
+
+                    
+                }
+
+
+            }
+
             .btn-search-form {
                 background: rgb(238, 206, 41);
                 background: linear-gradient(90deg, rgba(238, 206, 41, 0.9612219887955182) 25%, rgba(236, 153, 27, 0.9472163865546218) 69%);
