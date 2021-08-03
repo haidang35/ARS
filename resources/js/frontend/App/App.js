@@ -15,7 +15,7 @@ export const App = (
         <Fragment>
             <Switch>
                 <Suspense>
-                    <Route exact path="/" component={Home} />
+                    <Route path="/" component={Home} />
                     <Route
                         
                         path="/admin"
