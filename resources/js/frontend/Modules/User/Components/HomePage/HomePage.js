@@ -24,6 +24,8 @@ import {
 } from "@material-ui/icons";
 import ListDestination from "../ListDestination/ListDestination";
 import UserService from "../../Shared/UserService/UserService";
+import { Link } from "react-router-dom";
+import { getDate } from "../../../../Helpers/DateTime/ConvertDateTime";
 
 const CssTextField = withStyles({
     root: {
@@ -156,73 +158,62 @@ class HomePage extends Component {
     };
 
     changeQuantityPassenger = (passengerType, action) => {
-        switch(passengerType) {
-            case 1: 
+        switch (passengerType) {
+            case 1:
                 this.setQuantityPassenger(action, "adults", this.state.adults);
                 break;
             case 2:
-                this.setQuantityPassenger(action, "children", this.state.children);
+                this.setQuantityPassenger(
+                    action,
+                    "children",
+                    this.state.children
+                );
                 break;
             case 3:
-                this.setQuantityPassenger(action, "infants", this.state.infants);
+                this.setQuantityPassenger(
+                    action,
+                    "infants",
+                    this.state.infants
+                );
                 break;
             default:
                 break;
         }
-    
     };
 
     setQuantityPassenger = (action, stateName, stateValue) => {
-        if(action == 1) {
+        if (action == 1) {
             this.setState({
-                [stateName]: stateValue + 1
-             });
-        }else if(action == 0 && stateValue > 0) {
+                [stateName]: stateValue + 1,
+            });
+        } else if (action == 0 && stateValue > 0) {
             this.setState({
-                [stateName]: stateValue - 1
+                [stateName]: stateValue - 1,
             });
         }
-    }
+    };
 
     onSearchFlight = () => {
         const {
-            startDate,
-            returnDate,
             tripType,
             departure,
             destination,
+            startDate,
             adults,
-            children,
             infants,
+            children,
         } = this.state;
-        const data = {
-            trip_type: tripType,
-            departure_time: startDate,
-            departure: departure.id,
-            destination: destination.id,
-            passenger: [
-                {
-                    passenger_type: 1,
-                    quantity: adults,
-                },
-                {
-                    passenger_type: 2,
-                    quantity: children,
-                },
-                {
-                    passenger_type: 3,
-                    quantity: infants,
-                },
-            ],
+        const passengers = {
+            adults,
+            infants,
+            children,
         };
-        UserService.searchFlight(data)
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {});
+        localStorage.setItem("tripType", JSON.stringify(tripType));
+        localStorage.setItem("passengers", JSON.stringify(passengers));
     };
 
     render() {
+        const { tripType, departure, destination, startDate } = this.state;
         return (
             <div className="user-header">
                 <Navbar />
@@ -423,12 +414,15 @@ class HomePage extends Component {
                                                                         .children
                                                                 }
                                                             </span>
-                                                            <AddCircleOutline onClick={() =>
+                                                            <AddCircleOutline
+                                                                onClick={() =>
                                                                     this.changeQuantityPassenger(
                                                                         2,
                                                                         1
                                                                     )
-                                                                } className="icon" />
+                                                                }
+                                                                className="icon"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -438,40 +432,55 @@ class HomePage extends Component {
                                                             Em bé
                                                         </label>
                                                         <div className="content">
-                                                            <RemoveCircleOutline onClick={() =>
+                                                            <RemoveCircleOutline
+                                                                onClick={() =>
                                                                     this.changeQuantityPassenger(
                                                                         3,
                                                                         0
                                                                     )
-                                                                } className="icon" />
+                                                                }
+                                                                className="icon"
+                                                            />
                                                             <span className="quantity">
                                                                 {
                                                                     this.state
                                                                         .infants
                                                                 }
                                                             </span>
-                                                            <AddCircleOutline onClick={() =>
+                                                            <AddCircleOutline
+                                                                onClick={() =>
                                                                     this.changeQuantityPassenger(
                                                                         3,
                                                                         1
                                                                     )
-                                                                } className="icon" />
+                                                                }
+                                                                className="icon"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <Button
-                                        onClick={this.onSearchFlight}
-                                        variant="contained"
-                                        color="primary"
-                                        size="large"
-                                        className="btn-search-form"
-                                        startIcon={<Search />}
+                                    <Link
+                                        to={`/search-flight?departure=${
+                                            departure.id
+                                        }&destination=${
+                                            destination.id
+                                        }&time=${getDate(startDate)}`}
+                                        style={{ textDecoration: "none" }}
                                     >
-                                        Tìm kiếm chuyến bay
-                                    </Button>
+                                        <Button
+                                            onClick={this.onSearchFlight}
+                                            variant="contained"
+                                            color="primary"
+                                            size="large"
+                                            className="btn-search-form"
+                                            startIcon={<Search />}
+                                        >
+                                            Tìm kiếm chuyến bay
+                                        </Button>
+                                    </Link>
                                 </div>
                             </div>
                             <div>

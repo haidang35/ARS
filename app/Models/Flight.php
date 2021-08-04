@@ -33,7 +33,7 @@ class Flight extends Model
     }
 
     public function Departure() {
-        return $this->belongsTo(Destination::class, "departure_id", "id");
+        return $this->belongsTo(Destination::class);
     }
 
     public function Airline() {

@@ -1,0 +1,76 @@
+.header-booking-ticket {
+    width: 100%;
+    height: 9rem;
+    background-color: #18bfba;
+    margin-bottom: 8rem;
+
+    .top-content-bar {
+        padding: 2rem 2rem;
+        display: flex;
+
+        .icon-plane {
+            color: #ffff;
+            font-size: 4rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #ffff;
+        }
+
+        .content {
+            color: #ffff;
+            margin-left: 20px;
+            margin-top: 10px;
+
+            .top-content {
+                display: flex;
+
+                .location-title {
+                    font-size: 20px;
+                }
+
+                .icon-arrow {
+                    font-size: 2rem;
+                    margin: 0 1rem;
+                }
+            }
+
+            .departure-time {
+                font-size: 19px;
+            }
+        }
+
+    }
+
+    .bottom-content-bar {
+        margin-top: 1rem;
+        .item-box {
+            width: 14.2%;
+            height: 6rem;
+            background-color: #18bfba;
+            border-right: 2px solid #ffff;
+             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffff;
+            cursor: pointer;
+
+            .item-date {
+                font-size: 16px;
+            }
+            .item-day {
+                font-size: 20px;
+            }
+            .item-price {
+                font-size: 17px;
+            }
+        }
+        .item-box:nth-child(7n) {
+            border-right: none;
+        }
+
+        .item-selected {
+            background-color: #1e817e;
+        }
+    }
+
+}

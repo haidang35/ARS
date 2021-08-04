@@ -9,7 +9,7 @@ use App\Http\Controllers\FlightController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PassengerController;
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +43,7 @@ Route::get('bookings', [BookingController::class,  "getAllBooking"]);
 
 Route::get('passengers', [PassengerController::class,  "getAllPassenger"]);
 
-Route::post('user/flights/search', [TicketController::class, "searchFlightTicket"]);
+//User
+Route::post('user/flights/search', [UserController::class, "searchTickets"]);
+Route::post('user/flights', [UserController::class, "searchTicketsWithoutDate"]);
+Route::get('user/destinations/{id}', [UserController::class, "getDestinationInfo"]);
