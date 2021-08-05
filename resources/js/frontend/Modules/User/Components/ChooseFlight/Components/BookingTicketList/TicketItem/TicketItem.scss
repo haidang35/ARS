@@ -1,0 +1,122 @@
+.item-ticket {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 16px;
+    margin-bottom: 1rem;
+    background-color: #ffff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .airline-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 2rem;
+
+        .logo {
+            width: 200px;
+        }
+
+    }
+
+    .flight-info {
+        border-right: 2px solid rgb(163, 163, 163);
+        border-left: 2px solid rgb(163, 163, 163);
+        overflow: hidden;
+
+        .destination {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 2rem;
+
+            .city {
+                font-size: 17px;
+            }
+
+            .time {
+                font-size: 25px;
+            }
+        }
+
+        .info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 16px;
+
+            .flight-name {
+                font-size: 20px;
+                margin-top: -1rem;
+            }
+
+            .icon-flight-box {
+                display: flex;
+                align-items: center;
+
+                .location-icon {}
+
+                .line {
+                    position: relative;
+                    width: 0;
+                    height: 2px;
+                    animation: lineFlight linear 900ms forwards;
+                    background-color: black;
+                }
+
+                .icon-flight {
+                    position: absolute;
+                    font-size: 30px;
+                    margin: 10px 0;
+                    position: relative;
+                }
+            }
+
+
+            .detail {
+                font-size: 17px;
+                margin-bottom: 1.5rem;
+                margin-left: 1rem;
+                cursor: pointer;
+
+                .view-detail-icon {
+                    font-size: 30px;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+
+    .flight-choose {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 2rem;
+
+        .price {
+            font-size: 25px;
+            margin-top: -1rem;
+            margin-bottom: 10px;
+
+        }
+
+        .btn-choose {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+        }
+    }
+}
+
+@keyframes lineFlight {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100px;
+    }
+}

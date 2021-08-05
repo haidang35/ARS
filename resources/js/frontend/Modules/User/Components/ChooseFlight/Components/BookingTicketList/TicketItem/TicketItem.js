@@ -10,6 +10,7 @@ import {
     formatCurrency,
 } from "../../../../../../../Helpers/FormatCurrency";
 import FlightDetails from "../../FlightDetails/FlightDetails";
+import "./TicketItem.scss";
 
 class TicketItem extends Component {
     constructor(props) {
@@ -101,7 +102,7 @@ class TicketItem extends Component {
                             <div className="col-md-4">
                                 <div className="flight-choose">
                                     <Typography className="price">
-                                        {formatCurrency(data.price + data.tax)}
+                                        {formatCurrency(data.total_price)}
                                     </Typography>
                                     <Button
                                         className="btn-choose"

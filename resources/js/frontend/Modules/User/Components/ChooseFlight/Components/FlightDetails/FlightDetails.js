@@ -145,7 +145,8 @@ class FlightDetails extends Component {
                                                         </td>
                                                         <td>
                                                             {formatCurrency(
-                                                                data.price +
+                                                                item.quantity *
+                                                                    data.price +
                                                                     data.tax
                                                             )}
                                                         </td>
@@ -160,7 +161,7 @@ class FlightDetails extends Component {
                                             <td>
                                                 {" "}
                                                 {formatCurrency(
-                                                    data.price + data.tax
+                                                    data.into_money
                                                 )}
                                             </td>
                                         </tr>

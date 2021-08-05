@@ -1,6 +1,153 @@
-
 .side-bar-filter {
-    height: 800px;
-    border: 2px solid rgba(179, 177, 177, 0.849);
+    height: auto;
     border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 4rem;
+
+    .sort-flights {
+        background-color: #ffff;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin-bottom: 1rem;
+
+        .title-bar {
+            display: flex;
+            align-items: center;
+            color: #ffff;
+            background-color: #18bfba;
+            padding: 1rem;
+
+            .icon-filter {
+                font-size: 20px;
+                margin-right: 6px;
+            }
+
+            .title {
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+
+        .content {
+            padding: 1.2rem;
+            display: flex;
+
+            .item-check {
+                margin-bottom: 1rem;
+
+                .radio-check {
+                    color: green;
+                }
+
+                .label-radio {
+                    font-size: 18px;
+                }
+            }
+
+
+        }
+    }
+
+    .view-mode-filter {
+        background-color: #ffff;
+        margin-bottom: 1rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+        .title-bar {
+            display: flex;
+            align-items: center;
+            color: #ffff;
+            background-color: #18bfba;
+            padding: 1rem;
+
+            .icon-filter {
+                font-size: 20px;
+                margin-right: 6px;
+            }
+
+            .title {
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+
+        .content {
+            padding: 1rem;
+        }
+    }
+
+    .filter-flight {
+        background-color: #ffff;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin-bottom: 1rem;
+
+        .title-bar {
+            display: flex;
+            align-items: center;
+            color: #ffff;
+            background-color: #18bfba;
+            padding: 1rem;
+
+            .icon-filter {
+                font-size: 20px;
+                margin-right: 6px;
+            }
+
+            .title {
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+
+        .content {
+            .filter-airline {
+                padding: 1rem;
+
+                .title-filter {
+                    font-size: 18px;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 2px solid rgb(195, 194, 194);
+                }
+
+                .filter-box {
+                    margin-top: 1rem;
+                }
+            }
+
+            .filter-time {
+                padding: 1rem;
+
+                .title-filter {
+                    font-size: 18px;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 2px solid rgb(195, 194, 194);
+                }
+
+                .filter-slider {
+                    padding-top: 2rem;
+
+                    .title {
+                        font-size: 18px;
+                        text-align: center;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .flight-time {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .time {
+                            font-size: 20px;
+                            margin-right: 0.5rem;
+                        }
+
+                        .icon-arrow {
+                            font-size: 20px;
+                            margin-right: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

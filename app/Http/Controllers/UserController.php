@@ -9,57 +9,39 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    // public function searchFlightTicket(Request $request)
-    // {
-    //     $tripType = $request->trip_type;
-    //     $passengers = $request->passenger;
-    //     $departureTime = $request->departure_time;
-    //     $departureId = $request->departure;
-    //     $destinationId = $request->destination;
-    //     $flights = [];
-    //     try {
-    //        $flights = Flight::with("Ticket")->with("Destination")->with("Departure")->with("Airline")
-    //         ->departure($departureId)->destination($destinationId)
-    //         ->departuretime($departureTime)->get();
-    //     foreach ($flights as $item) {
-    //         $item["trip_type"] = $tripType;
-    //         $item["passenger"] = $passengers;
-    //      }  
-    //     }catch(\Exception $exeption) {
-    //     }
-    //     return $flights;
-    // }
 
     public function searchTickets(Request $request)
     {
         $tripType = $request->trip_type;
-        $passengers = array();
         $passenger = $request->passenger;
-        // foreach ($passenger as $item) {
-        //     if ($item->quantity > 0) {
-        //         $pass = [];
-        //         $pass["passenger_type"] = $item->passenger_type;
-        //         $pass["quantity"] = $item->quantity;
-        //         $passengers[] = $pass;
-        //     }
-        // }
         $departureTime = $request->departure_time;
         $departureId = $request->departure;
         $destinationId = $request->destination;
-        $flight = Flight::with("Ticket")->with("Destination")->with("Departure")->with("Airline")
+        $flights = Flight::with("Ticket")->with("Destination")->with("Departure")->with("Airline")
             ->departure($departureId)->destination($destinationId)->departuretime($departureTime)
-            ->first();
+            ->get();
         $tickets = [];
-        try {
-            $tickets = Ticket::where("flight_id", $flight->id)->get();
-            foreach ($tickets as $item) {
+        foreach ($flights as $flight) {
+            $ticketFlight = Ticket::where("flight_id", $flight->id)->get();
+            foreach ($ticketFlight as $item) {
                 $item["trip_type"] = $tripType;
                 $item["passenger"] = $passenger;
                 $item["flight"] = $flight;
+                $item["total_price"] = $item->price + $item->tax;
+                $item["into_money"] = $this->calcIntoMoney($passenger, $item->price, $item->tax);
+                $tickets[] = $item;
             }
-        } catch (\Exception) {
         }
         return $tickets;
+    }
+
+    private function calcIntoMoney($passengers, $price, $tax)
+    {
+        $intoMoney = 0;
+        foreach ($passengers as $item) {
+            $intoMoney += $item["quantity"] * $price + $tax;
+        }
+        return $intoMoney;
     }
 
     public function getDestinationInfo($id)
@@ -70,14 +52,23 @@ class UserController extends Controller
 
     public function searchTicketsWithoutDate(Request $request)
     {
+        $tripType = $request->trip_type;
+        $passenger = $request->passenger;
         $departureId = $request->departure;
         $destinationId = $request->destination;
-        $flight = Flight::with("Ticket")->with("Destination")->with("Departure")->with("Airline")
+        $flights = Flight::with("Ticket")->with("Destination")->with("Departure")->with("Airline")
             ->departure($departureId)->destination($destinationId)
-            ->first();
-        $tickets = Ticket::where("flight_id", $flight->id)->get();
-        foreach ($tickets as $item) {
-            $item["flight"] = $flight;
+            ->get();
+        $tickets = [];
+        foreach ($flights as $flight) {
+            $ticketFlight = Ticket::where("flight_id", $flight->id)->get();
+            foreach ($ticketFlight as $item) {
+                $item["trip_type"] = $tripType;
+                $item["passenger"] = $passenger;
+                $item["flight"] = $flight;
+                $item["total_price"] = $item->price + $item->tax;
+                $tickets[] = $item;
+            }
         }
 
         return $tickets;
