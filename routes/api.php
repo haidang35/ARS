@@ -44,3 +44,6 @@ Route::get('bookings', [BookingController::class,  "getAllBooking"]);
 Route::get('passengers', [PassengerController::class,  "getAllPassenger"]);
 
 Route::post('user/flights/search', [TicketController::class, "searchFlightTicket"]);
+
+
+
