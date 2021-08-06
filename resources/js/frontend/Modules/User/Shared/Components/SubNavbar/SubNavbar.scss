@@ -1,0 +1,38 @@
+.user-sub-nav {
+    position: relative;
+    background: rgb(29, 148, 236);
+    background: linear-gradient(90deg, rgba(29, 148, 236, 1) 9%, rgba(23, 193, 182, 1) 80%);
+
+    .nav-bar {
+        color: white;
+        box-shadow: none;
+        padding-top: 0.5em;
+        padding-bottom: 0.5rem;
+        padding-left: 0;
+
+        .list-menu {
+            margin-left: 24rem;
+
+            .menu-item {
+                color: white;
+                font-size: 21px;
+                text-decoration: none;
+                font-weight: 400;
+                margin-right: 3rem;
+                padding-bottom: 0.3rem;
+            }
+
+            .active {
+                border-bottom: 2px solid white;
+            }
+        }
+    }
+
+    .btn-login {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        right: 20px;
+
+    }
+}

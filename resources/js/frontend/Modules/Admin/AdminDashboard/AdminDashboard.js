@@ -17,8 +17,6 @@ import Airline from "../Components/Airline/Airline";
 import Ticket from "../Components/Ticket/Ticket";
 import Booking from "../Components/Booking/Booking";
 import Passenger from "../Components/Passenger/Passenger";
-
-
 class AdminDashBoard extends Component {
     constructor(props) {
         super(props);
@@ -43,7 +41,8 @@ class AdminDashBoard extends Component {
                                         <Route exact path={`/admin/tickets`} component={Ticket} />
                                         <Route exact path={`/admin/bookings`} component={Booking} />
                                         <Route exact path={`/admin/passengers`} component={Passenger} />
-                                    </Suspense>
+                                      
+                                     </Suspense>
                                 </Switch>
                             </div>
                         </div>

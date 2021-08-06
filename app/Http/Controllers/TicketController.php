@@ -26,21 +26,5 @@ class TicketController extends Controller
 
     // -------- User --------- //
 
-    public function searchFlightTicket(Request $request) {
-        $tripType = $request->trip_type;
-        $passengers = $request->passenger;
-        $departureTime = $request->departure_time;
-        $departureId = $request->departure;
-        $destinationId = $request->destination;
-        $flights = Flight::with("Ticket")->with("Destination")->with("Departure")->with("Airline")
-                    ->departure($departureId)->destination($destinationId)
-                    ->departuretime($departureTime)->get();
-        foreach($flights as $item) {
-            $item["trip_type"] = $tripType;
-            $item["passenger"] = $passengers;
-        }
-
-        return $flights;
-
-    }
+   
 }

@@ -1,21 +1,32 @@
-import React from 'react';
-import { Component } from 'react';
-import Header from '../Components/Header/Header';
+import React from "react";
+import { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.scss";
+import HomePage from "../Components/HomePage/HomePage";
+import Navbar from "../Shared/Components/Navbar/Navbar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Suspense } from "react";
+import ChooseFlight from "../Components/ChooseFlight/ChooseFlight";
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state={}
+        this.state = {};
     }
 
     render() {
-        return(
-            <div className="user-layout">
-                <Header/>
-            </div>
-        )
+        return (
+            <BrowserRouter>
+                <div className="user-layout">
+                    <Switch>
+                        <Suspense>
+                            <Route exact path={"/"} component={HomePage} />
+                            <Route path={"/search-flight"} component={ChooseFlight} />
+                        </Suspense>
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        );
     }
 }
 export default Home;

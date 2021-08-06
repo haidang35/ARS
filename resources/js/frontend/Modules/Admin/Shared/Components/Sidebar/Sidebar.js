@@ -62,7 +62,7 @@ class SideBar extends Component {
                                     <i className="bi bi-grid-fill" />
                                     <span>Passengers</span>
                                 </NavLink>
-                                
+   
                             </li>
                         </ul>
                     </div>

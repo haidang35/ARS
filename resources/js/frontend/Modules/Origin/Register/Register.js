@@ -10,7 +10,7 @@ class Register extends Component{
     render(){
         return (
             <div className="img js-fullheight">
-               <img className="centered" src="background-register.jpg" width="100%" height="850px"  style={{filter:"brightness(0.5)"}}/>
+               <img className="centered" src="bg.jpg" width="100%" height="850px"  style={{filter:"brightness(0.5)"}}/>
               <section className="ftco-section">
                 <div className="container">
                   <div className="row justify-content-center">
