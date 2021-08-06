@@ -5,12 +5,13 @@ const API_ENPOINT = {
     GET_ALL_DESTINARION: "destinations",
     SEARCH_FLIGHT: "user/flights/search",
     GET_DESTINATION_INFO: "user/destinations/",
-    GET_ALL_FLIGHT_FOLLOW_DATE: "user/flights"
-}
+    GET_ALL_FLIGHT_FOLLOW_DATE: "user/flights",
+    GET_FLIGHT_TICKET_INFO: "user/flights/ticket/",
+};
 
 class UserService {
     constructor() {
-        if(UserService._instance) {
+        if (UserService._instance) {
             return UserService._instance;
         }
         UserService._instance = this;
@@ -25,16 +26,25 @@ class UserService {
     }
 
     async getDestinationInfo(destinationId) {
-        return await axios.get(BASE_URL + API_ENPOINT.GET_DESTINATION_INFO + destinationId);
+        return await axios.get(
+            BASE_URL + API_ENPOINT.GET_DESTINATION_INFO + destinationId
+        );
     }
 
     async getFlightListWithoutDate(data) {
-        return await axios.post(BASE_URL + API_ENPOINT.GET_ALL_FLIGHT_FOLLOW_DATE, data);
+        return await axios.post(
+            BASE_URL + API_ENPOINT.GET_ALL_FLIGHT_FOLLOW_DATE,
+            data
+        );
+    }
+
+    async getFlightTicketInfo(ticketId, data = []) {
+        return await axios.post(
+            BASE_URL + API_ENPOINT.GET_FLIGHT_TICKET_INFO + ticketId,
+            data
+        );
     }
 }
 
 const instance = new UserService();
 export default instance;
-
-
-

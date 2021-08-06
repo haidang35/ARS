@@ -19,6 +19,7 @@ class ChooseFlight extends Component {
             flightsDataOrg: [],
             flightListDate: [],
             flightListDateOrg: [],
+            airlineList: [],
         };
     }
 
@@ -107,6 +108,7 @@ class ChooseFlight extends Component {
                 quantity: passengers.infants,
             },
         ];
+
         let searchData = {
             departure: departure,
             destination: destination,
@@ -121,11 +123,9 @@ class ChooseFlight extends Component {
         });
     };
 
-    handleChangeDepartureDate = (data, flightList) => {
-        this.setState({
-            departureDate: data.date,
-        });
+    handleChangeDepartureDate = (data, flightList, flightListOrg) => {
         let flightsData = [];
+        let flightsDataOrg = [];
         flightList.forEach((item) => {
             let newDate = new Date(item.flight.departure_datetime);
             if (
@@ -136,7 +136,25 @@ class ChooseFlight extends Component {
                 flightsData.push(item);
             }
         });
-        this.setState({ flightsData });
+        console.log(
+            "🚀 ~ file: ChooseFlight.js ~ line 137 ~ ChooseFlight ~ flightList.forEach ~ flightsData",
+            flightsData
+        );
+        flightListOrg.forEach((item) => {
+            let newDate = new Date(item.flight.departure_datetime);
+            if (
+                newDate.getDate() == data.date.getDate() &&
+                newDate.getMonth() == data.date.getMonth() &&
+                newDate.getFullYear() == data.date.getFullYear()
+            ) {
+                flightsDataOrg.push(item);
+            }
+        });
+        this.setState({
+            flightsData,
+            departureDate: data.date,
+            flightsDataOrg,
+        });
     };
 
     sortFlight = (value) => {
@@ -286,6 +304,7 @@ class ChooseFlight extends Component {
     scopeAirline = (value) => {
         let { flightsData, flightsDataOrg, flightListDate, flightListDateOrg } =
             this.state;
+
         if (value == 0) {
             flightsData = flightsDataOrg;
             flightListDate = flightListDateOrg;
@@ -325,13 +344,14 @@ class ChooseFlight extends Component {
             destinationSearch,
             flightListDate,
             flightsDataOrg,
+            flightListDateOrg,
         } = this.state;
         return (
             <div>
                 <SubNavbar />
                 <div className="choose-flight-page">
                     <div className="wrap-container">
-                        <StepListBar />
+                        <StepListBar step={1} />
                         <div className="main-content">
                             <div className="row">
                                 <div className="col-sm-3">
@@ -354,6 +374,7 @@ class ChooseFlight extends Component {
                                         <HeaderBookingTicket
                                             departureDate={departureDate}
                                             flightList={flightListDate}
+                                            flightListOrg={flightListDateOrg}
                                             departure={departureSearch}
                                             destination={destinationSearch}
                                             onChangeDepartureDate={

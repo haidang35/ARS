@@ -71,7 +71,12 @@ class SideBarFilter extends Component {
             sortFlight: null,
             viewModePrice: 2,
             scopeAirline: 0,
+            airlines: [],
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.getAirlineCurrentList(nextProps.dataOrg);
     }
 
     handleChangeDepartureTime = (ev, value) => {
@@ -112,8 +117,7 @@ class SideBarFilter extends Component {
         this.props.viewModePrice(ev.target.value);
     };
 
-    getAirlineCurrentList = () => {
-        let { dataOrg } = this.props;
+    getAirlineCurrentList = (dataOrg) => {
         let airlines = [];
         for (let i = 0; i < dataOrg.length; i++) {
             if (airlines.length > 0) {
@@ -126,7 +130,7 @@ class SideBarFilter extends Component {
                 airlines.push(dataOrg[0].flight.airline);
             }
         }
-        return airlines;
+        this.setState({ airlines });
     };
 
     handleScopeAirline = (ev) => {
@@ -145,9 +149,8 @@ class SideBarFilter extends Component {
             sortFlight,
             viewModePrice,
             scopeAirline,
+            airlines,
         } = this.state;
-
-        let airlines = this.getAirlineCurrentList();
 
         return (
             <div>

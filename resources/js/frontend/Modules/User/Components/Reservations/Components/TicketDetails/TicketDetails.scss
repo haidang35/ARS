@@ -1,0 +1,73 @@
+.ticket-details {
+    background-color: #ffff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 2rem;
+
+    .title-box {
+        background-color: #785ef2;
+        padding: 1rem;
+
+        .title {
+            color: white;
+            text-transform: uppercase;
+            font-size: 17px;
+        }
+    }
+
+    .content {
+        padding: 1.3rem;
+
+        .flight-time {
+            display: flex;
+            align-items: center;
+
+            .icon-arrow {
+                font-size: 26px;
+                margin: 0 1rem 0 1rem;
+            }
+
+            .destination {
+                font-size: 18px;
+            }
+
+            .icon-clock {
+                font-size: 20px;
+                margin-right: 1rem;
+            }
+
+            .time {
+                font-size: 17px;
+            }
+        }
+
+        .logo-airline {
+            .logo {
+                width: 95px;
+            }
+        }
+
+        .ticket-price {
+            margin-top: 1rem;
+
+            .title {
+                font-size: 18px;
+                font-weight: 600;
+                color: black;
+            }
+
+            .left-title {
+                float: left;
+            }
+
+            .total-title {
+                float: right;
+            }
+
+            .total-price {
+                font-size: 20px;
+                font-weight: bold;
+                color: #785ef2;
+            }
+        }
+    }
+}

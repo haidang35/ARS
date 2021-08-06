@@ -11,6 +11,7 @@ import {
 } from "../../../../../../../Helpers/FormatCurrency";
 import FlightDetails from "../../FlightDetails/FlightDetails";
 import "./TicketItem.scss";
+import { Link } from "react-router-dom";
 
 class TicketItem extends Component {
     constructor(props) {
@@ -104,19 +105,23 @@ class TicketItem extends Component {
                                     <Typography className="price">
                                         {formatCurrency(data.total_price)}
                                     </Typography>
-                                    <Button
-                                        className="btn-choose"
-                                        variant="contained"
-                                        color="primary"
+                                    <Link
+                                        to={`/reservations/ticket/${data.id}`}
                                     >
-                                        Chọn chuyến bay
-                                    </Button>
+                                        <Button
+                                            className="btn-choose"
+                                            variant="contained"
+                                            color="primary"
+                                        >
+                                            Chọn chuyến bay
+                                        </Button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {this.state.onViewDetails ? (
-                        <FlightDetails data={data} />
+                        <FlightDetails key={data.id} data={data} />
                     ) : (
                         ""
                     )}

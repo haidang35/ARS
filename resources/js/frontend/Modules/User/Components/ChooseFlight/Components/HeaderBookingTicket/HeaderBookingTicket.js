@@ -17,16 +17,16 @@ class HeaderBookingTicket extends Component {
         this.state = {
             listDate: [],
             flightList: [],
+            flightListOrg: [],
             departureDate: "",
         };
     }
-
-    componentDidMount() {}
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
             departureDate: nextProps.departureDate,
             flightList: nextProps.flightList,
+            flightListOrg: nextProps.flightListOrg,
         });
         let flightList = nextProps.flightList;
         this.getDaysOfWeek(nextProps.departureDate, flightList);
@@ -85,7 +85,11 @@ class HeaderBookingTicket extends Component {
     };
 
     handleChangeDepartureDate = (data) => {
-        this.props.onChangeDepartureDate(data, this.state.flightList);
+        this.props.onChangeDepartureDate(
+            data,
+            this.state.flightList,
+            this.state.flightListOrg
+        );
     };
 
     render() {

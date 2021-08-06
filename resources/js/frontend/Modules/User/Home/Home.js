@@ -7,6 +7,7 @@ import Navbar from "../Shared/Components/Navbar/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Suspense } from "react";
 import ChooseFlight from "../Components/ChooseFlight/ChooseFlight";
+import Reservations from "../Components/Reservations/Reservations";
 
 class Home extends Component {
     constructor(props) {
@@ -21,7 +22,14 @@ class Home extends Component {
                     <Switch>
                         <Suspense>
                             <Route exact path={"/"} component={HomePage} />
-                            <Route path={"/search-flight"} component={ChooseFlight} />
+                            <Route
+                                path={"/search-flight"}
+                                component={ChooseFlight}
+                            />
+                            <Route
+                                path={"/reservations/ticket/:id"}
+                                component={Reservations}
+                            />
                         </Suspense>
                     </Switch>
                 </div>
