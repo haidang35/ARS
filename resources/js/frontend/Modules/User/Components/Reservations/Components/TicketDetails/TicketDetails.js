@@ -4,20 +4,54 @@ import { Component } from "react";
 import "./TicketDetails.scss";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { BiTime } from "react-icons/bi";
+import {
+    dateConvert,
+    getTime,
+} from "../../../../../../Helpers/DateTime/ConvertDateTime";
 
 class TicketDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            data: {},
+        };
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({
+            data: nextProps.data,
+        });
+    };
+
+    getPassengerList = () => {
+        const { data } = this.state;
+        let passenger = [];
+        for (const ps of data.passenger) {
+            if (ps.quantity > 0) {
+                passenger.push(ps);
+            }
+        }
+        return passenger;
+    };
+
     render() {
+        const { data } = this.state;
+        let passenger = [];
+        if (Array.isArray(data.passenger)) {
+            data.passenger.forEach((item) => {
+                if (item.quantity > 0) passenger.push(item);
+            });
+        }
+
+        const flight = Object.assign({}, data.flight);
+        const departure = Object.assign({}, flight.departure);
+        const destination = Object.assign({}, flight.destination);
         return (
             <div>
                 <div className="ticket-details">
                     <div className="title-box">
                         <Typography variant="h4" className="title">
-                            Phương thức thanh toán
+                            Chi tiết giá vé
                         </Typography>
                     </div>
                     <div className="content">
@@ -25,23 +59,30 @@ class TicketDetails extends Component {
                             <div className="col-md-8">
                                 <div className="flight-time">
                                     <Typography
-                                        variant="span"
+                                        variant="body1"
                                         className="destination"
                                     >
-                                        Hà Nội
+                                        {departure.city}
                                     </Typography>
                                     <FaLongArrowAltRight className="icon-arrow" />
                                     <Typography
-                                        variant="span"
+                                        variant="body1"
                                         className="destination"
                                     >
-                                        Đà Nẵng
+                                        {destination.city}
                                     </Typography>
                                 </div>
                                 <div className="flight-time">
                                     <BiTime className="icon-clock" />
-                                    <Typography variant="span" className="time">
-                                        10:45 15-08-2021
+                                    <Typography
+                                        variant="body1"
+                                        className="time"
+                                    >
+                                        {getTime(flight.departure_datetime) +
+                                            " " +
+                                            dateConvert(
+                                                flight.departure_datetime
+                                            )}
                                     </Typography>
                                 </div>
                             </div>
@@ -69,17 +110,37 @@ class TicketDetails extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td className="content-line">
-                                                        Người lớn
-                                                    </td>
-                                                    <td className="content-line">
-                                                        2 x 1.500.000
-                                                    </td>
-                                                    <td className="content-line">
-                                                        3.000.000
-                                                    </td>
-                                                </tr>
+                                                {passenger.map((item) => {
+                                                    if (item.quantity > 0)
+                                                        return (
+                                                            <tr
+                                                                key={
+                                                                    item.passenger_type
+                                                                }
+                                                            >
+                                                                <td className="content-line">
+                                                                    {item.passenger_type ==
+                                                                    1
+                                                                        ? "Người lớn"
+                                                                        : item.passenger_type ==
+                                                                          2
+                                                                        ? "Trẻ em"
+                                                                        : item.passenger_type ==
+                                                                          3
+                                                                        ? "Em bé"
+                                                                        : ""}
+                                                                </td>
+                                                                <td className="content-line">
+                                                                    {`${item.quantity} x ${data.total_price}`}
+                                                                </td>
+                                                                <td className="content-line">
+                                                                    {item.quantity *
+                                                                        data.total_price}
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                })}
+
                                                 <tr>
                                                     <td
                                                         colSpan="2"
@@ -88,7 +149,7 @@ class TicketDetails extends Component {
                                                         Tổng chi phí
                                                     </td>
                                                     <td className="total-price">
-                                                        3.000.000
+                                                        {data.into_money}
                                                     </td>
                                                 </tr>
                                             </tbody>

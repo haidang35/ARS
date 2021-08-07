@@ -15,8 +15,12 @@ class Reservations extends Component {
         super(props);
         this.state = {
             flightTicket: {},
+            onReservation: false,
         };
     }
+
+    customerInfo = "";
+    contactInfo = "";
 
     componentDidMount() {
         this.getFlightTicketInfo();
@@ -48,8 +52,27 @@ class Reservations extends Component {
         });
     };
 
+    getCustomerInfo = (data) => {
+        this.customerInfo = data;
+    };
+
+    getContactInfo = (data) => {
+        this.contactInfo = data;
+    };
+
+    onReservationTicket = async () => {
+        this.setState({
+            onReservation: true,
+        });
+        (await this.customerInfo) !== "";
+        (await this.contactInfo) !== "";
+        if (this.customerInfo !== "" && this.contactInfo !== "") {
+            console.log("DATA is valid");
+        }
+    };
+
     render() {
-        const { flightTicket } = this.state;
+        const { flightTicket, onReservation } = this.state;
         return (
             <div>
                 <SubNavbar />
@@ -59,13 +82,22 @@ class Reservations extends Component {
                         <div className="main-content">
                             <div className="row">
                                 <div className="col-md-3">
-                                    <TicketDetails />
+                                    <TicketDetails data={flightTicket} />
                                 </div>
                                 <div className="col-md-9">
                                     <FlightChoosed data={flightTicket} />
-                                    <CustomerInfo />
-                                    <ContactInfo />
-                                    <PaymentMethod />
+                                    <CustomerInfo
+                                        data={flightTicket}
+                                        onReservation={onReservation}
+                                        getCustomerInfo={this.getCustomerInfo}
+                                    />
+                                    <ContactInfo
+                                        onReservation={onReservation}
+                                        getContactInfo={this.getContactInfo}
+                                    />
+                                    <PaymentMethod
+                                        onReservation={this.onReservationTicket}
+                                    />
                                 </div>
                             </div>
                         </div>

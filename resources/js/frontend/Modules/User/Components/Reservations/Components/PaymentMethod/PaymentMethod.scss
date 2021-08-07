@@ -37,9 +37,25 @@
             }
         }
 
+        .active-payment-method {
+            .icon-check {
+                background-color: #785ef2;
+                border-radius: 13px;
+                color: #ffff;
+            }
+        }
+
         .payment-method-item:hover {
             background-color: rgba(236, 232, 232, 0.753);
         }
 
+    }
+
+    .btn-box {
+        padding: 1rem;
+
+        .btn-reser {
+            float: right;
+        }
     }
 }

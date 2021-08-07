@@ -22,7 +22,8 @@ class CreateTableBooking extends Migration
             $table->string("contact_phone");
             $table->string("contact_email")->nullable();
             $table->tinyInteger("status")->default(0);
-            $table->double("into_money");
+            $table->double("into_money", 20);
+            $table->tinyInteger("payment_method");
             $table->unsignedBigInteger("user_id")->nullable();
             $table->timestamps();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");

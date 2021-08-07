@@ -1,15 +1,53 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
 import { Component } from "react";
+import { REGEX_TEL } from "../../../../../../Constances/const";
+import Form from "../../../../../../Shared/Components/Form/Form";
+import FormError from "../../../../../../Shared/Components/Form/FormError";
 import "./ContactInfo.scss";
 
-class ContactInfo extends Component {
+class ContactInfo extends Form {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            form: this._getInitFormData({
+                name: "",
+                vocative: "Anh",
+                phone: "",
+                email: "",
+                address: "",
+                note: "",
+            }),
+        };
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.onReservation) {
+            this.onReservation();
+        }
+    };
+
+    onReservation = () => {
+        this._validateForm();
+        this.state.form["dirty"] = true;
+        if (this._isFormValid()) {
+            const { form } = this.state;
+            const data = {
+                contact_name: form.name.value,
+                phone: form.phone.value,
+                email: form.email.value,
+                vocative: form.vocative.value,
+                address: form.address.value,
+                note: form.note.value,
+            };
+            this.props.getContactInfo(data);
+        }
+    };
+
     render() {
+        const { name, vocative, phone, email, address, note, dirty } =
+            this.state.form;
+
         return (
             <div>
                 <div className="contact-info">
@@ -30,13 +68,20 @@ class ContactInfo extends Component {
                                     </label>
 
                                     <select
-                                        type="text"
+                                        name="vocative"
+                                        required
+                                        value={vocative.value}
                                         className="form-control form-select"
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "vocative")
+                                        }
                                     >
-                                        <option>Quý ông</option>
-                                        <option>Quý bà</option>
-                                        <option>Anh</option>
-                                        <option>Chị</option>
+                                        <option value={"Anh"}>Anh</option>
+                                        <option value={"Chị"}>Chị</option>
+                                        <option value={"Quý ông"}>
+                                            Quý ông
+                                        </option>
+                                        <option value={"Quý bà"}>Quý bà</option>
                                     </select>
                                 </div>
                             </div>
@@ -52,9 +97,19 @@ class ContactInfo extends Component {
                                     <input
                                         type="text"
                                         required
+                                        name="name"
                                         className="form-control"
                                         placeholder="Họ và tên"
+                                        value={name.value}
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "name")
+                                        }
                                     />
+                                    {name.err == "*" && dirty ? (
+                                        <FormError err="Vui lòng nhập tên liên hệ" />
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
                             <div className="col-sm-4">
@@ -69,9 +124,22 @@ class ContactInfo extends Component {
                                     <input
                                         type="tel"
                                         required
+                                        pattern={REGEX_TEL}
+                                        name="phone"
                                         className="form-control"
                                         placeholder="Số điện thoại"
+                                        value={phone.value}
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "phone")
+                                        }
                                     />
+                                    {phone.err == "*" && dirty ? (
+                                        <FormError err="Vui lòng nhập số điện thoại" />
+                                    ) : phone.err.length > 0 && dirty ? (
+                                        <FormError err="Số điện thoại không đúng" />
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
                             <div className="col-sm-4">
@@ -85,9 +153,22 @@ class ContactInfo extends Component {
 
                                     <input
                                         type="email"
+                                        name="email"
+                                        required
                                         className="form-control"
                                         placeholder="Email"
+                                        value={email.value}
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "email")
+                                        }
                                     />
+                                    {email.err == "*" && dirty ? (
+                                        <FormError err="Vui lòng nhập email" />
+                                    ) : email.err.length > 0 && dirty ? (
+                                        <FormError err="Sai định dạng email" />
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
                             <div className="col-sm-4">
@@ -100,6 +181,11 @@ class ContactInfo extends Component {
                                         type="text"
                                         className="form-control"
                                         placeholder="Địa chỉ"
+                                        name="address"
+                                        value={address.value}
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "address")
+                                        }
                                     />
                                 </div>
                             </div>
@@ -111,8 +197,13 @@ class ContactInfo extends Component {
 
                                     <textarea
                                         type="text"
+                                        name="note"
                                         className="form-control"
                                         placeholder="Ghi chú đặc biệt"
+                                        value={note.value}
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "note")
+                                        }
                                     ></textarea>
                                 </div>
                             </div>
