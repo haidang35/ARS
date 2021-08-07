@@ -16,7 +16,7 @@ class FlightDetails extends Component{
                             <h4 className="card-title">
                                 Chi tiết chuyến bay
                             </h4>
-                          
+
                         </div>
                         <div>
                             <h5 style={{marginLeft:"25px", marginTop:"10px", fontSize:"16px"}}>Khứ hồi</h5>

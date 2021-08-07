@@ -17,7 +17,7 @@ class AirlineDetails extends Component {
                         </div>
                         <div className="introduduce-airline">
                              <h5 style={{marginLeft: "55px", fontSize:"16px"}}>Giới thiệu về hãng hàng không</h5>
-                             <li className="media mail-read"  style={{marginLeft: "90px"}}>
+                             <li className="media mail-read"  style={{marginLeft: "24px"}}>
                                 <div className="user-action">
                                     <span className="favorite text-warning">
                                     <svg className="bi" width="1.5em" height="1.5em" fill="currentColor">
@@ -54,7 +54,7 @@ class AirlineDetails extends Component {
                         </div>
                         <div className="introduduce-airline" style={{marginTop:"40px"}}>
                              <h5 style={{marginLeft: "55px", fontSize:"16px"}}>Các chuyến bay phổ biến</h5>
-                             <section id="list-group-icons"  style={{marginLeft: "90px"}}>
+                             <section id="list-group-icons"  style={{marginLeft: "24px"}}>
                                 <div className="row match-height">
                                     <div className="card">
                                         <div className="card-content">
@@ -78,7 +78,7 @@ class AirlineDetails extends Component {
                             </section> 
                         <div className="introduce-airline">
                             <h5 style={{marginLeft: "55px", fontSize:"16px"}}>Liên hệ Vietname Airlines</h5>
-                            <section className="section" style={{marginLeft: "90px"}} >
+                            <section className="section"  style={{marginLeft: "46px"}}>
                                 <div className="row" id="table-head">
                                     <div className="col-12">
                                         <div className="card">

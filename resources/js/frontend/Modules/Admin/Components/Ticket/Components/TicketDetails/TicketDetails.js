@@ -16,9 +16,7 @@ class TicketDetails extends Component{
                             <h4 className="card-title">
                                 Chi tiết vé máy bay
                             </h4>
-                          
                         </div>
-                       
                       <hr/>
                         <div className="card-content">
                             <div className="card-body">
@@ -73,7 +71,7 @@ class TicketDetails extends Component{
                                             </tr>                                      
                                         </tbody>
                                     </table>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="card-content">
@@ -97,7 +95,7 @@ class TicketDetails extends Component{
                                             </tr>                                      
                                         </tbody>
                                     </table>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

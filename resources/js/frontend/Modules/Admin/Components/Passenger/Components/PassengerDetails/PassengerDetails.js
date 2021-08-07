@@ -6,7 +6,6 @@ class PassengerDetails extends Component {
 
         }
     }
-
     render(){
         return (
             <div>
