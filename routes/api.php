@@ -23,7 +23,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('auth/me', [AuthController::class, "getMyInfo"] );
+    Route::get('auth/me', [AuthController::class, "getMyInfo"]);
 });
 
 Route::post('auth/register', [AuthController::class, "register"]);
@@ -47,3 +47,4 @@ Route::get('passengers', [PassengerController::class,  "getAllPassenger"]);
 Route::post('user/flights/search', [UserController::class, "searchTickets"]);
 Route::post('user/flights', [UserController::class, "searchTicketsWithoutDate"]);
 Route::get('user/destinations/{id}', [UserController::class, "getDestinationInfo"]);
+Route::post('user/flights/ticket/{id}', [UserController::class, "getFlightTicket"]);

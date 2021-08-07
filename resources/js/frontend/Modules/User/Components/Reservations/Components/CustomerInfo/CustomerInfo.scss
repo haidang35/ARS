@@ -1,0 +1,16 @@
+.customer-info {
+    background-color: #ffff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 2rem;
+
+    .title-box {
+        background-color: #785ef2;
+        padding: 1rem;
+
+        .title {
+            color: white;
+            text-transform: uppercase;
+            font-size: 17px;
+        }
+    }
+}

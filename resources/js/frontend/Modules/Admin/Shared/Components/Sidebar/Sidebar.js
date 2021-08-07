@@ -62,7 +62,7 @@ class SideBar extends Component {
                                     <i className="bi bi-grid-fill" />
                                     <span>Passengers</span>
                                 </NavLink>
-                                {/* <NavLink to="/admin/booking-details" className="sidebar-link">
+                                <NavLink to="/admin/booking-details" className="sidebar-link">
                                     <i className="bi bi-grid-fill" />
                                     <span>Booking Details</span>
                                 </NavLink>
@@ -86,7 +86,7 @@ class SideBar extends Component {
                                 <NavLink to="/admin/passenger-details" className="sidebar-link">
                                     <i className="bi bi-grid-fill" />
                                     <span>Passenger Details</span>
-                                </NavLink> */}
+                                </NavLink>
                             </li>
                         </ul>
                     </div>

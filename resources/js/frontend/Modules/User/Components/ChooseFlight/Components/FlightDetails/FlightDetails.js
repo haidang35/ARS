@@ -17,6 +17,11 @@ class FlightDetails extends Component {
 
     render() {
         let { data } = this.props;
+        console.log(
+            "🚀 ~ file: FlightDetails.js ~ line 20 ~ FlightDetails ~ render ~ data",
+            data
+        );
+
         return (
             <div>
                 <div className="flight-details">
@@ -69,7 +74,7 @@ class FlightDetails extends Component {
                                             {`Sân bay ${data.flight.destination.airport_name}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Cất cánh ${getTime(
+                                            {`Hạ cánh ${getTime(
                                                 data.flight.arrival_datetime
                                             )}`}
                                         </Typography>
@@ -86,7 +91,7 @@ class FlightDetails extends Component {
                                             {`Chuyến bay ${data.flight.flight_code}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Hạng chỗ ${data.available_class}`}
+                                            {`Hạng ghế ngồi ${data.available_class}`}
                                         </Typography>
                                         <Typography className="info-item">
                                             {`Loại vé: ${data.ticket_type}`}
@@ -122,7 +127,11 @@ class FlightDetails extends Component {
                                         {data.passenger.map((item) => {
                                             if (item.quantity > 0)
                                                 return (
-                                                    <tr key={item.id}>
+                                                    <tr
+                                                        key={
+                                                            item.passenger_type
+                                                        }
+                                                    >
                                                         <td>
                                                             {item.passenger_type ==
                                                             1
@@ -145,7 +154,8 @@ class FlightDetails extends Component {
                                                         </td>
                                                         <td>
                                                             {formatCurrency(
-                                                                data.price +
+                                                                item.quantity *
+                                                                    data.price +
                                                                     data.tax
                                                             )}
                                                         </td>
@@ -160,7 +170,7 @@ class FlightDetails extends Component {
                                             <td>
                                                 {" "}
                                                 {formatCurrency(
-                                                    data.price + data.tax
+                                                    data.into_money
                                                 )}
                                             </td>
                                         </tr>

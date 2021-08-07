@@ -17,34 +17,29 @@ class HeaderBookingTicket extends Component {
         this.state = {
             listDate: [],
             flightList: [],
+            flightListOrg: [],
             departureDate: "",
         };
-    }
-
-    componentDidMount() {
-        this.getFlightListDate();
-    }
-
-    getFlightListDate = () => {
-        const params = new URLSearchParams(window.location.search);
-        const departure = params.get("departure");
-        const destination = params.get("destination");
-        UserService.getFlightListWithoutDate({departure, destination}).then((res) => {
-            this.setState({
-                flightList: res.data
-            });
-        })
     }
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
             departureDate: nextProps.departureDate,
+            flightList: nextProps.flightList,
+            flightListOrg: nextProps.flightListOrg,
         });
-        this.getDaysOfWeek(nextProps.departureDate);
+        let flightList = nextProps.flightList;
+        this.getDaysOfWeek(nextProps.departureDate, flightList);
     };
 
-    getDaysOfWeek = (departureDate) => {
-        const { flightList } = this.state;
+    sortFLightPriceFromLowToHigh = (flightList) => {
+        flightList = flightList.sort((item1, item2) => {
+            return item1.total_price - item2.total_price;
+        });
+        return flightList;
+    };
+
+    getDaysOfWeek = (departureDate, flightList) => {
         let current = new Date(departureDate);
         let flightOnWeek = new Array();
         current.setDate(current.getDate() - 3);
@@ -67,9 +62,11 @@ class HeaderBookingTicket extends Component {
 
     getPriceFlightTicket(flightList, date) {
         for (let i = 0; i < flightList.length; i++) {
-            if (this.compareDate(flightList[i].flight.departure_datetime, date)) {
-                    let ticketPrice = flightList[i].price + flightList[i].tax;
-                    return ticketPrice;
+            if (
+                this.compareDate(flightList[i].flight.departure_datetime, date)
+            ) {
+                let ticketPrice = flightList[i].total_price;
+                return ticketPrice;
             }
         }
         return "-";
@@ -88,8 +85,12 @@ class HeaderBookingTicket extends Component {
     };
 
     handleChangeDepartureDate = (data) => {
-        this.props.onChangeDepartureDate(data);
-    }
+        this.props.onChangeDepartureDate(
+            data,
+            this.state.flightList,
+            this.state.flightListOrg
+        );
+    };
 
     render() {
         const { listDate, departureDate, flightList } = this.state;
@@ -102,16 +103,24 @@ class HeaderBookingTicket extends Component {
                         <div className="content">
                             <div className="top-content">
                                 <Typography className="location-title">
-                                    {departure.city + ", " + departure.country + ` (${departure.airport_code})`}
+                                    {departure.city +
+                                        ", " +
+                                        departure.country +
+                                        ` (${departure.airport_code})`}
                                 </Typography>
                                 <HiArrowNarrowRight className="icon-arrow" />
                                 <Typography className="location-title">
-                                {destination.city + ", " + destination.country + ` (${destination.airport_code})`}
+                                    {destination.city +
+                                        ", " +
+                                        destination.country +
+                                        ` (${destination.airport_code})`}
                                 </Typography>
                             </div>
 
                             <Typography className="departure-time">
-                                {`${getDayOfWeek(departureDate)} , ${dateConvert(departureDate)}`}
+                                {`${getDayOfWeek(
+                                    departureDate
+                                )} , ${dateConvert(departureDate)}`}
                             </Typography>
                         </div>
                     </div>
@@ -121,7 +130,9 @@ class HeaderBookingTicket extends Component {
                                 return (
                                     <div
                                         key={item.id}
-                                        onClick={() => this.handleChangeDepartureDate(item)}
+                                        onClick={() =>
+                                            this.handleChangeDepartureDate(item)
+                                        }
                                         className={
                                             this.compareDate(
                                                 departureDate,
