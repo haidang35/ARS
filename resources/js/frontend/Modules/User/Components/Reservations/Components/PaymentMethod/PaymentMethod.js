@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import React from "react";
 import { Component } from "react";
 import "./PaymentMethod.scss";
@@ -7,10 +7,19 @@ import { BiCheckCircle } from "react-icons/bi";
 class PaymentMethod extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            paymentMethod: 0,
+        };
     }
 
+    handleChangePaymentMethod = (value) => {
+        this.setState({
+            paymentMethod: value,
+        });
+    };
+
     render() {
+        const { paymentMethod } = this.state;
         return (
             <div>
                 <div className="payment-method">
@@ -20,24 +29,58 @@ class PaymentMethod extends Component {
                         </Typography>
                     </div>
                     <div className="content">
-                        <div className="payment-method-item">
+                        <div
+                            className={
+                                paymentMethod == 1
+                                    ? "payment-method-item active-payment-method"
+                                    : "payment-method-item"
+                            }
+                            onClick={() => this.handleChangePaymentMethod(1)}
+                        >
                             <BiCheckCircle className="icon-check" />
                             <Typography className="title" variant="h5">
                                 Thanh toán tại văn phòng
                             </Typography>
                         </div>
-                        <div className="payment-method-item">
+                        <div
+                            className={
+                                paymentMethod == 2
+                                    ? "payment-method-item active-payment-method"
+                                    : "payment-method-item"
+                            }
+                            onClick={() => this.handleChangePaymentMethod(2)}
+                        >
                             <BiCheckCircle className="icon-check" />
                             <Typography className="title" variant="h5">
                                 Giữ chỗ miễn phí và thanh toán qua chuyển khoản
                             </Typography>
                         </div>
-                        <div className="payment-method-item">
+                        <div
+                            className={
+                                paymentMethod == 3
+                                    ? "payment-method-item active-payment-method"
+                                    : "payment-method-item"
+                            }
+                            onClick={() => this.handleChangePaymentMethod(3)}
+                        >
                             <BiCheckCircle className="icon-check" />
                             <Typography className="title" variant="h5">
                                 Cổng thanh toán online onepay quốc tế
                             </Typography>
                         </div>
+                    </div>
+                    <div className="btn-box">
+                        <Button variant="outlined" color="primary">
+                            Quay lại
+                        </Button>
+                        <Button
+                            onClick={this.props.onReservation}
+                            className="btn-reser"
+                            variant="outlined"
+                            color="primary"
+                        >
+                            Đặt vé
+                        </Button>
                     </div>
                 </div>
             </div>
