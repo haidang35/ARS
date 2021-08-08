@@ -95,7 +95,8 @@ class AirlineDetails extends Component {
                                     </div>
                                 </div>
                             </section>
-                        </div>    
+                        </div>  
+                          
                         <div className="introduduce-airline" style={{marginTop:"-30px"}}>
                              <h5 style={{ fontSize:"16px",marginLeft: "55px", marginTop:"3px"}}>Liên hệ Vietnam Airlines</h5>
                              
