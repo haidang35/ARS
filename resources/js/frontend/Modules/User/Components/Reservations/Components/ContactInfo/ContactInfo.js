@@ -11,7 +11,7 @@ class ContactInfo extends Form {
         super(props);
         this.state = {
             form: this._getInitFormData({
-                name: "",
+                nameContact: "",
                 vocative: "Anh",
                 phone: "",
                 email: "",
@@ -33,7 +33,7 @@ class ContactInfo extends Form {
         if (this._isFormValid()) {
             const { form } = this.state;
             const data = {
-                contact_name: form.name.value,
+                contact_name: form.nameContact.value,
                 phone: form.phone.value,
                 email: form.email.value,
                 vocative: form.vocative.value,
@@ -45,7 +45,7 @@ class ContactInfo extends Form {
     };
 
     render() {
-        const { name, vocative, phone, email, address, note, dirty } =
+        const { nameContact, vocative, phone, email, address, note, dirty } =
             this.state.form;
 
         return (
@@ -97,15 +97,15 @@ class ContactInfo extends Form {
                                     <input
                                         type="text"
                                         required
-                                        name="name"
+                                        name="nameContact"
                                         className="form-control"
                                         placeholder="Họ và tên"
-                                        value={name.value}
+                                        value={nameContact.value}
                                         onChange={(ev) =>
-                                            this._setValue(ev, "name")
+                                            this._setValue(ev, "nameContact")
                                         }
                                     />
-                                    {name.err == "*" && dirty ? (
+                                    {nameContact.err == "*" && dirty ? (
                                         <FormError err="Vui lòng nhập tên liên hệ" />
                                     ) : (
                                         ""

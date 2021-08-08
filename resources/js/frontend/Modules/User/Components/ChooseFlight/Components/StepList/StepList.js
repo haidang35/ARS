@@ -18,7 +18,7 @@ class StepListBar extends Component {
                         <div className="col-sm-4">
                             <div
                                 className={
-                                    step == 1 || step == 2
+                                    step == 1 || step == 2 || step == 3
                                         ? "step-item "
                                         : "step-item step-unactive"
                                 }

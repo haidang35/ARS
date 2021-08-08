@@ -104,6 +104,7 @@ class CustomerInfo extends Component {
                     (item[k].value == null && k !== "id")
                 ) {
                     item[k].err = "*";
+                    this.setState({ isValid: false });
                 } else if (k !== "id") {
                     item[k].err = "";
                 }
@@ -116,6 +117,7 @@ class CustomerInfo extends Component {
                     (item[k].value == null && k !== "id")
                 ) {
                     item[k].err = "*";
+                    this.setState({ isValid: false });
                 } else if (k !== "id") {
                     item[k].err = "";
                 }
@@ -128,6 +130,7 @@ class CustomerInfo extends Component {
                     (item[k].value == null && k !== "id")
                 ) {
                     item[k].err = "*";
+                    this.setState({ isValid: false });
                 } else if (k !== "id") {
                     item[k].err = "";
                 }
@@ -154,16 +157,48 @@ class CustomerInfo extends Component {
     onReservation = () => {
         this.validateForm();
         if (this.isValidForm()) {
-            console.log("Form is valid");
-        } else {
-            console.log("Form not valid");
+            let { adults, children, infants } = this.state;
+            let data = [];
+            if (adults.length > 0) {
+                adults.forEach((item) => {
+                    const itemData = {
+                        passenger_name: item.name.value,
+                        gender: item.gender.value,
+                        birthday: item.birthday.value,
+                        passenger_type: 1,
+                    };
+                    data.push(itemData);
+                });
+            }
+            if (children.length > 0) {
+                children.forEach((item) => {
+                    const itemData = {
+                        passenger_name: item.name.value,
+                        gender: item.gender.value,
+                        birthday: item.birthday.value,
+                        passenger_type: 2,
+                    };
+                    data.push(itemData);
+                });
+            }
+            if (infants.length > 0) {
+                infants.forEach((item) => {
+                    const itemData = {
+                        passenger_name: item.name.value,
+                        gender: item.gender.value,
+                        birthday: item.birthday.value,
+                        passenger_type: 3,
+                    };
+                    data.push(itemData);
+                });
+            }
+            this.props.getCustomerInfo(data);
         }
     };
 
     render() {
         const { data, onReservation } = this.props;
         const { adults, children, infants, isValid } = this.state;
-        console.log("45", this.state);
         const passenger = [];
         if (Array.isArray(data.passenger)) {
             data.passenger.forEach((item) => {
@@ -273,7 +308,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Tên không được để trống"
+                                                            "Vui lòng nhập họ và tên hành khách"
                                                         }
                                                     />
                                                 ) : (
@@ -295,6 +330,16 @@ class CustomerInfo extends Component {
                                                         )
                                                     }
                                                 />
+                                                {item.birthday.err == "*" &&
+                                                !isValid ? (
+                                                    <FormError
+                                                        err={
+                                                            "Vui lòng nhập ngày sinh"
+                                                        }
+                                                    />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                         </div>
                                         <div className="baggage-info">
@@ -374,6 +419,16 @@ class CustomerInfo extends Component {
                                                         )
                                                     }
                                                 />
+                                                {item.name.err == "*" &&
+                                                !isValid ? (
+                                                    <FormError
+                                                        err={
+                                                            "Vui lòng nhập họ và tên"
+                                                        }
+                                                    />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                             <div className="col-md-4">
                                                 <input
@@ -390,6 +445,16 @@ class CustomerInfo extends Component {
                                                         )
                                                     }
                                                 />
+                                                {item.birthday.err == "*" &&
+                                                !isValid ? (
+                                                    <FormError
+                                                        err={
+                                                            "Vui lòng nhập ngày sinh"
+                                                        }
+                                                    />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                         </div>
                                         <div className="baggage-info">
@@ -469,6 +534,16 @@ class CustomerInfo extends Component {
                                                         )
                                                     }
                                                 />
+                                                {item.name.err == "*" &&
+                                                !isValid ? (
+                                                    <FormError
+                                                        err={
+                                                            "Vui lòng nhập họ và tên"
+                                                        }
+                                                    />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                             <div className="col-md-4">
                                                 <input
@@ -485,6 +560,16 @@ class CustomerInfo extends Component {
                                                         )
                                                     }
                                                 />
+                                                {item.name.err == "*" &&
+                                                !isValid ? (
+                                                    <FormError
+                                                        err={
+                                                            "Vui lòng nhập ngày sinh"
+                                                        }
+                                                    />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                         </div>
                                         <div className="baggage-info">

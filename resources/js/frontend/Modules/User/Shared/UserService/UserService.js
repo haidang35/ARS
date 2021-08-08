@@ -7,6 +7,7 @@ const API_ENPOINT = {
     GET_DESTINATION_INFO: "user/destinations/",
     GET_ALL_FLIGHT_FOLLOW_DATE: "user/flights",
     GET_FLIGHT_TICKET_INFO: "user/flights/ticket/",
+    BOOKING_FLIGHT: "user/booking",
 };
 
 class UserService {
@@ -43,6 +44,10 @@ class UserService {
             BASE_URL + API_ENPOINT.GET_FLIGHT_TICKET_INFO + ticketId,
             data
         );
+    }
+
+    async bookingFlightTicket(data) {
+        return await axios.post(BASE_URL + API_ENPOINT.BOOKING_FLIGHT, data);
     }
 }
 

@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Suspense } from "react";
 import ChooseFlight from "../Components/ChooseFlight/ChooseFlight";
 import Reservations from "../Components/Reservations/Reservations";
+import BookingConfirm from "../Components/BookingConfirm/BookingConfirm";
 
 class Home extends Component {
     constructor(props) {
@@ -29,6 +30,10 @@ class Home extends Component {
                             <Route
                                 path={"/reservations/ticket/:id"}
                                 component={Reservations}
+                            />
+                            <Route
+                                path={"/reservation/confirm"}
+                                component={BookingConfirm}
                             />
                         </Suspense>
                     </Switch>

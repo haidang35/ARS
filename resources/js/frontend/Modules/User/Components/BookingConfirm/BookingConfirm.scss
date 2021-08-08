@@ -1,0 +1,113 @@
+.booking-confirm {
+    .main-content {
+        margin-top: 2rem;
+
+        .confirm-notice {
+            background-color: #ffff;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            margin-bottom: 2rem;
+
+            .title-box {
+                background-color: #785ef2;
+                padding: 1rem;
+
+                .title {
+                    color: white;
+                    text-transform: uppercase;
+                    font-size: 17px;
+                }
+            }
+
+            .content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding: 3rem;
+
+                .notice-title {
+                    font-size: 25px;
+                    margin-top: 2rem;
+                    color: #17c1b6;
+                }
+
+                .animation-flight {
+                    .flight-icon {
+                        font-size: 6rem;
+                        color: #17c1b6;
+                        animation: flight linear 3s infinite;
+                        z-index: 5;
+                    }
+
+                    .cloud-icon {
+                        font-size: 3rem;
+                        z-index: 100;
+                        color: #785ef2;
+                        animation: cloud linear 2s infinite;
+                    }
+
+                    .cloud-icon-night {
+                        font-size: 3rem;
+                        z-index: 3;
+                        color: #785ef2;
+                        animation: cloud linear 2s infinite;
+                    }
+
+                    .cloud-1 {
+                        animation: cloud1 linear 3s infinite;
+                    }
+
+                    .cloud-2 {
+                        animation: cloud2 linear 3s infinite;
+                    }
+                }
+
+                @keyframes flight {
+                    from {
+
+                        transform: translateX(-20rem);
+                    }
+
+                    to {
+
+                        transform: translateX(20rem);
+                    }
+                }
+
+                @keyframes cloud {
+                    from {
+                        transform: translate(10rem, -1rem);
+                    }
+
+                    to {
+                        transform: translate(-10rem, 1rem);
+                    }
+                }
+
+                @keyframes cloud1 {
+                    from {
+                        transform: translate(10rem, 1rem);
+                    }
+
+                    to {
+                        transform: translate(-10rem, 0rem);
+                    }
+                }
+
+                @keyframes cloud2 {
+                    from {
+                        transform: translate(-10rem, 1rem);
+                    }
+
+                    to {
+                        transform: translate(10rem, 0rem);
+                    }
+                }
+
+
+            }
+        }
+
+
+    }
+}

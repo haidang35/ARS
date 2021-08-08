@@ -11,21 +11,26 @@ class Booking extends Model
     protected $table = "bookings";
     protected $fillable = [
         "booking_date",
-        "ticket_id",
-        "checkin_bag",
+        "trip_type",
         "contact_name",
+        "vocative",
         "contact_phone",
         "contact_email",
+        "address",
+        "note",
+        "payment_method",
         "status",
         "into_money",
         "user_id"
     ];
 
-    public function Ticket() {
+    public function Ticket()
+    {
         return $this->belongsTo(Ticket::class);
     }
 
-    public function Passenger() {
+    public function Passenger()
+    {
         return $this->hasMany(Passenger::class);
     }
 }
