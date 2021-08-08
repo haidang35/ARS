@@ -17,10 +17,6 @@ class FlightDetails extends Component {
 
     render() {
         let { data } = this.props;
-        console.log(
-            "🚀 ~ file: FlightDetails.js ~ line 20 ~ FlightDetails ~ render ~ data",
-            data
-        );
 
         return (
             <div>
@@ -155,8 +151,8 @@ class FlightDetails extends Component {
                                                         <td>
                                                             {formatCurrency(
                                                                 item.quantity *
-                                                                    data.price +
-                                                                    data.tax
+                                                                    (data.price +
+                                                                        data.tax)
                                                             )}
                                                         </td>
                                                     </tr>

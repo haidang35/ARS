@@ -136,10 +136,7 @@ class ChooseFlight extends Component {
                 flightsData.push(item);
             }
         });
-        console.log(
-            "🚀 ~ file: ChooseFlight.js ~ line 137 ~ ChooseFlight ~ flightList.forEach ~ flightsData",
-            flightsData
-        );
+
         flightListOrg.forEach((item) => {
             let newDate = new Date(item.flight.departure_datetime);
             if (

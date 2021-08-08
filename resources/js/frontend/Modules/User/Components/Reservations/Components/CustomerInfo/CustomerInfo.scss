@@ -13,4 +13,37 @@
             font-size: 17px;
         }
     }
+
+    .content {
+        width: 100%;
+        padding: 1rem;
+
+        .list-sub-title {
+            .sub-title {
+                font-size: 17px;
+            }
+        }
+
+        .list-sub-content {
+            .sub-content {
+                margin-top: 1.7rem;
+                border-bottom: 1px solid rgb(230, 230, 230);
+                padding-bottom: 1rem;
+
+                .baggage-info {
+                    margin-top: 1rem;
+                }
+            }
+
+
+
+            .sub-content-title {
+                font-size: 16px;
+            }
+
+
+        }
+
+
+    }
 }

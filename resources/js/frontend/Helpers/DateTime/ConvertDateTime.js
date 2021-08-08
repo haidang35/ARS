@@ -43,12 +43,22 @@ export const getDate = (date) => {
     let dd = String(newDate.getDate()).padStart(2, "0");
     let MM = String(newDate.getMonth() + 1).padStart(2, "0");
     let yy = newDate.getFullYear();
-    return yy + "-" + MM + "-" +dd;
-}
+    return yy + "-" + MM + "-" + dd;
+};
+
+export const getDateTimeNow = () => {
+    let now = new Date();
+    let dd = String(now.getDate()).padStart(2, "0");
+    let MM = String(now.getMonth() + 1).padStart(2, "0");
+    let yy = now.getFullYear();
+    let hour = String(now.getHours()).padStart(2, "0");
+    let min = String(now.getMinutes()).padStart(2, "0");
+    return yy + "-" + MM + "-" + dd + " " + hour + ":" + min;
+};
 
 export const getTime = (date) => {
     let newDate = new Date(date);
     let hour = String(newDate.getHours()).padStart(2, "0");
     let min = String(newDate.getMinutes()).padStart(2, "0");
     return hour + ":" + min;
-}
+};

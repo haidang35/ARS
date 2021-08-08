@@ -9,6 +9,8 @@ import CustomerInfo from "./Components/CustomerInfo/CustomerInfo";
 import ContactInfo from "./Components/ContactInfo/ContactInfo";
 import PaymentMethod from "./Components/PaymentMethod/PaymentMethod";
 import TicketDetails from "./Components/TicketDetails/TicketDetails";
+import { getDateTimeNow } from "../../../../Helpers/DateTime/ConvertDateTime";
+import { Redirect } from "react-router-dom";
 
 class Reservations extends Component {
     constructor(props) {
@@ -16,11 +18,14 @@ class Reservations extends Component {
         this.state = {
             flightTicket: {},
             onReservation: false,
+            bookingInfo: {},
+            redirect: false,
         };
     }
 
     customerInfo = "";
     contactInfo = "";
+    paymentMethod = "";
 
     componentDidMount() {
         this.getFlightTicketInfo();
@@ -60,19 +65,73 @@ class Reservations extends Component {
         this.contactInfo = data;
     };
 
+    getPaymentMethod = (data) => {
+        this.paymentMethod = data;
+    };
+
     onReservationTicket = async () => {
+        const { id } = this.props.match.params;
         this.setState({
             onReservation: true,
         });
         (await this.customerInfo) !== "";
         (await this.contactInfo) !== "";
-        if (this.customerInfo !== "" && this.contactInfo !== "") {
-            console.log("DATA is valid");
+        (await this.paymentMethod) !== "";
+        if (
+            this.customerInfo !== "" &&
+            this.contactInfo !== "" &&
+            this.paymentMethod !== ""
+        ) {
+            const trip_type = JSON.parse(localStorage.getItem("tripType"));
+            const data = {
+                booking_date: getDateTimeNow(),
+                trip_type,
+                ticket_id: id,
+                vocative: this.contactInfo.vocative,
+                contact_name: this.contactInfo.contact_name,
+                contact_phone: this.contactInfo.phone,
+                contact_email: this.contactInfo.email,
+                address: this.contactInfo.address,
+                note: this.contactInfo.note,
+                payment_method: this.paymentMethod,
+                into_money: this.state.flightTicket.into_money,
+                passengers: this.customerInfo,
+            };
+            UserService.bookingFlightTicket(data)
+                .then((res) => {
+                    this.setState({
+                        bookingInfo: res.data,
+                        redirect: true,
+                    });
+                })
+                .catch((err) => {
+                    console.log("booking failed ");
+                });
         }
     };
 
+    goToConfirmPage = (data) => {
+        if (this.state.redirect)
+            return (
+                <Redirect
+                    to={{ pathname: "/reservation/confirm", state: data }}
+                />
+            );
+    };
+
     render() {
-        const { flightTicket, onReservation } = this.state;
+        const { flightTicket, onReservation, bookingInfo, redirect } =
+            this.state;
+        if (redirect) {
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/reservation/confirm",
+                        state: bookingInfo,
+                    }}
+                />
+            );
+        }
         return (
             <div>
                 <SubNavbar />
@@ -97,6 +156,7 @@ class Reservations extends Component {
                                     />
                                     <PaymentMethod
                                         onReservation={this.onReservationTicket}
+                                        getPaymentMethod={this.getPaymentMethod}
                                     />
                                 </div>
                             </div>

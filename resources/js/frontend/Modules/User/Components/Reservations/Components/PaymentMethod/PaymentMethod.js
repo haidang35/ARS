@@ -3,6 +3,7 @@ import React from "react";
 import { Component } from "react";
 import "./PaymentMethod.scss";
 import { BiCheckCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 class PaymentMethod extends Component {
     constructor(props) {
@@ -11,6 +12,19 @@ class PaymentMethod extends Component {
             paymentMethod: 0,
         };
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.onReservation) {
+            this.getPaymentMethod();
+        }
+    }
+
+    getPaymentMethod = () => {
+        const { paymentMethod } = this.state;
+        if (paymentMethod !== 0) {
+            this.props.getPaymentMethod(paymentMethod);
+        }
+    };
 
     handleChangePaymentMethod = (value) => {
         this.setState({
@@ -73,6 +87,7 @@ class PaymentMethod extends Component {
                         <Button variant="outlined" color="primary">
                             Quay lại
                         </Button>
+
                         <Button
                             onClick={this.props.onReservation}
                             className="btn-reser"
