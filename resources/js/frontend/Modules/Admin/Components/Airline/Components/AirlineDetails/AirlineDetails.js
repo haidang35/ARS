@@ -85,7 +85,6 @@ class AirlineDetails extends Component {
                                                                         rows={3}
                                                                         defaultValue={""}
                                                                     />
-
                                                                 </div>
                                                             </div>
                                                         </div>
