@@ -17,7 +17,12 @@ import Airline from "../Components/Airline/Airline";
 import Ticket from "../Components/Ticket/Ticket";
 import Booking from "../Components/Booking/Booking";
 import Passenger from "../Components/Passenger/Passenger";
-
+import AirlineDetails from "../Components/Airline/Components/AirlineDetails/AirlineDetails";
+import BookingDetails from "../Components/Booking/Components/BookingDetails/BookingDetails";
+import TicketDetails from "../Components/Ticket/Components/TicketDetails/TicketDetails";
+import PassengerDetails from "../Components/Passenger/Components/PassengerDetails/PassengerDetails";
+import FlightDetails from "../Components/Flight/Components/FlightDetails/FlightDetails";
+import DestinationDetails from "../Components/Destination/Components/DestinationDetails/DestinationDetails";
 
 class AdminDashBoard extends Component {
     constructor(props) {
@@ -43,7 +48,14 @@ class AdminDashBoard extends Component {
                                         <Route exact path={`/admin/tickets`} component={Ticket} />
                                         <Route exact path={`/admin/bookings`} component={Booking} />
                                         <Route exact path={`/admin/passengers`} component={Passenger} />
-                                    </Suspense>
+                                       {/**/}
+                                        <Route exact path={`/admin/destination-details`} component={DestinationDetails}/>
+                                        <Route exact path={`/admin/flight-details`} component={FlightDetails}/> 
+                                        <Route exact path={`/admin/ticket-details`} component={TicketDetails}/> 
+                                         <Route exact path={`/admin/booking-details`} component={BookingDetails}/> 
+                                          <Route exact path={`/admin/airline-details`} component={AirlineDetails}/> 
+                                          <Route exact path={`/admin/passenger-details`} component={PassengerDetails}/>
+                                     </Suspense>
                                 </Switch>
                             </div>
                         </div>

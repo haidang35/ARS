@@ -62,7 +62,31 @@ class SideBar extends Component {
                                     <i className="bi bi-grid-fill" />
                                     <span>Passengers</span>
                                 </NavLink>
-                                
+                                <NavLink to="/admin/booking-details" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Booking Details</span>
+                                </NavLink>
+                           
+                                <NavLink to="/admin/flight-details" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Flight Details</span>
+                                </NavLink>
+                                <NavLink to="/admin/destination-details" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Destination Details</span>
+                                </NavLink>
+                                <NavLink to="/admin/airline-details" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Airline Details</span>
+                                </NavLink>
+                                <NavLink to="/admin/ticket-details" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Ticket Details</span>
+                                </NavLink>
+                                <NavLink to="/admin/passenger-details" className="sidebar-link">
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Passenger Details</span>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
