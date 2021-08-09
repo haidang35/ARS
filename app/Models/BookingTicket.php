@@ -17,4 +17,9 @@ class BookingTicket extends Model
         "birthday",
         "passenger_type"
     ];
+
+    public function Ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
 }

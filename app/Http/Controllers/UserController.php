@@ -111,7 +111,7 @@ class UserController extends Controller
             "payment_method" => $request->payment_method,
             "status" => 1,
             "into_money" => $request->into_money,
-            "user_id" => $request->user_id
+            "user_id" => $request->user_id,
         ];
         $booking = Booking::create($bookingInfo);
         $ticket = Ticket::findOrFail($request->ticket_id);

@@ -7,6 +7,7 @@ import AuthService from "../../../../Shared/Service/AuthService";
 import "./Login.scss";
 import { Link, Redirect } from "react-router-dom";
 import { goTo } from "../../../../Helpers/Redirect/Redirect";
+import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";
 
 class Login extends Form {
     constructor(props) {
@@ -17,6 +18,7 @@ class Login extends Form {
                 password: "",
             }),
             onLogged: false,
+            errLogin: "",
         };
     }
 
@@ -29,11 +31,18 @@ class Login extends Form {
                 email: form.email.value,
                 password: form.password.value,
             };
-            AuthService.userLogin(data).then((res) => {
-                localStorage.setItem("userId", res.data.user.id);
-                AuthService.getUserInfo();
-                goTo("");
-            });
+            AuthService.userLogin(data)
+                .then((res) => {
+                    localStorage.setItem("userId", res.data.user.id);
+                    AuthService.getUserInfo();
+                    goTo("");
+                })
+                .catch((err) => {
+                    this.setState({
+                        errLogin:
+                            "Đăng nhập thất bại, vui lòng kiểm tra lại tài khoản và mật khẩu",
+                    });
+                });
         }
     };
 
@@ -52,6 +61,13 @@ class Login extends Form {
                                     <div className="login d-flex align-items-center py-5">
                                         <div className="container">
                                             <div className="row">
+                                                <div className="col-md-9 col-lg-8 mx-auto">
+                                                    <AlertDanger
+                                                        message={
+                                                            this.state.errLogin
+                                                        }
+                                                    />
+                                                </div>
                                                 <div className="col-md-9 col-lg-8 mx-auto">
                                                     <h3 className="login-heading mb-4">
                                                         Đăng nhập

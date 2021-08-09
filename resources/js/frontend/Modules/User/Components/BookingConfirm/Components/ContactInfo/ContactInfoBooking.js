@@ -11,10 +11,7 @@ class ContactInfoBooking extends Component {
 
     render() {
         const { booking } = this.props;
-        console.log(
-            "🚀 ~ file: ContactInfoBooking.js ~ line 14 ~ ContactInfoBooking ~ render ~ booking",
-            booking
-        );
+
         return (
             <div>
                 <div className="contact-info-booking">

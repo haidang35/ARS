@@ -24,13 +24,9 @@ class Booking extends Model
         "user_id"
     ];
 
-    public function Ticket()
-    {
-        return $this->belongsTo(Ticket::class);
-    }
 
     public function Passenger()
     {
-        return $this->hasMany(Passenger::class);
+        return $this->hasMany(BookingTicket::class);
     }
 }

@@ -14,7 +14,11 @@ class AlertDanger extends Component {
                 {message.length > 0 ? (
                     <div className="alert alert-danger">
                         <BiErrorCircle
-                            style={{ color: "#ffff", marginRight: "1rem" }}
+                            style={{
+                                color: "#ffff",
+                                marginRight: "1rem",
+                                fontSize: "2rem",
+                            }}
                         />
                         {message}
                     </div>
