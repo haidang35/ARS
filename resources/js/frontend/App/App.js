@@ -17,10 +17,9 @@ export const App = (
                 <Suspense>
                     <Route path="/" component={Home} />
                     <Route
-                        
                         path="/admin"
                         render={() => {
-                            return (isLogged) ? (
+                            return isLogged ? (
                                 <AdminDashBoard></AdminDashBoard>
                             ) : (
                                 <Redirect to="/"></Redirect>

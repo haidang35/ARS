@@ -28,11 +28,43 @@
         }
     }
 
-    .btn-login {
+    .btn-login-box {
         position: absolute;
         bottom: 0;
         top: 0;
-        right: 20px;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
 
     }
+
+
+    .user-logged-box {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .hello-title {
+            color: #ffff;
+            margin-right: 0.5rem;
+        }
+
+        .icon-user {
+            font-size: 25px;
+        }
+
+        .btn-login {
+            font-size: 18px;
+
+        }
+    }
+
+
+
 }

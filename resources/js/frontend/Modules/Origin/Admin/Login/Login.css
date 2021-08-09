@@ -1,0 +1,305 @@
+
+body {
+	font-family: "Lato", Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.8;
+	font-weight: normal;
+	color: w;
+	position: relative;
+	z-index: 0;
+	padding: 0;
+	margin: 0;
+}
+.centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.container {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 540px;
+	position: relative;
+	text-align: center;
+}
+.justify-content-center {
+	-webkit-box-pack: center !important;
+	justify-content: center !important;
+	-webkit-box-pack: center !important;
+	justify-content: center !important;
+}
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+.col-md-6 {
+	position: relative;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.col-lg-4 {
+	position: relative;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.login-wrap {
+	position: relative;
+	color: rgba(255, 255, 255, 0.9);
+}
+.login-wrap h3 {
+	font-weight: 300;
+	color: #fff;
+	font-size: x-large;
+}
+.login-wrap .social {
+	display: block;
+}
+.p-0 {
+	padding: 0 !important;
+}
+.text-center {
+	text-align: center !important;
+}
+.mb-4 {
+	margin-bottom: 1.5rem !important;
+}
+.my-4 {
+	margin-bottom: 1.5rem !important;
+}
+h1 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+h2 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+h3 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+h4 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+h5 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+.h1 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+.h2 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+.h3 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+.h4 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+.h5 {
+	line-height: 1.5;
+	font-family: "Lato", Arial, sans-serif;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+h6 {
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+.h6 {
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+form {
+	display: block;
+	margin-top: 0em;
+}
+.w-100 {
+	width: 100% !important;
+}
+p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+.d-flex {
+	display: flex !important;
+}
+.pl-2 {
+	padding-left: 0.5rem !important;
+}
+.px-2 {
+	padding-left: 0.5rem !important;
+	padding-right: 0.5rem !important;
+}
+.pb-2 {
+	padding-bottom: 0.5rem !important;
+}
+.py-2 {
+	padding-bottom: 0.5rem !important;
+	padding-top: 0.5rem !important;
+}
+.pr-2 {
+	padding-right: 0.5rem !important;
+}
+.pt-2 {
+	padding-top: 0.5rem !important;
+}
+.rounded {
+	border-radius: 0.25rem !important;
+}
+a {
+	transition: 0.3s all ease;
+	text-decoration: none;
+	color: black;
+}
+a:-webkit-any-link {
+	cursor: pointer;
+}
+.form-control {
+	background: transparent;
+	border: none;
+	height: 50px;
+	color: white !important;
+	border: 1px solid transparent;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+	display: block;
+	width: 80%;
+	height: calc(1.5em + 0.75rem + 2px);
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	margin-bottom: 30px;
+}
+button {
+	overflow: visible;
+	margin: 0;
+	font-family: inherit;
+}
+input {
+	overflow: visible;
+	margin: 0;
+	font-family: inherit;
+}
+select {
+	margin: 0;
+	font-family: inherit;
+}
+optgroup {
+	margin: 0;
+	font-family: inherit;
+}
+textarea {
+	margin: 0;
+	font-family: inherit;
+}
+.form-group {
+	margin-left: 73px;
+}
+.form-group input::placeholder {
+	color: white;
+}
+.form-group button {
+	width: 86%;
+	height: 50px;
+	background-color: cornflowerblue !important;
+}
+.submit {
+	background-color: cornflowerblue !important;
+}
+.heading-section {
+	color: white;
+	font-size: 2rem;
+	margin-top: 120px;
+}
+.social a {
+	border: 0.5px solid white;
+	background-color: white;
+	width: 30%;
+	margin-left: 69px;
+}
+.social a:hover {
+	background-color: black;
+	color: white;
+	border: 0.5px solid black;
+}
+::placeholder {
+	color: #fff;
+}

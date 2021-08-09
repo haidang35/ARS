@@ -9,6 +9,9 @@ import { Suspense } from "react";
 import ChooseFlight from "../Components/ChooseFlight/ChooseFlight";
 import Reservations from "../Components/Reservations/Reservations";
 import BookingConfirm from "../Components/BookingConfirm/BookingConfirm";
+import Login from "../../Origin/User/Login/Login";
+import Register from "../../Origin/User/Register/Register";
+import CustomerProfile from "../Components/CustomerProfile/CustomerProfile";
 
 class Home extends Component {
     constructor(props) {
@@ -23,6 +26,12 @@ class Home extends Component {
                     <Switch>
                         <Suspense>
                             <Route exact path={"/"} component={HomePage} />
+                            <Route path={"/login"} component={Login} />
+                            <Route
+                                exact
+                                path={"/register"}
+                                component={Register}
+                            />
                             <Route
                                 path={"/search-flight"}
                                 component={ChooseFlight}
@@ -34,6 +43,10 @@ class Home extends Component {
                             <Route
                                 path={"/reservation/confirm"}
                                 component={BookingConfirm}
+                            />
+                            <Route
+                                path={"/customer-info"}
+                                component={CustomerProfile}
                             />
                         </Suspense>
                     </Switch>
