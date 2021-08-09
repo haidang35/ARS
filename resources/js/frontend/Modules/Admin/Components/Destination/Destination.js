@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import DestinationService from "./Shared/DestinationService";
 
 class Destination extends Component {
@@ -14,8 +15,8 @@ class Destination extends Component {
         this.getDestinationList();
     }
 
-    getDestinationList =  () => {
-         DestinationService.getDestinationList()
+    getDestinationList = () => {
+        DestinationService.getDestinationList()
             .then((res) => {
                 this.setState({
                     destinationList: res.data,
@@ -26,7 +27,7 @@ class Destination extends Component {
 
     render() {
         const { destinationList } = this.state;
-       
+
         return (
             <div>
                 <div className="col-sm-12">
@@ -51,28 +52,45 @@ class Destination extends Component {
                                         <tbody>
                                             {destinationList.map((item) => {
                                                 return (
-                                                   <tr key={item.id}>
-                                                    <td className="text-bold-500">
-                                                        {item.id}
-                                                    </td>
-                                                    <td className="text-bold-500">
-                                                         {item.province && item.province.toLowerCase().indexOf(item.city.toLowerCase()) === 1  ? (item.province + "/" + item.city) : (item.city)}
-                                                    </td>
-                                                    <td className="text-bold-500">
-                                                        {item.airport_code}
-                                                    </td>
-                                                    <td className="text-bold-500">
-                                                        {item.airport_name}
-                                                    </td>
-                                                    <td className="text-bold-500">
-                                                        {item.country}
-                                                    </td>
-                                                    <td className="text-bold-500">
-                                                        {item.country_code}
-                                                    </td>
-                                                </tr>
-                                                )
-                                               
+                                                    <tr key={item.id}>
+                                                        <td className="text-bold-500">
+                                                            {item.id}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.province &&
+                                                            item.province
+                                                                .toLowerCase()
+                                                                .indexOf(
+                                                                    item.city.toLowerCase()
+                                                                ) === 1
+                                                                ? item.province +
+                                                                  "/" +
+                                                                  item.city
+                                                                : item.city}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.airport_code}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.airport_name}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.country}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.country_code}
+                                                        </td>
+                                                        <td>
+                                                            <Link
+                                                                to={`/admin/destinations/${item.id}`}
+                                                            >
+                                                                <button className="btn btn-primary">
+                                                                    View
+                                                                </button>
+                                                            </Link>
+                                                        </td>
+                                                    </tr>
+                                                );
                                             })}
                                         </tbody>
                                     </table>

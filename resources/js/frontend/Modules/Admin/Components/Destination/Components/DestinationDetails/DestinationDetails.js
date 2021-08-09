@@ -1,138 +1,381 @@
-import React, {Component} from "react";
-class DestinationDetails extends Component {
-    constructor(props){
+import React, { Component } from "react";
+import DestinationService from "../../Shared/DestinationService";
+import Form from "../../../../../../Shared/Components/Form/Form";
+import FormError from "../../../../../../Shared/Components/Form/FormError";
+
+class DestinationDetails extends Form {
+    constructor(props) {
         super(props);
         this.state = {
-
-        }
+            form: this._getInitFormData({
+                city: "",
+                province: "",
+                airport_code: "",
+                airport: "",
+                country_code: "",
+                country: "",
+            }),
+            provinceOrg: "",
+            onEdit: false,
+        };
     }
 
-    render(){
+    componentDidMount() {
+        this.getDestinationDetails();
+    }
+
+    getDestinationDetails = () => {
+        const { id } = this.props.match.params;
+        DestinationService.getDestinationDetails(id).then((res) => {
+            this._fillForm({
+                city: res.data.city,
+                province: res.data.province,
+                airport_code: res.data.airport_code,
+                airport: res.data.airport_name,
+                country_code: res.data.country_code,
+                country: res.data.country,
+            });
+            this.setState({
+                provinceOrg: res.data.province,
+            });
+        });
+    };
+
+    onEditInfo = () => {
+        this.setState({
+            onEdit: true,
+        });
+    };
+
+    onCancelEdit = () => {
+        this.setState({
+            onEdit: false,
+        });
+        const { form } = this.state;
+        if (this.state.provinceOrg == null || this.state.provinceOrg == "") {
+            Object.keys(form).forEach((k) => {
+                if (k == "province") {
+                    Object.keys(form.province).forEach((i) => {
+                        form.province[i] = "";
+                    });
+                }
+            });
+        }
+        this.setState({ form });
+        this.getDestinationDetails();
+    };
+
+    onSaveChangeInfo = () => {
+        this._validateForm();
+        this.state.form["dirty"] = true;
+        const { id } = this.props.match.params;
+
+        if (this._isFormValid()) {
+            const { form } = this.state;
+            const data = {
+                city: form.city.value,
+                province: form.province.value,
+                airport_code: form.airport_code.value,
+                airport_name: form.airport.value,
+                country: form.country.value,
+                country_code: form.country_code.value,
+            };
+            DestinationService.updateDestination(id, data)
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            this.setState({ onEdit: false });
+        }
+    };
+
+    render() {
+        const {
+            city,
+            province,
+            airport_code,
+            airport,
+            country_code,
+            country,
+            dirty,
+        } = this.state.form;
+
+        const { onEdit } = this.state;
         return (
             <div>
-                <div className="col-sm-12">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title">Thông tin chi tiết của điểm đến</h4>
-                        </div>
-                        <div className="card card-default">
-                            <div className="card-body detail-info">
-                                <div className="row">
-                                    <div className="col-sm-6 col-12" style={{ marginBottom: "35px" }}></div>
-                                    <div
-                                        className="col-sm-6 col-12"
-                                        style={{ marginBottom: "5px"}}
+                <div className="card">
+                    <div className="card-header">
+                        <h4 className="card-title">
+                            Thông tin chi tiết của điểm đến
+                        </h4>
+                        <div className="float-right">
+                            {!onEdit ? (
+                                <button
+                                    onClick={this.onEditInfo}
+                                    className="btn btn-primary"
+                                >
+                                    Edit
+                                </button>
+                            ) : (
+                                <div>
+                                    <button
+                                        onClick={this.onSaveChangeInfo}
+                                        className="btn btn-success"
+                                        style={{
+                                            marginLeft: "1rem",
+                                            marginRight: "1rem",
+                                        }}
                                     >
-                                        {/* {!onEdit ? ( */}
-                                            <button
-                                                style={{marginTop:"-20px",marginBottom:"40px", marginLeft:"510px"}}
-                                                // onClick={this.onEditInfo}
-                                                className=" btn btn-primary"
-                                            >
-                                                Edit
-                                            </button>
-                                        {/* ) : ( */}
-                                            {/* <div>
-                                                <button
-                                                        style={{marginLeft: "400px",marginTop:"-20px"}}
-                                                    className=" btn btn-success"
-                                                    // onClick={this.onSaveChangeInfo}
-                                                >
-                                                    Save
-                                                </button>
-                                                <button
-                                                    style={{marginLeft: "488px",marginTop: "-68px"}}
-                                                    // onClick={this.onCancelEditInfo}
-                                                    className=" btn btn-warning"
-                                                >
-                                                    Cancel
-                                                </button>
-                                            </div> */}
-                                        </div>
-                                    </div>
+                                        Save
+                                    </button>
+                                    <button
+                                        onClick={this.onCancelEdit}
+                                        className="btn btn-warning"
+                                    >
+                                        Cancel
+                                    </button>
                                 </div>
-                            </div>  
-                        <section id="multiple-column-form" style={{marginTop: "-75px", marginLeft:"10px"}}>
-                            <div className="row match-height">
-                                <div className="col-12">
-                                    <div className="card">
-                                        <div className="card-content">
-                                            <div className="card-body">
-                                                <form className="form">
-                                                    <div className="row">
-                                                        <div className="col-md-6 col-12">
-                                                            <div className="form-group">
-                                                                <label htmlFor="first-name-column">Tỉnh/Thành phố</label>
-                                                                <input
+                            )}
+                        </div>
+                    </div>
+                    <section id="multiple-column-form">
+                        <div className="row match-height">
+                            <div className="col-12">
+                                <div className="card">
+                                    <div className="card-content">
+                                        <div className="card-body">
+                                            <form className="form">
+                                                <div className="row">
+                                                    <div className="col-md-6 col-12">
+                                                        <div>
+                                                            <label htmlFor="first-name-column">
+                                                                Thành phố
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                required
+                                                                id="first-name-column"
+                                                                className="form-control"
+                                                                disabled={
+                                                                    !onEdit
+                                                                }
+                                                                name="city"
+                                                                value={
+                                                                    city.value
+                                                                }
+                                                                onChange={(
+                                                                    ev
+                                                                ) =>
+                                                                    this._setValue(
+                                                                        ev,
+                                                                        "city"
+                                                                    )
+                                                                }
+                                                            />
+                                                            {city.err == "*" &&
+                                                            dirty ? (
+                                                                <FormError
+                                                                    err={
+                                                                        "City cannot be empty"
+                                                                    }
+                                                                />
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6 col-12">
+                                                        <div>
+                                                            <label htmlFor="first-name-column">
+                                                                Tỉnh
+                                                            </label>
+                                                            <input
                                                                 type="text"
                                                                 id="first-name-column"
                                                                 className="form-control"
-                                                                placeholder
-                                                                name="fname-column"
-                                                                />
-                                                            </div>
+                                                                disabled={
+                                                                    !onEdit
+                                                                }
+                                                                name="province"
+                                                                value={
+                                                                    province.value
+                                                                }
+                                                                onChange={(
+                                                                    ev
+                                                                ) =>
+                                                                    this._setValue(
+                                                                        ev,
+                                                                        "province"
+                                                                    )
+                                                                }
+                                                            />
                                                         </div>
-                                                        <div className="col-md-6 col-12">
-                                                            <div className="form-group">
-                                                                <label htmlFor="last-name-column">Mã sân bay</label>
-                                                                <input
+                                                    </div>
+                                                    <div className="col-md-6 col-12">
+                                                        <div>
+                                                            <label htmlFor="last-name-column">
+                                                                Mã sân bay
+                                                            </label>
+                                                            <input
                                                                 type="text"
                                                                 id="last-name-column"
                                                                 className="form-control"
-                                                                placeholder
-                                                                name="lname-column"
+                                                                required
+                                                                disabled={
+                                                                    !onEdit
+                                                                }
+                                                                name="airport_code"
+                                                                value={
+                                                                    airport_code.value
+                                                                }
+                                                                onChange={(
+                                                                    ev
+                                                                ) =>
+                                                                    this._setValue(
+                                                                        ev,
+                                                                        "airport_code"
+                                                                    )
+                                                                }
+                                                            />
+                                                            {airport_code.err ==
+                                                                "*" && dirty ? (
+                                                                <FormError
+                                                                    err={
+                                                                        "City cannot be empty"
+                                                                    }
                                                                 />
-                                                                
-                                                            </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
                                                         </div>
-                                                        <div className="col-md-6 col-12">
-                                                            <div className="form-group">
-                                                                <label htmlFor="city-column">Sân bay</label>
-                                                                <input
+                                                    </div>
+                                                    <div className="col-md-6 col-12">
+                                                        <div>
+                                                            <label htmlFor="city-column">
+                                                                Sân bay
+                                                            </label>
+                                                            <input
                                                                 type="text"
                                                                 id="city-column"
                                                                 className="form-control"
-                                                                placeholder
-                                                                name="city-column"
+                                                                required
+                                                                disabled={
+                                                                    !onEdit
+                                                                }
+                                                                name="airport"
+                                                                value={
+                                                                    airport.value
+                                                                }
+                                                                onChange={(
+                                                                    ev
+                                                                ) =>
+                                                                    this._setValue(
+                                                                        ev,
+                                                                        "airport"
+                                                                    )
+                                                                }
+                                                            />
+                                                            {airport.err ==
+                                                                "*" && dirty ? (
+                                                                <FormError
+                                                                    err={
+                                                                        "City cannot be empty"
+                                                                    }
                                                                 />
-                                                            </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
                                                         </div>
-                                                        <div className="col-md-6 col-12">
-                                                            <div className="form-group">
-                                                                <label htmlFor="country-floating">Quốc gia</label>
-                                                                <input
+                                                    </div>
+                                                    <div className="col-md-6 col-12">
+                                                        <div>
+                                                            <label htmlFor="country-floating">
+                                                                Quốc gia
+                                                            </label>
+                                                            <input
                                                                 type="text"
                                                                 id="country-floating"
                                                                 className="form-control"
-                                                                name="country-floating"
-                                                                placeholder
+                                                                required
+                                                                disabled={
+                                                                    !onEdit
+                                                                }
+                                                                name="country"
+                                                                value={
+                                                                    country.value
+                                                                }
+                                                                onChange={(
+                                                                    ev
+                                                                ) =>
+                                                                    this._setValue(
+                                                                        ev,
+                                                                        "country"
+                                                                    )
+                                                                }
+                                                            />
+                                                            {country.err ==
+                                                                "*" && dirty ? (
+                                                                <FormError
+                                                                    err={
+                                                                        "City cannot be empty"
+                                                                    }
                                                                 />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6 col-12">
-                                                            <div className="form-group">
-                                                                <label htmlFor="company-column">Mã quốc gia</label>
-                                                                <input
-                                                                type="text"
-                                                                id="company-column"
-                                                                className="form-control"
-                                                                name="company-column"
-                                                                placeholder
-                                                                />
-                                                            </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                    <div className="col-md-6 col-12">
+                                                        <div>
+                                                            <label htmlFor="company-column">
+                                                                Mã quốc gia
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="company-column"
+                                                                required
+                                                                className="form-control"
+                                                                disabled={
+                                                                    !onEdit
+                                                                }
+                                                                name="country_code"
+                                                                value={
+                                                                    country_code.value
+                                                                }
+                                                                onChange={(
+                                                                    ev
+                                                                ) =>
+                                                                    this._setValue(
+                                                                        ev,
+                                                                        "country_code"
+                                                                    )
+                                                                }
+                                                            />
+                                                            {country_code.err ==
+                                                                "*" && dirty ? (
+                                                                <FormError
+                                                                    err={
+                                                                        "City cannot be empty"
+                                                                    }
+                                                                />
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                     </div>
+                        </div>
+                    </section>
                 </div>
             </div>
-        )
+        );
     }
 }
 

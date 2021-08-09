@@ -34,28 +34,80 @@ class AdminDashBoard extends Component {
         return (
             <BrowserRouter>
                 <Fragment>
-                    <div id="app" className="admin-dashboard" >
+                    <div id="app" className="admin-dashboard">
                         <Sidebar />
-                        <div id="main" >
+                        <div id="main">
                             <Header />
                             <div>
                                 <Switch>
                                     <Suspense>
-                                        <Route exact path={`/admin`}  component={DashBoard} />
-                                        <Route exact path={`/admin/destinations`} component={Destination} />
-                                        <Route exact path={`/admin/flights`} component={Flight} />
-                                        <Route exact path={`/admin/airlines`} component={Airline} />
-                                        <Route exact path={`/admin/tickets`} component={Ticket} />
-                                        <Route exact path={`/admin/bookings`} component={Booking} />
-                                        <Route exact path={`/admin/passengers`} component={Passenger} />
-                                       {/**/}
-                                        <Route exact path={`/admin/destination-details`} component={DestinationDetails}/>
-                                        <Route exact path={`/admin/flight-details`} component={FlightDetails}/> 
-                                        <Route exact path={`/admin/ticket-details`} component={TicketDetails}/> 
-                                         <Route exact path={`/admin/booking-details`} component={BookingDetails}/> 
-                                          <Route exact path={`/admin/airlines/:id`} component={AirlineDetails}/> 
-                                          <Route exact path={`/admin/passenger-details`} component={PassengerDetails}/>
-                                     </Suspense>
+                                        <Route
+                                            exact
+                                            path={`/admin`}
+                                            component={DashBoard}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/destinations`}
+                                            component={Destination}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/flights`}
+                                            component={Flight}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/airlines`}
+                                            component={Airline}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/tickets`}
+                                            component={Ticket}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/bookings`}
+                                            component={Booking}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/passengers`}
+                                            component={Passenger}
+                                        />
+                                        {/**/}
+                                        <Route
+                                            exact
+                                            path={`/admin/destinations/:id`}
+                                            component={DestinationDetails}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/flight-details`}
+                                            component={FlightDetails}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/ticket-details`}
+                                            component={TicketDetails}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/booking-details`}
+                                            component={BookingDetails}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/airline-details`}
+                                            component={AirlineDetails}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/passenger-details`}
+                                            component={PassengerDetails}
+                                        />
+                                    </Suspense>
                                 </Switch>
                             </div>
                         </div>
