@@ -53,7 +53,7 @@ class AdminDashBoard extends Component {
                                         <Route exact path={`/admin/flight-details`} component={FlightDetails}/> 
                                         <Route exact path={`/admin/ticket-details`} component={TicketDetails}/> 
                                          <Route exact path={`/admin/booking-details`} component={BookingDetails}/> 
-                                          <Route exact path={`/admin/airline-details`} component={AirlineDetails}/> 
+                                          <Route exact path={`/admin/airlines/:id`} component={AirlineDetails}/> 
                                           <Route exact path={`/admin/passenger-details`} component={PassengerDetails}/>
                                      </Suspense>
                                 </Switch>

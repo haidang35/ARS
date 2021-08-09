@@ -47,6 +47,7 @@ class Airline extends Component {
                                                 <th>Quốc gia</th>
                                                 <th>Website</th>
                                                 <th>Đường dây nóng</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,6 +71,10 @@ class Airline extends Component {
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.hotline}
+                                                        </td>
+                                                        <td>
+                                                            {/* <Link to="/admin/airlines/:id"></Link> */}
+                                                            <button className="btn btn-btn-primary">View</button>
                                                         </td>
                                                     </tr>
                                                 );

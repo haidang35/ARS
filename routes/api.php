@@ -32,15 +32,16 @@ Route::post('auth/login', [AuthController::class, "login"]);
 
 //Destination
 Route::get('destinations', [DestinationController::class, "getAllDestination"]);
-
+// Airline
 Route::get('airlines', [AirlineController::class, "getAllAirline"]);
-
+Route::get('airlines/{id}', [AirlineController::class, "getAirlineDetails"]);
+// Flight
 Route::get('flights', [FlightController::class, "getAllFlight"]);
-
+// Ticket
 Route::get('tickets', [TicketController::class,  "getAllTicket"]);
-
+// Booking
 Route::get('bookings', [BookingController::class,  "getAllBooking"]);
-
+// Passenger
 Route::get('passengers', [PassengerController::class,  "getAllPassenger"]);
 
 //User
