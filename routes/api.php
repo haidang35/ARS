@@ -10,6 +10,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\UserController;
+use App\Models\Destination;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::post('auth/login', [AuthController::class, "login"]);
 
 //Destination
 Route::get('destinations', [DestinationController::class, "getAllDestination"]);
+Route::get('destinations/{id}', [DestinationController::class, "getDestinationDetails"]);
+Route::patch('destinations/update/{id}', [DestinationController::class, "updateDestinationInfo"]);
 
 Route::get('airlines', [AirlineController::class, "getAllAirline"]);
 
