@@ -78,12 +78,12 @@ class AirlineDetails extends Component {
                                                             <div className="col-md-6 col-12">
                                                                 <div className="form-group">
                                                                     <label htmlFor="country-floating">Miêu tả/Giới thiệu</label>
-                                                                    <input
-                                                                    type="text"
-                                                                    id="country-floating"
-                                                                    className="form-control"
-                                                                    name="country-floating"
-                                                                    placeholder=""
+                                                                    <textarea
+                                                                        style={{overflow:"hidden"}}
+                                                                        className="form-control"
+                                                                        id="exampleFormControlTextarea1"
+                                                                        rows={3}
+                                                                        defaultValue={""}
                                                                     />
                                                                 </div>
                                                             </div>
@@ -95,7 +95,8 @@ class AirlineDetails extends Component {
                                     </div>
                                 </div>
                             </section>
-                        </div>    
+                        </div>  
+                          
                         <div className="introduduce-airline" style={{marginTop:"-30px"}}>
                              <h5 style={{ fontSize:"16px",marginLeft: "55px", marginTop:"3px"}}>Liên hệ Vietnam Airlines</h5>
                              
@@ -110,13 +111,14 @@ class AirlineDetails extends Component {
                                                             <div className="col-md-6" >
                                                                 <div className="form-group"> 
                                                                     <label htmlFor="first-name-column">Văn phòng Vietnam Airlines</label>
-                                                                    <input
-                                                                    type="text"
-                                                                    id="first-name-column"
-                                                                    className="form-control"
-                                                                    placeholder=""
-                                                                    name="fname-column"
+                                                                    <textarea
+                                                                        style={{overflow:"hidden"}}
+                                                                        className="form-control"
+                                                                        id="exampleFormControlTextarea1"
+                                                                        rows={3}
+                                                                        defaultValue={""}
                                                                     />
+
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-6 col-12">
