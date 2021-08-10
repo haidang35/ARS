@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserLogin;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegister;
+use App\Http\Requests\UserUpdateInfo;
 use App\Models\Booking;
 use App\Models\BookingTicket;
 use App\Models\Flight;
@@ -71,5 +72,23 @@ class AuthController extends Controller
         ]);
         $password = Crypt::decrypt(auth()->user()->password);
         return  $password;
+    }
+
+    public function upDateMyInfo(UserUpdateInfo $request)
+    {
+        $validated = $request->validated();
+        $userId = auth()->user()->id;
+        $user = User::findOrFail($userId);
+        if ($user["email"] == $validated["email"]) {
+            $user->update($validated);
+            return response()->json($user);
+        } else {
+            $findEmailExist = User::where("email", $validated["email"])->first();
+            if ($findEmailExist) {
+                return response()->isServerError(500);
+            }
+            $user->update($validated);
+            return response()->json($user);
+        }
     }
 }

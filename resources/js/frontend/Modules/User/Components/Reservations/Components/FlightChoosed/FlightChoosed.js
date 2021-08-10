@@ -11,6 +11,7 @@ import {
 } from "../../../../../../Helpers/FormatCurrency";
 import FlightDetails from "../../../ChooseFlight/Components/FlightDetails/FlightDetails";
 import "./FlightChoosed.scss";
+import { withRouter } from "react-router-dom";
 
 class FlightChoosed extends Component {
     constructor(props) {
@@ -24,6 +25,10 @@ class FlightChoosed extends Component {
         this.setState({
             onViewDetails: !this.state.onViewDetails,
         });
+    };
+
+    goBack = () => {
+        this.props.history.goBack();
     };
 
     render() {
@@ -113,8 +118,9 @@ class FlightChoosed extends Component {
                                             className="btn-choose"
                                             variant="contained"
                                             color="primary"
+                                            onClick={this.goBack}
                                         >
-                                            Chọn chuyến bay
+                                            Thay đổi chuyến bay
                                         </Button>
                                     </div>
                                 </div>
@@ -131,4 +137,4 @@ class FlightChoosed extends Component {
         );
     }
 }
-export default FlightChoosed;
+export default withRouter(FlightChoosed);

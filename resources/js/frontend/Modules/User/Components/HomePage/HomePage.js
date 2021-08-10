@@ -24,8 +24,10 @@ import {
 } from "@material-ui/icons";
 import ListDestination from "../ListDestination/ListDestination";
 import UserService from "../../Shared/UserService/UserService";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { getDate } from "../../../../Helpers/DateTime/ConvertDateTime";
+import ModalNotice from "../../../../Shared/Components/Modal/ModalNotice";
+import { goTo } from "../../../../Helpers/Redirect/Redirect";
 
 const CssTextField = withStyles({
     root: {
@@ -93,11 +95,12 @@ class HomePage extends Component {
             changeDestination: false,
             destinationList: [],
             tripType: 1,
-            departure: {},
-            destination: {},
+            departure: "",
+            destination: "",
             adults: 1,
             children: 0,
             infants: 0,
+            message: "",
         };
     }
 
@@ -186,7 +189,11 @@ class HomePage extends Component {
             this.setState({
                 [stateName]: stateValue + 1,
             });
-        } else if (action == 0 && stateValue > 0) {
+        } else if (action == 0 && stateValue > 0 && stateName !== "adults") {
+            this.setState({
+                [stateName]: stateValue - 1,
+            });
+        } else if (action == 0 && stateValue >= 2 && stateName == "adults") {
             this.setState({
                 [stateName]: stateValue - 1,
             });
@@ -199,6 +206,7 @@ class HomePage extends Component {
             departure,
             destination,
             startDate,
+            returnDate,
             adults,
             infants,
             children,
@@ -208,12 +216,33 @@ class HomePage extends Component {
             infants,
             children,
         };
-        localStorage.setItem("tripType", JSON.stringify(tripType));
-        localStorage.setItem("passengers", JSON.stringify(passengers));
+        if (departure !== "" && destination !== "") {
+            localStorage.setItem("tripType", JSON.stringify(tripType));
+            localStorage.setItem("passengers", JSON.stringify(passengers));
+            if (tripType == 1) {
+                goTo(
+                    `search-flight?departure=${departure.id}&destination=${
+                        destination.id
+                    }&time=${getDate(startDate)}`
+                );
+            } else if (tripType == 2) {
+                goTo(
+                    `search-flight?departure=${departure.id}&destination=${
+                        destination.id
+                    }&time=${getDate(startDate)}&return=${getDate(returnDate)}`
+                );
+            }
+        } else {
+            this.setState({
+                message:
+                    "Xin vui lòng nhập đầy đủ thông tin tìm kiếm chuyến bay !!",
+            });
+        }
     };
 
     render() {
         const { tripType, departure, destination, startDate } = this.state;
+
         return (
             <div className="user-header">
                 <Navbar />
@@ -462,25 +491,17 @@ class HomePage extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <Link
-                                        to={`/search-flight?departure=${
-                                            departure.id
-                                        }&destination=${
-                                            destination.id
-                                        }&time=${getDate(startDate)}`}
-                                        style={{ textDecoration: "none" }}
+
+                                    <Button
+                                        onClick={this.onSearchFlight}
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                        className="btn-search-form"
+                                        startIcon={<Search />}
                                     >
-                                        <Button
-                                            onClick={this.onSearchFlight}
-                                            variant="contained"
-                                            color="primary"
-                                            size="large"
-                                            className="btn-search-form"
-                                            startIcon={<Search />}
-                                        >
-                                            Tìm kiếm chuyến bay
-                                        </Button>
-                                    </Link>
+                                        Tìm kiếm chuyến bay
+                                    </Button>
                                 </div>
                             </div>
                             <div>
@@ -505,6 +526,10 @@ class HomePage extends Component {
                         </div>
                     </div>
                 </div>
+                <ModalNotice
+                    message={this.state.message}
+                    onClose={() => this.setState({ message: "" })}
+                />
             </div>
         );
     }
