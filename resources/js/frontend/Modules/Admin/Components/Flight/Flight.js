@@ -25,6 +25,13 @@ class Flight extends Component {
             .catch((err) => {});
     };
 
+    addFlight=(data)=>{
+        FlightService.addNewFlight(data)
+            .then((res)=>{
+                this.getFlightList();
+            })
+    }
+
     render() {
         const { flightList } = this.state;
         console.log(flightList);
@@ -36,6 +43,11 @@ class Flight extends Component {
                             <h4 className="card-title">
                                 Danh sách các chuyến bay
                             </h4>
+                            <div className="float-right">
+                                <button 
+                                    className="btn btn-primary"
+                                >Add new flight</button>
+                            </div>
                         </div>
                         <div className="card-content">
                             <div className="card-body">

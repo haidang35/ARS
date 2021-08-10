@@ -38,18 +38,23 @@ Route::post('user/login', [AuthController::class, "login"]);
 Route::get('destinations', [DestinationController::class, "getAllDestination"]);
 Route::get('destinations/{id}', [DestinationController::class, "getDestinationDetails"]);
 Route::patch('destinations/update/{id}', [DestinationController::class, "updateDestinationInfo"]);
-Route::post('destinations/create',[DestinationController::class,"addNewDestination"]);
+Route::post('destinations',[DestinationController::class,"addNewDestination"]);
+
 // Airline
 Route::get('airlines', [AirlineController::class, "getAllAirline"]);
 Route::get('airlines/{id}', [AirlineController::class, "getAirlineDetails"]);
 Route::patch('airlines/update/{id}',[AirlineController::class,"updateAirlineInfo"]);
-Route::post('airlines/create',[AirlineController::class,"addNewAirline"]);
+Route::post('airlines',[AirlineController::class,"addNewAirline"]);
+
 // Flight
 Route::get('flights', [FlightController::class, "getAllFlight"]);
 Route::get('flights/{id}',[FlightController::class,"getFlightDetails"]);
 Route::patch('flights/update/{id}',[FlightController::class,"updateFlightInfo"]);
 // Ticket
 Route::get('tickets', [TicketController::class,  "getAllTicket"]);
+Route::get('tickets/{id}',[TicketController::class, "getTicketDetails"]);
+Route::patch('tickets/update/{id}',[TicketController::class,"updateTicketInfo"]);
+Route::post('tickets',[TicketController::class,"addNewTicket"]);
 // Booking
 Route::get('bookings', [BookingController::class,  "getAllBooking"]);
 // Passenger

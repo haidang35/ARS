@@ -15,7 +15,6 @@ class DestinationController extends Controller
 
     public function getDestinationDetails($id)
     {
-
         $destination = Destination::findOrFail($id);
         return response()->json($destination);
     }
@@ -47,4 +46,6 @@ class DestinationController extends Controller
         $destination = Destination::create($data);
         return response()->json($destination);
     }
+
+
 }

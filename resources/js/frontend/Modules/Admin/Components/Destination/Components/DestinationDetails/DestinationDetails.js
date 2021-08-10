@@ -90,9 +90,6 @@ class DestinationDetails extends Form {
             this.setState({ onEdit: false });
         }
     };
-
-    
-
     render() {
         const {
             city,

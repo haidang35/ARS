@@ -13,9 +13,8 @@ class FlightDetails extends Form{
                departure_datetime:"",
                arrival_datetime:"",
                aircraft:"",
-               airline_id:"",
-               departure_id:"",
-               destination_id:"",
+               airlineName:"",
+               destinationCity:"",
                capacity:"",
                seats_reserved:"",
                seats_available:"",
@@ -37,9 +36,8 @@ class FlightDetails extends Form{
                 departure_datetime:res.data.departure_datetime,
                 arrival_datetime:res.data.arrival_datetime,
                 aircraft:res.data.aircraft,
-                airline_id:res.data.airline_id,
-                departure_id:res.data.departure_id,
-                destination_id:res.data.destination_id,
+                airlineName:res.data.airline.airline_name,
+                destinationCity:res.data.destination.city,
                 capacity:res.data.capacity,
                 seats_reserved:res.data.seats_reserved,
                 seats_available:res.data.seats_available,
@@ -71,9 +69,6 @@ class FlightDetails extends Form{
                 departure_datetime:form.departure_datetime.value,
                 arrival_datetime:form.arrival_datetime.value,
                 aircraft:form.aircraft.value,
-                airline_id:form.airline_id.value,
-                departure_id:form.departure_id.value,
-                destination_id:form.destination_id.value,
                 capacity:form.capacity.value,
                 seats_reserved:form.seats_reserved.value,
                 seats_available:form.seats_available.value
@@ -81,7 +76,16 @@ class FlightDetails extends Form{
             }
             FlightService.updateFlightInfo(id,data)
                 .then((res)=>{
-                    console.log(res.data);
+                    this._fillForm({
+                        flight_code:"",
+                        departure_datetime:"",
+                        arrival_datetime:"",
+                        aircraft:"",
+                        capacity:"",
+                        seats_reserved:"",
+                        seats_available:"",
+                        dirty:false
+                    })
                 })
             this.setState({
                 onEdit:false
@@ -95,9 +99,8 @@ class FlightDetails extends Form{
             departure_datetime,
             arrival_datetime,
             aircraft,
-            airline_id,
-            departure_id,
-            destination_id,
+            airlineName,
+            destinationCity,
             capacity,
             seats_reserved,
             seats_available,
@@ -148,7 +151,7 @@ class FlightDetails extends Form{
                                         <div className="card-content">
                                             <form className="form">
                                                 <label htmlFor="first-name-column" style={{fontWeight:"600",color:"rgba(35,28,99,.7)"}}>Khởi hành</label>
-                                                        <div className="input-form">
+                                                        {/* <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Điểm khởi hành
@@ -157,23 +160,22 @@ class FlightDetails extends Form{
                                                                     type="text"
                                                                     className="form-control"
                                                                     required
-                                                                    disabled={!onEdit}
-                                                                    name="departure_id"
-                                                                    value={departure_id.value}
+                                                                    name="departure.city"
+                                                                    value={departure.city.value}
                                                                     onChange={(ev) => this._setValue(
-                                                                        ev,"departure_id"
+                                                                        ev,"departure.city"
                                                                     )}
                                                                 />
-                                                                {departure_id.err == "*" && dirty ? (
+                                                                {departure.city.err == "*" && dirty ? (
                                                                     <FormError
-                                                                        err={"Departure cannot be empty"}
+                                                                        err={"Departure city cannot be empty"}
                                                                     />
                                                                 ):(
                                                                     ""
                                                                 )}
                                                             </div>
-                                                        </div>
-                                                        <div className="input-form">
+                                                        </div> */}
+                                                        {/* <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Sân bay
@@ -181,11 +183,18 @@ class FlightDetails extends Form{
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    name="departure_id"
-                                                                    value={departure_id.value}
+                                                                    name="departure.airport_name"
+                                                                    value={departure.airport_name.value}
                                                                 />
+                                                                 {departure.airport_name.err == "*" && dirty ? (
+                                                                    <FormError
+                                                                        err={"Departure airport name cannot be empty"}
+                                                                    />
+                                                                ):(
+                                                                    ""
+                                                                )}
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
@@ -212,7 +221,7 @@ class FlightDetails extends Form{
                                                                 
                                                             </div>
                                                         </div>
-                                                        <div className="input-form">
+                                                        {/* <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Giờ khởi hành
@@ -224,7 +233,7 @@ class FlightDetails extends Form{
                                                                 aria-describedby="inputGroup-sizing-sm"
                                                                 />
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     {/* </div> */}
                                             </form>
                                         </div>
@@ -238,50 +247,23 @@ class FlightDetails extends Form{
                                 <div className="col-12">
                                     <div className="card">
                                         <div className="card-content">
-                                            <form className="form">
-                                                {/* <div className="row"> */}  
+                                            <form className="form"> 
                                                 <label htmlFor="first-name-column" style={{fontWeight:"600",color:"rgba(35,28,99,.7)"}}>Điểm đến</label>
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
-                                                            {/* style={{width:"96%",marginLeft:"30px"}} */}
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Điểm đến
                                                                 </span>
                                                                 <input
-                                                                // style={{height:"38px"}}
                                                                     type="text"
                                                                     className="form-control"
                                                                     required
-                                                                    disabled={!onEdit}
-                                                                    name="destination_id"
-                                                                    value={destination_id.value}
-                                                                    onChange={(ev) => this._setValue(
-                                                                        ev,"destination_id"
-                                                                    )}
-                                                                />
-                                                                {destination_id.err == "*" && dirty ? (
-                                                                    <FormError
-                                                                        err={"Destination cannot be empty"}
-                                                                    />
-                                                                ):(
-                                                                    ""
-                                                                )}
-                                                              
+                                                                    disabled
+                                                                    value={destinationCity.value}
+                                                                  />
                                                             </div>
                                                         </div>
-                                                        <div className="input-form">
-                                                            <div className="input-group input-group-sm mb-3">
-                                                                <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Sân bay
-                                                                </span>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    name="departure_id"
-                                                                    value={departure_id.value}
-                                                                />
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
@@ -308,20 +290,6 @@ class FlightDetails extends Form{
                                                               
                                                             </div>
                                                         </div>
-                                                        <div className="input-form">
-                                                            <div className="input-group input-group-sm mb-3">
-                                                                <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Giờ đến
-                                                                </span>
-                                                                <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                aria-label="Sizing example input"
-                                                                aria-describedby="inputGroup-sizing-sm"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    {/* </div> */}
                                             </form>
                                         </div>
                                     </div>
@@ -334,7 +302,6 @@ class FlightDetails extends Form{
                                     <div className="card">
                                         <div className="card-content">
                                             <form className="form">
-                                                {/* <div className="row"> */}  
                                                 <label htmlFor="first-name-column" style={{fontWeight:"600",color:"rgba(35,28,99,.7)"}}>Chuyến bay</label>
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
@@ -344,23 +311,9 @@ class FlightDetails extends Form{
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    name="airline_id"
-                                                                    value={airline_id.value}
-                                                                    required
-                                                                    disabled={!onEdit}
-                                                                 
-                                                                    onChange={(ev) => this._setValue(
-                                                                        ev,"airline_id"
-                                                                    )}
+                                                                    value={airlineName.value}
+                                                                    disabled
                                                                 />
-                                                                {airline_id.err == "*" && dirty ? (
-                                                                    <FormError
-                                                                        err={"Airline name cannot be empty"}
-                                                                    />
-                                                                ):(
-                                                                    ""
-                                                                )}
-                                                              
                                                             </div>
                                                         </div>
                                                         <div className="input-form">

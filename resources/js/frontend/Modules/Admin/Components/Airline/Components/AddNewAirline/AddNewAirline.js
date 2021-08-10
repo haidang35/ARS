@@ -2,7 +2,6 @@ import React from "react";
 import { Component } from "react";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-import AirlineService from "../../Shared/AirlineService";
 
 class AddNewAirline extends Form{
     constructor(props){
@@ -30,14 +29,14 @@ class AddNewAirline extends Form{
                 website:form.website.value,
                 hotline:form.hotline.value,
             }
-            this.props.addAirline(data);
+            this.props.onSubmit(data);
             this._fillForm({
                 airline_name:"",
                 code:"",
                 country:"",
                 website:"",
                 hotline:"",
-                dirty:""
+                // dirty:false
             })
         }
     }
@@ -48,181 +47,161 @@ class AddNewAirline extends Form{
             country,
             website,
             hotline,
+            dirty
         } = this.state.form;
         return (
-            <div>{/**/}
-                  <div className="card">
-                    <div className="card-header">
-                        <h4 className="card-title">
-                            Thêm điểm đến
-                        </h4>
-                    </div>
-                    <section id="multiple-column-form">
-                        <div className="row match-height">
-                            <div className="col-12">
-                                <div className="card">
-                                    <div className="card-content">
-                                        <div className="card-body">
-                                            <form className="form">
-                                                <div className="row">
-                                                    <div className="col-md-6 col-12">
-                                                        <div>
-                                                            <label htmlFor="first-name-column">
-                                                                Thành phố
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                required
-                                                                id="first-name-column"
-                                                                className="form-control"
-                                                                name="airline_name"
-                                                                value={
-                                                                    airline_name.value
-                                                                }
-                                                                
-                                                            />
-                                                            {airline_name.err == "*" &&
-                                                            dirty ? (
-                                                                <FormError
-                                                                    err={
-                                                                        "City cannot be empty"
-                                                                    }
-                                                                />
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-12">
-                                                        <div>
-                                                            <label htmlFor="first-name-column">
-                                                                Tỉnh
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                id="first-name-column"
-                                                                className="form-control"
-                                                              
-                                                                name="code"
-                                                                value={
-                                                                    code.value
-                                                                }
-                                                               
-                                                            />
-                                                              {code.err == "*" &&
-                                                            dirty ? (
-                                                                <FormError
-                                                                    err={
-                                                                        "City cannot be empty"
-                                                                    }
-                                                                />
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-12">
-                                                        <div>
-                                                            <label htmlFor="last-name-column">
-                                                                Mã sân bay
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                id="last-name-column"
-                                                                className="form-control"
-                                                                required
-                                                              
-                                                                name="country"
-                                                                value={
-                                                                    country.value
-                                                                }
-                                                              
-                                                            />
-                                                            {country.err ==
-                                                                "*" && dirty ? (
-                                                                <FormError
-                                                                    err={
-                                                                        "City cannot be empty"
-                                                                    }
-                                                                />
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-12">
-                                                        <div>
-                                                            <label htmlFor="city-column">
-                                                                Sân bay
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                id="city-column"
-                                                                className="form-control"
-                                                                required
-                                                               
-                                                                name="website"
-                                                                value={
-                                                                    website.value
-                                                                }
-                                                             
-                                                            />
-                                                            {website.err ==
-                                                                "*" && dirty ? (
-                                                                <FormError
-                                                                    err={
-                                                                        "City cannot be empty"
-                                                                    }
-                                                                />
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-12">
-                                                        <div>
-                                                            <label htmlFor="country-floating">
-                                                                Quốc gia
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                required
-                                                                name="hotline"
-                                                                value={
-                                                                    hotline.value
-                                                                }
-                                                               
-                                                            />
-                                                            {hotline.err ==
-                                                                "*" && dirty ? (
-                                                                <FormError
-                                                                    err={
-                                                                        "City cannot be empty"
-                                                                    }
-                                                                />
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                   
-                                                </div>
-                                            </form>
-                                            <div className="float-right">
-                                                <button 
-                                                    className="btn btn-primary"
-                                                    onClick={this.onSubmitInfo}
-                                                >Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            <div>
+                  <div
+                    className="modal fade"
+                    id="addNewAirline"
+                    tabIndex={-1}
+                    role="dialog"
+                    aria-labelledby="exampleModalFormTitle"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5
+                                    className="modal-title"
+                                    id="exampleModalFormTitle"
+                                >
+                                    Add new airline
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">×</span>
+                                </button>
                             </div>
-                        </div>  
-                    
-                    </section>
-                   
+                            <div className="modal-body">
+                                <form>
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">
+                                            Tên hãng hàng không
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="airline_name"
+                                            required
+                                            className="form-control"
+                                            value={airline_name.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "airline_name")
+                                            }
+                                        />
+                                        {airline_name.err === "*" && dirty ? (
+                                            <FormError err="Airline name cannot be empty" />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">
+                                            Mã hãng hàng không
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="code"
+                                            className="form-control"
+                                            required
+                                            value={code.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "code")
+                                            }
+                                        />
+                                        {code.err == "*" && dirty ? (
+                                            <FormError err="Airline code cannot be empty" />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">
+                                            Quốc gia
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="country"
+                                            className="form-control"
+                                            required
+                                            value={country.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "country")
+                                            }
+                                        />
+                                         {country.err == "*" && dirty ? (
+                                            <FormError err="Country cannot be empty" />
+                                        ) :(
+                                            ""
+                                        )}
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">
+                                            Website
+                                        </label>
+                                        <input
+                                            name="website"
+                                            className="form-control"
+                                            required
+                                            id="exampleInputPassword1"
+                                            value={website.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "website")
+                                            }
+                                        ></input>
+                                         {website.err == "*" && dirty ? (
+                                            <FormError err="Website cannot be empty" />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">
+                                            Hotline
+                                        </label>
+                                        <input
+                                            name="hotline"
+                                            className="form-control"
+                                            required
+                                            id="exampleInputPassword1"
+                                            value={hotline.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "hotline")
+                                            }
+                                        ></input>
+                                         {hotline.err =="*" && dirty ? (
+                                            <FormError err="Hotline cannot be empty" />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </div>
+                                   
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-pill"
+                                    data-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary btn-pill"
+                                    onClick={this.onSubmitInfo}
+                                    
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

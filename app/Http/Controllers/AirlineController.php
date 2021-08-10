@@ -38,4 +38,10 @@ class AirlineController extends Controller
         $airline = Airline::create($data);
         return response()->json($airline);
     }
+
+    public function deleteAirline($id){
+        $airline = Airline::find($id);
+        $airline->delete();
+        return response()->json($airline);
+    }
 }

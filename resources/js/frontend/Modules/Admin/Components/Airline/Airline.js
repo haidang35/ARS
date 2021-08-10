@@ -29,11 +29,11 @@ class Airline extends Component {
             .catch((err) => {});
     };
 
-   addAirline=()=>{
-     AirlineService.addNewAirline(data)
-      .then((res)=>{
-        this.getAirlineList();
-      })
+   addAirline=(data)=>{
+        AirlineService.addNewAirline(data)
+        .then((res)=>{
+            this.getAirlineList();
+        })
    }
 
     render() {
@@ -47,17 +47,16 @@ class Airline extends Component {
                                 Danh sách các hãng hàng không đang hợp tác
                             </h4>
                             <div className="float-right">
-                                <Link to={`/admin/airlines/create`}>
-                                    <button
-                                      type="button"
-                                      className="btn btn-primary"
-                                    >
-                                     Add new airline
-                                    </button>
-                                </Link>
+                                <button
+                                    className="btn btn-primary"
+                                    data-toggle="modal"
+                                    data-target="#addNewAirline"
+                                >
+                                    Add new airline
+                                </button>
                             </div>
                         </div>
-                        {/* <AddNewAirline onSubmitInfo={this.addAirline}/> */}
+                        <AddNewAirline onSubmit={this.addAirline}/>
                         <div className="card-content">
                             <div className="card-body">
                                 <div className="table-responsive">
@@ -105,6 +104,7 @@ class Airline extends Component {
                                                                 </button>
                                                             </Link>
                                                         </td>
+
                                                     </tr>
                                                 );
                                             })}
