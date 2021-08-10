@@ -18,7 +18,7 @@ class CreateTableBookingTicket extends Migration
             $table->unsignedInteger("booking_id");
             $table->unsignedInteger("ticket_id");
             $table->string("passenger_name");
-            $table->string("vocative");
+            $table->string("gender");
             $table->date("birthday");
             $table->tinyInteger("passenger_type");
             $table->timestamps();
