@@ -5,6 +5,7 @@ const API_ENPOINT = {
     GET_ALL_DESTINATIONS: "destinations",
     GET_DESTINATION_DETAILS: "destinations/",
     UPDATE_DESTINATION: "destinations/update/",
+    ADD_NEW_DESTINATION: "destinations/create"
 };
 
 class DestinationService {
@@ -30,6 +31,10 @@ class DestinationService {
             BASE_URL + API_ENPOINT.UPDATE_DESTINATION + id,
             data
         );
+    }
+
+    async addNewDestination(data){
+        return await axios.post(BASE_URL + API_ENPOINT.ADD_NEW_DESTINATION,data);
     }
 }
 

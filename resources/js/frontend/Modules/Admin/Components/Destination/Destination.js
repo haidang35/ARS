@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import AddNewDestination from "./Components/AddNewDestination/AddNewDestination";
 import DestinationService from "./Shared/DestinationService";
 
 class Destination extends Component {
@@ -24,6 +25,12 @@ class Destination extends Component {
             })
             .catch((err) => {});
     };
+    addDestination=()=>{
+        DestinationService.addNewDestination(data)
+            .then((res)=>{
+                this.getDestinationList();
+            })
+    }
 
     render() {
         const { destinationList } = this.state;
@@ -34,7 +41,18 @@ class Destination extends Component {
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">Điểm đến</h4>
+                            <div className="float-right">
+                                <Link to={`/admin/destinations/create`}>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Add new destination
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
+                       
                         <div className="card-content">
                             <div className="card-body">
                                 <div className="table-responsive">
@@ -47,6 +65,7 @@ class Destination extends Component {
                                                 <th>Sân bay</th>
                                                 <th>Quốc gia</th>
                                                 <th>Mã quốc gia</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>

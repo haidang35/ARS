@@ -23,7 +23,8 @@ import TicketDetails from "../Components/Ticket/Components/TicketDetails/TicketD
 import PassengerDetails from "../Components/Passenger/Components/PassengerDetails/PassengerDetails";
 import FlightDetails from "../Components/Flight/Components/FlightDetails/FlightDetails";
 import DestinationDetails from "../Components/Destination/Components/DestinationDetails/DestinationDetails";
-
+import AddNewDestination from "../Components/Destination/Components/AddNewDestination/AddNewDestination";
+import AddNewAirline from "../Components/Airline/Components/AddNewAirline/AddNewAirline";
 class AdminDashBoard extends Component {
     constructor(props) {
         super(props);
@@ -76,35 +77,45 @@ class AdminDashBoard extends Component {
                                             path={`/admin/passengers`}
                                             component={Passenger}
                                         />
-                                        {/**/}
+                                      
                                         <Route
                                             exact
                                             path={`/admin/destinations/:id`}
                                             component={DestinationDetails}
                                         />
+                                         <Route
+                                            exact
+                                            path={`/admin/destinations/create`}
+                                            component={AddNewDestination}
+                                        />
                                         <Route
                                             exact
-                                            path={`/admin/flight-details`}
+                                            path={`/admin/flights/:id`}
                                             component={FlightDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/ticket-details`}
+                                            path={`/admin/tickets/:id`}
                                             component={TicketDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/booking-details`}
+                                            path={`/admin/booking/:id`}
                                             component={BookingDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/airline-details`}
+                                            path={`/admin/airlines/:id`}
                                             component={AirlineDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/passenger-details`}
+                                            path={`/admin/airlines/create`}
+                                            component={AddNewAirline}
+                                        />
+                                        <Route
+                                            exact
+                                            path={`/admin/passengers/:id`}
                                             component={PassengerDetails}
                                         />
                                     </Suspense>

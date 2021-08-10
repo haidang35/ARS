@@ -35,4 +35,16 @@ class DestinationController extends Controller
         $destination->update($data);
         return response()->json($destination);
     }
+    public function addNewDestination(Request $request){
+        $data = [
+            "city" => $request->city,
+            "province" => $request->province,
+            "airport_code" => $request->airport_code,
+            "airport_name" => $request->airport_name,
+            "country_code" => $request->country_code,
+            "country" => $request->country
+        ];
+        $destination = Destination::create($data);
+        return response()->json($destination);
+    }
 }

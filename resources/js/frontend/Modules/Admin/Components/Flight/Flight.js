@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import FlightService from "./Shared/FlightService";
 
 class Flight extends Component {
@@ -95,6 +96,15 @@ class Flight extends Component {
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.seats_available}
+                                                        </td>
+                                                        <td>
+                                                            <Link 
+                                                                to={`/admin/flights/${item.id}`}
+                                                            >
+                                                                <button className="btn btn-primary">
+                                                                    View
+                                                                </button>
+                                                            </Link>
                                                         </td>
                                                     </tr>
                                                 )

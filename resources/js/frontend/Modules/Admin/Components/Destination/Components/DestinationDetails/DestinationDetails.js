@@ -91,6 +91,8 @@ class DestinationDetails extends Form {
         }
     };
 
+    
+
     render() {
         const {
             city,

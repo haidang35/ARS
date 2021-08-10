@@ -2,7 +2,9 @@ import axios from "axios";
 import { BASE_URL } from "../../../../../Constances/const";
 
 const API_ENPOINT = {
-    GET_ALL_FLIGHT: "flights"
+    GET_ALL_FLIGHT: "flights",
+    GET_FLIGHT_DETAILS: "flights/",
+    UPDATE_FLIGHT_INFO:"flights/update/"
 }
 
 class FlightService {
@@ -15,6 +17,12 @@ class FlightService {
 
     async getFlightList() {
         return await axios.get(BASE_URL + API_ENPOINT.GET_ALL_FLIGHT);
+    }
+    async getFlightDetails(id){
+        return await axios.get(BASE_URL + API_ENPOINT.GET_FLIGHT_DETAILS + id);
+    }
+    async updateFlightInfo(id,data){
+        return await axios.patch(BASE_URL + API_ENPOINT.UPDATE_FLIGHT_INFO + id,data);
     }
 }
 
