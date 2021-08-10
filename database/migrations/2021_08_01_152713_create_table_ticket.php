@@ -21,8 +21,8 @@ class CreateTableTicket extends Migration
             $table->tinyInteger("status");
             $table->integer("carbin_bag");
             $table->integer("checkin_bag");
-            $table->float("price");
-            $table->float("tax");
+            $table->double("price", 20, 2);
+            $table->double("tax", 20, 2);
             $table->timestamps();
             $table->foreign("flight_id")->references("id")->on("flights")->onDelete("cascade");
         });

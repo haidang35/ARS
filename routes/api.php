@@ -24,11 +24,14 @@ use App\Models\Destination;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('auth/me', [AuthController::class, "getMyInfo"]);
+    Route::get('user/my-info', [AuthController::class, "getMyInfo"]);
+    Route::get('user/get-booking', [AuthController::class, "getMyBooking"]);
+    Route::get('user/get-password', [AuthController::class, "getMyPassword"]);
+    Route::put('user/update-password', [AuthController::class, "updatePassword"]);
 });
 
-Route::post('auth/register', [AuthController::class, "register"]);
-Route::post('auth/login', [AuthController::class, "login"]);
+Route::post('user/register', [AuthController::class, "register"]);
+Route::post('user/login', [AuthController::class, "login"]);
 
 
 //Destination
