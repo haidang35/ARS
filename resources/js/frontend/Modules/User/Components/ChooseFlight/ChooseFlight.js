@@ -15,11 +15,17 @@ class ChooseFlight extends Component {
             departureSearch: "",
             destinationSearch: "",
             departureDate: "",
+            returnDate: "",
             flightsData: [],
+            flightsDataReturn: [],
+            flightsDataReturnOrg: [],
             flightsDataOrg: [],
             flightListDate: [],
             flightListDateOrg: [],
+            flightListDateReturn: [],
+            flightListDateReturnOrg: [],
             airlineList: [],
+            tripType: "",
         };
     }
 
@@ -32,6 +38,7 @@ class ChooseFlight extends Component {
         const departure = params.get("departure");
         const destination = params.get("destination");
         const departureDate = params.get("time");
+        const returnDate = params.get("return");
         this.getDepartureInfo(departure);
         this.getDestinationInfo(destination);
         const tripType = JSON.parse(localStorage.getItem("tripType"));
@@ -50,6 +57,7 @@ class ChooseFlight extends Component {
                 quantity: passengers.infants,
             },
         ];
+
         const data = {
             destination,
             departure,
@@ -57,8 +65,21 @@ class ChooseFlight extends Component {
             passenger,
             departure_time: departureDate,
         };
+        if (tripType == 2) {
+            const data = {
+                destination: departure,
+                departure: destination,
+                trip_type: tripType,
+                passenger,
+                departure_time: returnDate,
+            };
+            this.onSearchFlightReturn(data);
+        }
+
         this.setState({
             departureDate,
+            returnDate,
+            tripType,
         });
         this.onSearchFlight(data);
         this.getFlightListDate(departure, destination);
@@ -87,6 +108,18 @@ class ChooseFlight extends Component {
                     flightsData: res.data,
                     flightsDataOrg: res.data,
                 });
+            })
+            .catch((err) => {});
+    };
+
+    onSearchFlightReturn = (data) => {
+        UserService.searchFlight(data)
+            .then((res) => {
+                this.setState({
+                    flightsDataReturn: res.data,
+                    flightsDataReturnOrg: res.data,
+                });
+                console.log("returnnnnnn", res.data);
             })
             .catch((err) => {});
     };
@@ -121,6 +154,20 @@ class ChooseFlight extends Component {
                 flightListDateOrg: res.data,
             });
         });
+        if (tripType == 2) {
+            let searchData = {
+                departure: destination,
+                destination: departure,
+                trip_type: tripType,
+                passenger,
+            };
+            UserService.getFlightListWithoutDate(searchData).then((res) => {
+                this.setState({
+                    flightListDateReturn: res.data,
+                    flightListDateReturnOrg: res.data,
+                });
+            });
+        }
     };
 
     handleChangeDepartureDate = (data, flightList, flightListOrg) => {
@@ -147,11 +194,44 @@ class ChooseFlight extends Component {
                 flightsDataOrg.push(item);
             }
         });
+
         this.setState({
             flightsData,
             departureDate: data.date,
             flightsDataOrg,
         });
+    };
+
+    handleChangeReturnDate = (data, flightList, flightListOrg) => {
+        let flightsDataReturn = [];
+        let flightsDataReturnOrg = [];
+        flightList.forEach((item) => {
+            let newDate = new Date(item.flight.departure_datetime);
+            if (
+                newDate.getDate() == data.date.getDate() &&
+                newDate.getMonth() == data.date.getMonth() &&
+                newDate.getFullYear() == data.date.getFullYear()
+            ) {
+                flightsDataReturn.push(item);
+            }
+        });
+
+        flightListOrg.forEach((item) => {
+            let newDate = new Date(item.flight.departure_datetime);
+            if (
+                newDate.getDate() == data.date.getDate() &&
+                newDate.getMonth() == data.date.getMonth() &&
+                newDate.getFullYear() == data.date.getFullYear()
+            ) {
+                flightsDataReturnOrg.push(item);
+            }
+        });
+        this.setState({
+            flightsDataReturn,
+            flightsDataReturnOrg,
+            returnDate: data.date,
+        });
+        console.log("FL", this.state.flightsDataReturn);
     };
 
     sortFlight = (value) => {
@@ -336,6 +416,7 @@ class ChooseFlight extends Component {
     render() {
         const {
             departureDate,
+            returnDate,
             flightsData,
             departureSearch,
             destinationSearch,
@@ -343,6 +424,7 @@ class ChooseFlight extends Component {
             flightsDataOrg,
             flightListDateOrg,
         } = this.state;
+        console.log("return date", returnDate);
         return (
             <div>
                 <SubNavbar />
@@ -382,6 +464,35 @@ class ChooseFlight extends Component {
                                             flightList={flightsData}
                                         />
                                     </div>
+                                    {this.state.tripType == 2 ? (
+                                        <div className="booking-ticket-return">
+                                            <HeaderBookingTicket
+                                                departureDate={
+                                                    this.state.returnDate
+                                                }
+                                                flightList={
+                                                    this.state
+                                                        .flightListDateReturn
+                                                }
+                                                flightListOrg={
+                                                    this.state
+                                                        .flightListDateReturnOrg
+                                                }
+                                                departure={destinationSearch}
+                                                destination={departureSearch}
+                                                onChangeDepartureDate={
+                                                    this.handleChangeReturnDate
+                                                }
+                                            />
+                                            <BookingTicketList
+                                                flightList={
+                                                    this.state.flightsDataReturn
+                                                }
+                                            />
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
                         </div>

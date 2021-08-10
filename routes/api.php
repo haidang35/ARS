@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/get-booking', [AuthController::class, "getMyBooking"]);
     Route::get('user/get-password', [AuthController::class, "getMyPassword"]);
     Route::put('user/update-password', [AuthController::class, "updatePassword"]);
+    Route::patch('user/update-info', [AuthController::class, "upDateMyInfo"]);
 });
 
 Route::post('user/register', [AuthController::class, "register"]);

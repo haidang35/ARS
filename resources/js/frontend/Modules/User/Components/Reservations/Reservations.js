@@ -109,6 +109,7 @@ class Reservations extends Component {
                 .catch((err) => {
                     console.log("booking failed ");
                 });
+            window.scrollTo(0, 0);
         }
     };
 

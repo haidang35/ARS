@@ -94,9 +94,15 @@ class Navbar extends Component {
                 >
                     <div className="wrap-container">
                         <Toolbar style={{ padding: "0" }}>
-                            <Typography variant="h5" style={{ color: "#ffff" }}>
-                                Flight Booking
-                            </Typography>
+                            <Link to="/" style={{ textDecoration: "none" }}>
+                                <Typography
+                                    variant="h5"
+                                    style={{ color: "#ffff" }}
+                                >
+                                    Flight Booking
+                                </Typography>
+                            </Link>
+
                             <div className="list-menu">
                                 <NavLink
                                     to="/"
