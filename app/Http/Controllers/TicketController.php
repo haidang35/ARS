@@ -13,12 +13,6 @@ class TicketController extends Controller
 {
     public function getAllTicket() {
         $tickets = Ticket::with("Flight")->get();
-        foreach($tickets as $item) {
-            $airlineDetails = Airline::find($item->flight->airline_id); 
-            $destinationDetails = Destination::find($item->flight->destination_id); 
-            $item["airline"] = $airlineDetails;
-            $item["destination"]  = $destinationDetails;
-        }
         return response()->json($tickets);
     }
 
@@ -28,7 +22,7 @@ class TicketController extends Controller
     }
 
     public function updateTicketInfo($id, Request $request){
-        $data = [
+        $data =[
             "flight_id" => $request->flight_id,
             "ticket_type" => $request->ticket_type,
             "available_class" => $request->available_class,
@@ -44,7 +38,7 @@ class TicketController extends Controller
     }
 
     public function addNewTicket(Request $request){
-        $ticket = Ticket::create([
+        $data = [
             "flight_id" => $request->flight_id,
             "ticket_type" => $request->ticket_type,
             "available_class" => $request->available_class,
@@ -53,8 +47,8 @@ class TicketController extends Controller
             "checkin_bag" => $request->checkin_bag,
             "price" => $request->price,
             "tax" => $request->tax
-        ]);
-        $flight = Flight::find($request->flight_id);
+        ];
+        $ticket = Ticket::create($data);
         return response()->json($ticket);
     }
 

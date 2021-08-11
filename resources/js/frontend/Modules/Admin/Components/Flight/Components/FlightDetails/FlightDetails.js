@@ -14,6 +14,7 @@ class FlightDetails extends Form{
                arrival_datetime:"",
                aircraft:"",
                airlineName:"",
+               departureCity:"",
                destinationCity:"",
                capacity:"",
                seats_reserved:"",
@@ -37,6 +38,7 @@ class FlightDetails extends Form{
                 arrival_datetime:res.data.arrival_datetime,
                 aircraft:res.data.aircraft,
                 airlineName:res.data.airline.airline_name,
+                departureCity:res.data.departure.city,
                 destinationCity:res.data.destination.city,
                 capacity:res.data.capacity,
                 seats_reserved:res.data.seats_reserved,
@@ -56,31 +58,40 @@ class FlightDetails extends Form{
        this.setState({
            onEdit:false
        })
+       this.getFlightDetails();
    }
 
    onSaveChangeInfo=()=>{
+        const {form} = this.state;
         this._validateForm();
         this.state.form["dirty"] = true;
         const {id} = this.props.match.params;
         if(this._isFormValid()){
-            const {form} = this.state;
+          
             const data = {
                 flight_code:form.flight_code.value,
                 departure_datetime:form.departure_datetime.value,
                 arrival_datetime:form.arrival_datetime.value,
                 aircraft:form.aircraft.value,
+                airline_id:form.airline_id.value,
+                departure_id:form.departure_id.value,
+                destination_id:form.destination_id.value,
                 capacity:form.capacity.value,
                 seats_reserved:form.seats_reserved.value,
                 seats_available:form.seats_available.value
-
             }
+            console.log(data);
             FlightService.updateFlightInfo(id,data)
                 .then((res)=>{
+                    console.log(res.data);
                     this._fillForm({
                         flight_code:"",
                         departure_datetime:"",
                         arrival_datetime:"",
                         aircraft:"",
+                        airlineName:"",
+                        departureCity:"",
+                        destinationCity:"",
                         capacity:"",
                         seats_reserved:"",
                         seats_available:"",
@@ -100,6 +111,7 @@ class FlightDetails extends Form{
             arrival_datetime,
             aircraft,
             airlineName,
+            departureCity,
             destinationCity,
             capacity,
             seats_reserved,
@@ -123,7 +135,7 @@ class FlightDetails extends Form{
                       <div>
                             {!onEdit ? (
                                 <button 
-                                    style={{marginLeft:"1100px"}}
+                                    style={{marginLeft:"1120px"}}
                                     className="btn btn-primary"
                                     onClick={this.onEditInfo}
                                 > Edit</button>
@@ -136,7 +148,7 @@ class FlightDetails extends Form{
                                         onClick={this.onSaveChangeInfo}
                                     > Save</button>
                                     <button 
-                                        style={{marginLeft:"1rem"}}
+                                        style={{marginLeft:"32px"}}
                                         className="btn btn-warning"
                                         onClick={this.onCancelEdit}
                                     > Cancel</button>
@@ -151,7 +163,7 @@ class FlightDetails extends Form{
                                         <div className="card-content">
                                             <form className="form">
                                                 <label htmlFor="first-name-column" style={{fontWeight:"600",color:"rgba(35,28,99,.7)"}}>Khởi hành</label>
-                                                        {/* <div className="input-form">
+                                                        <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Điểm khởi hành
@@ -160,21 +172,11 @@ class FlightDetails extends Form{
                                                                     type="text"
                                                                     className="form-control"
                                                                     required
-                                                                    name="departure.city"
-                                                                    value={departure.city.value}
-                                                                    onChange={(ev) => this._setValue(
-                                                                        ev,"departure.city"
-                                                                    )}
+                                                                    disabled
+                                                                    value={departureCity.value}
                                                                 />
-                                                                {departure.city.err == "*" && dirty ? (
-                                                                    <FormError
-                                                                        err={"Departure city cannot be empty"}
-                                                                    />
-                                                                ):(
-                                                                    ""
-                                                                )}
                                                             </div>
-                                                        </div> */}
+                                                        </div>
                                                         {/* <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
@@ -198,7 +200,7 @@ class FlightDetails extends Form{
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Ngày khởi hành
+                                                                Thời gian khởi hành
                                                                 </span>
                                                                 <input
                                                                     type="text"
@@ -267,7 +269,7 @@ class FlightDetails extends Form{
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Ngày đến
+                                                                Thời gian đến
                                                                 </span>
                                                                 <input
                                                                     type="text"
@@ -309,6 +311,7 @@ class FlightDetails extends Form{
                                                                 Tên hãng
                                                                 </span>
                                                                 <input
+                                                                    required
                                                                     type="text"
                                                                     className="form-control"
                                                                     value={airlineName.value}
@@ -328,7 +331,6 @@ class FlightDetails extends Form{
                                                                     value={flight_code.value}
                                                                     required
                                                                     disabled={!onEdit}
-                                                                  
                                                                     onChange={(ev) => this._setValue(
                                                                         ev,"flight_code"
                                                                     )}
@@ -355,7 +357,6 @@ class FlightDetails extends Form{
                                                                     value={aircraft.value}
                                                                     required
                                                                     disabled={!onEdit}
-                                                                  
                                                                     onChange={(ev) => this._setValue(
                                                                         ev,"aircraft"
                                                                     )}
@@ -447,7 +448,7 @@ class FlightDetails extends Form{
                                                             value={seats_available.value}
                                                             required
                                                             disabled={!onEdit}
-                                                        
+
                                                             onChange={(ev) => this._setValue(
                                                                 ev,"seats_available"
                                                             )}

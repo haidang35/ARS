@@ -55,9 +55,9 @@ class TicketDetails extends Form{
    }
 
    onSaveChangeInfo=()=>{
+        const {id} = this.props.match.params;
         this._validateForm();
         this.state.form["dirty"] = true;
-        const {id} = this.props.match.params;
         if(this._isFormValid()){
             const {form} = this.state;
             const data = {
@@ -72,23 +72,13 @@ class TicketDetails extends Form{
             }
             TicketService.updateTicketInfo(id,data)
                 .then((res)=>{
-                    this._fillForm({
-                        flightCode:"",
-                        ticket_type:"",
-                        available_class:"",
-                        status:"",
-                        carbin_bag:"",
-                        checkin_bag,
-                        price:"",
-                        tax:"",
-                        dirty:false
-                    })
                     console.log(res.data);
                 })
-                this.setState({
+            this.setState({
                 onEdit:false
-                }) 
-            } 
+            }) 
+   
+        } 
    }
 
     render(){
@@ -442,5 +432,6 @@ class TicketDetails extends Form{
         )
     }
 }
+
 
 export default TicketDetails;

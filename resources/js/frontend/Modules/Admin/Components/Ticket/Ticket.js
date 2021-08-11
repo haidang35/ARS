@@ -79,7 +79,7 @@ class Ticket extends Form {
             const data = {
                 flight_id:form.flightId.value,
                 ticket_type:form.ticket_type.value,
-                available_class:form.ticket_type.value,
+                available_class:form.available_class.value,
                 status:form.status.value,
                 carbin_bag:form.carbin_bag.value,
                 checkin_bag:form.checkin_bag.value,
@@ -88,6 +88,7 @@ class Ticket extends Form {
             }
             TicketService.addNewTicket(data)
                 .then((res)=>{
+                    this.getTicketList();
                     this._fillForm({
                         flightId:"",
                         ticket_type:"",
@@ -99,7 +100,8 @@ class Ticket extends Form {
                         tax:"",
                         dirty:false
                     })
-                })
+            
+                });
                 this.setState({
                     onAdd:false
                 })

@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 class FlightController extends Controller
 {
     public function getAllFlight() {
-        $flights = Flight::with("Destination")->with("Airline")->get();
+        $flights = Flight::with("Destination")->with("Departure")->with("Airline")->get();
         return response()->json($flights);
     }
     public function getFlightDetails($id){
-        $flight = Flight::with("Destination")->with("Airline")->find($id);
+        $flight = Flight::with("Destination")->with("Departure")->with("Airline")->find($id);
         return response()->json($flight);
     }
     public function updateFlightInfo($id,Request $request){
@@ -22,12 +22,13 @@ class FlightController extends Controller
             "arrival_datetime"=>$request->arrival_datetime,
             "aircraft"=>$request->aircraft,
             "airline_id"=>$request->airline_id,
+            "departure_id" => $request->departure_id,
             "destination_id"=>$request->destination_id,
             "capacity"=>$request->capacity,
             "seats_reserved"=>$request->seats_reserved,
             "seats_available"=>$request->seats_available
         ];
-        $flight = Flight::with("Destination")->with("Airline")->find($id);      
+        $flight = Flight::with("Destination")->with("Departure")->with("Airline")->find($id);      
         $flight->update($data);
         return response()->json($flight);
     }
@@ -44,7 +45,7 @@ class FlightController extends Controller
             "seats_reserved" => $request->seats_reserved,
             "seats_available" => $request->seats_available
         ];
-        $flight = Flight::with("Destination")->with("Airline")->create($data);
+        $flight = Flight::with("Destination")->with("Departure")->with("Airline")->create($data);
         return response()->json($flight);
     }
 }
