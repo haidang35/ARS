@@ -1,0 +1,28 @@
+.customer-side-bar {
+    height: 20rem;
+    background-color: #ffff;
+    border-radius: 10px;
+    padding-top: 2rem;
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        text-decoration: none;
+
+        .menu-item {
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 1rem 2rem;
+
+            .icon-menu {
+                font-size: 25px;
+                margin-right: 1rem;
+            }
+        }
+
+        .menu-item:hover {
+            background-color: rgb(230, 223, 223);
+        }
+    }
+}

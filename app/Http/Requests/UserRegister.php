@@ -28,11 +28,12 @@ class UserRegister extends FormRequest
         return [
             "name" => 'required | string',
             "email" => "required | string | unique:users",
-            "password" => "required | string | confirmed"
+            "password" => "required | string | confirmed",
+            "phone" => "required | string"
         ];
     }
-    
-    public function failedValidation(Validator $validator) 
+
+    public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([$validator->errors()], 422));
     }
