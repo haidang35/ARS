@@ -491,6 +491,7 @@ class SearchFlightBar extends Component {
                                             margin="normal"
                                             id="date-picker-inline"
                                             label="Ngày đi"
+                                            disablePast
                                             value={startDate}
                                             onChange={
                                                 this.handleChangeStartDate
@@ -509,6 +510,10 @@ class SearchFlightBar extends Component {
                                             margin="normal"
                                             id="date-picker-inline"
                                             label="Ngày về"
+                                            disablePast
+                                            disabled={
+                                                tripType == 2 ? false : true
+                                            }
                                             value={returnDate}
                                             onChange={
                                                 this.handleChangeReturnDate
