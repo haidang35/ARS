@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import AddNewDestination from "./Components/AddNewDestination/AddNewDestination";
 import DestinationService from "./Shared/DestinationService";
 
 class Destination extends Component {
@@ -24,17 +25,33 @@ class Destination extends Component {
             })
             .catch((err) => {});
     };
+    addDestination=(data)=>{
+        DestinationService.addNewDestination(data)
+            .then((res)=>{
+                this.getDestinationList();
+            })
+    }
+
 
     render() {
         const { destinationList } = this.state;
-
         return (
             <div>
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">Điểm đến</h4>
+                            <div className="float-right">
+                                <button
+                                    className="btn btn-primary"
+                                    data-toggle="modal"
+                                    data-target="#addNewDestination"
+                                >
+                                    Add new destination
+                                </button>
                         </div>
+                        </div>
+                       <AddNewDestination onSubmit = {this.addDestination}/>
                         <div className="card-content">
                             <div className="card-body">
                                 <div className="table-responsive">
@@ -47,6 +64,8 @@ class Destination extends Component {
                                                 <th>Sân bay</th>
                                                 <th>Quốc gia</th>
                                                 <th>Mã quốc gia</th>
+                                                <th></th>
+                                             
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -80,14 +99,14 @@ class Destination extends Component {
                                                         <td className="text-bold-500">
                                                             {item.country_code}
                                                         </td>
-                                                        <td>
+                                                        <td style={{float:"right"}}>
                                                             <Link
                                                                 to={`/admin/destinations/${item.id}`}
                                                             >
-                                                                <button className="btn btn-primary">
+                                                                <button className="btn btn-primary" style={{marginLeft:"18px"}}>
                                                                     View
                                                                 </button>
-                                                            </Link>
+                                                            </Link> 
                                                         </td>
                                                     </tr>
                                                 );

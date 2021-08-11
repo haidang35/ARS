@@ -1,12 +1,31 @@
 import React from "react";
 import { Component } from "react";
+import { Link } from "react-router-dom";
+import Form from "../../../../Shared/Components/Form/Form";
+import FormError from "../../../../Shared/Components/Form/FormError";
 import FlightService from "./Shared/FlightService";
+import AirlineService from "../Airline/Shared/AirlineService";
 
-class Flight extends Component {
+class Flight extends Form {
     constructor(props) {
         super(props);
         this.state = {
+            destinationList:[],
             flightList: [],
+            airlineList:[],
+            form:this._getInitFormData({
+                flight_code:"",
+                departure_datetime:"",
+                arrival_datetime:"",
+                aircraft:"",
+                airlineName:"",
+                departureCity:"",
+                destinationCity:"",
+                capacity:"",
+                seats_reserved:"",
+                seats_available:""
+            }),
+            onAdd:false
         };
     }
 
@@ -24,6 +43,16 @@ class Flight extends Component {
             .catch((err) => {});
     };
 
+    getAirlineList = ()=>{
+
+    }
+    addFlight=(data)=>{
+        FlightService.addNewFlight(data)
+            .then((res)=>{
+                this.getFlightList();
+            })
+    }
+
     render() {
         const { flightList } = this.state;
         console.log(flightList);
@@ -35,6 +64,11 @@ class Flight extends Component {
                             <h4 className="card-title">
                                 Danh sách các chuyến bay
                             </h4>
+                            <div className="float-right">
+                                <button 
+                                    className="btn btn-primary"
+                                >Add new flight</button>
+                            </div>
                         </div>
                         <div className="card-content">
                             <div className="card-body">
@@ -72,7 +106,7 @@ class Flight extends Component {
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {
-                                                                item.departure_datetime
+                                                                item.arrival_datetime
                                                             }
                                                         </td>
                                                         <td className="text-bold-500">
@@ -95,6 +129,15 @@ class Flight extends Component {
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.seats_available}
+                                                        </td>
+                                                        <td>
+                                                            <Link 
+                                                                to={`/admin/flights/${item.id}`}
+                                                            >
+                                                                <button className="btn btn-primary">
+                                                                    View
+                                                                </button>
+                                                            </Link>
                                                         </td>
                                                     </tr>
                                                 )

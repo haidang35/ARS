@@ -76,35 +76,36 @@ class AdminDashBoard extends Component {
                                             path={`/admin/passengers`}
                                             component={Passenger}
                                         />
-                                        {/**/}
+                                      
                                         <Route
                                             exact
                                             path={`/admin/destinations/:id`}
                                             component={DestinationDetails}
                                         />
+                                       
                                         <Route
                                             exact
-                                            path={`/admin/flight-details`}
+                                            path={`/admin/flights/:id`}
                                             component={FlightDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/ticket-details`}
+                                            path={`/admin/tickets/:id`}
                                             component={TicketDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/booking-details`}
+                                            path={`/admin/bookings/:id`}
                                             component={BookingDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/airline-details`}
+                                            path={`/admin/airlines/:id`}
                                             component={AirlineDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/passenger-details`}
+                                            path={`/admin/passengers/:id`}
                                             component={PassengerDetails}
                                         />
                                     </Suspense>
