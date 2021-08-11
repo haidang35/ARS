@@ -1,10 +1,13 @@
+@import "../../../../../../Shared/Style/variables";
+
 .payment-method {
     background-color: #ffff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin-bottom: 2rem;
+    padding-bottom: 1rem;
 
     .title-box {
-        background-color: #785ef2;
+        background-color: $background-color;
         padding: 1rem;
 
         .title {
@@ -39,7 +42,7 @@
 
         .active-payment-method {
             .icon-check {
-                background-color: #785ef2;
+                background-color: $background-color;
                 border-radius: 13px;
                 color: #ffff;
             }
@@ -56,6 +59,10 @@
 
         .btn-reser {
             float: right;
+            background-color: $background-color;
+            color: #ffff;
+            font-size: 18px;
+
         }
     }
 }

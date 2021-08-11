@@ -1,10 +1,12 @@
+@import "../../../../../../Shared/Style/variables";
+
 .contact-info-booking {
     background-color: #ffff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin-bottom: 2rem;
 
     .title-box {
-        background-color: #785ef2;
+        background-color: $background-color;
         padding: 1rem;
 
         .title {

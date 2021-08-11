@@ -7,6 +7,7 @@ import "./ChooseFlight.scss";
 import BookingTicketList from "./Components/BookingTicketList/BookingTicketList";
 import HeaderBookingTicket from "./Components/HeaderBookingTicket/HeaderBookingTicket";
 import UserService from "../../../User/Shared/UserService/UserService";
+import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
 
 class ChooseFlight extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class ChooseFlight extends Component {
             flightListDateReturnOrg: [],
             airlineList: [],
             tripType: "",
+            filterTripType: 1,
         };
     }
 
@@ -247,38 +249,78 @@ class ChooseFlight extends Component {
     };
 
     sortFLightPriceFromHighToLow = () => {
-        let { flightsData, flightListDate } = this.state;
+        let {
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        } = this.state;
         flightsData = flightsData.sort((item1, item2) => {
             return item2.total_price - item1.total_price;
         });
         flightListDate = flightListDate.sort((item1, item2) => {
             return item2.total_price - item1.total_price;
         });
+        flightsDataReturn = flightsDataReturn.sort((item1, item2) => {
+            return item2.total_price - item1.total_price;
+        });
+        flightListDateReturn = flightListDateReturn.sort((item1, item2) => {
+            return item2.total_price - item1.total_price;
+        });
 
-        this.setState({ flightsData, flightListDate });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightListDateReturn,
+            flightsDataReturn,
+        });
     };
 
     sortFLightPriceFromLowToHigh = () => {
-        let { flightsData, flightListDate } = this.state;
+        let {
+            flightsData,
+            flightListDate,
+            flightListDateReturn,
+            flightsDataReturn,
+        } = this.state;
         flightsData = flightsData.sort((item1, item2) => {
             return item1.total_price - item2.total_price;
         });
         flightListDate = flightListDate.sort((item1, item2) => {
             return item1.total_price - item2.total_price;
         });
-        this.setState({ flightsData, flightListDate });
+        flightListDateReturn = flightListDateReturn.sort((item1, item2) => {
+            return item1.total_price - item2.total_price;
+        });
+        flightsDataReturn = flightsDataReturn.sort((item1, item2) => {
+            return item1.total_price - item2.total_price;
+        });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        });
     };
 
     sortFLightPriceFromLowToHighDidmount = () => {
-        let { flightsData } = this.state;
+        let { flightsData, flightsDataReturn } = this.state;
         flightsData = flightsData.sort((item1, item2) => {
             return item1.total_price - item2.total_price;
         });
-        this.setState({ flightsData });
+        flightsDataReturn = flightsDataReturn.sort((item1, item2) => {
+            return item1.total_price - item2.total_price;
+        });
+        this.setState({ flightsData, flightsDataReturn });
     };
 
     sortDepartureTime = () => {
-        let { flightsData, flightListDate } = this.state;
+        let {
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        } = this.state;
         flightsData = flightsData.sort((item1, item2) => {
             const departureTime1 = new Date(item1.flight.departure_datetime);
             const departureTime2 = new Date(item2.flight.departure_datetime);
@@ -289,11 +331,26 @@ class ChooseFlight extends Component {
             const departureTime2 = new Date(item2.flight.departure_datetime);
             return departureTime1.getTime() - departureTime2.getTime();
         });
-        this.setState({ flightsData, flightListDate });
+        flightsDataReturn = flightsDataReturn.sort((item1, item2) => {
+            const departureTime1 = new Date(item1.flight.departure_datetime);
+            const departureTime2 = new Date(item2.flight.departure_datetime);
+            return departureTime1.getTime() - departureTime2.getTime();
+        });
+        flightListDateReturn = flightListDateReturn.sort((item1, item2) => {
+            const departureTime1 = new Date(item1.flight.departure_datetime);
+            const departureTime2 = new Date(item2.flight.departure_datetime);
+            return departureTime1.getTime() - departureTime2.getTime();
+        });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        });
     };
 
     sortFlightTime = () => {
-        let { flightsData } = this.state;
+        let { flightsData, flightsDataReturn } = this.state;
         flightsData = flightsData.sort((item1, item2) => {
             const departureTime1 = new Date(item1.flight.departure_datetime);
             const arrivalTime1 = new Date(item1.flight.arrival_datetime);
@@ -305,16 +362,38 @@ class ChooseFlight extends Component {
                 (arrivalTime2.getTime() - departureTime2.getTime())
             );
         });
-        this.setState({ flightsData });
+        flightsDataReturn = flightsDataReturn.sort((item1, item2) => {
+            const departureTime1 = new Date(item1.flight.departure_datetime);
+            const arrivalTime1 = new Date(item1.flight.arrival_datetime);
+            const departureTime2 = new Date(item2.flight.departure_datetime);
+            const arrivalTime2 = new Date(item2.flight.arrival_datetime);
+            return (
+                arrivalTime1.getTime() -
+                departureTime1.getTime() -
+                (arrivalTime2.getTime() - departureTime2.getTime())
+            );
+        });
+        this.setState({ flightsData, flightsDataReturn });
     };
 
     handleViewModePrice = (value) => {
-        let { flightsData, flightListDate } = this.state;
+        let {
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        } = this.state;
         if (value == 1) {
             flightsData.forEach((item) => {
                 item.total_price = item.price;
             });
             flightListDate.forEach((item) => {
+                item.total_price = item.price;
+            });
+            flightsDataReturn.forEach((item) => {
+                item.total_price = item.price;
+            });
+            flightListDateReturn.forEach((item) => {
                 item.total_price = item.price;
             });
         } else if (value == 2) {
@@ -324,14 +403,34 @@ class ChooseFlight extends Component {
             flightListDate.forEach((item) => {
                 item.total_price = item.price + item.tax;
             });
+            flightsDataReturn.forEach((item) => {
+                item.total_price = item.price + item.tax;
+            });
+            flightListDateReturn.forEach((item) => {
+                item.total_price = item.price + item.tax;
+            });
         }
-        this.setState({ flightsData, flightListDate });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        });
     };
 
     filterDepartureTime = (data, scopeAirline) => {
-        let { flightsData, flightsDataOrg, flightListDateOrg, flightListDate } =
-            this.state;
+        let {
+            flightsData,
+            flightsDataOrg,
+            flightListDateOrg,
+            flightListDate,
+            flightsDataReturn,
+            flightsDataReturnOrg,
+            flightListDateReturn,
+            flightListDateReturnOrg,
+        } = this.state;
         flightsDataOrg = this.scopeAirlineWithOthers(scopeAirline);
+        flightsDataReturnOrg = this.scopeAirlineWithOthersReturn(scopeAirline);
         flightsData = flightsDataOrg.filter((item) => {
             const departureTime = new Date(item.flight.departure_datetime);
             let filterTimeFrom = new Date(departureTime);
@@ -350,14 +449,56 @@ class ChooseFlight extends Component {
             if (departureTime > filterTimeFrom && departureTime < filterTimeTo)
                 return item;
         });
-        this.setState({ flightsData, flightListDate });
+
+        flightsDataReturn = flightsDataReturnOrg.filter((item) => {
+            const departureTime = new Date(item.flight.departure_datetime);
+            let filterTimeFrom = new Date(departureTime);
+            filterTimeFrom.setHours(data.from, 0, 0);
+            let filterTimeTo = new Date(departureTime);
+            filterTimeTo.setHours(data.to, 0, 0);
+            if (departureTime > filterTimeFrom && departureTime < filterTimeTo)
+                return item;
+        });
+        flightListDateReturn = flightListDateReturnOrg.filter((item) => {
+            const departureTime = new Date(item.flight.departure_datetime);
+            let filterTimeFrom = new Date(departureTime);
+            filterTimeFrom.setHours(data.from, 0, 0);
+            let filterTimeTo = new Date(departureTime);
+            filterTimeTo.setHours(data.to, 0, 0);
+            if (departureTime > filterTimeFrom && departureTime < filterTimeTo)
+                return item;
+        });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        });
     };
 
     filterArrivalTime = (data, scopeAirline) => {
-        let { flightsData, flightsDataOrg, flightListDate, flightListDateOrg } =
-            this.state;
+        let {
+            flightsData,
+            flightsDataOrg,
+            flightListDate,
+            flightListDateOrg,
+            flightsDataReturn,
+            flightsDataReturnOrg,
+            flightListDateReturn,
+            flightListDateReturnOrg,
+        } = this.state;
         flightsDataOrg = this.scopeAirlineWithOthers(scopeAirline);
+        flightsDataReturnOrg = this.scopeAirlineWithOthersReturn(scopeAirline);
         flightsData = flightsDataOrg.filter((item) => {
+            const arrivalTime = new Date(item.flight.arrival_datetime);
+            let filterTimeFrom = new Date(arrivalTime);
+            filterTimeFrom.setHours(data.from, 0, 0);
+            let filterTimeTo = new Date(arrivalTime);
+            filterTimeTo.setHours(data.to, 0, 0);
+            if (arrivalTime > filterTimeFrom && arrivalTime < filterTimeTo)
+                return item;
+        });
+        flightsDataReturn = flightsDataReturnOrg.filter((item) => {
             const arrivalTime = new Date(item.flight.arrival_datetime);
             let filterTimeFrom = new Date(arrivalTime);
             filterTimeFrom.setHours(data.from, 0, 0);
@@ -375,16 +516,38 @@ class ChooseFlight extends Component {
             if (arrivalTime > filterTimeFrom && arrivalTime < filterTimeTo)
                 return item;
         });
-        this.setState({ flightsData, flightListDate });
+        flightListDateReturn = flightListDateReturnOrg.filter((item) => {
+            const arrivalTime = new Date(item.flight.arrival_datetime);
+            let filterTimeFrom = new Date(arrivalTime);
+            filterTimeFrom.setHours(data.from, 0, 0);
+            let filterTimeTo = new Date(arrivalTime);
+            filterTimeTo.setHours(data.to, 0, 0);
+            if (arrivalTime > filterTimeFrom && arrivalTime < filterTimeTo)
+                return item;
+        });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        });
     };
 
     scopeAirline = (value) => {
         let { flightsData, flightsDataOrg, flightListDate, flightListDateOrg } =
             this.state;
+        let {
+            flightsDataReturn,
+            flightsDataReturnOrg,
+            flightListDateReturn,
+            flightListDateReturnOrg,
+        } = this.state;
 
         if (value == 0) {
             flightsData = flightsDataOrg;
             flightListDate = flightListDateOrg;
+            flightsDataReturn = flightsDataReturnOrg;
+            flightListDateReturn = flightListDateReturnOrg;
         } else {
             flightsData = flightsDataOrg.filter((item) => {
                 return item.flight.airline.id == value;
@@ -392,8 +555,19 @@ class ChooseFlight extends Component {
             flightListDate = flightListDateOrg.filter((item) => {
                 return item.flight.airline.id == value;
             });
+            flightsDataReturn = flightsDataReturnOrg.filter((item) => {
+                return item.flight.airline.id == value;
+            });
+            flightListDateReturn = flightListDateReturnOrg.filter((item) => {
+                return item.flight.airline.id == value;
+            });
         }
-        this.setState({ flightsData, flightListDate });
+        this.setState({
+            flightsData,
+            flightListDate,
+            flightsDataReturn,
+            flightListDateReturn,
+        });
     };
 
     scopeAirlineWithOthers = (value) => {
@@ -413,6 +587,34 @@ class ChooseFlight extends Component {
         return flightsData;
     };
 
+    scopeAirlineWithOthersReturn = (value) => {
+        let {
+            flightsDataReturn,
+            flightsDataReturnOrg,
+            flightListDateReturn,
+            flightListDateReturnOrg,
+        } = this.state;
+        if (value == 0) {
+            flightsDataReturn = flightsDataReturnOrg;
+            flightListDateReturn = flightListDateReturnOrg;
+        } else {
+            flightsDataReturn = flightsDataOrg.filter((item) => {
+                return item.flight.airline.id == value;
+            });
+            flightListDateReturn = flightListDateReturnOrg.filter((item) => {
+                return item.flight.airline.id == value;
+            });
+        }
+        return flightsDataReturn;
+    };
+
+    handleChangeFilterTripType = (value) => {
+        const { flightsDataReturn } = this.state;
+        this.setState({
+            filterTripType: value,
+        });
+    };
+
     render() {
         const {
             departureDate,
@@ -423,20 +625,32 @@ class ChooseFlight extends Component {
             flightListDate,
             flightsDataOrg,
             flightListDateOrg,
+            filterTripType,
+            flightsDataReturn,
+            flightsDataReturnOrg,
+            flightListDateReturn,
+            flightListDateReturnOrg,
+            tripType,
         } = this.state;
-        console.log("return date", returnDate);
         return (
             <div>
                 <SubNavbar />
                 <div className="choose-flight-page">
                     <div className="wrap-container">
+                        <SearchFlightBar />
                         <StepListBar step={1} />
                         <div className="main-content">
                             <div className="row">
                                 <div className="col-sm-3">
                                     <SideBarFilter
+                                        tripType={this.state.tripType}
                                         data={flightsData}
-                                        dataOrg={flightsDataOrg}
+                                        dataOrg={
+                                            filterTripType == 2
+                                                ? flightsDataReturnOrg
+                                                : flightsDataOrg
+                                        }
+                                        dataReturnOrg={flightsDataReturnOrg}
                                         onSortFlight={this.sortFlight}
                                         viewModePrice={this.handleViewModePrice}
                                         filterDepartureTime={
@@ -446,6 +660,9 @@ class ChooseFlight extends Component {
                                             this.filterArrivalTime
                                         }
                                         scopeAirline={this.scopeAirline}
+                                        filterTripType={
+                                            this.handleChangeFilterTripType
+                                        }
                                     />
                                 </div>
                                 <div className="col-sm-9">
