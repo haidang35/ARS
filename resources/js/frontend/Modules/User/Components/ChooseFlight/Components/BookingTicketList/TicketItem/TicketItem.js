@@ -26,6 +26,10 @@ class TicketItem extends Component {
             onViewDetails: !this.state.onViewDetails,
         });
     };
+
+    onChooseFlight = () => {
+        window.scrollTo(0, 0);
+    };
     render() {
         const { data } = this.props;
         return (
@@ -107,9 +111,13 @@ class TicketItem extends Component {
                                     </Typography>
                                     <Link
                                         to={`/reservations/ticket/${data.id}`}
-                                        style={{ textDecoration: "none" }}
+                                        style={{
+                                            textDecoration: "none",
+                                            width: "100%",
+                                        }}
                                     >
                                         <Button
+                                            onClick={this.onChooseFlight}
                                             className="btn-choose"
                                             variant="contained"
                                             color="primary"

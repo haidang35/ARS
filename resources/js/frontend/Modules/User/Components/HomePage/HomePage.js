@@ -352,6 +352,7 @@ class HomePage extends Component {
                                                 disableToolbar
                                                 variant="inline"
                                                 format="dd/MM/yyyy"
+                                                disablePast
                                                 margin="normal"
                                                 id="date-picker-inline"
                                                 label="Ngày đi"
@@ -368,6 +369,7 @@ class HomePage extends Component {
                                             <StyleDatePicker
                                                 disableToolbar
                                                 variant="inline"
+                                                disablePast
                                                 format="dd/MM/yyyy"
                                                 margin="normal"
                                                 id="date-picker-inline"
