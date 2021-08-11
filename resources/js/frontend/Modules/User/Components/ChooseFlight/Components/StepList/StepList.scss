@@ -1,10 +1,12 @@
+@import "../../../../../../Shared/Style/variables";
+
 .step-list {
     margin-top: 2rem;
 
 
     .step-item {
         clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
-        background-color: #785ef2;
+        background-color: $background-color;
         height: 50px;
         color: white;
         display: flex;

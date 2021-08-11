@@ -142,4 +142,16 @@ class UserController extends Controller
 
         return $booking;
     }
+
+    public function findRouteFlight(Request $request)
+    {
+        $departureId = $request->departure_id;
+        $destinationId = $request->destination_id;
+        $departure = Destination::findOrFail($departureId);
+        $destination = Destination::findOrFail($destinationId);
+        $data = [];
+        $data["destination"] = $destination;
+        $data["departure"]  = $departure;
+        return response()->json($data);
+    }
 }

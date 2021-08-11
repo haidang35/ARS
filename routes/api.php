@@ -56,3 +56,4 @@ Route::post('user/flights', [UserController::class, "searchTicketsWithoutDate"])
 Route::get('user/destinations/{id}', [UserController::class, "getDestinationInfo"]);
 Route::post('user/flights/ticket/{id}', [UserController::class, "getFlightTicket"]);
 Route::post('user/booking', [UserController::class, "bookingFlightTicket"]);
+Route::post('user/find-route', [UserController::class, "findRouteFlight"]);

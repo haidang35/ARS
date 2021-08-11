@@ -1,0 +1,67 @@
+.destination-modal {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    .card-content {
+        width: 35rem;
+        padding: 20px 18px;
+
+        .title {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .input-field {
+            width: 100%;
+            color: white;
+            font-size: 17px;
+            margin-top: 1rem;
+        }
+
+        .search-result-list {
+            overflow: hidden;
+
+            .list-item {
+                animation: floatDownListItem linear 500ms forwards;
+            }
+        }
+
+        .choose-country {
+            margin-top: 1rem;
+        }
+
+        .choose-destination {
+            padding: 1rem 1.5rem;
+
+            .list-destination {
+                padding: 0;
+
+                .item {
+                    list-style: none;
+                    font-size: 17px;
+                    cursor: pointer;
+                    font-weight: 500;
+                }
+
+                .item:hover {
+                    color: #10a8a8;
+                }
+            }
+        }
+
+        .btn-control-box {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    @keyframes floatDownListItem {
+        from {
+            transform: translateY(200px);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+}

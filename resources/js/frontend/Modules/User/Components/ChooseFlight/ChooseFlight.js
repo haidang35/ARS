@@ -7,6 +7,7 @@ import "./ChooseFlight.scss";
 import BookingTicketList from "./Components/BookingTicketList/BookingTicketList";
 import HeaderBookingTicket from "./Components/HeaderBookingTicket/HeaderBookingTicket";
 import UserService from "../../../User/Shared/UserService/UserService";
+import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
 
 class ChooseFlight extends Component {
     constructor(props) {
@@ -636,6 +637,7 @@ class ChooseFlight extends Component {
                 <SubNavbar />
                 <div className="choose-flight-page">
                     <div className="wrap-container">
+                        <SearchFlightBar />
                         <StepListBar step={1} />
                         <div className="main-content">
                             <div className="row">

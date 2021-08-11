@@ -107,6 +107,7 @@ class TicketItem extends Component {
                                     </Typography>
                                     <Link
                                         to={`/reservations/ticket/${data.id}`}
+                                        style={{ textDecoration: "none" }}
                                     >
                                         <Button
                                             className="btn-choose"

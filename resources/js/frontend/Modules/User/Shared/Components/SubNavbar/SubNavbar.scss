@@ -1,7 +1,9 @@
+@import "../../../../../Shared/Style/variables";
+
 .user-sub-nav {
     position: relative;
-    background: rgb(29, 148, 236);
-    background: linear-gradient(90deg, rgba(29, 148, 236, 1) 9%, rgba(23, 193, 182, 1) 80%);
+    background: $background;
+    background: $background-linear;
 
     .nav-bar {
         color: white;
