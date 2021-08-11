@@ -17,7 +17,6 @@ class CreateTableBooking extends Migration
             $table->increments("id");
             $table->tinyInteger("trip_type");
             $table->dateTime("booking_date");
-            $table->integer("checkin_bag");
             $table->string("contact_name");
             $table->string("contact_phone");
             $table->string("contact_email")->nullable();
