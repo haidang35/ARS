@@ -8,6 +8,7 @@ const API_ENPOINT = {
     GET_ALL_FLIGHT_FOLLOW_DATE: "user/flights",
     GET_FLIGHT_TICKET_INFO: "user/flights/ticket/",
     BOOKING_FLIGHT: "user/booking",
+    GET_FLIGHT_ROUTE: "user/find-route",
 };
 
 class UserService {
@@ -48,6 +49,10 @@ class UserService {
 
     async bookingFlightTicket(data) {
         return await axios.post(BASE_URL + API_ENPOINT.BOOKING_FLIGHT, data);
+    }
+
+    async getFlightRoute(data) {
+        return await axios.post(BASE_URL + API_ENPOINT.GET_FLIGHT_ROUTE, data);
     }
 }
 

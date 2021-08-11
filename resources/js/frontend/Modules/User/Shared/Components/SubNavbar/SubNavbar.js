@@ -100,9 +100,17 @@ class SubNavbar extends Component {
                 >
                     <div className="wrap-container">
                         <Toolbar style={{ padding: "0" }}>
-                            <Typography variant="h5" style={{ color: "#ffff" }}>
+                            <Typography
+                                variant="h5"
+                                style={{ color: "#ffff" }}
+                                onClick={() => {
+                                    goTo("");
+                                }}
+                                style={{ cursor: "pointer", color: "#ffff" }}
+                            >
                                 Flight Booking
                             </Typography>
+
                             <div className="list-menu">
                                 {/* <NavLink
                                     to="/"
@@ -170,7 +178,7 @@ class SubNavbar extends Component {
                                     >
                                         <StyledMenuItem>
                                             <Link
-                                                to="customer-info"
+                                                to="/customer-info"
                                                 style={{
                                                     textDecoration: "none",
                                                     display: "flex",

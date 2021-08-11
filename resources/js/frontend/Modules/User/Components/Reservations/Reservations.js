@@ -83,6 +83,7 @@ class Reservations extends Component {
             this.paymentMethod !== ""
         ) {
             const trip_type = JSON.parse(localStorage.getItem("tripType"));
+            const userId = JSON.parse(localStorage.getItem("userId" || ""));
             const data = {
                 booking_date: getDateTimeNow(),
                 trip_type,
@@ -96,6 +97,7 @@ class Reservations extends Component {
                 payment_method: this.paymentMethod,
                 into_money: this.state.flightTicket.into_money,
                 passengers: this.customerInfo,
+                user_id: userId,
             };
             UserService.bookingFlightTicket(data)
                 .then((res) => {
@@ -107,6 +109,7 @@ class Reservations extends Component {
                 .catch((err) => {
                     console.log("booking failed ");
                 });
+            window.scrollTo(0, 0);
         }
     };
 

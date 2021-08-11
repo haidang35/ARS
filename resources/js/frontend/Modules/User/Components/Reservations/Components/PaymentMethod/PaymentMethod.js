@@ -3,7 +3,7 @@ import React from "react";
 import { Component } from "react";
 import "./PaymentMethod.scss";
 import { BiCheckCircle } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class PaymentMethod extends Component {
     constructor(props) {
@@ -84,7 +84,13 @@ class PaymentMethod extends Component {
                         </div>
                     </div>
                     <div className="btn-box">
-                        <Button variant="outlined" color="primary">
+                        <Button
+                            onClick={() => {
+                                this.props.history.goBack();
+                            }}
+                            variant="outlined"
+                            color="primary"
+                        >
                             Quay lại
                         </Button>
 
@@ -103,4 +109,4 @@ class PaymentMethod extends Component {
     }
 }
 
-export default PaymentMethod;
+export default withRouter(PaymentMethod);

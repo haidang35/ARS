@@ -1,3 +1,5 @@
+@import "../../../../../../../Shared/Style/variables";
+
 .item-ticket {
     width: 100%;
     border-radius: 15px;
@@ -107,6 +109,9 @@
             width: 100%;
             padding: 12px;
             font-size: 17px;
+            background: $background-btn;
+            background: $background-linear-btn;
+            text-decoration: none;
         }
     }
 }

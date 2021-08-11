@@ -1,3 +1,5 @@
+@import "../../../../../../Shared/Style/variables";
+
 .side-bar-filter {
     height: auto;
     border-radius: 1rem;
@@ -13,7 +15,7 @@
             display: flex;
             align-items: center;
             color: #ffff;
-            background-color: #18bfba;
+            background-color: $background-color;
             padding: 1rem;
 
             .icon-filter {
@@ -35,7 +37,7 @@
                 margin-bottom: 1rem;
 
                 .radio-check {
-                    color: green;
+                    color: rgb(36, 226, 36);
                 }
 
                 .label-radio {
@@ -56,7 +58,7 @@
             display: flex;
             align-items: center;
             color: #ffff;
-            background-color: #18bfba;
+            background-color: $background-color;
             padding: 1rem;
 
             .icon-filter {
@@ -84,7 +86,7 @@
             display: flex;
             align-items: center;
             color: #ffff;
-            background-color: #18bfba;
+            background-color: $background-color;
             padding: 1rem;
 
             .icon-filter {

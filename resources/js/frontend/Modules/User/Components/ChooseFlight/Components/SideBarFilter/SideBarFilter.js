@@ -72,11 +72,16 @@ class SideBarFilter extends Component {
             viewModePrice: 2,
             scopeAirline: 0,
             airlines: [],
+            filterTripType: 1,
+            flightsDataReturnOrg: [],
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.getAirlineCurrentList(nextProps.dataOrg);
+        this.setState({
+            flightsDataReturnOrg: nextProps.dataReturnOrg,
+        });
     }
 
     handleChangeDepartureTime = (ev, value) => {
@@ -140,6 +145,13 @@ class SideBarFilter extends Component {
         this.props.scopeAirline(ev.target.value);
     };
 
+    handleChangeFilterTripType = (value) => {
+        this.setState({
+            filterTripType: value,
+        });
+        this.props.filterTripType(value);
+    };
+
     render() {
         const {
             startTimeDeparture,
@@ -150,8 +162,10 @@ class SideBarFilter extends Component {
             viewModePrice,
             scopeAirline,
             airlines,
+            filterTripType,
         } = this.state;
 
+        const { tripType } = this.props;
         return (
             <div>
                 <div className="side-bar-filter">
@@ -273,6 +287,49 @@ class SideBarFilter extends Component {
                         </div>
                         <div className="content">
                             <div className="filter-airline">
+                                {tripType == 2 ? (
+                                    <div className="choose-filter-trip">
+                                        <FormControlLabel
+                                            value="price"
+                                            control={
+                                                <GreenRadio
+                                                    checked={
+                                                        filterTripType == 1
+                                                    }
+                                                    onChange={() =>
+                                                        this.handleChangeFilterTripType(
+                                                            1
+                                                        )
+                                                    }
+                                                    value={filterTripType}
+                                                    className="radio-check"
+                                                />
+                                            }
+                                            label="Chiều đi"
+                                        />
+                                        <FormControlLabel
+                                            value="price"
+                                            control={
+                                                <GreenRadio
+                                                    checked={
+                                                        filterTripType == 2
+                                                    }
+                                                    onChange={() =>
+                                                        this.handleChangeFilterTripType(
+                                                            2
+                                                        )
+                                                    }
+                                                    value={filterTripType}
+                                                    className="radio-check"
+                                                />
+                                            }
+                                            label="Chiều về"
+                                        />
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+
                                 <Typography className="title-filter">
                                     Chọn hãng hàng không
                                 </Typography>

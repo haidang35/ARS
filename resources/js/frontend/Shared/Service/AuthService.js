@@ -5,6 +5,8 @@ const API_ENPOINT = {
     USER_LOGIN: "user/login",
     USER_REGISTER: "user/register",
     GET_USER_INFO: "user/my-info",
+    GET_MY_BOOKING: "user/get-booking",
+    UPDATE_MY_INFO: "user/update-info",
 };
 
 class AuthService {
@@ -31,6 +33,14 @@ class AuthService {
             .data;
         this.userInfo = userInfo;
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    }
+
+    async getMyBookingFlight() {
+        return await axios.get(BASE_URL + API_ENPOINT.GET_MY_BOOKING);
+    }
+
+    async updateMyInfo(data) {
+        return await axios.patch(BASE_URL + API_ENPOINT.UPDATE_MY_INFO, data);
     }
 }
 

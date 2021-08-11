@@ -1,3 +1,5 @@
+@import "../../../../Shared/Style/variables";
+
 .booking-confirm {
     .main-content {
         margin-top: 2rem;
@@ -8,7 +10,7 @@
             margin-bottom: 2rem;
 
             .title-box {
-                background-color: #785ef2;
+                background-color: $background-color;
                 padding: 1rem;
 
                 .title {
@@ -42,14 +44,14 @@
                     .cloud-icon {
                         font-size: 3rem;
                         z-index: 100;
-                        color: #785ef2;
+                        color: $background-color;
                         animation: cloud linear 2s infinite;
                     }
 
                     .cloud-icon-night {
                         font-size: 3rem;
                         z-index: 3;
-                        color: #785ef2;
+                        color: $background-color;
                         animation: cloud linear 2s infinite;
                     }
 

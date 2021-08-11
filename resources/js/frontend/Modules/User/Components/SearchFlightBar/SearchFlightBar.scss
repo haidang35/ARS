@@ -1,0 +1,109 @@
+@import "../../../../Shared/Style/variables";
+
+.search-flight-bar {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 100%;
+    margin-top: 1rem;
+    background-color: $background-color;
+    padding: 1rem 2rem 2rem 2rem;
+    z-index: 50;
+
+    .close-icon-btn {
+        float: right;
+        margin-top: -2.5rem;
+        cursor: pointer;
+
+        .close-icon {
+            font-size: 1.5rem;
+        }
+    }
+
+    .input-departure {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+
+        .input-field {
+            width: 100%;
+        }
+
+        .destination-modal-list {
+            z-index: 100;
+            position: absolute;
+        }
+    }
+
+    .input-destination {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+
+        .input-field {
+            width: 100%;
+        }
+
+        .destination-modal-list {
+            z-index: 100;
+            position: absolute;
+        }
+    }
+
+    .date-field {
+        width: 100%;
+        z-index: 50;
+    }
+
+
+    .passenger-type {
+
+        .choose-quantity {
+            text-align: center;
+            margin-top: -10px;
+
+            .title-passenger {
+                font-size: 17px;
+                font-weight: 500;
+                color: #ffff;
+            }
+
+            .content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #ffff;
+                padding: 7px 0;
+                border-radius: 6px;
+
+                .quantity {
+                    font-size: 27px;
+                    padding: 0 20px;
+                    color: rgba(236, 153, 27, 0.9472163866);
+                }
+
+                .icon {
+                    width: 27px;
+                    height: 27px;
+                    cursor: pointer;
+                    color: rgba(236, 153, 27, 0.9472163866);
+
+                }
+
+
+            }
+
+
+        }
+
+
+    }
+
+    .btn-search-form {
+        margin-top: 2.5rem;
+        padding: 15px 20px;
+        width: 100%;
+        background: $background-btn;
+        background: $background-linear-btn;
+
+    }
+
+}

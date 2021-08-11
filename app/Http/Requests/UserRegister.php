@@ -28,8 +28,9 @@ class UserRegister extends FormRequest
         return [
             "name" => 'required | string',
             "email" => "required | string | unique:users",
+            "phone" => "required | string",
             "password" => "required | string | confirmed",
-            "phone" => "required | string"
+
         ];
     }
 
