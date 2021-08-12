@@ -1,7 +1,6 @@
-
 .list-destination {
 
-    
+
     .card-content {
         width: 35rem;
         padding: 20px 18px;
@@ -11,28 +10,51 @@
             margin-bottom: 5px;
         }
 
-        .input-field {
+        .search-destination-box {
+            position: relative;
+            display: inline-block;
+            z-index: 100;
             width: 100%;
-            color: white;
-            font-size: 17px;
-            margin-top: 1rem;
-        }
 
-        .search-result-list {
-            overflow: hidden;
-            .list-item {
-                animation: floatDownListItem linear 500ms forwards;
+            .input-field {
+                width: 100%;
+                color: white;
+                font-size: 17px;
+                margin-top: 1rem;
+            }
+
+            .search-result-list {
+                position: absolute;
+                overflow: hidden;
+                background-color: #ffff;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                width: 100%;
+
+                .list-item {
+                    width: 100%;
+                    animation: floatDownListItem linear 500ms forwards;
+
+                    .item-destination {
+                        width: 100%;
+                    }
+                }
             }
         }
 
+
+
         .choose-country {
             margin-top: 1rem;
+            z-index: 10;
         }
 
         .choose-destination {
             padding: 1rem 1.5rem;
+            z-index: 10;
+
             .list-destination {
                 padding: 0;
+
                 .item {
                     list-style: none;
                     font-size: 17px;
@@ -41,7 +63,7 @@
                 }
 
                 .item:hover {
-                    color: #10a8a8 ;
+                    color: #10a8a8;
                 }
             }
         }
@@ -57,6 +79,7 @@
         from {
             transform: translateY(200px);
         }
+
         to {
             transform: translateY(0);
         }

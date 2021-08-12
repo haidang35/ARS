@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import AdminDashBoard from "../Modules/Admin/AdminDashboard/AdminDashboard";
 import AuthService from "../Shared/Service/AuthService";
 import { Fragment } from "react";
+import "./App.scss";
 
 // const isLogged = !!AuthService.userId;
 const isLogged = true;
