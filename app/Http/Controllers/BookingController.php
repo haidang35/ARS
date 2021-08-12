@@ -10,6 +10,7 @@ use App\Models\Destination;
 use App\Models\Flight;
 use App\Models\Ticket;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -58,20 +59,21 @@ class BookingController extends Controller
         $ticket = $booking["passenger"]->first();
         $booking["ticket"] = Ticket::find($ticket->ticket_id);
         $booking["flight"] = Flight::with("Airline")->with("Departure")->with("Destination")->find($booking["ticket"]["flight_id"]);
-        $departureTime = new Carbon($booking["flight"]["departure-datetime"]);
-        $arrivalTime = new Carbon($booking["flight"]["arrival_datetime"]);
-        $time = (strtotime($arrivalTime->toTimeString()) - strtotime($departureTime->toTimeString())) / 60;
+        $departureTime = new DateTime($booking["flight"]["departure_datetime"]);
+        $arrivalTime = new DateTime($booking["flight"]["arrival_datetime"]);
+        // $time = (strtotime($arrivalTime->toTimeString()) - strtotime($departureTime->toTimeString())) / 60;
+        $time = $arrivalTime->diff($departureTime);
         $offer = [
             'title' => 'Thông báo xác nhận yêu cầu đặt vé từ quý khách',
             'url' => 'http://127.0.0.1:8000/',
             'data' => $booking,
-            "flight_duration" => $time
+            "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"
         ];
         $email = $booking["contact_email"];
-        Mail::to($email)->send(new ConfirmMail($offer));
+        // Mail::to($email)->send(new ConfirmMail($offer));
 
-        // return new ConfirmMail($offer);
+        return new ConfirmMail($offer);
 
-        return response()->json($booking);
+        // return response()->json($booking);
     }
 }

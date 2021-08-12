@@ -677,7 +677,7 @@
                                                     <p
                                                         style="margin: 0; font-size: 15px; line-height: 1.5; text-align: center; word-break: break-word; mso-line-height-alt: 23px; margin-top: 0; margin-bottom: 0;">
                                                         <span style="font-size: 15px;"> Flight Duration:
-                                                            {{ date('G', mktime(0, $offer['flight_duration'])) . 'h' . ' ' . date('i', mktime(0, $offer['flight_duration'])) . 'min' }}</span>
+                                                            {{ $offer['time'] }}</span>
                                                     </p>
                                                 </div>
                                             </div>
