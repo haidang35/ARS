@@ -16,6 +16,7 @@ class AddNewDestination extends Form {
         };
     }
 
+    
     onSubmitInfo = () => {
         this._validateForm();
         this.state.form["dirty"] = true;

@@ -45,7 +45,6 @@ class Airline extends Component {
                 errorMessage:"Create airline failed"
             })
         })
-
    }
 
     render() {

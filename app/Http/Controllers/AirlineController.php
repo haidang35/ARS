@@ -44,4 +44,5 @@ class AirlineController extends Controller
         $airline->delete();
         return response()->json($airline);
     }
+    
 }

@@ -25,6 +25,7 @@ class TicketDetails extends Form{
        }
    }
 
+   
    componentDidMount(){
        this.getTicketDetails();
        this.getFlightList();

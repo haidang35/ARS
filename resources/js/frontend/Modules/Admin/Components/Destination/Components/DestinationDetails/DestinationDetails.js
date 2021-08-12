@@ -69,7 +69,6 @@ class DestinationDetails extends Form {
         this.setState({ form });
         this.getDestinationDetails();
     };
-
     onSaveChangeInfo = () => {
         this._validateForm();
         this.state.form["dirty"] = true;

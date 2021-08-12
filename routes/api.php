@@ -51,10 +51,7 @@ Route::post('airlines',[AirlineController::class,"addNewAirline"]);
 Route::get('flights', [FlightController::class, "getAllFlight"]);
 Route::get('flights/{id}',[FlightController::class,"getFlightDetails"]);
 Route::patch('flights/update/{id}',[FlightController::class,"updateFlightInfo"]);
-<<<<<<< HEAD
 Route::post('flights',[FlightController::class,"addNewFlight"]);
-=======
->>>>>>> ab425e93d5476962b172474bd613d3763ba1213b
 // Ticket
 Route::get('tickets', [TicketController::class,  "getAllTicket"]);
 Route::get('tickets/{id}',[TicketController::class, "getTicketDetails"]);

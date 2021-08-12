@@ -53,7 +53,6 @@ class TicketController extends Controller
     }
 
 
-
     // -------- User --------- //
 
    

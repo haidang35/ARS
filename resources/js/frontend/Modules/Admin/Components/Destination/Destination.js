@@ -46,7 +46,6 @@ class Destination extends Component {
            
     }
 
-
     render() {
         const { destinationList } = this.state;
         const {message,errorMessage} = this.state;

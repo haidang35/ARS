@@ -9,6 +9,7 @@ const API_ENPOINT = {
     DELETE_DESTINATION:"destinations/"
 };
 
+
 class DestinationService {
     constructor() {
         if (DestinationService._instance) {

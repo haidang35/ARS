@@ -160,6 +160,7 @@ class FlightDetails extends Form{
                 });
             }, 5000);
         }
+        
         return (
             <div>
                 <AlertSuccess message={this.state.updateMessage}/>

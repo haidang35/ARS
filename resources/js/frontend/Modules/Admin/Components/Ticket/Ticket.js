@@ -42,6 +42,7 @@ class Ticket extends Form {
         });
     };
 
+    
     getFlightList=()=>{
         FlightService.getFlightList()
             .then((res)=>{

@@ -12,7 +12,6 @@ class Flight extends Form {
     constructor(props) {
         super(props);
         this.state = {
-          
             destinationList:[],
             flightList: [],
             airlineList:[],
