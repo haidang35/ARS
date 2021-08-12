@@ -13,7 +13,8 @@ class AirlineDetails extends Form {
                 code:"",
                 country:"",
                 website:"",
-                hotline:""
+                hotline:"",
+                desc:""
             }),
             onEdit:false,
             message:"",
@@ -34,7 +35,8 @@ class AirlineDetails extends Form {
                     code:res.data.code,
                     country:res.data.country,
                     website:res.data.website,
-                    hotline:res.data.hotline
+                    hotline:res.data.hotline,
+                    desc:res.data.desc
                 })
             });
     }
@@ -63,7 +65,8 @@ class AirlineDetails extends Form {
                 code:form.code.value,
                 country:form.country.value,
                 website:form.website.value,
-                hotline:form.hotline.value
+                hotline:form.hotline.value,
+                desc:form.desc.value
             }
             AirlineService.updateAirlineInfo(id,data)
                 .then((res) => {
@@ -93,6 +96,7 @@ class AirlineDetails extends Form {
             country,
             website,
             hotline,
+            desc,
             dirty
         } = this.state.form;
         const {onEdit} = this.state;
@@ -269,8 +273,11 @@ class AirlineDetails extends Form {
                                                             <textarea
                                                                 style={{overflow:"hidden"}}
                                                                 type="text"
+                                                                name="desc"
+                                                                value={desc.value}
                                                                 disabled = {!onEdit}
                                                                 className="form-control"
+                                                                onChange={(ev) => this._setValue(ev,"desc")}
                                                                 
                                                             >
                                                             </textarea>

@@ -91,7 +91,8 @@ class Airline extends Component {
                                                 <th>Mã hãng hàng không</th>
                                                 <th>Quốc gia</th>
                                                 <th>Website</th>
-                                                <th>Đường dây nóng</th>
+                                                <th>Hotline</th>
+                                                <th>Mô tả</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -117,7 +118,9 @@ class Airline extends Component {
                                                         <td className="text-bold-500">
                                                             {item.hotline}
                                                         </td>
-                                                      
+                                                        <td className="text-bold-500">
+                                                            {item.desc}
+                                                        </td>
                                                         <td>
                                                             <Link 
                                                                 to={`/admin/airlines/${item.id}`}

@@ -40,6 +40,7 @@ Route::get('destinations', [DestinationController::class, "getAllDestination"]);
 Route::get('destinations/{id}', [DestinationController::class, "getDestinationDetails"]);
 Route::patch('destinations/update/{id}', [DestinationController::class, "updateDestinationInfo"]);
 Route::post('destinations',[DestinationController::class,"addNewDestination"]);
+Route::post('destinations/search',[DestinationController::class,"searchDestination"]);
 
 // Airline
 Route::get('airlines', [AirlineController::class, "getAllAirline"]);

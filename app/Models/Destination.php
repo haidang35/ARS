@@ -18,4 +18,20 @@ class Destination extends Model
         "country",
         "country_code"
     ];
+
+    public function scopeCity($query,$city){
+        if($city == "" || $city == null){
+            return $query;
+        }else{
+            return $query->where("city","LIKE","%".$city."%");
+        }
+    }
+
+    public function scopeAirport($query,$airport_name){
+        if($airport_name == "" || $airport_name == null){
+            return $query;
+        }else{
+            return $query->where("airport_name",$airport_name);
+        }
+    }
 }

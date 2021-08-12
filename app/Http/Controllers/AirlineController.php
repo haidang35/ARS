@@ -22,6 +22,7 @@ class AirlineController extends Controller
             "country"=>$request->country,
             "website"=>$request->website,
             "hotline"=>$request->hotline,
+            "desc" => $request->desc
         ];
         $airline = Airline::find($id);
         $airline->update($data);
@@ -33,7 +34,8 @@ class AirlineController extends Controller
             "code" => $request->code,
             "country" => $request->country,
             "website" => $request->website,
-            "hotline" => $request->hotline
+            "hotline" => $request->hotline,
+            "desc" => $request->desc
         ];
         $airline = Airline::create($data);
         return response()->json($airline);

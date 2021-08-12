@@ -13,6 +13,7 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
+                desc:""
             })
         }
     }
@@ -28,6 +29,7 @@ class AddNewAirline extends Form{
                 country:form.country.value,
                 website:form.website.value,
                 hotline:form.hotline.value,
+                desc:form.desc.value
             }
             this.props.onSubmit(data);
             this._fillForm({
@@ -36,6 +38,7 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
+                desc:""
                 // dirty:false
             })
         }
@@ -47,6 +50,7 @@ class AddNewAirline extends Form{
             country,
             website,
             hotline,
+            desc,
             dirty
         } = this.state.form;
         return (
@@ -180,8 +184,19 @@ class AddNewAirline extends Form{
                                             ""
                                         )}
                                     </div>
-                         
-                                   
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">
+                                            Description
+                                        </label>
+                                        <textarea
+                                            name="desc"
+                                            className="form-control"
+                                            value={desc.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "desc")
+                                            }
+                                        ></textarea>
+                                    </div>
                                 </form>
                             </div>
                             <div className="modal-footer">
