@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import DestinationService from "../../Shared/DestinationService";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-
+import "../DestinationDetails.scss";
+import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess";
+import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";   
 class DestinationDetails extends Form {
     constructor(props) {
         super(props);
@@ -17,6 +19,9 @@ class DestinationDetails extends Form {
             }),
             provinceOrg: "",
             onEdit: false,
+            message:"",
+            updateMessage:"",
+            errorMessage:""
         };
     }
 
@@ -83,9 +88,14 @@ class DestinationDetails extends Form {
             DestinationService.updateDestination(id, data)
                 .then((res) => {
                     console.log(res.data);
+                    this.setState({
+                        updateMessage:"Update destination successfully "
+                    })
                 })
                 .catch((err) => {
-                    console.log(err);
+                    this.setState({
+                        errorMessage:"Update destionation failed"
+                    })
                 });
             this.setState({ onEdit: false });
         }
@@ -100,18 +110,29 @@ class DestinationDetails extends Form {
             country,
             dirty,
         } = this.state.form;
-
+        const {updateMessage,errorMessage} = this.state;
+        if (updateMessage.length > 0 || errorMessage.length > 0) {
+            const timer = setTimeout(() => {
+                this.setState({
+                    updateMessage: "",
+                    errorMessage: "",
+                });
+            }, 5000);
+        }
         const { onEdit } = this.state;
         return (
             <div>
+                <AlertSuccess message={this.state.updateMessage}/>
+                <AlertDanger message={this.state.errorMessage}/>
                 <div className="card">
                     <div className="card-header">
-                        <h4 className="card-title">
+                        <h4 className="card-title" style={{marginLeft:"20px"}}>
                             Thông tin chi tiết của điểm đến
                         </h4>
                         <div className="float-right">
                             {!onEdit ? (
                                 <button
+                                    style={{marginRight:"20px"}}
                                     onClick={this.onEditInfo}
                                     className="btn btn-primary"
                                 >
@@ -145,9 +166,9 @@ class DestinationDetails extends Form {
                                 <div className="card">
                                     <div className="card-content">
                                         <div className="card-body">
-                                            <form className="form">
+                                            <form className="form" style={{padding:"20px"}}>
                                                 <div className="row">
-                                                    <div className="col-md-6 col-12">
+                                                    <div className="col-md-6 col-12" style={{paddingRight:"20px"}}>
                                                         <div>
                                                             <label htmlFor="first-name-column">
                                                                 Thành phố
@@ -185,7 +206,7 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12">
+                                                    <div className="col-md-6 col-12" style={{paddingLeft:"20px"}}>
                                                         <div>
                                                             <label htmlFor="first-name-column">
                                                                 Tỉnh
@@ -212,7 +233,9 @@ class DestinationDetails extends Form {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12">
+                                                </div>
+                                                <div className="row" style={{marginTop:"20px"}}>
+                                                    <div className="col-md-6 col-12" style={{paddingRight:"20px"}}>
                                                         <div>
                                                             <label htmlFor="last-name-column">
                                                                 Mã sân bay
@@ -242,7 +265,7 @@ class DestinationDetails extends Form {
                                                                 "*" && dirty ? (
                                                                 <FormError
                                                                     err={
-                                                                        "City cannot be empty"
+                                                                        "Airport code cannot be empty"
                                                                     }
                                                                 />
                                                             ) : (
@@ -250,7 +273,7 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12">
+                                                    <div className="col-md-6 col-12" style={{paddingLeft:"20px"}}>
                                                         <div>
                                                             <label htmlFor="city-column">
                                                                 Sân bay
@@ -280,7 +303,7 @@ class DestinationDetails extends Form {
                                                                 "*" && dirty ? (
                                                                 <FormError
                                                                     err={
-                                                                        "City cannot be empty"
+                                                                        "Airport cannot be empty"
                                                                     }
                                                                 />
                                                             ) : (
@@ -288,7 +311,9 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12">
+                                                </div>
+                                                <div className="row" style={{marginTop:"20px"}}>
+                                                    <div className="col-md-6 col-12" style={{paddingRight:"20px"}}>
                                                         <div>
                                                             <label htmlFor="country-floating">
                                                                 Quốc gia
@@ -318,7 +343,7 @@ class DestinationDetails extends Form {
                                                                 "*" && dirty ? (
                                                                 <FormError
                                                                     err={
-                                                                        "City cannot be empty"
+                                                                        "Country cannot be empty"
                                                                     }
                                                                 />
                                                             ) : (
@@ -326,7 +351,7 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12">
+                                                    <div className="col-md-6 col-12" style={{paddingLeft:"20px"}}>
                                                         <div>
                                                             <label htmlFor="company-column">
                                                                 Mã quốc gia
@@ -356,7 +381,7 @@ class DestinationDetails extends Form {
                                                                 "*" && dirty ? (
                                                                 <FormError
                                                                     err={
-                                                                        "City cannot be empty"
+                                                                        "Country code cannot be empty"
                                                                     }
                                                                 />
                                                             ) : (
@@ -364,7 +389,7 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>     
                                             </form>
                                         </div>
                                     </div>

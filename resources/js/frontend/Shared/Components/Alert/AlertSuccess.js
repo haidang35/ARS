@@ -12,7 +12,7 @@ class AlertSuccess extends Component {
         return (
             <div>
                 {message.length > 0 ? (
-                    <div className="alert alert-success">
+                    <div className="alert alert-success" style={{marginLeft:"17px",width:"40%"}}>
                         <FaCheckCircle
                             style={{ color: "#ffff", marginRight: "1rem" }}
                         />

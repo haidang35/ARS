@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-
 class AddNewDestination extends Form {
     constructor(props) {
         super(props);
@@ -39,7 +38,7 @@ class AddNewDestination extends Form {
                 country_code:"",
                 country:"",
                 // dirty: false,
-            });
+            })
         }
     };
 
@@ -126,7 +125,7 @@ class AddNewDestination extends Form {
 
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Mã hãng hàng không
+                                            Mã sân bay
                                         </label>
                                         <input
                                             type="text"
@@ -146,7 +145,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Tên hãng hàng không
+                                            Tên sân bay
                                         </label>
                                         <input
                                             name="airport_name"
@@ -218,7 +217,7 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    
+                                   
                                 >
                                     Submit
                                 </button>

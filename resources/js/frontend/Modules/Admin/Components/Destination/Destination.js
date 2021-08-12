@@ -3,12 +3,15 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import AddNewDestination from "./Components/AddNewDestination/AddNewDestination";
 import DestinationService from "./Shared/DestinationService";
-
+import AlertSuccess from "../../../../Shared/Components/Alert/AlertSuccess";
+import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";    
 class Destination extends Component {
     constructor(props) {
         super(props);
         this.state = {
             destinationList: [],
+            message:"",
+            errorMessage:""
         };
     }
 
@@ -29,19 +32,41 @@ class Destination extends Component {
         DestinationService.addNewDestination(data)
             .then((res)=>{
                 this.getDestinationList();
+            })   
+
+            this.setState({
+                message:"Create destination successfully"
+            
             })
+              .catch((err)=>{
+                this.setState({
+                    errorMessage:"Create destination failed"
+                })
+            })
+           
     }
 
 
     render() {
         const { destinationList } = this.state;
+        const {message,errorMessage} = this.state;
+        if (message.length > 0 || errorMessage.length > 0) {
+            const timer = setTimeout(() => {
+                this.setState({
+                    message: "",
+                    errorMessage: "",
+                });
+            }, 5000);
+        }
         return (
             <div>
+                <AlertSuccess message={this.state.message}/>
+                <AlertDanger message={this.state.errorMessage}/>
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">Điểm đến</h4>
-                            <div className="float-right">
+                            <div className="float-right" style={{marginRight:"20px"}}>
                                 <button
                                     className="btn btn-primary"
                                     data-toggle="modal"
@@ -99,11 +124,11 @@ class Destination extends Component {
                                                         <td className="text-bold-500">
                                                             {item.country_code}
                                                         </td>
-                                                        <td style={{float:"right"}}>
+                                                        <td>
                                                             <Link
                                                                 to={`/admin/destinations/${item.id}`}
                                                             >
-                                                                <button className="btn btn-primary" style={{marginLeft:"18px"}}>
+                                                                <button className="btn btn-primary" style={{float:"right"}}>
                                                                     View
                                                                 </button>
                                                             </Link> 
