@@ -124,7 +124,7 @@ class Destination extends Component {
                                                         <td className="text-bold-500">
                                                             {item.country_code}
                                                         </td>
-                                                        <td>
+                                                        <td style={{float:"right"}}>
                                                             <Link
                                                                 to={`/admin/destinations/${item.id}`}
                                                             >
