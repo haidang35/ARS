@@ -8,6 +8,7 @@ const API_ENPOINT = {
     ADD_NEW_FLIGHT:"flights"
 }
 
+
 class FlightService {
     constructor() {
         if(FlightService._instance) {

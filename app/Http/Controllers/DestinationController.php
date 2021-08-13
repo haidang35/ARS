@@ -28,7 +28,6 @@ class DestinationController extends Controller
             "airport_name" => $request->airport_name,
             "country_code" => $request->country_code,
             "country" => $request->country
-
         ];
         $destination = Destination::findOrFail($id);
         $destination->update($data);
@@ -47,5 +46,5 @@ class DestinationController extends Controller
         return response()->json($destination);
     }
 
-
+   
 }

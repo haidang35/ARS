@@ -4,30 +4,68 @@ import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
 import FlightService from "../../Shared/FlightService";
 import "../FlightDetails.scss";
+import DestinationService from "../../../Destination/Shared/DestinationService";
+import AirlineService from "../../../Airline/Shared/AirlineService";
+import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess";
+import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";
 class FlightDetails extends Form{
    constructor(props){
        super(props);
        this.state={
+           departureList:[],
+           destinationList:[],
+           airlineList:[],
            form:this._getInitFormData({
                flight_code:"",
                departure_datetime:"",
                arrival_datetime:"",
                aircraft:"",
-               airlineName:"",
-               departureCity:"",
-               destinationCity:"",
+               airline_id:"",
+               departure_id:"",
+               destination_id:"",
                capacity:"",
                seats_reserved:"",
                seats_available:"",
            }),
-           onEdit:false
+           onEdit:false,
+           message:"",
+           errorMessage:"",
+           updateMessage:""
        }
    }
 
    componentDidMount(){
        this.getFlightDetails();
+       this.getAirlineList();
+       this.getDepartureList();
+       this.getDestinationList();
    }
 
+   getDestinationList=()=>{
+        DestinationService.getDestinationList()
+            .then((res)=>{
+                this.setState({
+                    destinationList:res.data
+                })
+            })
+   }
+   getDepartureList=()=>{
+        DestinationService.getDestinationList()
+            .then((res)=>{
+                this.setState({
+                    departureList:res.data
+                })
+            })
+    }
+
+   getAirlineList=()=>{
+       AirlineService.getAirlineList()
+            .then((res)=>{
+                this.setState({
+                    airlineList:res.data
+                })
+            })
+   }
    getFlightDetails=()=>{
        const {id} = this.props.match.params;
        FlightService.getFlightDetails(id)
@@ -37,9 +75,9 @@ class FlightDetails extends Form{
                 departure_datetime:res.data.departure_datetime,
                 arrival_datetime:res.data.arrival_datetime,
                 aircraft:res.data.aircraft,
-                airlineName:res.data.airline.airline_name,
-                departureCity:res.data.departure.city,
-                destinationCity:res.data.destination.city,
+                airline_id:res.data.airline_id,
+                departure_id:res.data.departure_id,
+                destination_id:res.data.destination_id,
                 capacity:res.data.capacity,
                 seats_reserved:res.data.seats_reserved,
                 seats_available:res.data.seats_available,
@@ -67,7 +105,6 @@ class FlightDetails extends Form{
         this.state.form["dirty"] = true;
         const {id} = this.props.match.params;
         if(this._isFormValid()){
-          
             const data = {
                 flight_code:form.flight_code.value,
                 departure_datetime:form.departure_datetime.value,
@@ -84,23 +121,18 @@ class FlightDetails extends Form{
             FlightService.updateFlightInfo(id,data)
                 .then((res)=>{
                     console.log(res.data);
-                    this._fillForm({
-                        flight_code:"",
-                        departure_datetime:"",
-                        arrival_datetime:"",
-                        aircraft:"",
-                        airlineName:"",
-                        departureCity:"",
-                        destinationCity:"",
-                        capacity:"",
-                        seats_reserved:"",
-                        seats_available:"",
-                        dirty:false
+                    this.setState({
+                        updateMessage:`Update successfully flight with code ${res.data.flight_code}`
                     })
                 })
-            this.setState({
-                onEdit:false
-            })
+                .catch((err)=>{
+                    this.setState({
+                        errorMessage:"Update flight failed"
+                    })
+                })
+                this.setState({
+                    onEdit:false
+                })
         }
        
    }
@@ -110,26 +142,38 @@ class FlightDetails extends Form{
             departure_datetime,
             arrival_datetime,
             aircraft,
-            airlineName,
-            departureCity,
-            destinationCity,
+            airline_id,
+            departure_id,
+            destination_id,
             capacity,
             seats_reserved,
             seats_available,
             dirty
         } = this.state.form;
+        const {destinationList,airlineList, departureList,updateMessage,errorMessage} = this.state;
         const {onEdit} = this.state;
+        if (updateMessage.length > 0 || errorMessage.length > 0) {
+            const timer = setTimeout(() => {
+                this.setState({
+                    updateMessage: "",
+                    errorMessage: "",
+                });
+            }, 5000);
+        }
+        
         return (
             <div>
+                <AlertSuccess message={this.state.updateMessage}/>
+                <AlertDanger message={this.state.errorMessage} />
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">
+                            <h4 className="card-title" style={{marginLeft:"10px"}}>
                                 Chi tiết chuyến bay
                             </h4>
                         </div>
                         <div>
-                            <h5 style={{marginLeft:"40px", marginTop:"10px", fontSize:"16px"}}>Khứ hồi</h5>
+                            <h5 style={{marginLeft:"35px", fontSize:"18px"}}>Khứ hồi</h5>
                         </div>
                       <hr/>
                       <div>
@@ -168,35 +212,36 @@ class FlightDetails extends Form{
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Điểm khởi hành
                                                                 </span>
-                                                                <input
+                                                                <select
                                                                     type="text"
                                                                     className="form-control"
                                                                     required
                                                                     disabled
-                                                                    value={departureCity.value}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        {/* <div className="input-form">
-                                                            <div className="input-group input-group-sm mb-3">
-                                                                <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Sân bay
-                                                                </span>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    name="departure.airport_name"
-                                                                    value={departure.airport_name.value}
-                                                                />
-                                                                 {departure.airport_name.err == "*" && dirty ? (
+                                                                    name="departure_id"
+                                                                    value={departure_id.value}
+                                                                    onChange={(ev) => this._setValue(
+                                                                        ev,"departure_id"
+                                                                    )}
+                                                                >
+                                                                    <option>Select departure city</option>
+                                                                    {departureList.map((item)=>{
+                                                                        return (
+                                                                            <option key={item.id} value={item.id}>
+                                                                                {item.city}
+                                                                            </option>
+                                                                        );
+                                                                    })}
+                                                                </select>
+                                                                {departure_id.err == "*" && dirty ? (
                                                                     <FormError
-                                                                        err={"Departure airport name cannot be empty"}
+                                                                        err={"Departure city cannot be empty"}
                                                                     />
                                                                 ):(
                                                                     ""
                                                                 )}
                                                             </div>
-                                                        </div> */}
+                                                        </div>
+                                                       
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
@@ -213,30 +258,8 @@ class FlightDetails extends Form{
                                                                         ev,"departure_datetime"
                                                                     )}
                                                                 />
-                                                                {departure_datetime.err == "*" && dirty ? (
-                                                                    <FormError
-                                                                        err={"Departure datetime cannot be empty"}
-                                                                    />
-                                                                ):(
-                                                                    ""
-                                                                )}
-                                                                
                                                             </div>
-                                                        </div>
-                                                        {/* <div className="input-form">
-                                                            <div className="input-group input-group-sm mb-3">
-                                                                <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Giờ khởi hành
-                                                                </span>
-                                                                <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                aria-label="Sizing example input"
-                                                                aria-describedby="inputGroup-sizing-sm"
-                                                                />
-                                                            </div>
-                                                        </div> */}
-                                                    {/* </div> */}
+                                                        </div> 
                                             </form>
                                         </div>
                                     </div>
@@ -256,13 +279,26 @@ class FlightDetails extends Form{
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Điểm đến
                                                                 </span>
-                                                                <input
+                                                                <select
                                                                     type="text"
                                                                     className="form-control"
                                                                     required
                                                                     disabled
-                                                                    value={destinationCity.value}
-                                                                  />
+                                                                    name="destination_id"
+                                                                    value={destination_id.value}
+                                                                    onChange={(ev) => this._setValue(
+                                                                        ev,"destination_id"
+                                                                    )}
+                                                                >
+                                                                    <option>Select destination city</option>
+                                                                    {destinationList.map((item)=>{
+                                                                        return (
+                                                                            <option key={item.id} value={item.id}>
+                                                                                {item.city}
+                                                                            </option>
+                                                                        );
+                                                                    })}
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         
@@ -310,13 +346,24 @@ class FlightDetails extends Form{
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
                                                                 Tên hãng
                                                                 </span>
-                                                                <input
+                                                                <select
                                                                     required
                                                                     type="text"
                                                                     className="form-control"
-                                                                    value={airlineName.value}
+                                                                    name="airline_id"
+                                                                    value={airline_id.value}
                                                                     disabled
-                                                                />
+                                                                >
+                                                                    <option>Select airline name</option>
+                                                                    {airlineList.map((item)=>{
+                                                                        return (
+                                                                            <option key={item.id} value={item.id}>
+                                                                                {item.airline_name}
+                                                                            </option>
+                                                                        );
+                                                                    })};
+                                                                </select>
+
                                                             </div>
                                                         </div>
                                                         <div className="input-form">
@@ -348,7 +395,7 @@ class FlightDetails extends Form{
                                                         <div className="input-form">
                                                             <div className="input-group input-group-sm mb-3">
                                                                 <span className="input-group-text" id="inputGroup-sizing-sm">
-                                                                Aircraft
+                                                                Loại máy bay
                                                                 </span>
                                                                 <input
                                                                     type="text"
@@ -429,7 +476,7 @@ class FlightDetails extends Form{
                                                         />
                                                         {seats_reserved.err == "*" && dirty ? (
                                                             <FormError
-                                                                err={"Seat reserved cannot be empty"}
+                                                                err={"Seats reserved cannot be empty"}
                                                             />
                                                         ):(
                                                             ""
@@ -455,7 +502,7 @@ class FlightDetails extends Form{
                                                         />
                                                         {seats_available.err == "*" && dirty ? (
                                                             <FormError
-                                                                err={"Seat available cannot be empty"}
+                                                                err={"Seats available cannot be empty"}
                                                             />
                                                         ):(
                                                             ""

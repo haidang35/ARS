@@ -13,6 +13,8 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
+                desc:"",
+                dirty:false
             })
         }
     }
@@ -28,6 +30,7 @@ class AddNewAirline extends Form{
                 country:form.country.value,
                 website:form.website.value,
                 hotline:form.hotline.value,
+                desc:form.desc.value
             }
             this.props.onSubmit(data);
             this._fillForm({
@@ -36,10 +39,14 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
-                // dirty:false
+                desc:"",
+                dirty:false
             })
+            
         }
     }
+
+
     render(){
         const {
             airline_name,
@@ -47,6 +54,7 @@ class AddNewAirline extends Form{
             country,
             website,
             hotline,
+            desc,
             dirty
         } = this.state.form;
         return (
@@ -73,6 +81,7 @@ class AddNewAirline extends Form{
                                     className="close"
                                     data-dismiss="modal"
                                     aria-label="Close"
+                                    
                                 >
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -94,8 +103,8 @@ class AddNewAirline extends Form{
                                             }
                                         />
                                         {airline_name.err === "*" && dirty ? (
-                                            <FormError err="Airline name cannot be empty" />
-                                        ) : (
+                                            <FormError err="Airline name cannot be empty" />  
+                                        ):(
                                             ""
                                         )}
                                     </div>
@@ -180,7 +189,19 @@ class AddNewAirline extends Form{
                                             ""
                                         )}
                                     </div>
-                                   
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">
+                                            Description
+                                        </label>
+                                        <textarea
+                                            name="desc"
+                                            className="form-control"
+                                            value={desc.value}
+                                            onChange={(ev) =>
+                                                this._setValue(ev, "desc")
+                                            }
+                                        ></textarea>
+                                    </div>
                                 </form>
                             </div>
                             <div className="modal-footer">
@@ -188,6 +209,7 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="btn btn-danger btn-pill"
                                     data-dismiss="modal"
+                                
                                 >
                                     Close
                                 </button>
@@ -195,7 +217,10 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    
+                                    data-dismiss={
+                                        !this._isFormValid() ? "modal" : ""
+                                    }
+                                   
                                 >
                                     Submit
                                 </button>

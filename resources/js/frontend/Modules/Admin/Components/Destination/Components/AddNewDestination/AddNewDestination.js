@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-
 class AddNewDestination extends Form {
     constructor(props) {
         super(props);
@@ -17,6 +16,7 @@ class AddNewDestination extends Form {
         };
     }
 
+    
     onSubmitInfo = () => {
         this._validateForm();
         this.state.form["dirty"] = true;
@@ -38,10 +38,15 @@ class AddNewDestination extends Form {
                 airport_name:"",
                 country_code:"",
                 country:"",
-                // dirty: false,
-            });
+                dirty:false
+            })
         }
+      
     };
+
+    onCloseAdd=()=>{
+        this.props.onClose();
+    }
 
     render() {
         const {
@@ -76,6 +81,7 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
+                                    onClick={this.onCloseAdd}
                                     aria-label="Close"
                                 >
                                     <span aria-hidden="true">×</span>
@@ -126,7 +132,7 @@ class AddNewDestination extends Form {
 
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Mã hãng hàng không
+                                            Mã sân bay
                                         </label>
                                         <input
                                             type="text"
@@ -146,7 +152,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Tên hãng hàng không
+                                            Tên sân bay
                                         </label>
                                         <input
                                             name="airport_name"
@@ -218,7 +224,8 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    
+                                    data-dismiss=
+                                    {this._isFormValid ? "modal" : ""}
                                 >
                                     Submit
                                 </button>

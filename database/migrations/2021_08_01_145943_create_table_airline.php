@@ -20,6 +20,7 @@ class CreateTableAirline extends Migration
             $table->string("country");
             $table->string("website")->nullable();
             $table->string("hotline")->nullable();
+            $table->text("desc");
             $table->timestamps();
         });
     }

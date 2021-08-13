@@ -8,6 +8,7 @@ const API_ENPOINT = {
     ADD_NEW_TICKET :  "tickets"
 }
 
+
 class TicketService {
     constructor() {
         if(TicketService._instance) {

@@ -14,6 +14,7 @@ class Airline extends Model
         "code",
         "country",
         "website",
-        "hotline"
+        "hotline",
+        "desc"
     ];
 }

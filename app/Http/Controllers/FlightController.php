@@ -36,16 +36,17 @@ class FlightController extends Controller
     public function addNewFlight(Request $request){
         $data = [
             "flight_code" => $request->flight_code,
-            "departute_datetime" => $request->departure_datetime,
+            "departure_datetime" => $request->departure_datetime,
             "arrival_datetime" => $request->arrival_datetime,
             "aircraft" => $request->aircraft,
             "airline_id" => $request->airline_id,
+            "departure_id" => $request->departure_id,
             "destination_id" => $request->destination_id,
             "capacity" => $request->capacity,
             "seats_reserved" => $request->seats_reserved,
             "seats_available" => $request->seats_available
         ];
-        $flight = Flight::with("Destination")->with("Departure")->with("Airline")->create($data);
+        $flight = Flight::create($data);
         return response()->json($flight);
     }
 }

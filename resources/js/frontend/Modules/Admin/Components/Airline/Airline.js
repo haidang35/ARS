@@ -6,12 +6,15 @@ import Form from "../../../../Shared/Components/Form/Form";
 import FormError from "../../../../Shared/Components/Form/FormError";
 import AddNewAirline from "./Components/AddNewAirline/AddNewAirline";
 import AirlineService from "./Shared/AirlineService";
-
+import AlertSuccess from "../../../../Shared/Components/Alert/AlertSuccess";
+import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";
 class Airline extends Component {
     constructor(props) {
         super(props);
         this.state = {
             airlineList: [],
+            message:"",
+            errorMessage:""
         };
     }
 
@@ -33,13 +36,34 @@ class Airline extends Component {
         AirlineService.addNewAirline(data)
         .then((res)=>{
             this.getAirlineList();
+            this.setState({
+                message:`Create successfully ${res.data.airline_name} airline`,
+                
+            })
+        })
+        .catch((err)=>{
+            this.setState({
+                errorMessage:"Create airline failed"
+            })
         })
    }
 
+
     render() {
         const { airlineList } = this.state;
+        const {message,errorMessage} = this.state;
+        if (message.length > 0 || errorMessage.length > 0) {
+            const timer = setTimeout(() => {
+                this.setState({
+                    message: "",
+                    errorMessage: "",
+                });
+            }, 5000);
+        }
         return (
             <div>
+                <AlertSuccess message={this.state.message}/>
+                <AlertDanger message={this.state.errorMessage}/>
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
@@ -47,7 +71,8 @@ class Airline extends Component {
                                 Danh sách các hãng hàng không đang hợp tác
                             </h4>
                             <div className="float-right">
-                                <button
+                                <button 
+                                    style={{marginRight:"20px"}}
                                     className="btn btn-primary"
                                     data-toggle="modal"
                                     data-target="#addNewAirline"
@@ -57,6 +82,7 @@ class Airline extends Component {
                             </div>
                         </div>
                         <AddNewAirline onSubmit={this.addAirline}/>
+                        
                         <div className="card-content">
                             <div className="card-body">
                                 <div className="table-responsive">
@@ -68,7 +94,8 @@ class Airline extends Component {
                                                 <th>Mã hãng hàng không</th>
                                                 <th>Quốc gia</th>
                                                 <th>Website</th>
-                                                <th>Đường dây nóng</th>
+                                                <th>Hotline</th>
+                                                <th>Mô tả</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -94,12 +121,17 @@ class Airline extends Component {
                                                         <td className="text-bold-500">
                                                             {item.hotline}
                                                         </td>
-                                                      
+                                                        <td className="text-bold-500">
+                                                            {item.desc}
+                                                        </td>
                                                         <td>
                                                             <Link 
                                                                 to={`/admin/airlines/${item.id}`}
                                                             >
-                                                                <button className="btn btn-primary">
+                                                                <button 
+                                                                    className="btn btn-primary"
+                                                                    style={{float:"right"}}
+                                                                >
                                                                     View
                                                                 </button>
                                                             </Link>

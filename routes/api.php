@@ -22,7 +22,7 @@ use App\Models\Destination;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+  
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/my-info', [AuthController::class, "getMyInfo"]);
     Route::get('user/get-booking', [AuthController::class, "getMyBooking"]);
@@ -39,7 +39,8 @@ Route::post('user/login', [AuthController::class, "login"]);
 Route::get('destinations', [DestinationController::class, "getAllDestination"]);
 Route::get('destinations/{id}', [DestinationController::class, "getDestinationDetails"]);
 Route::patch('destinations/update/{id}', [DestinationController::class, "updateDestinationInfo"]);
-Route::post('destinations', [DestinationController::class, "addNewDestination"]);
+Route::post('destinations',[DestinationController::class,"addNewDestination"]);
+
 
 // Airline
 Route::get('airlines', [AirlineController::class, "getAllAirline"]);
@@ -49,8 +50,9 @@ Route::post('airlines', [AirlineController::class, "addNewAirline"]);
 
 // Flight
 Route::get('flights', [FlightController::class, "getAllFlight"]);
-Route::get('flights/{id}', [FlightController::class, "getFlightDetails"]);
-Route::patch('flights/update/{id}', [FlightController::class, "updateFlightInfo"]);
+Route::get('flights/{id}',[FlightController::class,"getFlightDetails"]);
+Route::patch('flights/update/{id}',[FlightController::class,"updateFlightInfo"]);
+Route::post('flights',[FlightController::class,"addNewFlight"]);
 // Ticket
 Route::get('tickets', [TicketController::class,  "getAllTicket"]);
 Route::get('tickets/{id}', [TicketController::class, "getTicketDetails"]);
