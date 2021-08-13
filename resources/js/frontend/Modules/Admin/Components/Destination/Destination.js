@@ -12,8 +12,7 @@ class Destination extends Component {
             destinationList: [],
             message:"",
             errorMessage:"",
-            scopeAirport:"",
-            scopeCity:""
+           
         };
     }
 
@@ -28,19 +27,19 @@ class Destination extends Component {
                     destinationList: res.data,
                 });
             })
-            .catch((err) => {});
+           
     };
     addDestination=(data)=>{
         DestinationService.addNewDestination(data)
             .then((res)=>{
                 this.getDestinationList();
+                console.log(res.data);
+                this.setState({
+                    message:"Create destination successfully"
+                })
             })   
-
-            this.setState({
-                message:"Create destination successfully"
-            
-            })
-              .catch((err)=>{
+           
+            .catch((err)=>{
                 this.setState({
                     errorMessage:"Create destination failed"
                 })
@@ -48,9 +47,13 @@ class Destination extends Component {
            
     }
 
+    onCloseAdd=()=>{
+        this.getDestinationList();
+    }
+
     render() {
         
-        const { destinationList,scopeAirport,scopeCity } = this.state;
+        const { destinationList} = this.state;
         const {message,errorMessage} = this.state;
         if (message.length > 0 || errorMessage.length > 0) {
             const timer = setTimeout(() => {
@@ -64,57 +67,7 @@ class Destination extends Component {
             <div>
                 <AlertSuccess message={this.state.message}/>
                 <AlertDanger message={this.state.errorMessage}/>
-                <div className="card">
-                    <div className="card-content">
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-md-6 mb-4">
-                                    <div className="input-group mb-2 mr-sm-2">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">
-                                                <i className="mdi mdi-magnify"></i>
-                                            </div>
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="scopeCity"
-                                            className="form-control"
-                                            id="inlineFormInputGroupUsername2"
-                                            placeholder="Search title ..."
-                                            value={scopeCity.value}
-                                            onChange={(ev)=> this._setValue(
-                                                ev,"scopeCity"
-                                            )}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-md-6 mb-4">
-                                    <div className="input-group mb-3">
-                                        <label className="input-group-text" htmlFor="inputGroupSelect01">
-                                        Airport name
-                                        </label>
-                                        <select 
-                                            className="form-select"
-                                            id="inputGroupSelect01"
-                                            name="scopeAirport"
-                                            value={scopeAirport.value}
-                                        >
-                                            <option selected>Select airport name</option>
-                                            {destinationList.map((item)=>{
-                                                return (
-                                                    <option key={item.id} value={item.id}>
-                                                        {item.airport_name}
-                                                    </option>
-                                                )
-                                            })}
-                                        </select>                   
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-             
+               
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
@@ -129,7 +82,8 @@ class Destination extends Component {
                                 </button>
                         </div>
                         </div>
-                       <AddNewDestination onSubmit = {this.addDestination}/>
+                       <AddNewDestination onSubmit = {this.addDestination} onClose={this.onCloseAdd}/>
+                       
                         <div className="card-content">
                             <div className="card-body">
                                 <div className="table-responsive">

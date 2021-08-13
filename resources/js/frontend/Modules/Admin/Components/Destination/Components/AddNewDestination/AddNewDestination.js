@@ -38,10 +38,15 @@ class AddNewDestination extends Form {
                 airport_name:"",
                 country_code:"",
                 country:"",
-                // dirty: false,
+                dirty:false
             })
         }
+      
     };
+
+    onCloseAdd=()=>{
+        this.props.onClose();
+    }
 
     render() {
         const {
@@ -76,6 +81,7 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
+                                    onClick={this.onCloseAdd}
                                     aria-label="Close"
                                 >
                                     <span aria-hidden="true">×</span>
@@ -218,7 +224,8 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                   
+                                    data-dismiss=
+                                    {this._isFormValid ? "modal" : ""}
                                 >
                                     Submit
                                 </button>

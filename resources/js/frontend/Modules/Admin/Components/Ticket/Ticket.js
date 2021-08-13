@@ -300,7 +300,9 @@ class Ticket extends Form {
                                             </select>
                                             {dirty && flight_id.err === "*" ? (
                                                 <FormError err="Flight code cannot be empty" />
-                                            ) : (
+                                            ) :dirty ?(
+                                                <FormError err="Flight code cannot be empty" />
+                                            ):(
                                                 ""
                                             )}
                                         </div>

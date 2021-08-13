@@ -13,7 +13,8 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
-                desc:""
+                desc:"",
+                dirty:false
             })
         }
     }
@@ -38,11 +39,14 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
-                desc:""
-                // dirty:false
+                desc:"",
+                dirty:false
             })
+            
         }
     }
+
+
     render(){
         const {
             airline_name,
@@ -77,6 +81,7 @@ class AddNewAirline extends Form{
                                     className="close"
                                     data-dismiss="modal"
                                     aria-label="Close"
+                                    
                                 >
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -98,8 +103,8 @@ class AddNewAirline extends Form{
                                             }
                                         />
                                         {airline_name.err === "*" && dirty ? (
-                                            <FormError err="Airline name cannot be empty" />
-                                        ) : (
+                                            <FormError err="Airline name cannot be empty" />  
+                                        ):(
                                             ""
                                         )}
                                     </div>
@@ -204,6 +209,7 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="btn btn-danger btn-pill"
                                     data-dismiss="modal"
+                                
                                 >
                                     Close
                                 </button>
@@ -211,7 +217,10 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    
+                                    data-dismiss={
+                                        !this._isFormValid() ? "modal" : ""
+                                    }
+                                   
                                 >
                                     Submit
                                 </button>

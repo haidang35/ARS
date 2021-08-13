@@ -219,6 +219,9 @@ class FlightDetails extends Form{
                                                                     disabled
                                                                     name="departure_id"
                                                                     value={departure_id.value}
+                                                                    onChange={(ev) => this._setValue(
+                                                                        ev,"departure_id"
+                                                                    )}
                                                                 >
                                                                     <option>Select departure city</option>
                                                                     {departureList.map((item)=>{
@@ -229,6 +232,13 @@ class FlightDetails extends Form{
                                                                         );
                                                                     })}
                                                                 </select>
+                                                                {departure_id.err == "*" && dirty ? (
+                                                                    <FormError
+                                                                        err={"Departure city cannot be empty"}
+                                                                    />
+                                                                ):(
+                                                                    ""
+                                                                )}
                                                             </div>
                                                         </div>
                                                        
@@ -248,17 +258,8 @@ class FlightDetails extends Form{
                                                                         ev,"departure_datetime"
                                                                     )}
                                                                 />
-                                                                {departure_datetime.err == "*" && dirty ? (
-                                                                    <FormError
-                                                                        err={"Departure datetime cannot be empty"}
-                                                                    />
-                                                                ):(
-                                                                    ""
-                                                                )}
-                                                                
                                                             </div>
-                                                        </div>
-                                                     
+                                                        </div> 
                                             </form>
                                         </div>
                                     </div>
@@ -285,6 +286,9 @@ class FlightDetails extends Form{
                                                                     disabled
                                                                     name="destination_id"
                                                                     value={destination_id.value}
+                                                                    onChange={(ev) => this._setValue(
+                                                                        ev,"destination_id"
+                                                                    )}
                                                                 >
                                                                     <option>Select destination city</option>
                                                                     {destinationList.map((item)=>{
@@ -359,6 +363,7 @@ class FlightDetails extends Form{
                                                                         );
                                                                     })};
                                                                 </select>
+
                                                             </div>
                                                         </div>
                                                         <div className="input-form">

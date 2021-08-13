@@ -37,7 +37,8 @@ class Airline extends Component {
         .then((res)=>{
             this.getAirlineList();
             this.setState({
-                message:`Create successfully ${res.data.airline_name} airline`
+                message:`Create successfully ${res.data.airline_name} airline`,
+                
             })
         })
         .catch((err)=>{
@@ -46,6 +47,7 @@ class Airline extends Component {
             })
         })
    }
+
 
     render() {
         const { airlineList } = this.state;
@@ -80,6 +82,7 @@ class Airline extends Component {
                             </div>
                         </div>
                         <AddNewAirline onSubmit={this.addAirline}/>
+                        
                         <div className="card-content">
                             <div className="card-body">
                                 <div className="table-responsive">

@@ -126,7 +126,8 @@ class Flight extends Form {
                         destination_id:"",
                         capacity:"",
                         seats_reserved:"",
-                        seats_available:""
+                        seats_available:"",
+                        dirty:false
                     })
                     this.setState({
                         message:`Create successfully flight with code ${res.data.flight_code}`
@@ -318,7 +319,9 @@ class Flight extends Form {
                                             </select>
                                             {dirty && departure_id.err === "*" ? (
                                                 <FormError err="Departure city cannot be empty" />
-                                            ) : (
+                                            ) : dirty? (
+                                                <FormError err="Departure city cannot be empty" />
+                                            ):(
                                                 ""
                                             )}
                                         </div>
@@ -338,7 +341,9 @@ class Flight extends Form {
                                             />
                                             {dirty && departure_datetime.err === "*" ? (
                                                 <FormError err="Departure time cannot be empty" />
-                                            ) : (
+                                            ) : dirty ?(
+                                                <FormError err="Departure time cannot be empty" />
+                                            ):(
                                                 ""
                                             )}
                                         </div>
@@ -370,7 +375,9 @@ class Flight extends Form {
                                             </select>
                                             {dirty && destination_id.err === "*" ? (
                                                 <FormError err="Destination city cannot be empty" />
-                                            ) : (
+                                            ) : dirty?(
+                                                <FormError err="Destination city cannot be empty" />
+                                            ):(
                                                 ""
                                             )}
                                         </div>
@@ -417,7 +424,9 @@ class Flight extends Form {
                                     </select>
                                      {dirty && airline_id.err === "*" ? (
                                         <FormError err="Airline name cannot be empty" />
-                                    ) : (
+                                    ) : dirty ?(
+                                        <FormError err="Airline name cannot be empty" />
+                                    ):(
                                         ""
                                     )}
                                 </div>
