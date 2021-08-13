@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class BookingController extends Controller
 {
@@ -70,10 +71,17 @@ class BookingController extends Controller
             "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"
         ];
         $email = $booking["contact_email"];
-        // Mail::to($email)->send(new ConfirmMail($offer));
+        Mail::to($email)->send(new ConfirmMail($offer));
 
-        return new ConfirmMail($offer);
+        // Nexmo::message()->send([
+        //     'to' => '84357446532',
+        //     'from' => 'Dang Jinner',
+        //     'text' => 'Hello Dang Jinner'
+        // ]);
 
-        // return response()->json($booking);
+
+        // return new ConfirmMail($offer);
+
+        return response()->json($booking);
     }
 }

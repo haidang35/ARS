@@ -11,6 +11,7 @@ class Booking extends Component {
         this.state = {
             bookingList: [],
             message: "",
+            itemLoadingConfirm: "",
         };
     }
 
@@ -27,25 +28,29 @@ class Booking extends Component {
     };
 
     confirmBooking = (id) => {
+        this.setState({ itemLoadingConfirm: id });
         BookingService.updateStatus(id, { status: 2 }).then((res) => {
             this.setState({
                 message: `Xác nhận đặt vé cho khách hàng ${res.data.contact_name} thành công`,
+                itemLoadingConfirm: "",
             });
             this.getBookingList();
         });
     };
 
     cancelBooking = (id) => {
+        this.setState({ itemLoadingConfirm: id });
         BookingService.updateStatus(id, { status: 3 }).then((res) => {
             this.setState({
                 message: `Hủy đặt vé cho khách hàng ${res.data.contact_name} thành công`,
+                itemLoadingConfirm: "",
             });
             this.getBookingList();
         });
     };
 
     render() {
-        const { bookingList } = this.state;
+        const { bookingList, itemLoadingConfirm } = this.state;
         return (
             <div>
                 <div className="col-sm-12">
@@ -157,8 +162,36 @@ class Booking extends Component {
                                                                             )
                                                                         }
                                                                         className="btn btn-success rounded-pill"
+                                                                        style={{
+                                                                            display:
+                                                                                "flex",
+                                                                            justifyContent:
+                                                                                "center",
+                                                                            alignItems:
+                                                                                "center",
+                                                                        }}
                                                                     >
-                                                                        Confirm
+                                                                        {itemLoadingConfirm ==
+                                                                        item.id ? (
+                                                                            <div
+                                                                                className="spinner-border text-warning"
+                                                                                role="status"
+                                                                                style={{
+                                                                                    marginRight:
+                                                                                        "7px",
+                                                                                }}
+                                                                            >
+                                                                                <span className="visually-hidden">
+                                                                                    Loading...
+                                                                                </span>
+                                                                            </div>
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
+                                                                        {itemLoadingConfirm ==
+                                                                        item.id
+                                                                            ? "Confirming"
+                                                                            : "Confirm"}
                                                                     </button>
                                                                 ) : (
                                                                     <button
@@ -168,9 +201,36 @@ class Booking extends Component {
                                                                             )
                                                                         }
                                                                         className="btn btn-danger rounded-pill"
+                                                                        style={{
+                                                                            display:
+                                                                                "flex",
+                                                                            justifyContent:
+                                                                                "center",
+                                                                            alignItems:
+                                                                                "center",
+                                                                        }}
                                                                     >
-                                                                        Hủy yêu
-                                                                        cầu
+                                                                        {itemLoadingConfirm ==
+                                                                        item.id ? (
+                                                                            <div
+                                                                                className="spinner-border text-warning"
+                                                                                role="status"
+                                                                                style={{
+                                                                                    marginRight:
+                                                                                        "7px",
+                                                                                }}
+                                                                            >
+                                                                                <span className="visually-hidden">
+                                                                                    Loading...
+                                                                                </span>
+                                                                            </div>
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
+                                                                        {itemLoadingConfirm ==
+                                                                        item.id
+                                                                            ? "Đang hủy"
+                                                                            : "Hủy bỏ"}
                                                                     </button>
                                                                 )}
 

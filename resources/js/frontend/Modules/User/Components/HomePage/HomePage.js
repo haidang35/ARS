@@ -295,26 +295,7 @@ class HomePage extends Component {
                                             }
                                             label="Khứ hồi"
                                         />
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    name="checkedB"
-                                                    color="primary"
-                                                    className="check-box"
-                                                    checked={
-                                                        this.state.tripType == 3
-                                                            ? true
-                                                            : false
-                                                    }
-                                                    value={3}
-                                                    onChange={
-                                                        this
-                                                            .handleChangeTripType
-                                                    }
-                                                />
-                                            }
-                                            label="Nhiều chặng"
-                                        />
+
                                         <div className="form-input">
                                             <CssTextField
                                                 required

@@ -112,34 +112,38 @@ class SubNavbar extends Component {
                             </Typography>
 
                             <div className="list-menu">
-                                {/* <NavLink
-                                    to="/"
-                                    className="menu-item"
-                                    activeClassName="active"
-                                >
-                                    Home
-                                </NavLink>
-                                <NavLink
-                                    to="/about"
-                                    className="menu-item"
-                                    activeClassName="active"
-                                >
-                                    About
-                                </NavLink>
-                                <NavLink
-                                    to="/services"
-                                    className="menu-item"
-                                    activeClassName="active"
-                                >
-                                    Service
-                                </NavLink>
-                                <NavLink
-                                    to="/contact"
-                                    className="menu-item"
-                                    activeClassName="active"
-                                >
-                                    Contact
-                                </NavLink> */}
+                                <div className="hotline">
+                                    <img
+                                        src="https://i.postimg.cc/ZnB4qS7v/Icon24h.png"
+                                        className="icon-24h"
+                                    />
+                                    <div className="hotline-info">
+                                        <Typography
+                                            variant="body1"
+                                            className="title"
+                                        >
+                                            Hotline
+                                        </Typography>
+                                        <Typography
+                                            variant="h6"
+                                            className="phone"
+                                        >
+                                            0357446532
+                                        </Typography>
+                                        <Typography
+                                            variant="h6"
+                                            className="phone"
+                                        >
+                                            -
+                                        </Typography>
+                                        <Typography
+                                            variant="h6"
+                                            className="phone"
+                                        >
+                                            1900.1010
+                                        </Typography>
+                                    </div>
+                                </div>
                             </div>
                             {!isLogged ? (
                                 <div className="btn-login-box">

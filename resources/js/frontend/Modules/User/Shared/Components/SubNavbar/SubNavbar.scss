@@ -15,17 +15,30 @@
         .list-menu {
             margin-left: 24rem;
 
-            .menu-item {
-                color: white;
-                font-size: 21px;
-                text-decoration: none;
-                font-weight: 400;
-                margin-right: 3rem;
-                padding-bottom: 0.3rem;
-            }
+            .hotline {
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-            .active {
-                border-bottom: 2px solid white;
+                .icon-24h {
+                    margin-right: 1rem;
+                }
+
+                .hotline-info {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    .title {
+                        font-size: 22px;
+                    }
+
+                    .phone {
+                        color: #ffff;
+                        margin-left: 1rem;
+                        color: #ffeb00;
+                    }
+                }
             }
         }
     }
