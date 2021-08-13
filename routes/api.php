@@ -22,7 +22,7 @@ use App\Models\Destination;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+  
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/my-info', [AuthController::class, "getMyInfo"]);
     Route::get('user/get-booking', [AuthController::class, "getMyBooking"]);

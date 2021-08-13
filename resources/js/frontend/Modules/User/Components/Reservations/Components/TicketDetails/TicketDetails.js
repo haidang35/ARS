@@ -8,6 +8,7 @@ import {
     dateConvert,
     getTime,
 } from "../../../../../../Helpers/DateTime/ConvertDateTime";
+import { formatCurrency } from "../../../../../../Helpers/FormatCurrency";
 
 class TicketDetails extends Component {
     constructor(props) {
@@ -96,64 +97,96 @@ class TicketDetails extends Component {
                             </div>
                             <div className="col-md-12">
                                 <div className="ticket-price">
-                                    <div className="table-responsive">
-                                        <table className="table table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th className="title left-title">
-                                                        Tóm tắt giá vé
-                                                    </th>
-                                                    <th></th>
-                                                    <th className="title total-title">
-                                                        Tổng
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {passenger.map((item) => {
-                                                    if (item.quantity > 0)
-                                                        return (
-                                                            <tr
-                                                                key={
-                                                                    item.passenger_type
-                                                                }
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <Typography
+                                                variant="h6"
+                                                className="title left-title"
+                                            >
+                                                Tóm tắt giá vé
+                                            </Typography>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <Typography
+                                                variant="h6"
+                                                className="title total-title"
+                                            >
+                                                Tổng
+                                            </Typography>
+                                        </div>
+                                        <div className="passenger-list-price">
+                                            {passenger.map((item) => {
+                                                return (
+                                                    <div
+                                                        key={
+                                                            item.passenger_type
+                                                        }
+                                                        className="row"
+                                                    >
+                                                        <div className="col-sm-4">
+                                                            <Typography
+                                                                variant="body1"
+                                                                className="content-line"
                                                             >
-                                                                <td className="content-line">
-                                                                    {item.passenger_type ==
-                                                                    1
-                                                                        ? "Người lớn"
-                                                                        : item.passenger_type ==
-                                                                          2
-                                                                        ? "Trẻ em"
-                                                                        : item.passenger_type ==
-                                                                          3
-                                                                        ? "Em bé"
-                                                                        : ""}
-                                                                </td>
-                                                                <td className="content-line">
-                                                                    {`${item.quantity} x ${data.total_price}`}
-                                                                </td>
-                                                                <td className="content-line">
-                                                                    {item.quantity *
-                                                                        data.total_price}
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                })}
-
-                                                <tr>
-                                                    <td
-                                                        colSpan="2"
+                                                                {item.passenger_type ==
+                                                                1
+                                                                    ? "Người lớn"
+                                                                    : item.passenger_type ==
+                                                                      2
+                                                                    ? "Trẻ em"
+                                                                    : item.passenger_type ==
+                                                                      3
+                                                                    ? "Em bé"
+                                                                    : ""}
+                                                            </Typography>
+                                                        </div>
+                                                        <div className="col-sm-4">
+                                                            <Typography
+                                                                variant="body1"
+                                                                className="content-line"
+                                                            >
+                                                                {`${
+                                                                    item.quantity
+                                                                } x ${formatCurrency(
+                                                                    data.total_price
+                                                                )}`}
+                                                            </Typography>
+                                                        </div>
+                                                        <div className="col-sm-4">
+                                                            <Typography
+                                                                variant="body1"
+                                                                className="content-line right"
+                                                            >
+                                                                {formatCurrency(
+                                                                    item.quantity *
+                                                                        data.total_price
+                                                                )}
+                                                            </Typography>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <Typography
+                                                        variant="h4"
                                                         className="total-price"
                                                     >
                                                         Tổng chi phí
-                                                    </td>
-                                                    <td className="total-price">
-                                                        {data.into_money}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                    </Typography>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <Typography
+                                                        variant="h4"
+                                                        className="total-price right"
+                                                    >
+                                                        {formatCurrency(
+                                                            data.into_money
+                                                        )}
+                                                    </Typography>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -65,10 +65,26 @@
                 float: right;
             }
 
+            .passenger-list-price {
+                margin-top: 1rem;
+
+                .content-line {}
+
+                .right {
+                    float: right;
+                }
+            }
+
             .total-price {
-                font-size: 20px;
+                font-size: 22px;
                 font-weight: bold;
                 color: $background;
+                margin-top: 1rem;
+
+            }
+
+            .right {
+                float: right;
             }
         }
     }

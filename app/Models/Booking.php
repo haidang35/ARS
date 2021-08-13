@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Booking extends Model
 {
@@ -25,7 +26,7 @@ class Booking extends Model
     ];
 
 
-    public function Passenger()
+    public function passenger(): HasMany
     {
         return $this->hasMany(BookingTicket::class);
     }

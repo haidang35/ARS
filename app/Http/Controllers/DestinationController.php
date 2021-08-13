@@ -46,11 +46,5 @@ class DestinationController extends Controller
         return response()->json($destination);
     }
 
-    public function searchDestination(Request $request){
-        $city => $request->city;
-        $airportName => $request->airport_name;
-        $destinations = Destination::city($city)->airport($airportName);
-        return response()->json($destinations);
-    }
-
+   
 }
