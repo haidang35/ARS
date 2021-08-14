@@ -33,6 +33,20 @@
                     color: #17c1b6;
                 }
 
+                .notice-alert {
+                    color: red;
+
+                    .time {
+                        color: $background;
+                    }
+                }
+
+                .notice-payment-success {
+                    color: rgb(24, 173, 24);
+                    font-size: 25px;
+                    margin-top: 2rem;
+                }
+
                 .animation-flight {
                     .flight-icon {
                         font-size: 6rem;

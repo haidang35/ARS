@@ -11,21 +11,49 @@ import FlightBookingDetail from "./Components/FlightBookingDetail/FlightBookingD
 import PassengerInfo from "./Components/PassengerInfo/PassengerInfo";
 import ContactInfo from "../Reservations/Components/ContactInfo/ContactInfo";
 import ContactInfoBooking from "./Components/ContactInfo/ContactInfoBooking";
+import { getTime } from "../../../../Helpers/DateTime/ConvertDateTime";
+import Payment from "./Components/Payment/Payment";
+import UserService from "../../../User/Shared/UserService/UserService";
 
 class BookingConfirm extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            bookingInfo: {},
+        };
     }
 
-    render() {
-        console.log("456", this.props.location.state);
+    componentDidMount() {
+        this.getBookingInfo();
+    }
+
+    getBookingInfo = () => {
         const data = this.props.location.state;
-        const flight = Object.assign({}, data.flight);
+        UserService.getBookingInfo(data.id).then((res) => {
+            this.setState({
+                bookingInfo: res.data,
+            });
+        });
+    };
+
+    onPaymentBooking = () => {
+        const data = this.props.location.state;
+        const bookingId = data.id;
+        UserService.paymentBooking(bookingId, { payment_status: 1 }).then(
+            (res) => {
+                this.getBookingInfo();
+            }
+        );
+    };
+
+    render() {
+        const { bookingInfo } = this.state;
+        const flight = Object.assign({}, bookingInfo.flight);
         const departure = Object.assign({}, flight.departure);
         const destination = Object.assign({}, flight.destination);
-        const ticket = Object.assign({}, data.ticket);
-
+        const ticket = Object.assign({}, bookingInfo.ticket);
+        let bookingTime = new Date(bookingInfo.booking_date);
+        bookingTime.setHours(bookingTime.getHours() + 2);
         return (
             <div>
                 <SubNavbar />
@@ -47,14 +75,52 @@ class BookingConfirm extends Component {
                                         <FaCloud className="cloud-icon cloud-1" />
                                         <FaCloud className="cloud-icon cloud-2" />
                                     </div>
-                                    <Typography
-                                        className="notice-title"
-                                        variant="h6"
-                                    >
-                                        Quý khách đã đặt chỗ thành công
-                                    </Typography>
+                                    {bookingInfo.payment_status == 0 ? (
+                                        <Typography
+                                            className="notice-title"
+                                            variant="h6"
+                                        >
+                                            Quý khách đã đặt chỗ thành công
+                                        </Typography>
+                                    ) : (
+                                        ""
+                                    )}
+
+                                    {bookingInfo.payment_status == 0 ? (
+                                        <Typography
+                                            variant="h6"
+                                            className="notice-alert"
+                                        >
+                                            Vui lòng thanh toán trước{" "}
+                                            <span className="time">
+                                                {" "}
+                                                {getTime(bookingTime)}{" "}
+                                            </span>
+                                            hôm nay, sau thời gian này nếu quý
+                                            khách hàng chưa thanh toán yêu cầu
+                                            đặt vé sẽ bị hủy
+                                        </Typography>
+                                    ) : bookingInfo.payment_status == 1 ? (
+                                        <Typography
+                                            variant="h6"
+                                            className="notice-payment-success"
+                                        >
+                                            Quý khách đã thanh toán thành công
+                                        </Typography>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
+                            {bookingInfo.payment_status == 0 ? (
+                                <Payment
+                                    data={bookingInfo}
+                                    onPaymentBooking={this.onPaymentBooking}
+                                />
+                            ) : (
+                                ""
+                            )}
+
                             <FlightBookingDetail
                                 flight={flight}
                                 ticket={ticket}
@@ -62,11 +128,11 @@ class BookingConfirm extends Component {
                                 departure={departure}
                             />
                             <PassengerInfo
-                                passengers={data.passengers}
+                                passengers={bookingInfo.passenger}
                                 ticket={ticket}
-                                booking={data}
+                                booking={bookingInfo}
                             />
-                            <ContactInfoBooking booking={data} />
+                            <ContactInfoBooking booking={bookingInfo} />
                         </div>
                     </div>
                 </div>

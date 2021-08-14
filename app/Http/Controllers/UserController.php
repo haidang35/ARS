@@ -111,6 +111,7 @@ class UserController extends Controller
             "payment_method" => $request->payment_method,
             "status" => 1,
             "into_money" => $request->into_money,
+            "payment_status" => $request->payment_status,
             "user_id" => $request->user_id,
         ];
         $booking = Booking::create($bookingInfo);
@@ -153,5 +154,26 @@ class UserController extends Controller
         $data["destination"] = $destination;
         $data["departure"]  = $departure;
         return response()->json($data);
+    }
+
+    public function paymentBooking($bookingId, Request $request)
+    {
+        $booking = Booking::findOrFail($bookingId);
+        $booking->update([
+            "payment_status" => $request->payment_status
+        ]);
+        return response()->json($booking);
+    }
+
+    public function getBookingInfo($bookingId)
+    {
+        $booking = Booking::with("passenger")->findOrFail($bookingId);
+        $bookingTicket = BookingTicket::where("booking_id", $booking["id"])->with("Ticket")->first();
+        $ticket = Ticket::find($bookingTicket["ticket_id"]);
+        $flight = Flight::with("Destination")->with("Departure")->with("Airline")->find($bookingTicket["ticket"]["flight_id"]);
+        $booking["flight"] = $flight;
+        $booking["ticket"] = $ticket;
+
+        return $booking;
     }
 }

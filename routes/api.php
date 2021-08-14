@@ -70,4 +70,6 @@ Route::post('user/flights', [UserController::class, "searchTicketsWithoutDate"])
 Route::get('user/destinations/{id}', [UserController::class, "getDestinationInfo"]);
 Route::post('user/flights/ticket/{id}', [UserController::class, "getFlightTicket"]);
 Route::post('user/booking', [UserController::class, "bookingFlightTicket"]);
+Route::put('user/booking/payment/{id}', [UserController::class, "paymentBooking"]);
+Route::get('user/booking/{id}', [UserController::class, "getBookingInfo"]);
 Route::post('user/find-route', [UserController::class, "findRouteFlight"]);

@@ -22,6 +22,7 @@ class Booking extends Model
         "payment_method",
         "status",
         "into_money",
+        "payment_status",
         "user_id"
     ];
 
