@@ -16,16 +16,12 @@ class PassengerController extends Controller
         $passengers = Passenger::with("Booking")->get();
         foreach($passengers as $item) {
             $ticketDetails = Ticket::find($item->booking->ticket_id);
-            $flightDetails = Flight::find($ticketDetails->flight_id);
-            $airlineDetails = Airline::find($flightDetails->airline_id);
-            $departureDetails = Departure::find($flightDetails->departure_id);
-            $destinationDetails = Destination::find($flightDetails->destination_id);
+            // $flightDetails = Flight::find($ticketDetails->flight_id);
             $item["ticket"] = $ticketDetails;
-            $item["flight"] = $flightDetails;
-            $item["airline"] = $airlineDetails;
-            $item["departure"] = $departureDetails;
-            $item["destination"] = $destinationDetails;
+            // $item["flight"] = $flightDetails;
         }
         return response()->json($passengers);
     }
+
+    
 }

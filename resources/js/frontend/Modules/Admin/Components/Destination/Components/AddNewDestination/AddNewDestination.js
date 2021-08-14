@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-
 class AddNewDestination extends Form {
     constructor(props) {
         super(props);
@@ -16,6 +15,7 @@ class AddNewDestination extends Form {
             })
         };
     }
+
 
     onSubmitInfo = () => {
         this._validateForm();
@@ -38,11 +38,22 @@ class AddNewDestination extends Form {
                 airport_name:"",
                 country_code:"",
                 country:"",
-                // dirty: false,
-            });
+                dirty: false,
+            })
         }
+       
     };
 
+    onCloseAdd=()=>{
+        this._fillForm({
+            city:"",
+            province:"",
+            airport_code:"",
+            airport_name:"",
+            country_code:"",
+            country:"",
+        })
+    }
     render() {
         const {
             city,
@@ -67,6 +78,7 @@ class AddNewDestination extends Form {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5
+                                    style={{marginLeft:"27px"}}
                                     className="modal-title"
                                     id="exampleModalFormTitle"
                                 >
@@ -76,12 +88,13 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
+                                    onClick={this.onCloseAdd}
                                     aria-label="Close"
                                 >
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div className="modal-body">
+                            <div className="modal-body" style={{marginRight:"27px"}}>
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
@@ -123,10 +136,9 @@ class AddNewDestination extends Form {
                                             ""
                                         )}
                                     </div>
-
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Mã hãng hàng không
+                                            Mã sân bay
                                         </label>
                                         <input
                                             type="text"
@@ -146,7 +158,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Tên hãng hàng không
+                                            Tên sân bay
                                         </label>
                                         <input
                                             name="airport_name"
@@ -211,14 +223,16 @@ class AddNewDestination extends Form {
                                     type="button"
                                     className="btn btn-danger btn-pill"
                                     data-dismiss="modal"
+                                    onClick={this.onCloseAdd}
                                 >
                                     Close
                                 </button>
                                 <button
                                     type="button"
+                                    style={{marginRight:"23px"}}
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    
+                                    data-dismiss= {!this._isFormValid ? "modal" : ""}
                                 >
                                     Submit
                                 </button>
@@ -230,5 +244,4 @@ class AddNewDestination extends Form {
         );
     }
 }
-
 export default AddNewDestination;
