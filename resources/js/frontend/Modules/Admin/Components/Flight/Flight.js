@@ -8,8 +8,8 @@ import AirlineService from "../Airline/Shared/AirlineService";
 import DestinationService from "../Destination/Shared/DestinationService";
 import AlertSuccess from "../../../../Shared/Components/Alert/AlertSuccess"; 
 import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";
-import { getTime } from "date-fns";
-import { dateConvert, getDate } from "../../../../Helpers/DateTime/ConvertDateTime";
+import { getTime } from "../../../../Helpers/DateTime/ConvertDateTime";
+import { dateConvert} from "../../../../Helpers/DateTime/ConvertDateTime";
 class Flight extends Form {
     constructor(props) {
         super(props);
@@ -360,15 +360,18 @@ class Flight extends Form {
                                         <div>
                                             <label>Thời gian khởi hành</label>
                                             <input
-                                                type="date"
-                                                name="departure_datetime"
                                                 required
+                                                type="text"
+                                                name="departure_datetime"
                                                 className="form-control"
-                                                value={departure_datetime.value}
+                                                value={dateConvert(departure_datetime.value) + " " + getTime(departure_datetime.value)}
+                                               
                                                 onChange={(ev) =>
                                                     this._setValue(ev, "departure_datetime")
                                                 }
+                                               
                                             />
+                                           
                                             {dirty && departure_datetime.err === "*" ? (
                                                 <FormError err="Departure datetime cannot be empty" />
                                             ) : (

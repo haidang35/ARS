@@ -162,10 +162,10 @@ class FlightDetails extends Form{
                         <div className="card-header">
                             <h4 className="card-title" style={{marginLeft:"10px"}}>
                                 Chi tiết chuyến bay
-                                <div style={{ marginTop:"-25px"}}>
+                                <div style={{ float:"right"}}>
                                     {!onEdit ? (
                                         <button 
-                                            style={{marginLeft:"1080px"}}
+                                            // style={{marginLeft:"1080px"}}
                                             className="btn btn-primary"
                                             onClick={this.onEditInfo}
                                         > Edit</button>
