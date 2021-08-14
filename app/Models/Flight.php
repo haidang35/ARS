@@ -16,8 +16,8 @@ class Flight extends Model
         "arrival_datetime",
         "aircraft",
         "airline_id",
-        "destionation_id",
         "departure_id",
+        "destination_id",
         "capacity",
         "seats_reserved",
         "seats_available"
