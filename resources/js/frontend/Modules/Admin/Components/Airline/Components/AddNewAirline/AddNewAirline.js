@@ -194,7 +194,7 @@ class AddNewAirline extends Form{
 
                                 </form>
                             </div>
-                            <div className="modal-footer">
+                            <div className="modal-footer" style={{marginRight:"23px"}}>
                                 <button
                                     type="button"
                                     className="btn btn-danger btn-pill"

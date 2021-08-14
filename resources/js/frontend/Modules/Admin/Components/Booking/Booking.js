@@ -76,6 +76,7 @@ class Booking extends Component {
                                                 <th>Chuyến bay </th>
                                                 <th>Hãng hàng không </th>
                                                 <th>Tổng tiền</th>
+                                                <th>Trạng thái thanh toán</th>
                                                 <th>Trạng thái</th>
                                                 <th></th>
                                             </tr>
@@ -128,6 +129,12 @@ class Booking extends Component {
                                                             {formatCurrency(
                                                                 item.into_money
                                                             )}
+                                                        </td>
+                                                        <td>
+                                                            {item.payment_status ==
+                                                            0
+                                                                ? "Chưa thanh toán"
+                                                                : "Đã thanh toán"}
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.status ==

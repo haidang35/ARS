@@ -92,7 +92,15 @@ class ContactInfoBooking extends Component {
                                     >
                                         Phương thức thanh toán:
                                     </Typography>
-                                    <Typography className="content-item"></Typography>
+                                    <Typography className="content-item">
+                                        {booking.payment_method == 1
+                                            ? "Thanh toán tại đại lý"
+                                            : booking.payment_method == 2
+                                            ? "Thanh toán qua chuyển khoản"
+                                            : booking.payment_method == 3
+                                            ? "Thanh toán qua Paypal"
+                                            : ""}
+                                    </Typography>
                                 </div>
                             </div>
                         </div>

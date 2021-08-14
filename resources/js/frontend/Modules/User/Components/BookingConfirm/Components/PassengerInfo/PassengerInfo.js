@@ -16,6 +16,10 @@ class PassengerInfo extends Component {
 
     render() {
         const { passengers, ticket, booking } = this.props;
+        let passengerList = [];
+        if (Array.isArray(passengers)) {
+            passengerList = passengers;
+        }
         let loop = 1;
         return (
             <div className="passenger-info">
@@ -37,7 +41,7 @@ class PassengerInfo extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {passengers.map((item) => {
+                                {passengerList.map((item) => {
                                     return (
                                         <tr>
                                             <td className="content-item">

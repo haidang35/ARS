@@ -4,12 +4,15 @@ import { Component } from "react";
 import "./PaymentMethod.scss";
 import { BiCheckCircle } from "react-icons/bi";
 import { Link, withRouter } from "react-router-dom";
+import { PayPalButton } from "react-paypal-button-v2";
+import { formatCurrencyToUSD } from "../../../../../../Helpers/FormatCurrency";
 
 class PaymentMethod extends Component {
     constructor(props) {
         super(props);
         this.state = {
             paymentMethod: 0,
+            openPaymentPay: false,
         };
     }
 
@@ -32,8 +35,16 @@ class PaymentMethod extends Component {
         });
     };
 
+    onOpenMethodPayment = () => {
+        this.setState({
+            openPaymentPay: true,
+        });
+    };
+
     render() {
-        const { paymentMethod } = this.state;
+        const { paymentMethod, openPaymentPay } = this.state;
+        const { data } = this.props;
+        let intoMoney = Math.floor(data.into_money / 22810);
         return (
             <div>
                 <div className="payment-method">
@@ -70,16 +81,20 @@ class PaymentMethod extends Component {
                             </Typography>
                         </div>
                         <div
+                            onClick={() => this.handleChangePaymentMethod(3)}
                             className={
                                 paymentMethod == 3
                                     ? "payment-method-item active-payment-method"
                                     : "payment-method-item"
                             }
-                            onClick={() => this.handleChangePaymentMethod(3)}
                         >
                             <BiCheckCircle className="icon-check" />
-                            <Typography className="title" variant="h5">
-                                Cổng thanh toán online onepay quốc tế
+                            <Typography
+                                className="title"
+                                variant="h5"
+                                style={{ marginRight: "2rem" }}
+                            >
+                                Cổng thanh toán online paypal quốc tế
                             </Typography>
                         </div>
                     </div>
