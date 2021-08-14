@@ -2,7 +2,6 @@ import React from "react";
 import { Component } from "react";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-
 class AddNewAirline extends Form{
     constructor(props){
         super(props);
@@ -16,7 +15,6 @@ class AddNewAirline extends Form{
             })
         }
     }
-
     onSubmitInfo=()=>{
         this._validateForm();
         this.state.form["dirty"] = true;
@@ -36,9 +34,20 @@ class AddNewAirline extends Form{
                 country:"",
                 website:"",
                 hotline:"",
-                // dirty:false
+                dirty:false
             })
         }
+    }
+
+    onCloseAdd=()=>{
+        this._fillForm({
+            airline_name:"",
+            code:"",
+            country:"",
+            website:"",
+            hotline:"",
+            dirty:false
+        })
     }
     render(){
         const {
@@ -63,6 +72,7 @@ class AddNewAirline extends Form{
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5
+                                     style={{marginLeft:"27px"}}
                                     className="modal-title"
                                     id="exampleModalFormTitle"
                                 >
@@ -72,12 +82,13 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
+                                    onClick={this.onCloseAdd}
                                     aria-label="Close"
                                 >
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div className="modal-body">
+                            <div className="modal-body"  style={{marginRight:"27px"}}>
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
@@ -119,7 +130,6 @@ class AddNewAirline extends Form{
                                             ""
                                         )}
                                     </div>
-
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
                                             Quốc gia
@@ -180,14 +190,16 @@ class AddNewAirline extends Form{
                                             ""
                                         )}
                                     </div>
-                                   
+
+
                                 </form>
                             </div>
-                            <div className="modal-footer">
+                            <div className="modal-footer" style={{marginRight:"23px"}}>
                                 <button
                                     type="button"
                                     className="btn btn-danger btn-pill"
                                     data-dismiss="modal"
+                                    onClick={this.onCloseAdd}
                                 >
                                     Close
                                 </button>
@@ -195,7 +207,7 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    
+                                    data-dismiss={!this._isFormValid ? "modal" : ""}
                                 >
                                     Submit
                                 </button>
@@ -207,5 +219,4 @@ class AddNewAirline extends Form{
         )
     }
 }
-
 export default AddNewAirline;

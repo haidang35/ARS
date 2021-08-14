@@ -20,7 +20,6 @@ import Passenger from "../Components/Passenger/Passenger";
 import AirlineDetails from "../Components/Airline/Components/AirlineDetails/AirlineDetails";
 import BookingDetails from "../Components/Booking/Components/BookingDetails/BookingDetails";
 import TicketDetails from "../Components/Ticket/Components/TicketDetails/TicketDetails";
-import PassengerDetails from "../Components/Passenger/Components/PassengerDetails/PassengerDetails";
 import FlightDetails from "../Components/Flight/Components/FlightDetails/FlightDetails";
 import DestinationDetails from "../Components/Destination/Components/DestinationDetails/DestinationDetails";
 
@@ -103,11 +102,7 @@ class AdminDashBoard extends Component {
                                             path={`/admin/airlines/:id`}
                                             component={AirlineDetails}
                                         />
-                                        <Route
-                                            exact
-                                            path={`/admin/passengers/:id`}
-                                            component={PassengerDetails}
-                                        />
+                                      
                                     </Suspense>
                                 </Switch>
                             </div>

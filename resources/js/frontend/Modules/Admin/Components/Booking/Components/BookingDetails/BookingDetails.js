@@ -164,7 +164,7 @@ class BookingDetails extends Form {
                                                     Thông tin khách hàng đặt vé
                                                 </h5>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-4">
                                                 <div className="form-input-group">
                                                     <label htmlFor="first-name-vertical">
                                                         Vocative
@@ -192,7 +192,7 @@ class BookingDetails extends Form {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="col-md-5">
+                                            <div className="col-md-4">
                                                 <div className="form-input-group">
                                                     <label htmlFor="first-name-vertical">
                                                         Customer Name
@@ -223,7 +223,7 @@ class BookingDetails extends Form {
                                                 </div>
                                             </div>
 
-                                            <div className="col-md-5">
+                                            <div className="col-md-4">
                                                 <div className="form-input-group">
                                                     <label htmlFor="first-name-vertical">
                                                         Phone Number
@@ -317,6 +317,7 @@ class BookingDetails extends Form {
                                                         Note
                                                     </label>
                                                     <textarea
+                                                        style={{overflow:"hidden"}}
                                                         id="first-name-vertical"
                                                         className="form-control"
                                                         name="note"
@@ -332,11 +333,11 @@ class BookingDetails extends Form {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="row">
+                                        <div className="row" style={{marginTop:"55px"}}>
                                             <div className="col-12">
                                                 <h5>Thông tin chuyến bay</h5>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-3">
                                                 <div className="form-input-group">
                                                     <label htmlFor="first-name-vertical">
                                                         Trip Type
@@ -389,7 +390,7 @@ class BookingDetails extends Form {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <div className="form-input-group">
                                                     <label htmlFor="first-name-vertical">
                                                         Airlline
@@ -492,7 +493,7 @@ class BookingDetails extends Form {
                             </div>
                         </div>
                     </div>
-
+          
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">Thông tin hành khách</h4>
