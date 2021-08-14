@@ -168,10 +168,9 @@ class FlightDetails extends Form {
                                 style={{ marginLeft: "10px" }}
                             >
                                 Chi tiết chuyến bay
-                                <div style={{ marginTop: "-25px" }}>
+                                <div className="float-right">
                                     {!onEdit ? (
                                         <button
-                                            style={{ marginLeft: "1080px" }}
                                             className="btn btn-primary"
                                             onClick={this.onEditInfo}
                                         >
@@ -181,7 +180,6 @@ class FlightDetails extends Form {
                                     ) : (
                                         <div style={{ marginBottom: "20px" }}>
                                             <button
-                                                style={{ marginLeft: "985px" }}
                                                 className="btn btn-success"
                                                 onClick={this.onSaveChangeInfo}
                                             >
