@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import AirlineService from "../../../../Components/Airline/Shared/AirlineService";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-
+import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess";
+import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";
 class AirlineDetails extends Form {
     constructor(props){
         super(props);
@@ -14,10 +15,12 @@ class AirlineDetails extends Form {
                 website:"",
                 hotline:""
             }),
-            onEdit:false
+            onEdit:false,
+            message:"",
+            updateMessage:"",
+            errorMessage:""
         }
     }
-
     componentDidMount(){
         this.getAirlineDetails();
     }
@@ -34,20 +37,17 @@ class AirlineDetails extends Form {
                 })
             });
     }
-
     onEditInfo=()=>{
         this.setState({
             onEdit:true
         })
     }
-
     onCancelEdit=()=>{
         this.setState({
             onEdit:false
         })
         this.getAirlineDetails();
     }
-
     onSaveChangeInfo=()=>{
         const {id} = this.props.match.params;
         this._validateForm();
@@ -64,7 +64,15 @@ class AirlineDetails extends Form {
             AirlineService.updateAirlineInfo(id,data)
                 .then((res) => {
                     console.log(res.data);
-                });
+                    this.setState({
+                        updateMessage:`Update successfully ${res.data.airline_name} airline`
+                    })
+                })
+                .catch((err)=>{
+                    this.setState({
+                        errorMessage:"Update airline failed"
+                    })
+                })
             this.setState({
                 onEdit:false,
             
@@ -72,7 +80,6 @@ class AirlineDetails extends Form {
         }
       
     }
-
     
     render(){
         const {
@@ -84,52 +91,72 @@ class AirlineDetails extends Form {
             dirty
         } = this.state.form;
         const {onEdit} = this.state;
+        const {updateMessage,errorMessage} = this.state;
+        if (updateMessage.length > 0 || errorMessage.length > 0) {
+            const timer = setTimeout(() => {
+                this.setState({
+                    updateMessage: "",
+                    errorMessage: "",
+                });
+            }, 5000);
+        }
+
         return (
             <div>
+               
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Thông tin chi tiết của hãng hàng không</h4>
-                            <div className="float-right">
-                            {!onEdit ? (
-                                <button
-                                    onClick={this.onEditInfo}
-                                    className="btn btn-primary"
-                                >
-                                    Edit
-                                </button>
-                            ) : (
-                                <div>
-                                    <button
-                                        onClick={this.onSaveChangeInfo}
-                                        className="btn btn-success"
-                                        style={{
-                                            marginLeft: "1rem",
-                                            marginRight: "1rem",
-                                        }}
-                                    >
-                                        Save
-                                    </button>
-                                    <button
-                                        onClick={this.onCancelEdit}
-                                        className="btn btn-warning"
-                                    >
-                                        Cancel
-                                    </button>
+                            <h4 className="card-title" style={{marginLeft:"20px"}}>Thông tin chi tiết của hãng hàng không
+                                <div className="float-right">
+                                    {!onEdit ? (
+                                        <button
+                                            style={{marginRight:"20px"}}
+                                            onClick={this.onEditInfo}
+                                            className="btn btn-primary"
+                                        >
+                                            Edit
+                                        </button>
+                                    ) : (
+                                        <div>
+                                            <button
+                                                onClick={this.onSaveChangeInfo}
+                                                className="btn btn-success"
+                                                style={{
+                                                    marginLeft: "1rem",
+                                                    marginRight: "1rem",
+                                                }}
+                                            >
+                                                Save
+                                            </button>
+                                            <button
+                                                style={{
+                                                
+                                                    marginRight: "22px",
+                                                }}
+                                                onClick={this.onCancelEdit}
+                                                className="btn btn-warning"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
+                            </h4>
+                            <div style={{marginTop:"54px"}}>
+                                <AlertSuccess message={this.state.updateMessage}/>
+                                <AlertDanger message={this.state.errorMessage} />
+                            </div>
                         </div>
                         <div className="introduduce-airline">
-                             <h5 style={{ fontSize:"1rem", marginLeft:"25px"}}>Giới thiệu về hãng hàng không</h5>
                             <section id="multiple-column-form">
                                 <div className="row match-height">
                                     <div className="card-content">
-                                        <div className="card-body">
+                                        <div className="card-body" style={{padding:"44px"}}>
                                                 <div className="row">
-                                                    <div className="col-md-6" >
+                                                    <div className="col-md-6"  style={{paddingRight:"20px"}}>
                                                         <div> 
-                                                            <label htmlFor="first-name-column">Mã hãng hàng không</label>
+                                                            <label htmlFor="first-name-column">Tên hãng hàng không</label>
                                                             <input
                                                                 required
                                                                 type="text"
@@ -141,7 +168,7 @@ class AirlineDetails extends Form {
                                                             />
                                                             {airline_name.err == "*" && dirty ? (
                                                                 <FormError 
-                                                                    err={"Code cannot be empty"}
+                                                                    err={"Airline name cannot be empty"}
                                                                 />
                                                             ):(
                                                                 ""
@@ -149,7 +176,7 @@ class AirlineDetails extends Form {
                                                             
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6" >
+                                                    <div className="col-md-6"  style={{paddingLeft:"20px"}}>
                                                         <div> 
                                                             <label htmlFor="first-name-column">Mã hãng hàng không</label>
                                                             <input
@@ -163,15 +190,18 @@ class AirlineDetails extends Form {
                                                             />
                                                             {code.err == "*" && dirty ? (
                                                                 <FormError 
-                                                                    err={"Code cannot be empty"}
+                                                                    err={"Airline code cannot be empty"}
                                                                 />
                                                             ):(
                                                                 ""
                                                             )}
                                                             
                                                         </div>
-                                                    </div>
-                                                    <div className="col-md-6">
+                                                        </div>
+                                                </div>
+                                                <div className="row" style={{marginTop:"20px"}}>
+                                                
+                                                    <div className="col-md-6" style={{paddingRight:"20px"}}>
                                                         <div>
                                                             <label htmlFor="country-floating">Quốc gia</label>
                                                             <input
@@ -185,7 +215,28 @@ class AirlineDetails extends Form {
                                                             />
                                                             {country.err == "*" && dirty ? (
                                                                 <FormError 
-                                                                    err={"Airline name cannot be empty"}
+                                                                    err={"Country cannot be empty"}
+                                                                />
+                                                            ):(
+                                                                ""
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6"  style={{paddingLeft:"20px"}}>
+                                                        <div> 
+                                                            <label htmlFor="first-name-column">Website</label>
+                                                            <input
+                                                                type="text"
+                                                                required
+                                                                disabled = {!onEdit}
+                                                                className="form-control"
+                                                                name="website"
+                                                                value={website.value}
+                                                                onChange={(ev) => this._setValue(ev,"website")}
+                                                            />
+                                                            {website.err == "*" && dirty ? (
+                                                                <FormError 
+                                                                    err={"Website cannot be empty"}
                                                                 />
                                                             ):(
                                                                 ""
@@ -193,76 +244,52 @@ class AirlineDetails extends Form {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                </div>
-                            </section>
-                        </div>   
-                        <div className="introduduce-airline">
-                             <h5 style={{ fontSize:"1rem", marginLeft:"25px"}}>Liên hệ Vietnam Airlines</h5>
-                            <section id="multiple-column-form">
-                                <div className="row match-height">
-                                    <div className="col-12">
-                                        <div className="card">
-                                            <div className="card-content">
-                                                <div className="card-body">
-                                                    <div className="row">
-                                                        <div className="col-md-6" >
-                                                            <div> 
-                                                                <label htmlFor="first-name-column">Website</label>
-                                                                <input
-                                                                    type="text"
-                                                                    required
-                                                                    disabled = {!onEdit}
-                                                                    className="form-control"
-                                                                    name="website"
-                                                                    value={website.value}
-                                                                    onChange={(ev) => this._setValue(ev,"website")}
+                                                <div className="row" style={{marginTop:"20px"}}>
+                                                <div className="col-md-6" style={{paddingRight:"20px"}}>
+                                                        <div>
+                                                            <label htmlFor="country-floating">Hotline</label>
+                                                            <input
+                                                                type="text"
+                                                                required
+                                                                disabled = {!onEdit}
+                                                                className="form-control"
+                                                                name="hotline"
+                                                                    value={hotline.value}
+                                                                    onChange={(ev) => this._setValue(ev,"hotline")}
                                                                 />
-                                                                {website.err == "*" && dirty ? (
+                                                                {hotline.err == "*" && dirty ? (
                                                                     <FormError 
-                                                                        err={"Airline name cannot be empty"}
+                                                                        err={"Hotline cannot be empty"}
                                                                     />
                                                                 ):(
                                                                     ""
                                                                 )}
-                                                            </div>
                                                         </div>
-                                                        <div className="col-md-6">
-                                                            <div>
-                                                                <label htmlFor="country-floating">Đường dây nóng</label>
-                                                                <input
-                                                                    type="text"
-                                                                    required
-                                                                    disabled = {!onEdit}
-                                                                    className="form-control"
-                                                                    name="hotline"
-                                                                        value={hotline.value}
-                                                                        onChange={(ev) => this._setValue(ev,"hotline")}
-                                                                    />
-                                                                    {hotline.err == "*" && dirty ? (
-                                                                        <FormError 
-                                                                            err={"Airline name cannot be empty"}
-                                                                        />
-                                                                    ):(
-                                                                        ""
-                                                                    )}
-                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-6" style={{paddingLeft:"20px"}}>
+                                                        <div>
+                                                            <label htmlFor="country-floating">Description</label>
+                                                            <textarea
+                                                                style={{overflow:"hidden"}}
+                                                                type="text"
+                                                                disabled = {!onEdit}
+                                                                className="form-control"
+                                                                
+                                                            >
+                                                            </textarea>
+                                                                
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>       
                                         </div>
-                                    </div>
+                                        </div>  
+                                    </section>
                                 </div>
-                            </section>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-     
         )
     }
 }
-
 export default AirlineDetails;

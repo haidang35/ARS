@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import PassengerService from "./Shared/PassengerService";
-
+import {Link} from "react-router-dom";
 class Passenger extends Component {
     constructor(props) {
         super(props);
@@ -41,10 +41,11 @@ class Passenger extends Component {
                                             <tr>
                                                 <th>STT</th>
                                                 <th>Tên hành khách</th>
-                                                <th>Quý danh</th>
-                                                <th>Địa chỉ </th>
+                                                <th>Giới tính</th>
+                                                <th>Ngày sinh</th>
+                                                <th>Số điện thoại</th>
                                                 <th>Loại hành khách </th>
-                                                <th>Mã chuyến bay </th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,18 +59,22 @@ class Passenger extends Component {
                                                             {item.passenger_name}
                                                         </td>
                                                         <td className="text-bold-500">
-                                                            {item.vocative}
+                                                            {item.gender}
                                                         </td>
                                                         <td className="text-bold-500">
-                                                            {item.address}
+                                                            {item.birthday}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.booking.contact_phone}
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.passenger_type == 1 ? "Người lớn" : item.passenger_type == 2 ? "Trẻ em" : "Em bé sơ sinh" } 
                                                         </td>
                                                         <td className="text-bold-500">
-                                                            {item.flight.flight_code}
+                                                            <Link to={`/admin/bookings/${item.id}`}>
+                                                                <button className="btn btn-primary" style={{marginRight:"-18px" , float:"right"}}>View</button>
+                                                            </Link>
                                                         </td>
-                                                        
                                                     </tr>
                                                 );
                                             })}

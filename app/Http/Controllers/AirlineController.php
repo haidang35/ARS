@@ -39,9 +39,5 @@ class AirlineController extends Controller
         return response()->json($airline);
     }
 
-    public function deleteAirline($id){
-        $airline = Airline::find($id);
-        $airline->delete();
-        return response()->json($airline);
-    }
+ 
 }
