@@ -284,7 +284,7 @@ class SearchFlightBar extends Component {
         const { startDate, returnDate, tripType } = this.state;
 
         return (
-            <div>
+            <div className="wrap-container">
                 <div className="search-flight-bar">
                     <div className="row">
                         <div className="col-md-12">

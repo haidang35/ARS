@@ -7,6 +7,7 @@ import BookingDetails from "./Components/BookingDetails/BookingDetails";
 import BookingList from "./Components/BookingList/BookingList";
 import CustomerInfo from "./Components/CustomerInfo/CustomerInfo";
 import SideBar from "./Components/SideBar/SideBar";
+import SearchFlightBar from "../../Components/SearchFlightBar/SearchFlightBar";
 import "./CustomerProfile.scss";
 
 class CustomerProfile extends Component {
@@ -20,6 +21,7 @@ class CustomerProfile extends Component {
             <BrowserRouter>
                 <div>
                     <SubNavbar />
+                    <SearchFlightBar />
                     <div className="customer-profile">
                         <div className="wrap-container">
                             <div className="row">

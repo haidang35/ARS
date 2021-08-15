@@ -51,20 +51,26 @@ Route::post('airlines', [AirlineController::class, "addNewAirline"]);
 Route::get('flights', [FlightController::class, "getAllFlight"]);
 Route::get('flights/{id}', [FlightController::class, "getFlightDetails"]);
 Route::patch('flights/update/{id}', [FlightController::class, "updateFlightInfo"]);
-Route::post('flights',[FlightController::class,"addNewFlight"]);
+Route::post('flights', [FlightController::class, "addNewFlight"]);
+
+
 // Ticket
 Route::get('tickets', [TicketController::class,  "getAllTicket"]);
 Route::get('tickets/{id}', [TicketController::class, "getTicketDetails"]);
 Route::patch('tickets/update/{id}', [TicketController::class, "updateTicketInfo"]);
 Route::post('tickets', [TicketController::class, "addNewTicket"]);
+
 // Booking
 Route::get('bookings', [BookingController::class,  "getAllBooking"]);
 Route::get('bookings/{id}', [BookingController::class, "getBookingDetails"]);
 Route::patch('bookings/update/{id}', [BookingController::class, "updateBooking"]);
 Route::put('bookings/confirm/{id}', [BookingController::class, "updateBookingStatus"]);
+
 // Passenger
 Route::get('passengers', [PassengerController::class,  "getAllPassenger"]);
 Route::get('passengers/{id}', [PassengerController::class, "getPassengerDetails"]);
+
+
 //User
 Route::post('user/flights/search', [UserController::class, "searchTickets"]);
 Route::post('user/flights', [UserController::class, "searchTicketsWithoutDate"]);
@@ -74,3 +80,4 @@ Route::post('user/booking', [UserController::class, "bookingFlightTicket"]);
 Route::put('user/booking/payment/{id}', [UserController::class, "paymentBooking"]);
 Route::get('user/booking/{id}', [UserController::class, "getBookingInfo"]);
 Route::post('user/find-route', [UserController::class, "findRouteFlight"]);
+Route::get('user/payment', [UserController::class, "bookingPayment"]);

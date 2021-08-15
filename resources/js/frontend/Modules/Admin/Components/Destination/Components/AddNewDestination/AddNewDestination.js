@@ -6,16 +6,15 @@ class AddNewDestination extends Form {
         super(props);
         this.state = {
             form: this._getInitFormData({
-                city:"",
-                province:"",
-                airport_code:"",
-                airport_name:"",
-                country_code:"",
-                country:""
-            })
+                city: "",
+                province: "",
+                airport_code: "",
+                airport_name: "",
+                country_code: "",
+                country: "",
+            }),
         };
     }
-
 
     onSubmitInfo = () => {
         this._validateForm();
@@ -23,37 +22,36 @@ class AddNewDestination extends Form {
         if (this._isFormValid()) {
             const { form } = this.state;
             const data = {
-                city:form.city.value,
-                province:form.province.value,
-                airport_code:form.airport_code.value,
-                airport_name:form.airport_name.value,
-                country_code:form.country_code.value,
-                country:form.country.value
+                city: form.city.value,
+                province: form.province.value,
+                airport_code: form.airport_code.value,
+                airport_name: form.airport_name.value,
+                country_code: form.country_code.value,
+                country: form.country.value,
             };
             this.props.onSubmit(data);
             this._fillForm({
-                city:"",
-                province:"",
-                airport_code:"",
-                airport_name:"",
-                country_code:"",
-                country:"",
+                city: "",
+                province: "",
+                airport_code: "",
+                airport_name: "",
+                country_code: "",
+                country: "",
                 dirty: false,
-            })
+            });
         }
-       
     };
 
-    onCloseAdd=()=>{
+    onCloseAdd = () => {
         this._fillForm({
-            city:"",
-            province:"",
-            airport_code:"",
-            airport_name:"",
-            country_code:"",
-            country:"",
-        })
-    }
+            city: "",
+            province: "",
+            airport_code: "",
+            airport_name: "",
+            country_code: "",
+            country: "",
+        });
+    };
     render() {
         const {
             city,
@@ -62,7 +60,7 @@ class AddNewDestination extends Form {
             airport_name,
             country_code,
             country,
-            dirty
+            dirty,
         } = this.state.form;
         return (
             <div>
@@ -78,7 +76,7 @@ class AddNewDestination extends Form {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5
-                                    style={{marginLeft:"27px"}}
+                                    style={{ marginLeft: "27px" }}
                                     className="modal-title"
                                     id="exampleModalFormTitle"
                                 >
@@ -94,7 +92,10 @@ class AddNewDestination extends Form {
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div className="modal-body" style={{marginRight:"27px"}}>
+                            <div
+                                className="modal-body"
+                                style={{ marginRight: "27px" }}
+                            >
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
@@ -124,17 +125,11 @@ class AddNewDestination extends Form {
                                             type="text"
                                             name="province"
                                             className="form-control"
-                                            required
                                             value={province.value}
                                             onChange={(ev) =>
                                                 this._setValue(ev, "province")
                                             }
                                         />
-                                        {province.err == "*" && dirty ? (
-                                            <FormError err="Province cannot be empty" />
-                                        ) : (
-                                            ""
-                                        )}
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
@@ -147,12 +142,15 @@ class AddNewDestination extends Form {
                                             required
                                             value={airport_code.value}
                                             onChange={(ev) =>
-                                                this._setValue(ev, "airport_code")
+                                                this._setValue(
+                                                    ev,
+                                                    "airport_code"
+                                                )
                                             }
                                         />
-                                         {airport_code.err == "*" && dirty ? (
+                                        {airport_code.err == "*" && dirty ? (
                                             <FormError err="Airport code cannot be empty" />
-                                        ) :(
+                                        ) : (
                                             ""
                                         )}
                                     </div>
@@ -167,10 +165,13 @@ class AddNewDestination extends Form {
                                             id="exampleInputPassword1"
                                             value={airport_name.value}
                                             onChange={(ev) =>
-                                                this._setValue(ev, "airport_name")
+                                                this._setValue(
+                                                    ev,
+                                                    "airport_name"
+                                                )
                                             }
                                         ></input>
-                                         {airport_name.err == "*" && dirty ? (
+                                        {airport_name.err == "*" && dirty ? (
                                             <FormError err="Airport name cannot be empty" />
                                         ) : (
                                             ""
@@ -187,10 +188,13 @@ class AddNewDestination extends Form {
                                             id="exampleInputPassword1"
                                             value={country_code.value}
                                             onChange={(ev) =>
-                                                this._setValue(ev, "country_code")
+                                                this._setValue(
+                                                    ev,
+                                                    "country_code"
+                                                )
                                             }
                                         ></input>
-                                         {country_code.err =="*" && dirty ? (
+                                        {country_code.err == "*" && dirty ? (
                                             <FormError err="Country code cannot be empty" />
                                         ) : (
                                             ""
@@ -210,7 +214,7 @@ class AddNewDestination extends Form {
                                                 this._setValue(ev, "country")
                                             }
                                         ></input>
-                                         {country.err == "*" && dirty ? (
+                                        {country.err == "*" && dirty ? (
                                             <FormError err="Country cannot be empty" />
                                         ) : (
                                             ""
@@ -229,10 +233,12 @@ class AddNewDestination extends Form {
                                 </button>
                                 <button
                                     type="button"
-                                    style={{marginRight:"23px"}}
+                                    style={{ marginRight: "23px" }}
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    data-dismiss= {!this._isFormValid ? "modal" : ""}
+                                    data-dismiss={
+                                        this._isFormValid() ? "modal" : ""
+                                    }
                                 >
                                     Submit
                                 </button>

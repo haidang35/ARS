@@ -14,6 +14,7 @@ import ContactInfoBooking from "./Components/ContactInfo/ContactInfoBooking";
 import { getTime } from "../../../../Helpers/DateTime/ConvertDateTime";
 import Payment from "./Components/Payment/Payment";
 import UserService from "../../../User/Shared/UserService/UserService";
+import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
 
 class BookingConfirm extends Component {
     constructor(props) {
@@ -57,6 +58,7 @@ class BookingConfirm extends Component {
         return (
             <div>
                 <SubNavbar />
+                <SearchFlightBar />
                 <div className="booking-confirm">
                     <div className="wrap-container">
                         <StepListBar step={3} />
@@ -112,7 +114,8 @@ class BookingConfirm extends Component {
                                     )}
                                 </div>
                             </div>
-                            {bookingInfo.payment_status == 0 ? (
+                            {bookingInfo.payment_status == 0 &&
+                            bookingInfo.payment_method == 3 ? (
                                 <Payment
                                     data={bookingInfo}
                                     onPaymentBooking={this.onPaymentBooking}

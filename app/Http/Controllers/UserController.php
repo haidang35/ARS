@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailCheckout;
 use App\Models\Booking;
 use App\Models\BookingTicket;
 use App\Models\Destination;
@@ -175,5 +176,11 @@ class UserController extends Controller
         $booking["ticket"] = $ticket;
 
         return $booking;
+    }
+
+    public function bookingPayment()
+    {
+        $message = "";
+        return new MailCheckout($message);
     }
 }
