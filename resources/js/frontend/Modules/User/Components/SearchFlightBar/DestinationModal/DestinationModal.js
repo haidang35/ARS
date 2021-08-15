@@ -91,6 +91,10 @@ class DestinationModal extends Component {
                                     {searchResultList.map((item) => {
                                         return (
                                             <ListItem
+                                                key={item.id}
+                                                onClick={() =>
+                                                    this.onChooseDeparture(item)
+                                                }
                                                 button
                                                 className="list-item "
                                             >

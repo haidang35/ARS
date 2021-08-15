@@ -20,7 +20,6 @@ import Passenger from "../Components/Passenger/Passenger";
 import AirlineDetails from "../Components/Airline/Components/AirlineDetails/AirlineDetails";
 import BookingDetails from "../Components/Booking/Components/BookingDetails/BookingDetails";
 import TicketDetails from "../Components/Ticket/Components/TicketDetails/TicketDetails";
-import PassengerDetails from "../Components/Passenger/Components/PassengerDetails/PassengerDetails";
 import FlightDetails from "../Components/Flight/Components/FlightDetails/FlightDetails";
 import DestinationDetails from "../Components/Destination/Components/DestinationDetails/DestinationDetails";
 
@@ -76,37 +75,34 @@ class AdminDashBoard extends Component {
                                             path={`/admin/passengers`}
                                             component={Passenger}
                                         />
-                                        {/**/}
+                                      
                                         <Route
                                             exact
                                             path={`/admin/destinations/:id`}
                                             component={DestinationDetails}
                                         />
+                                       
                                         <Route
                                             exact
-                                            path={`/admin/flight-details`}
+                                            path={`/admin/flights/:id`}
                                             component={FlightDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/ticket-details`}
+                                            path={`/admin/tickets/:id`}
                                             component={TicketDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/booking-details`}
+                                            path={`/admin/bookings/:id`}
                                             component={BookingDetails}
                                         />
                                         <Route
                                             exact
-                                            path={`/admin/airline-details`}
+                                            path={`/admin/airlines/:id`}
                                             component={AirlineDetails}
                                         />
-                                        <Route
-                                            exact
-                                            path={`/admin/passenger-details`}
-                                            component={PassengerDetails}
-                                        />
+                                      
                                     </Suspense>
                                 </Switch>
                             </div>

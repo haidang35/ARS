@@ -10,10 +10,19 @@ import {
     Popper,
     TextField,
     Typography,
+    withStyles,
 } from "@material-ui/core";
 import React from "react";
 import { Component } from "react";
 import "./ListDestination.scss";
+
+const ListItemStyle = withStyles({
+    root: {
+        "& .MuiFormLabel-root": {
+            width: "100%",
+        },
+    },
+})(ListItem);
 
 class ListDestination extends Component {
     constructor(props) {
@@ -21,7 +30,7 @@ class ListDestination extends Component {
         this.state = {
             searchValue: "",
             destination: "",
-            departure: ""
+            departure: "",
         };
     }
 
@@ -33,7 +42,7 @@ class ListDestination extends Component {
 
     onChooseDeparture = (data) => {
         this.props.onChoose(data);
-    }
+    };
 
     render() {
         const { searchValue } = this.state;
@@ -56,10 +65,8 @@ class ListDestination extends Component {
                 <Dialog open={onOpen} onClose={handleClose}>
                     <div className="list-destination">
                         <Card className="card-content">
-                            <Typography className="title">
-                                {title}
-                            </Typography>
-                            <FormGroup>
+                            <Typography className="title">{title}</Typography>
+                            <FormGroup className="search-destination-box">
                                 <TextField
                                     id="outlined-basic"
                                     name="searchValue"
@@ -69,32 +76,42 @@ class ListDestination extends Component {
                                     value={searchValue}
                                     onChange={this.handleSearchDestination}
                                 />
-                                <List
-                                    component="nav"
-                                    aria-label="secondary mailbox folders"
-                                    className="search-result-list "
-                                >
-                                    {searchResultList.map((item) => {
-                                        return (
-                                            <ListItem
-                                                button
-                                                className="list-item "
-                                            >
-                                                <ListItemText
-                                                    primary={
-                                                        item.airport_code +
-                                                        "  " +
-                                                        item.airport_name +
-                                                        ", " +
-                                                        item.city +
-                                                        ", " +
-                                                        item.country
+                                {searchValue.length > 0 ? (
+                                    <List
+                                        component="nav"
+                                        aria-label="secondary mailbox folders"
+                                        className="search-result-list "
+                                    >
+                                        {searchResultList.map((item) => {
+                                            return (
+                                                <ListItemStyle
+                                                    onClick={() =>
+                                                        this.onChooseDeparture(
+                                                            item
+                                                        )
                                                     }
-                                                />
-                                            </ListItem>
-                                        );
-                                    })}
-                                </List>
+                                                    button
+                                                    className="list-item "
+                                                >
+                                                    <ListItemText
+                                                        className="item-destination"
+                                                        primary={
+                                                            item.airport_code +
+                                                            "  " +
+                                                            item.airport_name +
+                                                            ", " +
+                                                            item.city +
+                                                            ", " +
+                                                            item.country
+                                                        }
+                                                    />
+                                                </ListItemStyle>
+                                            );
+                                        })}
+                                    </List>
+                                ) : (
+                                    ""
+                                )}
                             </FormGroup>
 
                             <div className="choose-country">
@@ -106,7 +123,14 @@ class ListDestination extends Component {
                                 <Grid container className="list-destination">
                                     {data.map((item) => {
                                         return (
-                                            <Grid onClick={() => this.onChooseDeparture(item)} key={item.id} item xs={4}>
+                                            <Grid
+                                                onClick={() =>
+                                                    this.onChooseDeparture(item)
+                                                }
+                                                key={item.id}
+                                                item
+                                                xs={4}
+                                            >
                                                 <Typography className="item">
                                                     {item.city +
                                                         ` (${item.airport_code}) `}

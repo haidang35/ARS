@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { FormGroup, Typography } from "@material-ui/core";
 import React from "react";
 import { Component } from "react";
 import { REGEX_TEL } from "../../../../../../Constances/const";
@@ -59,91 +59,77 @@ class ContactInfo extends Form {
                     <div className="content">
                         <div className="row">
                             <div className="col-sm-4">
-                                <div className="form-group">
-                                    <label className="label-info">
-                                        Quý danh{" "}
-                                        <span className="required-label">
-                                            *
-                                        </span>
-                                    </label>
+                                <label className="label-info">
+                                    Quý danh{" "}
+                                    <span className="required-label">*</span>
+                                </label>
 
-                                    <select
-                                        name="vocative"
-                                        required
-                                        value={vocative.value}
-                                        className="form-control form-select"
-                                        onChange={(ev) =>
-                                            this._setValue(ev, "vocative")
-                                        }
-                                    >
-                                        <option value={"Anh"}>Anh</option>
-                                        <option value={"Chị"}>Chị</option>
-                                        <option value={"Quý ông"}>
-                                            Quý ông
-                                        </option>
-                                        <option value={"Quý bà"}>Quý bà</option>
-                                    </select>
-                                </div>
+                                <select
+                                    name="vocative"
+                                    required
+                                    value={vocative.value}
+                                    className="form-control form-select"
+                                    onChange={(ev) =>
+                                        this._setValue(ev, "vocative")
+                                    }
+                                >
+                                    <option value={"Anh"}>Anh</option>
+                                    <option value={"Chị"}>Chị</option>
+                                    <option value={"Quý ông"}>Quý ông</option>
+                                    <option value={"Quý bà"}>Quý bà</option>
+                                </select>
                             </div>
                             <div className="col-sm-4">
-                                <div className="form-group">
-                                    <label className="label-info">
-                                        Họ và tên{" "}
-                                        <span className="required-label">
-                                            *
-                                        </span>
-                                    </label>
+                                <label className="label-info">
+                                    Họ và tên{" "}
+                                    <span className="required-label">*</span>
+                                </label>
 
-                                    <input
-                                        type="text"
-                                        required
-                                        name="nameContact"
-                                        className="form-control"
-                                        placeholder="Họ và tên"
-                                        value={nameContact.value}
-                                        onChange={(ev) =>
-                                            this._setValue(ev, "nameContact")
-                                        }
-                                    />
-                                    {nameContact.err == "*" && dirty ? (
-                                        <FormError err="Vui lòng nhập tên liên hệ" />
-                                    ) : (
-                                        ""
-                                    )}
-                                </div>
+                                <input
+                                    type="text"
+                                    required
+                                    name="nameContact"
+                                    className="form-control"
+                                    placeholder="Họ và tên"
+                                    value={nameContact.value}
+                                    onChange={(ev) =>
+                                        this._setValue(ev, "nameContact")
+                                    }
+                                />
+                                {nameContact.err == "*" && dirty ? (
+                                    <FormError err="Vui lòng nhập tên liên hệ" />
+                                ) : (
+                                    ""
+                                )}
                             </div>
                             <div className="col-sm-4">
-                                <div className="form-group">
-                                    <label className="label-info">
-                                        Điện thoại{" "}
-                                        <span className="required-label">
-                                            *
-                                        </span>
-                                    </label>
+                                <label className="label-info">
+                                    Điện thoại{" "}
+                                    <span className="required-label">*</span>
+                                </label>
 
-                                    <input
-                                        type="tel"
-                                        required
-                                        pattern={REGEX_TEL}
-                                        name="phone"
-                                        className="form-control"
-                                        placeholder="Số điện thoại"
-                                        value={phone.value}
-                                        onChange={(ev) =>
-                                            this._setValue(ev, "phone")
-                                        }
-                                    />
-                                    {phone.err == "*" && dirty ? (
-                                        <FormError err="Vui lòng nhập số điện thoại" />
-                                    ) : phone.err.length > 0 && dirty ? (
-                                        <FormError err="Số điện thoại không đúng" />
-                                    ) : (
-                                        ""
-                                    )}
-                                </div>
+                                <input
+                                    type="tel"
+                                    required
+                                    pattern={REGEX_TEL}
+                                    name="phone"
+                                    className="form-control"
+                                    placeholder="Số điện thoại"
+                                    value={phone.value}
+                                    onChange={(ev) =>
+                                        this._setValue(ev, "phone")
+                                    }
+                                />
+                                {phone.err == "*" && dirty ? (
+                                    <FormError err="Vui lòng nhập số điện thoại" />
+                                ) : phone.err.length > 0 && dirty ? (
+                                    <FormError err="Số điện thoại không đúng" />
+                                ) : (
+                                    ""
+                                )}
                             </div>
                             <div className="col-sm-4">
-                                <div className="form-group">
+                                <FormGroup style={{ marginTop: "0.7rem" }}>
                                     <label className="label-info">
                                         Email{" "}
                                         <span className="required-label">
@@ -169,10 +155,10 @@ class ContactInfo extends Form {
                                     ) : (
                                         ""
                                     )}
-                                </div>
+                                </FormGroup>
                             </div>
                             <div className="col-sm-4">
-                                <div className="form-group">
+                                <FormGroup style={{ marginTop: "0.7rem" }}>
                                     <label className="label-info">
                                         Địa chỉ{" "}
                                     </label>
@@ -187,14 +173,13 @@ class ContactInfo extends Form {
                                             this._setValue(ev, "address")
                                         }
                                     />
-                                </div>
+                                </FormGroup>
                             </div>
                             <div className="col-sm-4">
-                                <div className="form-group">
+                                <FormGroup style={{ marginTop: "0.7rem" }}>
                                     <label className="label-info">
                                         Ghi chú{" "}
                                     </label>
-
                                     <textarea
                                         type="text"
                                         name="note"
@@ -205,7 +190,7 @@ class ContactInfo extends Form {
                                             this._setValue(ev, "note")
                                         }
                                     ></textarea>
-                                </div>
+                                </FormGroup>
                             </div>
                         </div>
                     </div>

@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Passenger extends Model
 {
     use HasFactory;
-    protected $table = "passengers";
+    protected $table = "bookings_tickets";
     protected $fillable = [
         "passenger_name",
-        "vocative",
+        "gender",
         "birthday",
-        "address",
         "passenger_type",
-        "booking_id"
+        "booking_id",
+        "ticket_id",
+       
     ];
 
     public function Booking() {

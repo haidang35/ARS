@@ -24,6 +24,7 @@ class CreateTableBookingTicket extends Migration
             $table->timestamps();
             $table->foreign("booking_id")->references("id")->on("bookings");
             $table->foreign("ticket_id")->references("id")->on("tickets");
+        
         });
     }
 

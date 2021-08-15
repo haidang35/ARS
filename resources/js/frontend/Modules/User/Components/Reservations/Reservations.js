@@ -84,6 +84,7 @@ class Reservations extends Component {
         ) {
             const trip_type = JSON.parse(localStorage.getItem("tripType"));
             const userId = JSON.parse(localStorage.getItem("userId" || ""));
+
             const data = {
                 booking_date: getDateTimeNow(),
                 trip_type,
@@ -96,6 +97,7 @@ class Reservations extends Component {
                 note: this.contactInfo.note,
                 payment_method: this.paymentMethod,
                 into_money: this.state.flightTicket.into_money,
+                payment_status: 0,
                 passengers: this.customerInfo,
                 user_id: userId,
             };
@@ -158,6 +160,7 @@ class Reservations extends Component {
                                         getContactInfo={this.getContactInfo}
                                     />
                                     <PaymentMethod
+                                        data={flightTicket}
                                         onReservation={this.onReservationTicket}
                                         getPaymentMethod={this.getPaymentMethod}
                                     />
