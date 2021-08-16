@@ -1,126 +1,123 @@
+import { Typography } from "@material-ui/core";
 import React, { Component } from "react";
-class Login extends Component {
+import Form from "../../../../Shared/Components/Form/Form";
+import ModalNotice2 from "../../../../Shared/Components/Modal/ModalNotice2";
+import "./Login.scss";
+import AuthService from "../../../../Shared/Service/AuthService";
+import { goTo } from "../../../../Helpers/Redirect/Redirect";
+class Login extends Form {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            form: this._getInitFormData({
+                username: "",
+                password: "",
+            }),
+            message: "",
+        };
     }
 
+    onLogin = () => {
+        const { form } = this.state;
+        this._validateForm();
+        this.state.form["dirty"] = true;
+        if (form.username.err == "*") {
+            this.setState({
+                message: "Vui lòng nhập tài khoản",
+            });
+        } else if (form.username.err.length > 0) {
+            this.setState({
+                message: "Vui lòng nhập đúng định dạng email",
+            });
+        } else if (form.password.err == "*") {
+            this.setState({
+                message: "Vui lòng nhập mật khẩu",
+            });
+        }
+        if (this._isFormValid()) {
+            const data = {
+                email: form.username.value,
+                password: form.password.value,
+            };
+            AuthService.adminLogin(data)
+                .then((res) => {
+                    localStorage.setItem(
+                        "adminId",
+                        JSON.stringify(res.data.user.id)
+                    );
+                    goTo("admin");
+                })
+                .catch((err) => {
+                    console.log(
+                        "🚀 ~ file: Login.js ~ line 51 ~ Login ~ err",
+                        err
+                    );
+                    this.setState({
+                        message: "Bạn không có quyền truy cập vào trang này !!",
+                    });
+                });
+        }
+    };
+
     render() {
+        const { username, password } = this.state.form;
         return (
-            <div>
-                <div className="img js-fullheight">
-                    <img
-                        className="centered"
-                        src="background-register.jpg"
-                        width="100%"
-                        height="750px"
-                        style={{ filter: "brightness(0.5)" }}
-                    />
-                    <section className="ftco-section">
-                        <div className="container">
-                            <div className="row justify-content-center">
-                                <div className="col-md-6 text-center mb-5">
-                                    <h2 className="heading-section">Login</h2>
+            <div className="admin-login">
+                <div className="container">
+                    <div className="screen">
+                        <div className="screen__content">
+                            <Typography variant="h4" className="title-login">
+                                Flight Hi <br /> Management
+                            </Typography>
+                            <div className="login">
+                                <div className="login__field">
+                                    <i className="login__icon fas fa-user" />
+                                    <input
+                                        type="email"
+                                        name="username"
+                                        required
+                                        className="login__input"
+                                        value={username.value}
+                                        placeholder="User name / Email"
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "username")
+                                        }
+                                    />
                                 </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                <div className="col-md-6 col-lg-4">
-                                    <div className="login-wrap p-0">
-                                        <h3 className="mb-4 text-center">
-                                            Have an account?
-                                        </h3>
-                                        <form
-                                            action="#"
-                                            className="signin-form"
-                                        >
-                                            <div className="form-group">
-                                                <input
-                                                    style={{ outline: "none" }}
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Username"
-                                                    required
-                                                />
-                                            </div>
-                                            <div className="form-group">
-                                                <input
-                                                    style={{
-                                                        marginTop: "-10px",
-                                                        outline: "none",
-                                                    }}
-                                                    id="password-field"
-                                                    type="password"
-                                                    className="form-control"
-                                                    placeholder="Password"
-                                                    required
-                                                />
-                                                <span
-                                                    toggle="#password-field"
-                                                    className="fa fa-fw fa-eye field-icon toggle-password"
-                                                />
-                                            </div>
-                                            <div className="form-group">
-                                                <button
-                                                    type="submit"
-                                                    className="form-control btn btn-primary submit px-3"
-                                                >
-                                                    LOG IN
-                                                </button>
-                                            </div>
-                                            <div
-                                                className="form-group d-md-flex"
-                                                style={{
-                                                    display: "-webkit-box",
-                                                }}
-                                            >
-                                                <div className="w-50">
-                                                    <label className="checkbox-wrap checkbox-primary">
-                                                        <input
-                                                            type="checkbox"
-                                                            defaultChecked
-                                                        />
-                                                        Remember Me
-                                                        <span className="checkmark" />
-                                                    </label>
-                                                </div>
-                                                <div className="w-50 text-md-right">
-                                                    <a
-                                                        href="#"
-                                                        style={{
-                                                            color: "#fff",
-                                                            marginLeft: "160px",
-                                                        }}
-                                                    >
-                                                        Forgot Password
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <p className="w-100 text-center">
-                                            — Or Sign In With —
-                                        </p>
-                                        <div className="social d-flex text-center">
-                                            <a
-                                                href="#"
-                                                className="px-2 py-2 mr-md-1 rounded"
-                                            >
-                                                <span className="ion-logo-facebook mr-2" />{" "}
-                                                Facebook
-                                            </a>
-                                            <a
-                                                href="#"
-                                                className="px-2 py-2 ml-md-1 rounded"
-                                                style={{ marginLeft: "46px" }}
-                                            >
-                                                <span className="ion-logo-twitter mr-2" />{" "}
-                                                Google
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div className="login__field">
+                                    <i className="login__icon fas fa-lock" />
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        required
+                                        className="login__input"
+                                        placeholder="Password"
+                                        value={password.value}
+                                        onChange={(ev) =>
+                                            this._setValue(ev, "password")
+                                        }
+                                    />
                                 </div>
+                                <button
+                                    onClick={this.onLogin}
+                                    className="button login__submit"
+                                >
+                                    <span className="button__text">Log In</span>
+                                    <i className="button__icon fas fa-chevron-right" />
+                                </button>
                             </div>
                         </div>
-                    </section>
+                        <div className="screen__background">
+                            <span className="screen__background__shape screen__background__shape4" />
+                            <span className="screen__background__shape screen__background__shape3" />
+                            <span className="screen__background__shape screen__background__shape2" />
+                            <span className="screen__background__shape screen__background__shape1" />
+                        </div>
+                    </div>
+                    <ModalNotice2
+                        message={this.state.message}
+                        onClose={() => this.setState({ message: "" })}
+                    />
                 </div>
             </div>
         );

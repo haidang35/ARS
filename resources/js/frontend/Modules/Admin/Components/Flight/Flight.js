@@ -13,6 +13,22 @@ import {
     getDate,
     getTime,
 } from "../../../../Helpers/DateTime/ConvertDateTime";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+} from "@material-ui/pickers";
+import { TablePagination, withStyles } from "@material-ui/core";
+
+const StyleDatePicker = withStyles({
+    root: {
+        "& .MuiFormControl-root": {
+            width: "100%",
+        },
+    },
+})(KeyboardDatePicker);
 class Flight extends Form {
     constructor(props) {
         super(props);
@@ -22,8 +38,8 @@ class Flight extends Form {
             airlineList: [],
             form: this._getInitFormData({
                 flight_code: "",
-                departure_datetime: "",
-                arrival_datetime: "",
+                departure_datetime: new Date(),
+                arrival_datetime: new Date(),
                 aircraft: "",
                 airline_id: "",
                 departure_id: "",
@@ -35,6 +51,16 @@ class Flight extends Form {
             onAdd: false,
             message: "",
             errorMessage: "",
+            onSearch: false,
+            searchValue: "",
+            scopeAirline: "",
+            scopeDestination: "",
+            scopeDeparture: "",
+            scopeTimeList: "",
+            showDatePicker: false,
+            scopeDatePicker: new Date(),
+            page: 0,
+            rowsPerPage: 20,
         };
     }
     componentDidMount() {
@@ -96,8 +122,14 @@ class Flight extends Form {
             const { form } = this.state;
             const data = {
                 flight_code: form.flight_code.value,
-                departure_datetime: form.departure_datetime.value,
-                arrival_datetime: form.arrival_datetime.value,
+                departure_datetime:
+                    getDate(form.departure_datetime.value) +
+                    " " +
+                    getTime(form.departure_datetime.value),
+                arrival_datetime:
+                    getDate(form.arrival_datetime.value) +
+                    " " +
+                    getTime(form.arrival_datetime.value),
                 aircraft: form.aircraft.value,
                 airline_id: form.airline_id.value,
                 departure_id: form.departure_id.value,
@@ -136,13 +168,183 @@ class Flight extends Form {
             });
         }
     };
+
+    handleChangeSearchValue = (ev) => {
+        const { name, value } = ev.target;
+        this.setState({
+            [name]: value,
+            onSearch: false,
+        });
+    };
+
+    handleChangeScope = (ev) => {
+        const { name, value } = ev.target;
+        this.setState({
+            [name]: value,
+        });
+    };
+
+    onSearch = () => {
+        this.setState({
+            onSearch: true,
+        });
+    };
+
+    onScopeDeparture = (flightData) => {
+        let { scopeDeparture } = this.state;
+        let flightList = flightData.filter((item) => {
+            return item.departure_id == scopeDeparture;
+        });
+        return flightList;
+    };
+
+    onScopeDestination = (flightData) => {
+        let { scopeDestination } = this.state;
+        let flightList = flightData.filter((item) => {
+            return item.destination_id == scopeDestination;
+        });
+        return flightList;
+    };
+
+    onScopeAirline = (flightData) => {
+        let { scopeAirline } = this.state;
+        let flightList = flightData.filter((item) => {
+            return item.airline_id == scopeAirline;
+        });
+        return flightList;
+    };
+
+    onScopeListTime = (flightData) => {
+        const { scopeTimeList } = this.state;
+        let flightList = [];
+        if (scopeTimeList == 1) {
+            const today = new Date();
+            flightList = flightData.filter((item) => {
+                const departureDate = new Date(item.departure_datetime);
+                if (
+                    departureDate.getDate() == today.getDate() &&
+                    departureDate.getMonth() == today.getMonth() &&
+                    departureDate.getFullYear() == today.getFullYear()
+                ) {
+                    return item;
+                }
+            });
+        } else if (scopeTimeList == 2) {
+            const today = new Date();
+            today.setDate(today.getDate() + 1);
+            flightList = flightData.filter((item) => {
+                const departureDate = new Date(item.departure_datetime);
+                if (
+                    departureDate.getDate() == today.getDate() &&
+                    departureDate.getMonth() == today.getMonth() &&
+                    departureDate.getFullYear() == today.getFullYear()
+                ) {
+                    return item;
+                }
+            });
+        } else if (scopeTimeList == 3) {
+            flightList = flightData.filter((item) => {
+                if (this.checkScopeThisWeek(item.departure_datetime)) {
+                    return item;
+                }
+            });
+        }
+        return flightList;
+    };
+
+    showDatePicker = () => {
+        this.setState({
+            showDatePicker: !this.state.showDatePicker,
+        });
+    };
+
+    checkScopeThisWeek(date) {
+        const today = new Date();
+        const dateConvert = new Date(date);
+        let curr = new Date();
+        let first = curr.getDate() - curr.getDay();
+        let last = first + 6;
+        let firstday = new Date(curr.setDate(first));
+        let lastday = new Date(curr.setDate(last));
+
+        if (
+            dateConvert.getDate() >= firstday.getDate() &&
+            dateConvert.getDate() <= lastday.getDate() &&
+            dateConvert.getMonth() === today.getMonth() &&
+            dateConvert.getFullYear() === today.getFullYear()
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    handleChangeDatePicker = (datetime, value) => {
+        this.setState({
+            scopeDatePicker: datetime,
+        });
+    };
+
+    onScopeDate = (flightData) => {
+        const { scopeDatePicker } = this.state;
+        let flightList = flightData.filter((item) => {
+            const departureTime = new Date(item.departure_datetime);
+            if (
+                departureTime.getDate() == scopeDatePicker.getDate() &&
+                departureTime.getMonth() == scopeDatePicker.getMonth() &&
+                departureTime.getFullYear() == scopeDatePicker.getFullYear()
+            ) {
+                return item;
+            }
+        });
+        return flightList;
+    };
+
+    handleChangeAddDepartureTime = (time, value) => {
+        let { form } = this.state;
+        form["departure_datetime"].value = time;
+        this.setState({
+            form,
+        });
+    };
+
+    handleChangeAddArrivalTime = (time, value) => {
+        let { form } = this.state;
+        form["arrival_datetime"].value = time;
+        this.setState({
+            form,
+        });
+    };
+
+    handleChangePage = (event, newPage) => {
+        this.setState({
+            page: newPage,
+        });
+    };
+
+    handleChangeRowsPerPage = (event) => {
+        this.setState({
+            rowsPerPage: event.target.value,
+            page: 0,
+        });
+    };
+
     render() {
-        const {
+        let {
             flightList,
             airlineList,
             destinationList,
             message,
             errorMessage,
+            searchValue,
+            scopeAirline,
+            scopeDestination,
+            onSearch,
+            scopeDeparture,
+            scopeTimeList,
+            scopeDatePicker,
+            page,
+            rowsPerPage,
         } = this.state;
         const {
             flight_code,
@@ -158,6 +360,38 @@ class Flight extends Form {
             dirty,
         } = this.state.form;
         const { onAdd } = this.state;
+
+        flightList = flightList.slice(
+            page * rowsPerPage,
+            page * rowsPerPage + rowsPerPage
+        );
+        if (onSearch) {
+            flightList = flightList.filter((item) => {
+                return (
+                    item.flight_code
+                        .toLowerCase()
+                        .indexOf(searchValue.toLowerCase()) !== -1 ||
+                    item.aircraft
+                        .toLowerCase()
+                        .indexOf(searchValue.toLowerCase()) !== -1
+                );
+            });
+            if (scopeAirline !== "") {
+                flightList = this.onScopeAirline(flightList);
+            }
+            if (scopeDeparture !== "") {
+                flightList = this.onScopeDeparture(flightList);
+            }
+            if (scopeDestination !== "") {
+                flightList = this.onScopeDestination(flightList);
+            }
+            if (scopeTimeList !== "") {
+                flightList = this.onScopeListTime(flightList);
+            }
+            if (this.state.showDatePicker) {
+                flightList = this.onScopeDate(flightList);
+            }
+        }
 
         if (message.length > 0 || errorMessage.length > 0) {
             const timer = setTimeout(() => {
@@ -228,6 +462,215 @@ class Flight extends Form {
 
                         {!onAdd ? (
                             <div className="card-content">
+                                <div className="row">
+                                    <div className="col-sm-4">
+                                        <div className="form-group position-relative has-icon-left">
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="Search ..."
+                                                name="searchValue"
+                                                value={this.state.searchValue}
+                                                onChange={
+                                                    this.handleChangeSearchValue
+                                                }
+                                            />
+                                            <div className="form-control-icon">
+                                                <i className="bi bi-search" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <div style={{ marginLeft: "-1rem" }}>
+                                            <select
+                                                className="choices form-select"
+                                                name="scopeDeparture"
+                                                value={
+                                                    this.state.scopeDeparture
+                                                }
+                                                onChange={
+                                                    this.handleChangeScope
+                                                }
+                                            >
+                                                <option value="">
+                                                    Chọn điểm khởi hành
+                                                </option>
+                                                {destinationList.map((item) => {
+                                                    return (
+                                                        <option
+                                                            key={item.id}
+                                                            value={item.id}
+                                                        >
+                                                            {item.city}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <div style={{ marginLeft: "-1rem" }}>
+                                            <select
+                                                className="choices form-select"
+                                                name="scopeDestination"
+                                                value={
+                                                    this.state.scopeDestination
+                                                }
+                                                onChange={
+                                                    this.handleChangeScope
+                                                }
+                                            >
+                                                <option value="">
+                                                    Chọn điểm đến
+                                                </option>
+                                                {destinationList.map((item) => {
+                                                    return (
+                                                        <option
+                                                            key={item.id}
+                                                            value={item.id}
+                                                        >
+                                                            {item.city}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <div style={{ marginLeft: "-1rem" }}>
+                                            <select
+                                                className="choices form-select"
+                                                name="scopeAirline"
+                                                value={this.state.scopeAirline}
+                                                onChange={
+                                                    this.handleChangeScope
+                                                }
+                                            >
+                                                <option value="">
+                                                    Chọn hãng hàng không
+                                                </option>
+                                                {airlineList.map((item) => {
+                                                    return (
+                                                        <option
+                                                            key={item.id}
+                                                            value={item.id}
+                                                        >
+                                                            {item.airline_name}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-sm-2">
+                                        <div style={{ marginLeft: "-1rem" }}>
+                                            <button
+                                                onClick={this.onSearch}
+                                                className="btn btn-primary"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    {!this.state.showDatePicker ? (
+                                        <div className="col-sm-3">
+                                            <div className="form-group">
+                                                <select
+                                                    className="choices form-select"
+                                                    name="scopeTimeList"
+                                                    value={
+                                                        this.state.scopeTimeList
+                                                    }
+                                                    onChange={
+                                                        this.handleChangeScope
+                                                    }
+                                                >
+                                                    <option value="">
+                                                        Chọn thời gian
+                                                    </option>
+                                                    <option value={1}>
+                                                        Hôm nay
+                                                    </option>
+                                                    <option value={2}>
+                                                        Ngày mai
+                                                    </option>
+                                                    <option value={3}>
+                                                        Tuần này
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="col-md-3">
+                                            <div style={{ marginLeft: "2rem" }}>
+                                                <MuiPickersUtilsProvider
+                                                    utils={DateFnsUtils}
+                                                >
+                                                    <Grid container>
+                                                        <KeyboardDatePicker
+                                                            style={{
+                                                                width: "100%",
+                                                            }}
+                                                            margin="normal"
+                                                            id="date-picker-dialog"
+                                                            label="Chọn ngày khởi hành"
+                                                            format="dd/MM/yyyy"
+                                                            value={
+                                                                scopeDatePicker
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleChangeDatePicker
+                                                            }
+                                                            KeyboardButtonProps={{
+                                                                "aria-label":
+                                                                    "change date",
+                                                            }}
+                                                        />
+
+                                                        {/*                                                    
+                                                        <KeyboardTimePicker
+                                                            margin="normal"
+                                                            id="time-picker"
+                                                            label="Giờ khởi hành"
+                                                            value={
+                                                                scopeDatePicker
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleChangeDatePicker
+                                                            }
+                                                            KeyboardButtonProps={{
+                                                                "aria-label":
+                                                                    "change time",
+                                                            }}
+                                                        />
+                                                    */}
+                                                    </Grid>
+                                                </MuiPickersUtilsProvider>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div className="col-md-2">
+                                        <button
+                                            onClick={this.showDatePicker}
+                                            className="btn btn-info"
+                                            style={
+                                                this.state.showDatePicker
+                                                    ? { marginTop: "1rem" }
+                                                    : {}
+                                            }
+                                        >
+                                            {!this.state.showDatePicker
+                                                ? "Date Picker"
+                                                : " Time List "}
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div className="card-body">
                                     <div className="table-responsive">
                                         <table className="table table-lg">
@@ -236,7 +679,7 @@ class Flight extends Form {
                                                     <th>STT</th>
                                                     <th>Tên chuyến bay</th>
                                                     <th>Thời gian khởi hành</th>
-                                                    <th>Ngày khởi hành</th>
+                                                    <th>Thời gian hạ cánh</th>
                                                     <th>Điểm khởi hành</th>
                                                     <th>Điểm đến</th>
                                                     <th>Loại máy bay</th>
@@ -332,6 +775,16 @@ class Flight extends Form {
                                                 })}
                                             </tbody>
                                         </table>
+                                        <TablePagination
+                                            component="div"
+                                            count={this.state.flightList.length}
+                                            page={page}
+                                            onPageChange={this.handleChangePage}
+                                            rowsPerPage={rowsPerPage}
+                                            onRowsPerPageChange={
+                                                this.handleChangeRowsPerPage
+                                            }
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -433,59 +886,115 @@ class Flight extends Form {
                                     className="row"
                                     style={{ marginTop: "20px" }}
                                 >
-                                    <div
-                                        className="col-sm-6"
-                                        style={{ paddingRight: "20px" }}
-                                    >
+                                    <div className="col-sm-6">
                                         <div>
-                                            <label>Thời gian khởi hành</label>
-                                            <input
-                                                type="date"
-                                                name="departure_datetime"
-                                                required
-                                                className="form-control"
-                                                value={departure_datetime.value}
-                                                onChange={(ev) =>
-                                                    this._setValue(
-                                                        ev,
-                                                        "departure_datetime"
-                                                    )
-                                                }
-                                            />
-                                            {dirty &&
-                                            departure_datetime.err === "*" ? (
-                                                <FormError err="Departure datetime cannot be empty" />
-                                            ) : (
-                                                ""
-                                            )}
+                                            <MuiPickersUtilsProvider
+                                                utils={DateFnsUtils}
+                                            >
+                                                <Grid container spacing={3}>
+                                                    <Grid item xs={6}>
+                                                        <StyleDatePicker
+                                                            style={{
+                                                                width: "100%",
+                                                            }}
+                                                            margin="normal"
+                                                            id="date-picker-dialog"
+                                                            label="Chọn ngày khởi hành"
+                                                            name="departure_datetime"
+                                                            format="dd/MM/yyyy"
+                                                            value={
+                                                                departure_datetime.value
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleChangeAddDepartureTime
+                                                            }
+                                                            KeyboardButtonProps={{
+                                                                "aria-label":
+                                                                    "change date",
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <KeyboardTimePicker
+                                                            style={{
+                                                                width: "100%",
+                                                            }}
+                                                            margin="normal"
+                                                            id="time-picker"
+                                                            name="departure_datetime"
+                                                            label="Giờ khởi hành"
+                                                            value={
+                                                                departure_datetime.value
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleChangeAddDepartureTime
+                                                            }
+                                                            KeyboardButtonProps={{
+                                                                "aria-label":
+                                                                    "change time",
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                            </MuiPickersUtilsProvider>
                                         </div>
                                     </div>
 
-                                    <div
-                                        className="col-sm-6"
-                                        style={{ paddingLeft: "20px" }}
-                                    >
-                                        <div>
-                                            <label>Thời gian đến</label>
-                                            <input
-                                                type="date"
-                                                name="arrival_datetime"
-                                                required
-                                                className="form-control"
-                                                value={arrival_datetime.value}
-                                                onChange={(ev) =>
-                                                    this._setValue(
-                                                        ev,
-                                                        "arrival_datetime"
-                                                    )
-                                                }
-                                            ></input>
-                                            {dirty &&
-                                            arrival_datetime.err === "*" ? (
-                                                <FormError err="Arrival datetime cannot be empty" />
-                                            ) : (
-                                                ""
-                                            )}
+                                    <div className="col-sm-6">
+                                        <div style={{ marginLeft: "1rem" }}>
+                                            <MuiPickersUtilsProvider
+                                                utils={DateFnsUtils}
+                                            >
+                                                <Grid container spacing={3}>
+                                                    <Grid item xs={6}>
+                                                        <StyleDatePicker
+                                                            style={{
+                                                                width: "100%",
+                                                            }}
+                                                            margin="normal"
+                                                            id="date-picker-dialog"
+                                                            label="Chọn ngày đến"
+                                                            name="destination_datetime"
+                                                            format="dd/MM/yyyy"
+                                                            value={
+                                                                arrival_datetime.value
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleChangeAddArrivalTime
+                                                            }
+                                                            KeyboardButtonProps={{
+                                                                "aria-label":
+                                                                    "change date",
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <KeyboardTimePicker
+                                                            style={{
+                                                                width: "100%",
+                                                            }}
+                                                            margin="normal"
+                                                            id="time-picker"
+                                                            name="destination_datetime"
+                                                            label="Thời gian hạ cánh"
+                                                            value={
+                                                                arrival_datetime.value
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleChangeAddArrivalTime
+                                                            }
+                                                            KeyboardButtonProps={{
+                                                                "aria-label":
+                                                                    "change time",
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                            </MuiPickersUtilsProvider>
                                         </div>
                                     </div>
                                 </div>
@@ -498,7 +1007,7 @@ class Flight extends Form {
                                         style={{ paddingRight: "20px" }}
                                     >
                                         <div>
-                                            <label>Tên hãng</label>
+                                            <label>Tên hãng hàng không</label>
                                             <select
                                                 required
                                                 name="airline_id"
@@ -539,7 +1048,7 @@ class Flight extends Form {
                                         style={{ paddingLeft: "20px" }}
                                     >
                                         <div>
-                                            <label>Mã chuyến</label>
+                                            <label>Mã chuyến bay</label>
                                             <input
                                                 required
                                                 name="flight_code"

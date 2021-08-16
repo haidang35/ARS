@@ -11,6 +11,7 @@ import PaymentMethod from "./Components/PaymentMethod/PaymentMethod";
 import TicketDetails from "./Components/TicketDetails/TicketDetails";
 import { getDateTimeNow } from "../../../../Helpers/DateTime/ConvertDateTime";
 import { Redirect } from "react-router-dom";
+import ModalNotice from "../../../../Shared/Components/Modal/ModalNotice";
 
 class Reservations extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class Reservations extends Component {
             onReservation: false,
             bookingInfo: {},
             redirect: false,
+            message: "",
         };
     }
 
@@ -112,6 +114,14 @@ class Reservations extends Component {
                     console.log("booking failed ");
                 });
             window.scrollTo(0, 0);
+        } else if (
+            this.paymentMethod == "" &&
+            this.contactInfo !== "" &&
+            this.customerInfo !== ""
+        ) {
+            this.setState({
+                message: "Vui lòng chọn phương thức thanh toán",
+            });
         }
     };
 
@@ -167,6 +177,10 @@ class Reservations extends Component {
                                 </div>
                             </div>
                         </div>
+                        <ModalNotice
+                            message={this.state.message}
+                            onClose={() => this.setState({ message: "" })}
+                        />
                     </div>
                 </div>
             </div>

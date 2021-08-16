@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminLogin;
+use App\Http\Requests\AdminRegister;
 use App\Http\Requests\UserLogin;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegister;
@@ -90,5 +92,30 @@ class AuthController extends Controller
             $user->update($validated);
             return response()->json($user);
         }
+    }
+
+
+    // -------- ADMIN --------- //
+    public function adminLogin(AdminLogin $request)
+    {
+        $validated = $request->validated();
+        if (auth()->attempt($validated)) {
+            $user = Auth::user();
+            if ($user["roleId"] == 1) {
+                $token = $user->createToken('adm')->plainTextToken;
+                return response()->json(["user" => $user, "token" => $token]);
+            }
+            return response()->isServerError();
+        } else {
+            return response()->isServerError();
+        }
+    }
+
+    public function adminRegister(AdminRegister $request)
+    {
+        $validated = $request->validated();
+        $validated["password"] = Hash::make($validated["password"]);
+        $user = User::create($validated);
+        return response()->json(["user" => $user, "msg" => "Register successful !"], 200);
     }
 }
