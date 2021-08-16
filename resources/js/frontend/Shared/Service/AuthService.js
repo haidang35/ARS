@@ -7,6 +7,7 @@ const API_ENPOINT = {
     GET_USER_INFO: "user/my-info",
     GET_MY_BOOKING: "user/get-booking",
     UPDATE_MY_INFO: "user/update-info",
+    ADMIN_LOGIN: "admin/login",
 };
 
 class AuthService {
@@ -18,6 +19,7 @@ class AuthService {
     }
 
     userId = JSON.parse(window.localStorage.getItem("userId" || ""));
+    adminId = JSON.parse(window.localStorage.getItem("adminId" || ""));
     userInfo = {};
 
     async userLogin(data) {
@@ -41,6 +43,10 @@ class AuthService {
 
     async updateMyInfo(data) {
         return await axios.patch(BASE_URL + API_ENPOINT.UPDATE_MY_INFO, data);
+    }
+
+    async adminLogin(data) {
+        return await axios.post(BASE_URL + API_ENPOINT.ADMIN_LOGIN, data);
     }
 }
 

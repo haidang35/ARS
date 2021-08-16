@@ -292,10 +292,7 @@ class Ticket extends Form {
 
     onScopeTicketPrice = (ticketData) => {
         const { scopeTicketPrice } = this.state;
-        console.log(
-            "🚀 ~ file: Ticket.js ~ line 291 ~ Ticket ~ scopeTicketPrice",
-            scopeTicketPrice
-        );
+
         let ticketList = [];
         if (scopeTicketPrice == 1) {
             ticketList = ticketData.sort((item1, item2) => {
