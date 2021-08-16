@@ -10,6 +10,7 @@ use App\Models\Flight;
 use App\Models\Passenger;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -163,6 +164,11 @@ class UserController extends Controller
         $booking->update([
             "payment_status" => $request->payment_status
         ]);
+        // if ($request->payment_status == 1) {
+
+        //     $email = $booking["contact_email"];
+        //     Mail::to($email)->send(new MailCheckout($booking));
+        // }
         return response()->json($booking);
     }
 

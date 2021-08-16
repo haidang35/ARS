@@ -8,6 +8,7 @@ import AuthService from "../Shared/Service/AuthService";
 import { Fragment } from "react";
 import "./App.scss";
 import Login from "../Modules/Origin/Admin/Login/Login";
+import { goTo } from "../Helpers/Redirect/Redirect";
 
 // const isLogged = !!AuthService.userId;
 const isAdminLogged = !!AuthService.adminId;
@@ -17,7 +18,7 @@ export const App = (
         <Fragment>
             <Switch>
                 <Suspense>
-                    <Route exact path="/" component={Home} />
+                    <Route path="/" component={Home} />
                     <Route exact path="/admin-login" component={Login} />
                     <Route
                         path="/admin"
@@ -25,7 +26,7 @@ export const App = (
                             return isAdminLogged ? (
                                 <AdminDashBoard></AdminDashBoard>
                             ) : (
-                                <Redirect to="/"></Redirect>
+                                goTo("")
                             );
                         }}
                     ></Route>

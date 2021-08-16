@@ -1,4 +1,4 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, LinearProgress, Typography } from "@material-ui/core";
 import React from "react";
 import { Component } from "react";
 import { HiLocationMarker } from "react-icons/hi";
@@ -12,6 +12,7 @@ import {
 } from "../../../../../../Helpers/FormatCurrency";
 import FlightDetails from "../FlightDetails/FlightDetails";
 import TicketItem from "./TicketItem/TicketItem";
+import { GiAirplaneDeparture } from "react-icons/gi";
 
 class BookingTicketList extends Component {
     constructor(props) {
@@ -36,6 +37,24 @@ class BookingTicketList extends Component {
                     {flightList.map((item) => {
                         return <TicketItem key={item.id} data={item} />;
                     })}
+                    {flightList.length == 0 ? (
+                        <div className="notice-none-flight">
+                            <GiAirplaneDeparture className="plane-icon" />
+                            <div className="progress-search">
+                                <LinearProgress />
+                            </div>
+                            <Typography variant="h6">
+                                Hiện tại, không có chuyến bay vào phù hợp với
+                                yêu cầu của quý khách.
+                            </Typography>
+                            <Typography variant="h6">
+                                Quý khách có thể thay đổi thời gian để tìm
+                                chuyến bay phù hợp
+                            </Typography>
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
             </div>
         );

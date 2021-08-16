@@ -1,6 +1,18 @@
 .booking-ticket-list {
     padding-bottom: 2rem;
 
+    .notice-none-flight {
+        text-align: center;
+        align-items: center;
+
+        .plane-icon {
+            font-size: 6rem;
+        }
+
+        .progress-search {
+            margin: 1.2rem;
+        }
+    }
 
 
 }

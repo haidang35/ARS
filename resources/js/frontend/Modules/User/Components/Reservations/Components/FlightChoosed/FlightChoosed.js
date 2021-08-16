@@ -3,7 +3,7 @@ import React from "react";
 import { Component } from "react";
 import { HiLocationMarker } from "react-icons/hi";
 import { IoAirplane, IoArrowDown, IoRemove } from "react-icons/io5";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { getTime } from "../../../../../../Helpers/DateTime/ConvertDateTime";
 import {
     formatCash,
@@ -87,10 +87,16 @@ class FlightChoosed extends Component {
                                                                 data.id
                                                             )
                                                         }
+                                                        variant="h6"
                                                         className="detail"
                                                     >
                                                         Chi tiết
-                                                        <IoMdArrowDropdown className="view-detail-icon" />
+                                                        {this.state
+                                                            .onViewDetails ? (
+                                                            <IoMdArrowDropup className="view-detail-icon" />
+                                                        ) : (
+                                                            <IoMdArrowDropdown className="view-detail-icon" />
+                                                        )}
                                                     </Typography>
                                                 </div>
                                             </div>
