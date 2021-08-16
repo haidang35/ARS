@@ -160,6 +160,7 @@ class FlightDetails extends Form {
 
         return (
             <div>
+              
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
@@ -168,7 +169,7 @@ class FlightDetails extends Form {
                                 style={{ marginLeft: "10px" }}
                             >
                                 Chi tiết chuyến bay
-                                <div className="float-right">
+                                <div className="float-right" style={{marginRight:"10px"}}>
                                     {!onEdit ? (
                                         <button
                                             className="btn btn-primary"

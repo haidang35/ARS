@@ -72,7 +72,7 @@ class AddNewAirline extends Form{
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5
-                                     style={{marginLeft:"27px"}}
+                                
                                     className="modal-title"
                                     id="exampleModalFormTitle"
                                 >
@@ -88,7 +88,7 @@ class AddNewAirline extends Form{
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div className="modal-body"  style={{marginRight:"27px"}}>
+                            <div className="modal-body"  style={{marginLeft:"-29px"}}>
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
@@ -194,7 +194,7 @@ class AddNewAirline extends Form{
 
                                 </form>
                             </div>
-                            <div className="modal-footer" style={{marginRight:"23px"}}>
+                            <div className="modal-footer">
                                 <button
                                     type="button"
                                     className="btn btn-danger btn-pill"

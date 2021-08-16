@@ -72,7 +72,7 @@ class Flight extends Form {
         FlightService.getFlightList()
             .then((res) => {
                 this.setState({
-                    flightList: res.data,
+                    flightList: res.data
                 });
             })
             .catch((err) => {});
@@ -403,6 +403,7 @@ class Flight extends Form {
         }
         return (
             <div>
+              
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
