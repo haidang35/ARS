@@ -56,18 +56,23 @@ class TicketController extends Controller
 
     public function addNewTicket(Request $request)
     {
-        $data = [
-            "flight_id" => $request->flight_id,
-            "ticket_type" => $request->ticket_type,
-            "available_class" => $request->available_class,
-            "status" => $request->status,
-            "carbin_bag" => $request->carbin_bag,
-            "checkin_bag" => $request->checkin_bag,
-            "price" => $request->price,
-            "tax" => $request->tax
-        ];
-        $ticket = Ticket::create($data);
-        return response()->json($ticket);
+        $flight = Flight::findOrFail($request->flight_id);
+        if ($flight["seats_available"] > 0) {
+            $data = [
+                "flight_id" => $request->flight_id,
+                "ticket_type" => $request->ticket_type,
+                "available_class" => $request->available_class,
+                "status" => $request->status,
+                "carbin_bag" => $request->carbin_bag,
+                "checkin_bag" => $request->checkin_bag,
+                "price" => $request->price,
+                "tax" => $request->tax
+            ];
+            $ticket = Ticket::create($data);
+            return response()->json($ticket);
+        } else {
+            return response()->isServerError();
+        }
     }
 
 

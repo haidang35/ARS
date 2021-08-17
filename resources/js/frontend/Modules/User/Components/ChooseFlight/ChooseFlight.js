@@ -175,12 +175,15 @@ class ChooseFlight extends Component {
     handleChangeDepartureDate = (data, flightList, flightListOrg) => {
         let flightsData = [];
         let flightsDataOrg = [];
+        let now = new Date();
         flightList.forEach((item) => {
             let newDate = new Date(item.flight.departure_datetime);
             if (
                 newDate.getDate() == data.date.getDate() &&
                 newDate.getMonth() == data.date.getMonth() &&
-                newDate.getFullYear() == data.date.getFullYear()
+                newDate.getFullYear() == data.date.getFullYear() &&
+                newDate.getDate() >= now.getDate() &&
+                newDate.getMonth() == now.getMonth()
             ) {
                 flightsData.push(item);
             }
@@ -191,7 +194,9 @@ class ChooseFlight extends Component {
             if (
                 newDate.getDate() == data.date.getDate() &&
                 newDate.getMonth() == data.date.getMonth() &&
-                newDate.getFullYear() == data.date.getFullYear()
+                newDate.getFullYear() == data.date.getFullYear() &&
+                newDate.getDate() >= now.getDate() &&
+                newDate.getMonth() == now.getMonth()
             ) {
                 flightsDataOrg.push(item);
             }

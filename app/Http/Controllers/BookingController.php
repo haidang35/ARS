@@ -59,7 +59,8 @@ class BookingController extends Controller
         ]);
         $ticket = $booking["passenger"]->first();
         $booking["ticket"] = Ticket::find($ticket->ticket_id);
-        $booking["flight"] = Flight::with("Airline")->with("Departure")->with("Destination")->find($booking["ticket"]["flight_id"]);
+        $flight = Flight::with("Airline")->with("Departure")->with("Destination")->find($booking["ticket"]["flight_id"]);
+        $booking["flight"] = $flight;
         $departureTime = new DateTime($booking["flight"]["departure_datetime"]);
         $arrivalTime = new DateTime($booking["flight"]["arrival_datetime"]);
         // $time = (strtotime($arrivalTime->toTimeString()) - strtotime($departureTime->toTimeString())) / 60;
@@ -71,6 +72,19 @@ class BookingController extends Controller
             "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"
         ];
         $email = $booking["contact_email"];
+        if ($booking["status"] == 3) {
+            $flight->update([
+                "seats_reserved" => $flight["seats_reserved"] - count($booking["passenger"]),
+                "seats_available" => $flight["seats_available"] + count($booking["passenger"]),
+
+            ]);
+        } else if ($booking["status"] == 2) {
+            $flight->update([
+                "seats_reserved" => $flight["seats_reserved"] + count($booking["passenger"]),
+                "seats_available" => $flight["seats_available"] - count($booking["passenger"]),
+
+            ]);
+        }
         Mail::to($email)->send(new ConfirmMail($offer));
 
         // Nexmo::message()->send([

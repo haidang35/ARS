@@ -9,6 +9,7 @@ use App\Models\Destination;
 use App\Models\Flight;
 use App\Models\Passenger;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -26,17 +27,27 @@ class UserController extends Controller
             ->departure($departureId)->destination($destinationId)->departuretime($departureTime)
             ->get();
         $tickets = [];
-        foreach ($flights as $flight) {
-            $ticketFlight = Ticket::where("flight_id", $flight->id)->get();
-            foreach ($ticketFlight as $item) {
-                $item["trip_type"] = $tripType;
-                $item["passenger"] = $passenger;
-                $item["flight"] = $flight;
-                $item["total_price"] = $item->price + $item->tax;
-                $item["into_money"] = $this->calcIntoMoney($passenger, $item->price, $item->tax);
-                $tickets[] = $item;
+        $departureTimeConvert = new Carbon($departureTime);
+        if (!$departureTimeConvert->isPast() && $departureTimeConvert->isToday()) {
+            $passengerQuantity = 0;
+            foreach ($passenger as $item) {
+                $passengerQuantity += $item["quantity"];
+            }
+            foreach ($flights as $flight) {
+                if ($flight["seats_available"] >= $passengerQuantity) {
+                    $ticketFlight = Ticket::where("flight_id", $flight->id)->get();
+                    foreach ($ticketFlight as $item) {
+                        $item["trip_type"] = $tripType;
+                        $item["passenger"] = $passenger;
+                        $item["flight"] = $flight;
+                        $item["total_price"] = $item->price + $item->tax;
+                        $item["into_money"] = $this->calcIntoMoney($passenger, $item->price, $item->tax);
+                        $tickets[] = $item;
+                    }
+                }
             }
         }
+
         return $tickets;
     }
 
@@ -69,15 +80,22 @@ class UserController extends Controller
             ->departure($departureId)->destination($destinationId)
             ->get();
         $tickets = [];
+        $passengerQuantity = 0;
+        foreach ($passenger as $item) {
+            $passengerQuantity += $item["quantity"];
+        }
         foreach ($flights as $flight) {
-            $ticketFlight = Ticket::where("flight_id", $flight->id)->get();
-            foreach ($ticketFlight as $item) {
-                $item["trip_type"] = $tripType;
-                $item["passenger"] = $passenger;
-                $item["flight"] = $flight;
-                $item["total_price"] = $item->price + $item->tax;
-                $item["into_money"] = $this->calcIntoMoney($passenger, $item->price, $item->tax);
-                $tickets[] = $item;
+            $departureTime = new Carbon($flight["departure_datetime"]);
+            if ($flight["seats_available"] >= $passengerQuantity && !$departureTime->isPast()) {
+                $ticketFlight = Ticket::where("flight_id", $flight->id)->get();
+                foreach ($ticketFlight as $item) {
+                    $item["trip_type"] = $tripType;
+                    $item["passenger"] = $passenger;
+                    $item["flight"] = $flight;
+                    $item["total_price"] = $item->price + $item->tax;
+                    $item["into_money"] = $this->calcIntoMoney($passenger, $item->price, $item->tax);
+                    $tickets[] = $item;
+                }
             }
         }
 
@@ -95,7 +113,6 @@ class UserController extends Controller
         $ticket["total_price"] = $ticket->price + $ticket->tax;
         $ticket["into_money"] = $this->calcIntoMoney($passenger, $ticket->price, $ticket->tax);
         $ticket["flight"] = $flight;
-
         return response()->json($ticket);
     }
 
@@ -126,7 +143,6 @@ class UserController extends Controller
         $passengers = $request->passengers;
         $into_money = 0;
         foreach ($passengers as $item) {
-
             $bookingTicketInfo = [
                 "booking_id" => $booking->id,
                 "ticket_id" => $request->ticket_id,
