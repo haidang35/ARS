@@ -6,7 +6,10 @@ const API_ENPOINT = {
     GET_DESTINATION_DETAILS: "destinations/",
     UPDATE_DESTINATION: "destinations/update/",
     ADD_NEW_DESTINATION: "destinations",
-    DELETE_DESTINATION:"destinations/"
+    DELETE_DESTINATION: "destinations/",
+    GET_FAVOURITE_DESTINATION: "destinations/favourite/get",
+    UPLOAD_IMAGE_DESTINATION: "destinations/upload-image/",
+    UPDATE_FAVOURITE: "destinations/favourite/",
 };
 
 class DestinationService {
@@ -34,11 +37,32 @@ class DestinationService {
         );
     }
 
-    async addNewDestination(data){
-        return await axios.post(BASE_URL + API_ENPOINT.ADD_NEW_DESTINATION,data);
+    async addNewDestination(data) {
+        return await axios.post(
+            BASE_URL + API_ENPOINT.ADD_NEW_DESTINATION,
+            data
+        );
     }
 
+    async getFavouriteDestinations() {
+        return await axios.get(
+            BASE_URL + API_ENPOINT.GET_FAVOURITE_DESTINATION
+        );
+    }
 
+    async uploadImageDestination(id, data) {
+        return await axios.post(
+            BASE_URL + API_ENPOINT.UPLOAD_IMAGE_DESTINATION + id,
+            data,
+            { headers: { "Content-Type": "multipart/form-data" } }
+        );
+    }
+    async updateFavoriteDestination(id, data) {
+        return await axios.put(
+            BASE_URL + API_ENPOINT.UPDATE_FAVOURITE + id,
+            data
+        );
+    }
 }
 
 const instance = new DestinationService();

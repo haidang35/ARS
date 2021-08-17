@@ -2,65 +2,74 @@ import React from "react";
 import { Component } from "react";
 import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
-class AddNewAirline extends Form{
-    constructor(props){
+class AddNewAirline extends Form {
+    constructor(props) {
         super(props);
-        this.state={
-            form:this._getInitFormData({
-                airline_name:"",
-                code:"",
-                country:"",
-                website:"",
-                hotline:"",
-            })
-        }
+        this.state = {
+            form: this._getInitFormData({
+                airline_name: "",
+                code: "",
+                country: "",
+                website: "",
+                hotline: "",
+            }),
+            image: "",
+        };
+        this.handleUploadImage = this.handleUploadImage.bind(this);
     }
-    onSubmitInfo=()=>{
+    onSubmitInfo = () => {
         this._validateForm();
         this.state.form["dirty"] = true;
-        if(this._isFormValid()){
-            const {form} = this.state;
-            const data = {
-                airline_name:form.airline_name.value,
-                code:form.code.value,
-                country:form.country.value,
-                website:form.website.value,
-                hotline:form.hotline.value,
-            }
-            this.props.onSubmit(data);
+        let formData = new FormData();
+        formData.append("image", this.state.image, this.state.image.name);
+        if (this._isFormValid()) {
+            const { form } = this.state;
+            formData.append("airline_name", form.airline_name.value);
+            formData.append("code", form.code.value);
+            formData.append("country", form.country.value);
+            formData.append("website", form.website.value);
+            formData.append("hotline", form.hotline.value);
+            this.props.onSubmit(formData);
             this._fillForm({
-                airline_name:"",
-                code:"",
-                country:"",
-                website:"",
-                hotline:"",
-                dirty:false
-            })
+                airline_name: "",
+                code: "",
+                country: "",
+                website: "",
+                hotline: "",
+                dirty: false,
+            });
+            this.setState({
+                image: "",
+            });
         }
-    }
+    };
 
-    onCloseAdd=()=>{
+    onCloseAdd = () => {
         this._fillForm({
-            airline_name:"",
-            code:"",
-            country:"",
-            website:"",
-            hotline:"",
-            dirty:false
-        })
-    }
-    render(){
-        const {
-            airline_name,
-            code,
-            country,
-            website,
-            hotline,
-            dirty
-        } = this.state.form;
+            airline_name: "",
+            code: "",
+            country: "",
+            website: "",
+            hotline: "",
+            dirty: false,
+        });
+    };
+
+    handleUploadImage = (ev) => {
+        if (ev.target.files && ev.target.files[0]) {
+            let image = ev.target.files[0];
+            this.setState({
+                image,
+            });
+        }
+    };
+
+    render() {
+        const { airline_name, code, country, website, hotline, dirty } =
+            this.state.form;
         return (
             <div>
-                  <div
+                <div
                     className="modal fade"
                     id="addNewAirline"
                     tabIndex={-1}
@@ -72,7 +81,6 @@ class AddNewAirline extends Form{
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5
-                                
                                     className="modal-title"
                                     id="exampleModalFormTitle"
                                 >
@@ -88,7 +96,10 @@ class AddNewAirline extends Form{
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div className="modal-body"  style={{marginLeft:"-29px"}}>
+                            <div
+                                className="modal-body"
+                                style={{ marginLeft: "-29px" }}
+                            >
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
@@ -101,7 +112,10 @@ class AddNewAirline extends Form{
                                             className="form-control"
                                             value={airline_name.value}
                                             onChange={(ev) =>
-                                                this._setValue(ev, "airline_name")
+                                                this._setValue(
+                                                    ev,
+                                                    "airline_name"
+                                                )
                                             }
                                         />
                                         {airline_name.err === "*" && dirty ? (
@@ -144,9 +158,9 @@ class AddNewAirline extends Form{
                                                 this._setValue(ev, "country")
                                             }
                                         />
-                                         {country.err == "*" && dirty ? (
+                                        {country.err == "*" && dirty ? (
                                             <FormError err="Country cannot be empty" />
-                                        ) :(
+                                        ) : (
                                             ""
                                         )}
                                     </div>
@@ -157,18 +171,12 @@ class AddNewAirline extends Form{
                                         <input
                                             name="website"
                                             className="form-control"
-                                            required
                                             id="exampleInputPassword1"
                                             value={website.value}
                                             onChange={(ev) =>
                                                 this._setValue(ev, "website")
                                             }
                                         ></input>
-                                         {website.err == "*" && dirty ? (
-                                            <FormError err="Website cannot be empty" />
-                                        ) : (
-                                            ""
-                                        )}
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
@@ -184,14 +192,23 @@ class AddNewAirline extends Form{
                                                 this._setValue(ev, "hotline")
                                             }
                                         ></input>
-                                         {hotline.err =="*" && dirty ? (
+                                        {hotline.err == "*" && dirty ? (
                                             <FormError err="Hotline cannot be empty" />
                                         ) : (
                                             ""
                                         )}
                                     </div>
-
-
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">
+                                            Hotline
+                                        </label>
+                                        <input
+                                            type="file"
+                                            name="image"
+                                            className="form-control"
+                                            onChange={this.handleUploadImage}
+                                        />
+                                    </div>
                                 </form>
                             </div>
                             <div className="modal-footer">
@@ -207,7 +224,9 @@ class AddNewAirline extends Form{
                                     type="button"
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
-                                    data-dismiss={!this._isFormValid ? "modal" : ""}
+                                    data-dismiss={
+                                        this._isFormValid() ? "modal" : ""
+                                    }
                                 >
                                     Submit
                                 </button>
@@ -216,7 +235,7 @@ class AddNewAirline extends Form{
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 export default AddNewAirline;

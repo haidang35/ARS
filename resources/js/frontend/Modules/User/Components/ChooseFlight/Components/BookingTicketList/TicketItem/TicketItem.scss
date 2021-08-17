@@ -9,21 +9,30 @@
     background-color: #ffff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    .airline-logo {
+    .airline-logo-box {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-left: 2rem;
 
-        .logo {
-            width: 200px;
+        .airline-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 1rem;
+
+            .logo {
+                width: 120px;
+            }
+
         }
 
     }
 
+
+
     .flight-info {
-        border-right: 2px solid rgb(163, 163, 163);
-        border-left: 2px solid rgb(163, 163, 163);
+        border-right: 2px dashed rgb(223, 221, 221);
+        border-left: 2px dashed rgb(223, 221, 221);
         overflow: hidden;
 
         .destination {

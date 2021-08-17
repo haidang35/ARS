@@ -164,6 +164,7 @@ class Airline extends Component {
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
+                                                <th>Logo</th>
                                                 <th>Tên hãng hàng không</th>
                                                 <th>Mã hãng hàng không</th>
                                                 <th>Quốc gia</th>
@@ -178,6 +179,15 @@ class Airline extends Component {
                                                     <tr key={item.id}>
                                                         <td className="text-bold-500">
                                                             {item.id}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            <img
+                                                                src={`http://127.0.0.1:8000/images/airline/${item.logo}`}
+                                                                style={{
+                                                                    width: "120px",
+                                                                }}
+                                                                alt="logo"
+                                                            />
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.airline_name}

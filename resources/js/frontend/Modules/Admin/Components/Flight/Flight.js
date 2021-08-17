@@ -72,7 +72,7 @@ class Flight extends Form {
         FlightService.getFlightList()
             .then((res) => {
                 this.setState({
-                    flightList: res.data
+                    flightList: res.data,
                 });
             })
             .catch((err) => {});
@@ -143,8 +143,8 @@ class Flight extends Form {
                     this.getFlightList();
                     this._fillForm({
                         flight_code: "",
-                        departure_datetime: "",
-                        arrival_datetime: "",
+                        departure_datetime: new Date(),
+                        arrival_datetime: new Date(),
                         aircraft: "",
                         airline_id: "",
                         departure_id: "",
@@ -156,7 +156,6 @@ class Flight extends Form {
                     this.setState({
                         message: `Create successfully flight with code ${res.data.flight_code}`,
                     });
-                    console.log(res.data);
                 })
                 .catch((err) => {
                     this.setState({
@@ -403,7 +402,6 @@ class Flight extends Form {
         }
         return (
             <div>
-              
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">

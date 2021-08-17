@@ -28,6 +28,7 @@ import { Link, Redirect } from "react-router-dom";
 import { getDate } from "../../../../Helpers/DateTime/ConvertDateTime";
 import ModalNotice from "../../../../Shared/Components/Modal/ModalNotice";
 import { goTo } from "../../../../Helpers/Redirect/Redirect";
+import FavouriteDestination from "../FavouriteDestination/FavouriteDestination";
 
 const CssTextField = withStyles({
     root: {
@@ -107,6 +108,12 @@ class HomePage extends Component {
     componentDidMount() {
         this.getDestinationList();
     }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({
+            destination: nextProps.destinationChoosed,
+        });
+    };
 
     getDestinationList = () => {
         UserService.getAllDestination().then((res) => {

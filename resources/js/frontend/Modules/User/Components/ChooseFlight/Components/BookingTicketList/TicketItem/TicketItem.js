@@ -12,6 +12,7 @@ import {
 import FlightDetails from "../../FlightDetails/FlightDetails";
 import "./TicketItem.scss";
 import { Link } from "react-router-dom";
+import { URL_IMAGE_AIRLINE } from "../../../../../../../Constances/const";
 
 class TicketItem extends Component {
     constructor(props) {
@@ -32,16 +33,20 @@ class TicketItem extends Component {
     };
     render() {
         const { data } = this.props;
+        console.log(
+            "🚀 ~ file: TicketItem.js ~ line 35 ~ TicketItem ~ render ~ data",
+            data
+        );
         return (
             <div>
                 <div>
                     <div className="item-ticket">
                         <div className="row">
-                            <div className="col-md-2">
+                            <div className="col-md-2 airline-logo-box">
                                 <div className="airline-logo">
                                     <img
                                         className="logo"
-                                        src="https://static.wixstatic.com/media/9d8ed5_b328a87c44a04887ab0d35ef93991f16~mv2.png/v1/fill/w_1000,h_626,al_c,usm_0.66_1.00_0.01/9d8ed5_b328a87c44a04887ab0d35ef93991f16~mv2.png"
+                                        src={`${URL_IMAGE_AIRLINE}${data.flight.airline.logo}`}
                                     />
                                 </div>
                             </div>

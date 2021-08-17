@@ -1,9 +1,10 @@
 .user-header {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 1000px;
     background-image: url("../../../../Public/Images/slider.png");
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 
     .header-content {
         .header-left {

@@ -13,6 +13,7 @@ import Login from "../../Origin/User/Login/Login";
 import Register from "../../Origin/User/Register/Register";
 import CustomerProfile from "../Components/CustomerProfile/CustomerProfile";
 import AuthService from "../../../Shared/Service/AuthService";
+import HomeMain from "../Components/HomeMain/HomeMain";
 
 class Home extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class Home extends Component {
                 <div className="user-layout">
                     <Switch>
                         <Suspense>
-                            <Route exact path={"/"} component={HomePage} />
+                            <Route exact path={"/"} component={HomeMain} />
                             <Route
                                 exact
                                 path={"/login"}

@@ -21,15 +21,6 @@ class AddNewDestination extends Form {
         this.state.form["dirty"] = true;
         if (this._isFormValid()) {
             const { form } = this.state;
-            const data = {
-                city: form.city.value,
-                province: form.province.value,
-                airport_code: form.airport_code.value,
-                airport_name: form.airport_name.value,
-                country_code: form.country_code.value,
-                country: form.country.value,
-            };
-            this.props.onSubmit(data);
             this._fillForm({
                 city: "",
                 province: "",
@@ -39,6 +30,15 @@ class AddNewDestination extends Form {
                 country: "",
                 dirty: false,
             });
+            const data = {
+                city: form.city.value,
+                province: form.province.value,
+                airport_code: form.airport_code.value,
+                airport_name: form.airport_name.value,
+                country_code: form.country_code.value,
+                country: form.country.value,
+            };
+            this.props.onSubmit(data);
         }
     };
 
@@ -76,8 +76,6 @@ class AddNewDestination extends Form {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5
-                   
-
                                     className="modal-title"
                                     id="exampleModalFormTitle"
                                 >
@@ -94,8 +92,10 @@ class AddNewDestination extends Form {
                                 </button>
                             </div>
 
-                            <div className="modal-body" style={{marginLeft:"-29px"}}>
-
+                            <div
+                                className="modal-body"
+                                style={{ marginLeft: "-29px" }}
+                            >
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
@@ -233,9 +233,6 @@ class AddNewDestination extends Form {
                                 </button>
                                 <button
                                     type="button"
-
-                                  
-
                                     className="btn btn-primary btn-pill"
                                     onClick={this.onSubmitInfo}
                                     data-dismiss={

@@ -34,7 +34,8 @@ class DestinationController extends Controller
         $destination->update($data);
         return response()->json($destination);
     }
-    public function addNewDestination(Request $request){
+    public function addNewDestination(Request $request)
+    {
         $data = [
             "city" => $request->city,
             "province" => $request->province,
@@ -47,5 +48,33 @@ class DestinationController extends Controller
         return response()->json($destination);
     }
 
+    public function updateFavouriteDestination($id, Request $request)
+    {
+        $destination = Destination::find($id);
+        $destination->update([
+            "favourite" => $request->favourite
+        ]);
+        return response()->json($destination);
+    }
 
+    public function getFavouriteDestinations()
+    {
+        $favouriteDestinations = Destination::where("favourite", 1)->get();
+        return  response()->json($favouriteDestinations);
+    }
+
+    public function uploadImageDestination($id, Request $request)
+    {
+        $request->validate([
+            "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $imageName = time() . "." . $request->image->extension();
+        $request->image->move(public_path("images/destination"), $imageName);
+        $destination = Destination::find($id);
+        $destination->update([
+            "image" => $imageName,
+            "favourite" => 1
+        ]);
+        return $destination;
+    }
 }

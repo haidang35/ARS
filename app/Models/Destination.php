@@ -16,6 +16,8 @@ class Destination extends Model
         "airport_code",
         "airport_name",
         "country",
-        "country_code"
+        "country_code",
+        "favourite",
+        "image"
     ];
 }
