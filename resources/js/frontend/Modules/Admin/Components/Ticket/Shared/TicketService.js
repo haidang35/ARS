@@ -4,13 +4,14 @@ import { BASE_URL } from "../../../../../Constances/const";
 const API_ENPOINT = {
     GET_ALL_TICKET: "tickets",
     GET_TICKET_DETAILS: "tickets/",
-    UPDATE_TICKET_INFO:"tickets/update/",
-    ADD_NEW_TICKET :  "tickets"
-}
+    UPDATE_TICKET_INFO: "tickets/update/",
+    ADD_NEW_TICKET: "tickets",
+    DELETE_TICKET: "tickets/",
+};
 
 class TicketService {
     constructor() {
-        if(TicketService._instance) {
+        if (TicketService._instance) {
             return TicketService._instance;
         }
         TicketService._instance = this;
@@ -20,21 +21,25 @@ class TicketService {
         return await axios.get(BASE_URL + API_ENPOINT.GET_ALL_TICKET);
     }
 
-    async getTicketDetails (id){
+    async getTicketDetails(id) {
         return await axios.get(BASE_URL + API_ENPOINT.GET_TICKET_DETAILS + id);
     }
 
-    async updateTicketInfo(id,data){
-        return await axios.patch(BASE_URL + API_ENPOINT.UPDATE_TICKET_INFO + id,data);
+    async updateTicketInfo(id, data) {
+        return await axios.patch(
+            BASE_URL + API_ENPOINT.UPDATE_TICKET_INFO + id,
+            data
+        );
     }
 
-    async addNewTicket(data){
-        return await axios.post(BASE_URL + API_ENPOINT.ADD_NEW_TICKET,data);
+    async addNewTicket(data) {
+        return await axios.post(BASE_URL + API_ENPOINT.ADD_NEW_TICKET, data);
+    }
+
+    async deleteTicket(id) {
+        return await axios.delete(BASE_URL + API_ENPOINT.DELETE_TICKET + id);
     }
 }
 
 const instance = new TicketService();
 export default instance;
-
-
-

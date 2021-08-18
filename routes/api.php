@@ -59,6 +59,7 @@ Route::get('flights', [FlightController::class, "getAllFlight"]);
 Route::get('flights/{id}', [FlightController::class, "getFlightDetails"]);
 Route::patch('flights/update/{id}', [FlightController::class, "updateFlightInfo"]);
 Route::post('flights', [FlightController::class, "addNewFlight"]);
+ROute::delete('flighs/{id}', [FlightController::class, "deleteFlight"]);
 
 
 // Ticket
@@ -66,6 +67,7 @@ Route::get('tickets', [TicketController::class,  "getAllTicket"]);
 Route::get('tickets/{id}', [TicketController::class, "getTicketDetails"]);
 Route::patch('tickets/update/{id}', [TicketController::class, "updateTicketInfo"]);
 Route::post('tickets', [TicketController::class, "addNewTicket"]);
+Route::delete('tickets/{id}', [TicketController::class, "deleteTicket"]);
 
 // Booking
 Route::get('bookings', [BookingController::class,  "getAllBooking"]);

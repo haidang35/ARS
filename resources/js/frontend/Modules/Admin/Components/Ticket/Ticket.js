@@ -22,6 +22,7 @@ import {
 import { TablePagination, withStyles } from "@material-ui/core";
 import DestinationService from "../Destination/Shared/DestinationService";
 import AirlineService from "../Airline/Shared/AirlineService";
+import AlertModal from "../../../../Shared/Components/Modal/AlertModal";
 class Ticket extends Form {
     constructor(props) {
         super(props);
@@ -34,7 +35,7 @@ class Ticket extends Form {
                 flight_id: "",
                 ticket_type: "",
                 available_class: "",
-                status: "",
+                status: 1,
                 carbin_bag: "",
                 checkin_bag: "",
                 price: "",
@@ -352,6 +353,21 @@ class Ticket extends Form {
             rowsPerPage: event.target.value,
             page: 0,
         });
+    };
+
+    onDeleteTicket = (id) => {
+        TicketService.deleteTicket(id)
+            .then((res) => {
+                this.setState({
+                    message: `Delete ticket with flight successful`,
+                });
+                this.getTicketList();
+            })
+            .catch((err) => {
+                this.setState({
+                    errorMessage: `Delete ticket failed`,
+                });
+            });
     };
 
     render() {
@@ -882,17 +898,33 @@ class Ticket extends Form {
                                                                 <Link
                                                                     to={`/admin/tickets/${item.id}`}
                                                                 >
-                                                                    <button
-                                                                        className="btn btn-primary"
-                                                                        style={{
-                                                                            float: "right",
-                                                                            marginRight:
-                                                                                "-18px",
-                                                                        }}
-                                                                    >
+                                                                    <button className="btn btn-primary">
                                                                         View
                                                                     </button>
                                                                 </Link>
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn btn-danger"
+                                                                    data-toggle="modal"
+                                                                    data-target={`#alertModal${item.id}`}
+                                                                    style={{
+                                                                        marginTop:
+                                                                            "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    Delete
+                                                                </button>
+                                                                <AlertModal
+                                                                    id={item.id}
+                                                                    onConfirm={
+                                                                        this
+                                                                            .onDeleteTicket
+                                                                    }
+                                                                    title={
+                                                                        "Confirm"
+                                                                    }
+                                                                    message={`Are you sure delete ticket with flight ${item.flight.flight_code}`}
+                                                                />
                                                             </td>
                                                         </tr>
                                                     );
@@ -1022,15 +1054,25 @@ class Ticket extends Form {
                                     >
                                         <div>
                                             <label>Trạng thái</label>
-                                            <input
+                                            <select
                                                 name="status"
                                                 required
-                                                className="form-control"
+                                                className="form-control form-select"
                                                 value={status.value}
                                                 onChange={(ev) =>
                                                     this._setValue(ev, "status")
                                                 }
-                                            ></input>
+                                            >
+                                                <option value="">
+                                                    Chọn trạng thái
+                                                </option>
+                                                <option value={1}>
+                                                    Khởi hành đúng giờ
+                                                </option>
+                                                <option value={2}>
+                                                    Bị delay
+                                                </option>
+                                            </select>
                                             {dirty && status.err === "*" ? (
                                                 <FormError err="Status cannot be empty" />
                                             ) : (

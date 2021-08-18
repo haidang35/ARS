@@ -76,6 +76,21 @@ class Airline extends Component {
         });
     };
 
+    onDeleteAirline = (id) => {
+        AirlineService.deleteAirline(id)
+            .then((res) => {
+                this.setState({
+                    message: `Delete airline ${res.data.airline_name} successfull`,
+                });
+                this.getAirlineList();
+            })
+            .catch((err) => {
+                this.setState({
+                    errorMessage: `Delete airline failed`,
+                });
+            });
+    };
+
     render() {
         let { airlineList, page, rowsPerPage, onSearch, searchValue } =
             this.state;
@@ -230,7 +245,7 @@ class Airline extends Component {
                                                                 id={item.id}
                                                                 onConfirm={
                                                                     this
-                                                                        .onDeleteDestination
+                                                                        .onDeleteAirline
                                                                 }
                                                                 title={
                                                                     "Confirm"

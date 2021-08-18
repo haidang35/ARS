@@ -6,6 +6,7 @@ const API_ENPOINT = {
     GET_AIRLINE_DETAILS: "airlines/",
     UPDATE_AIRLINE_INFO: "airlines/update/",
     ADD_NEW_AIRLINE: "airlines",
+    DELETE_AIRLINE: "airlines/",
 };
 
 class AirlineService {
@@ -32,6 +33,10 @@ class AirlineService {
         return await axios.post(BASE_URL + API_ENPOINT.ADD_NEW_AIRLINE, data, {
             headers: { "Content-Type": "multipart/form-data" },
         });
+    }
+
+    async deleteAirline(id) {
+        return await axios.delete(BASE_URL + API_ENPOINT.DELETE_AIRLINE + id);
     }
 }
 

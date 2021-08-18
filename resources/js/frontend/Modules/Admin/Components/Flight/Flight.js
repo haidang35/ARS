@@ -21,6 +21,7 @@ import {
     KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { TablePagination, withStyles } from "@material-ui/core";
+import AlertModal from "../../../../Shared/Components/Modal/AlertModal";
 
 const StyleDatePicker = withStyles({
     root: {
@@ -326,6 +327,21 @@ class Flight extends Form {
             rowsPerPage: event.target.value,
             page: 0,
         });
+    };
+
+    onDeleteFlight = (id) => {
+        FlightService.deleteFlight(id)
+            .then((res) => {
+                this.setState({
+                    message: `Delete flight ${res.data.flight_code} successful`,
+                });
+                this.getFlightList();
+            })
+            .catch((err) => {
+                this.setState({
+                    errorMessage: `Delete flight  failed`,
+                });
+            });
     };
 
     render() {
@@ -756,17 +772,33 @@ class Flight extends Form {
                                                                 <Link
                                                                     to={`/admin/flights/${item.id}`}
                                                                 >
-                                                                    <button
-                                                                        className="btn btn-primary"
-                                                                        style={{
-                                                                            float: "right",
-                                                                            marginRight:
-                                                                                "-18px",
-                                                                        }}
-                                                                    >
+                                                                    <button className="btn btn-primary">
                                                                         View
                                                                     </button>
                                                                 </Link>
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn btn-danger"
+                                                                    data-toggle="modal"
+                                                                    data-target={`#alertModal${item.id}`}
+                                                                    style={{
+                                                                        marginTop:
+                                                                            "0.5rem",
+                                                                    }}
+                                                                >
+                                                                    Delete
+                                                                </button>
+                                                                <AlertModal
+                                                                    id={item.id}
+                                                                    onConfirm={
+                                                                        this
+                                                                            .onDeleteFlight
+                                                                    }
+                                                                    title={
+                                                                        "Confirm"
+                                                                    }
+                                                                    message={`Are you sure delete flight ${item.flight_code}`}
+                                                                />
                                                             </td>
                                                         </tr>
                                                     );
