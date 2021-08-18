@@ -28,7 +28,7 @@ class UserController extends Controller
             ->get();
         $tickets = [];
         $departureTimeConvert = new Carbon($departureTime);
-        if (!$departureTimeConvert->isPast() && $departureTimeConvert->isToday()) {
+        if ($departureTimeConvert->isToday() || $departureTimeConvert->isFuture()) {
             $passengerQuantity = 0;
             foreach ($passenger as $item) {
                 $passengerQuantity += $item["quantity"];

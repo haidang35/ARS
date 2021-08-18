@@ -9,6 +9,7 @@ import AirlineService from "./Shared/AirlineService";
 import AlertSuccess from "../../../../Shared/Components/Alert/AlertSuccess";
 import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";
 import { TablePagination } from "@material-ui/core";
+import AlertModal from "../../../../Shared/Components/Modal/AlertModal";
 class Airline extends Component {
     constructor(props) {
         super(props);
@@ -209,17 +210,33 @@ class Airline extends Component {
                                                             <Link
                                                                 to={`/admin/airlines/${item.id}`}
                                                             >
-                                                                <button
-                                                                    className="btn btn-primary"
-                                                                    style={{
-                                                                        float: "right",
-                                                                        marginRight:
-                                                                            "-18px",
-                                                                    }}
-                                                                >
+                                                                <button className="btn btn-primary">
                                                                     View
                                                                 </button>
                                                             </Link>
+                                                            <button
+                                                                type="button"
+                                                                className="btn btn-danger"
+                                                                data-toggle="modal"
+                                                                data-target={`#alertModal${item.id}`}
+                                                                style={{
+                                                                    marginLeft:
+                                                                        "1rem",
+                                                                }}
+                                                            >
+                                                                Delete
+                                                            </button>
+                                                            <AlertModal
+                                                                id={item.id}
+                                                                onConfirm={
+                                                                    this
+                                                                        .onDeleteDestination
+                                                                }
+                                                                title={
+                                                                    "Confirm"
+                                                                }
+                                                                message={`Are you sure delete airline ${item.airline_name}`}
+                                                            />
                                                         </td>
                                                     </tr>
                                                 );

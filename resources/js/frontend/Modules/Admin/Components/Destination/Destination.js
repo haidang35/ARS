@@ -7,6 +7,7 @@ import AlertSuccess from "../../../../Shared/Components/Alert/AlertSuccess";
 import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";
 import { TablePagination } from "@material-ui/core";
 import AddFavouriteDestination from "./Components/AddFavouriteDestination/AddFavouriteDestination";
+import AlertModal from "../../../../Shared/Components/Modal/AlertModal";
 class Destination extends Component {
     constructor(props) {
         super(props);
@@ -100,6 +101,21 @@ class Destination extends Component {
             .catch((err) => {
                 this.setState({
                     message: "Hủy địa điểm yêu thích thất bại",
+                });
+            });
+    };
+
+    onDeleteDestination = (id) => {
+        DestinationService.deleteDestination(id)
+            .then((res) => {
+                this.setState({
+                    message: `Delete destination ${res.data.city} successful`,
+                });
+                this.getDestinationList();
+            })
+            .catch((err) => {
+                this.setState({
+                    errorMessage: `Delete destination failed`,
                 });
             });
     };
@@ -273,17 +289,33 @@ class Destination extends Component {
                                                             <Link
                                                                 to={`/admin/destinations/${item.id}`}
                                                             >
-                                                                <button
-                                                                    className="btn btn-primary"
-                                                                    style={{
-                                                                        float: "right",
-                                                                        marginRight:
-                                                                            "-18px",
-                                                                    }}
-                                                                >
+                                                                <button className="btn btn-primary">
                                                                     View
                                                                 </button>
                                                             </Link>
+                                                            <button
+                                                                type="button"
+                                                                className="btn btn-danger"
+                                                                data-toggle="modal"
+                                                                data-target={`#alertModal${item.id}`}
+                                                                style={{
+                                                                    marginLeft:
+                                                                        "1rem",
+                                                                }}
+                                                            >
+                                                                Delete
+                                                            </button>
+                                                            <AlertModal
+                                                                id={item.id}
+                                                                onConfirm={
+                                                                    this
+                                                                        .onDeleteDestination
+                                                                }
+                                                                title={
+                                                                    "Confirm"
+                                                                }
+                                                                message={`Are you sure delete destination ${item.city}`}
+                                                            />
                                                         </td>
                                                     </tr>
                                                 );

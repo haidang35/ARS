@@ -77,4 +77,11 @@ class DestinationController extends Controller
         ]);
         return $destination;
     }
+
+    public function deleteDestination($id)
+    {
+        $destination = Destination::find($id);
+        $destination->delete();
+        return response()->json($destination);
+    }
 }

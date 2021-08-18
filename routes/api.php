@@ -45,11 +45,14 @@ Route::post('destinations', [DestinationController::class, "addNewDestination"])
 Route::put('destinations/favourite/{id}', [DestinationController::class, "updateFavouriteDestination"]);
 Route::get('destinations/favourite/get', [DestinationController::class, "getFavouriteDestinations"]);
 Route::post('destinations/upload-image/{id}', [DestinationController::class, "uploadImageDestination"]);
+Route::delete('destinations/{id}', [DestinationController::class, "deleteDestination"]);
+
 // Airline
 Route::get('airlines', [AirlineController::class, "getAllAirline"]);
 Route::get('airlines/{id}', [AirlineController::class, "getAirlineDetails"]);
 Route::patch('airlines/update/{id}', [AirlineController::class, "updateAirlineInfo"]);
 Route::post('airlines', [AirlineController::class, "addNewAirline"]);
+Route::delete('airlines/{id}', [AirlineController::class, "deleteAirline"]);
 
 // Flight
 Route::get('flights', [FlightController::class, "getAllFlight"]);

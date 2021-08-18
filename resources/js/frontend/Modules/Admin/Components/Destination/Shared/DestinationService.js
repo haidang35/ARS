@@ -10,6 +10,7 @@ const API_ENPOINT = {
     GET_FAVOURITE_DESTINATION: "destinations/favourite/get",
     UPLOAD_IMAGE_DESTINATION: "destinations/upload-image/",
     UPDATE_FAVOURITE: "destinations/favourite/",
+    DELETE_DESTINATION: "destinations/",
 };
 
 class DestinationService {
@@ -61,6 +62,12 @@ class DestinationService {
         return await axios.put(
             BASE_URL + API_ENPOINT.UPDATE_FAVOURITE + id,
             data
+        );
+    }
+
+    async deleteDestination(id) {
+        return await axios.delete(
+            BASE_URL + API_ENPOINT.DELETE_DESTINATION + id
         );
     }
 }
