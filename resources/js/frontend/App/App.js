@@ -10,6 +10,8 @@ import "./App.scss";
 import Login from "../Modules/Origin/Admin/Login/Login";
 import { goTo } from "../Helpers/Redirect/Redirect";
 
+import Echo from "laravel-echo";
+
 // const isLogged = !!AuthService.userId;
 const isAdminLogged = !!AuthService.adminId;
 

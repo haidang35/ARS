@@ -23,6 +23,7 @@ class Home extends Component {
 
     render() {
         const isLogged = !!AuthService.userId;
+
         return (
             <BrowserRouter>
                 <div className="user-layout">

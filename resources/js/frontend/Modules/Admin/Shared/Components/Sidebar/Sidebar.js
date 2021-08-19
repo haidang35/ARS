@@ -16,8 +16,8 @@ class SideBar extends Component {
                     <div className="sidebar-header">
                         <div className="d-flex justify-content-between">
                             <div className="logo">
-                                <Link to="" style={{textDecoration: 'none'}}>
-                                   ARS Manage
+                                <Link to="" style={{ textDecoration: "none" }}>
+                                    ARS Manage
                                 </Link>
                             </div>
                             <div className="toggler">
@@ -38,31 +38,55 @@ class SideBar extends Component {
                                     <i className="bi bi-grid-fill" />
                                     <span>Dashboard</span>
                                 </NavLink>
-                                <NavLink to="/admin/flights" className="sidebar-link">
+                                <NavLink
+                                    to="/admin/flights"
+                                    className="sidebar-link"
+                                >
                                     <i className="bi bi-grid-fill" />
                                     <span>Flights</span>
                                 </NavLink>
-                                <NavLink to="/admin/destinations" className="sidebar-link">
+                                <NavLink
+                                    to="/admin/destinations"
+                                    className="sidebar-link"
+                                >
                                     <i className="bi bi-grid-fill" />
                                     <span>Destinations</span>
                                 </NavLink>
-                                <NavLink to="/admin/airlines" className="sidebar-link">
+                                <NavLink
+                                    to="/admin/airlines"
+                                    className="sidebar-link"
+                                >
                                     <i className="bi bi-grid-fill" />
                                     <span>Airlines</span>
                                 </NavLink>
-                                <NavLink to="/admin/tickets" className="sidebar-link">
+                                <NavLink
+                                    to="/admin/tickets"
+                                    className="sidebar-link"
+                                >
                                     <i className="bi bi-grid-fill" />
                                     <span>Tickets</span>
                                 </NavLink>
-                                <NavLink to="/admin/bookings" className="sidebar-link">
+                                <NavLink
+                                    to="/admin/bookings"
+                                    className="sidebar-link"
+                                >
                                     <i className="bi bi-grid-fill" />
                                     <span>Bookings</span>
                                 </NavLink>
-                                <NavLink to="/admin/passengers" className="sidebar-link">
+                                <NavLink
+                                    to="/admin/passengers"
+                                    className="sidebar-link"
+                                >
                                     <i className="bi bi-grid-fill" />
                                     <span>Passengers</span>
                                 </NavLink>
-                              
+                                <NavLink
+                                    to="/admin/chat-box"
+                                    className="sidebar-link"
+                                >
+                                    <i className="bi bi-grid-fill" />
+                                    <span>Chat Box</span>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>

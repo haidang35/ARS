@@ -22,6 +22,7 @@ import BookingDetails from "../Components/Booking/Components/BookingDetails/Book
 import TicketDetails from "../Components/Ticket/Components/TicketDetails/TicketDetails";
 import FlightDetails from "../Components/Flight/Components/FlightDetails/FlightDetails";
 import DestinationDetails from "../Components/Destination/Components/DestinationDetails/DestinationDetails";
+import ChatBox from "../Components/Chat/ChatBox";
 
 class AdminDashBoard extends Component {
     constructor(props) {
@@ -75,13 +76,13 @@ class AdminDashBoard extends Component {
                                             path={`/admin/passengers`}
                                             component={Passenger}
                                         />
-                                      
+
                                         <Route
                                             exact
                                             path={`/admin/destinations/:id`}
                                             component={DestinationDetails}
                                         />
-                                       
+
                                         <Route
                                             exact
                                             path={`/admin/flights/:id`}
@@ -102,7 +103,11 @@ class AdminDashBoard extends Component {
                                             path={`/admin/airlines/:id`}
                                             component={AirlineDetails}
                                         />
-                                      
+                                        <Route
+                                            exact
+                                            path="/admin/chat-box"
+                                            component={ChatBox}
+                                        />
                                     </Suspense>
                                 </Switch>
                             </div>

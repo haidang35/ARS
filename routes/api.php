@@ -8,6 +8,7 @@ use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ChatBoxController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\UserController;
 use App\Models\Destination;
@@ -29,6 +30,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/get-password', [AuthController::class, "getMyPassword"]);
     Route::put('user/update-password', [AuthController::class, "updatePassword"]);
     Route::patch('user/update-info', [AuthController::class, "upDateMyInfo"]);
+
+    //Message
+    Route::get('my-message', [ChatBoxController::class, "fetchMessage"]);
+    Route::post('send-message', [ChatBoxController::class, "sendMessage"]);
+    Route::get('list-people-chat', [ChatBoxController::class, "getListPeopleChat"]);
+    Route::get('messages/{userId}', [ChatBoxController::class, "getIncomingMessage"]);
 });
 
 Route::post('user/register', [AuthController::class, "register"]);

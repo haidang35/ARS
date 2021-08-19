@@ -8,6 +8,10 @@ const API_ENPOINT = {
     GET_MY_BOOKING: "user/get-booking",
     UPDATE_MY_INFO: "user/update-info",
     ADMIN_LOGIN: "admin/login",
+    FETCH_MESSAGE: "my-message",
+    SEND_MESSAGE: "send-message",
+    GET_LIST_PEOPLE_CHAT: "list-people-chat",
+    GET_INCOMING_MESSAGE: "messages/",
 };
 
 class AuthService {
@@ -47,6 +51,24 @@ class AuthService {
 
     async adminLogin(data) {
         return await axios.post(BASE_URL + API_ENPOINT.ADMIN_LOGIN, data);
+    }
+
+    async fetchMyMessages() {
+        return await axios.get(BASE_URL + API_ENPOINT.FETCH_MESSAGE);
+    }
+
+    async sendMessage(data) {
+        return await axios.post(BASE_URL + API_ENPOINT.SEND_MESSAGE, data);
+    }
+
+    async getListPeopleChat() {
+        return await axios.get(BASE_URL + API_ENPOINT.GET_LIST_PEOPLE_CHAT);
+    }
+
+    async getIncomingMessage(userId) {
+        return await axios.get(
+            BASE_URL + API_ENPOINT.GET_INCOMING_MESSAGE + userId
+        );
     }
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import ChatBox from "../ChatBox/ChatBox";
 import FavouriteDestination from "../FavouriteDestination/FavouriteDestination";
 import HomePage from "../HomePage/HomePage";
 
@@ -23,6 +24,7 @@ class HomeMain extends Component {
                 <FavouriteDestination
                     getDestinationChoosed={this.getDestinationChoosed}
                 />
+                <ChatBox />
             </div>
         );
     }
