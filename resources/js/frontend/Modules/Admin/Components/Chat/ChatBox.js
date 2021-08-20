@@ -6,6 +6,7 @@ import {
     convertMonthAndDate,
     getTime,
 } from "../../../../Helpers/DateTime/ConvertDateTime";
+import { Typography } from "@material-ui/core";
 
 class ChatBox extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class ChatBox extends Component {
             send_message: "",
             listUser: [],
             userReceived: "",
+            userChat: {},
         };
     }
 
@@ -37,6 +39,7 @@ class ChatBox extends Component {
             this.setState({
                 listUser: res.data,
             });
+            this.onChoosePersonChat(res.data[0]);
         });
     };
 
@@ -60,22 +63,48 @@ class ChatBox extends Component {
         }
     };
 
-    receiveMessage = () => {
-        window.Echo.channel("ChatMessage").listen("MessageEvent", (event) => {
-            let { messages } = this.state;
-            const userId = AuthService.adminId;
-            if (event.message.user_received == userId) {
-                messages.push(event.message);
-                this.setState({ messages });
-            }
+    onClickSendMessage = () => {
+        let { send_message, messages, userReceived } = this.state;
+        AuthService.sendMessage({
+            message: send_message,
+            user_received: userReceived,
+        }).then((res) => {
+            messages.push(res.data);
+            this.setState({ messages, send_message: "" });
         });
     };
 
-    onChoosePersonChat = (userId) => {
-        this.setState({
-            userReceived: userId,
+    receiveMessage = () => {
+        window.Echo.channel("ChatMessage").listen("MessageEvent", (event) => {
+            let { messages, listUser, userReceived } = this.state;
+            const userId = AuthService.adminId;
+            if (
+                event.message.user_received == userId &&
+                event.message.user_id === userReceived
+            ) {
+                messages.push(event.message);
+            }
+            let checkUnique = true;
+            listUser.forEach((item) => {
+                if (
+                    event.message.user_id == item.id ||
+                    event.message.user_id == userId
+                ) {
+                    checkUnique = false;
+                }
+            });
+            if (checkUnique) {
+                listUser.push(event.message.user_incoming);
+            }
+            this.setState({ messages, listUser });
         });
-        AuthService.getIncomingMessage(userId).then((res) => {
+    };
+
+    onChoosePersonChat = (user) => {
+        this.setState({
+            userReceived: user.id,
+        });
+        AuthService.getIncomingMessage(user.id).then((res) => {
             let { messages } = this.state;
             messages = res.data;
             messages = messages.sort((item1, item2) => {
@@ -83,12 +112,12 @@ class ChatBox extends Component {
                 const sendTimeMs2 = new Date(item2.created_at);
                 return sendTimeMs1.getTime() - sendTimeMs2.getTime();
             });
-            this.setState({ messages });
+            this.setState({ messages, userChat: user });
         });
     };
 
     render() {
-        const { messages, listUser, userReceived } = this.state;
+        const { messages, listUser, userReceived, userChat } = this.state;
         const userId = AuthService.adminId;
         return (
             <div>
@@ -131,7 +160,7 @@ class ChatBox extends Component {
                                                         <div
                                                             onClick={() =>
                                                                 this.onChoosePersonChat(
-                                                                    item.id
+                                                                    item
                                                                 )
                                                             }
                                                             key={item.id}
@@ -169,32 +198,22 @@ class ChatBox extends Component {
                                             </div>
                                         </div>
                                         <div className="mesgs">
+                                            <div className="side-bar-msg">
+                                                <div className="chat_img">
+                                                    {" "}
+                                                    <img
+                                                        src="https://ptetutorials.com/images/user-profile.png"
+                                                        alt="sunil"
+                                                    />{" "}
+                                                </div>
+                                                <Typography
+                                                    className="user-chat-name"
+                                                    variant="h6"
+                                                >
+                                                    {userChat.name}
+                                                </Typography>
+                                            </div>
                                             <div className="msg_history">
-                                                {/* <div className="incoming_msg">
-                                                    <div className="incoming_msg_img">
-                                                        {" "}
-                                                        <img
-                                                            src="https://ptetutorials.com/images/user-profile.png"
-                                                            alt="sunil"
-                                                        />{" "}
-                                                    </div>
-
-                                                    <div className="received_msg">
-                                                        <div className="received_withd_msg">
-                                                            <p>
-                                                                Test which is a
-                                                                new approach to
-                                                                have all
-                                                                solutions
-                                                            </p>
-                                                            <span className="time_date">
-                                                                {" "}
-                                                                11:01 AM | June
-                                                                9
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div> */}
                                                 {messages.map((item) => {
                                                     return (
                                                         <div
@@ -281,7 +300,8 @@ class ChatBox extends Component {
                                                     />
                                                     <button
                                                         onClick={
-                                                            this.sendMessage
+                                                            this
+                                                                .onClickSendMessage
                                                         }
                                                         className="msg_send_btn"
                                                         type="button"

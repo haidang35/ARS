@@ -76,6 +76,18 @@ class ChatBox extends Component {
         }
     };
 
+    onClickSendNewMail = () => {
+        const { newMessage } = this.state;
+        AuthService.sendMessage({
+            message: newMessage,
+            user_received: 1,
+        }).then((res) => {
+            let { messages } = this.state;
+            messages.push(res.data);
+            this.setState({ messages, newMessage: "" });
+        });
+    };
+
     render() {
         const isLogged = !!AuthService.userId;
         const userId = AuthService.userId;
@@ -150,6 +162,7 @@ class ChatBox extends Component {
 
                                                                             <p className="meta">
                                                                                 <time
+                                                                                    className="time"
                                                                                     dateTime={
                                                                                         2021
                                                                                     }
@@ -164,48 +177,6 @@ class ChatBox extends Component {
                                                                 );
                                                             }
                                                         )}
-                                                        {/* <div className="media media-chat">
-                                                            {" "}
-                                                            <img
-                                                                className="avatar"
-                                                                src="https://img.icons8.com/color/36/000000/administrator-male.png"
-                                                                alt="..."
-                                                            />
-                                                            <div className="media-body">
-                                                                <p>Hi</p>
-
-                                                                <p className="meta">
-                                                                    <time
-                                                                        dateTime={
-                                                                            2018
-                                                                        }
-                                                                    >
-                                                                        23:58
-                                                                    </time>
-                                                                </p>
-                                                            </div>
-                                                        </div> */}
-                                                        {/* <div className="media media-meta-day">
-                                                            Today
-                                                        </div> */}
-                                                        {/* <div className="media media-chat media-chat-reverse">
-                                                            <div className="media-body">
-                                                                <p>
-                                                                    Hiii, I'm
-                                                                    good.
-                                                                </p>
-
-                                                                <p className="meta">
-                                                                    <time
-                                                                        dateTime={
-                                                                            2018
-                                                                        }
-                                                                    >
-                                                                        00:06
-                                                                    </time>
-                                                                </p>
-                                                            </div>
-                                                        </div> */}
 
                                                         <div
                                                             className="ps-scrollbar-x-rail"
@@ -277,13 +248,16 @@ class ChatBox extends Component {
                                                         >
                                                             <i className="fa fa-smile" />
                                                         </a>{" "}
-                                                        <a
+                                                        <button
                                                             className="publisher-btn text-info"
-                                                            href="#"
+                                                            onClick={
+                                                                this
+                                                                    .onClickSendNewMail
+                                                            }
                                                             data-abc="true"
                                                         >
                                                             <i className="fa fa-paper-plane" />
-                                                        </a>{" "}
+                                                        </button>{" "}
                                                     </div>
                                                 </div>
                                             ) : (

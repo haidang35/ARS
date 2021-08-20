@@ -9,6 +9,7 @@ import CustomerInfo from "./Components/CustomerInfo/CustomerInfo";
 import SideBar from "./Components/SideBar/SideBar";
 import SearchFlightBar from "../../Components/SearchFlightBar/SearchFlightBar";
 import "./CustomerProfile.scss";
+import ChatBox from "../ChatBox/ChatBox";
 
 class CustomerProfile extends Component {
     constructor(props) {
@@ -52,6 +53,7 @@ class CustomerProfile extends Component {
                             </div>
                         </div>
                     </div>
+                    <ChatBox />
                 </div>
             </BrowserRouter>
         );

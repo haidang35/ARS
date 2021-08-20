@@ -147,11 +147,12 @@
 
     .media-chat {
         padding-right: 64px;
+        padding-top: 0;
+        padding-bottom: 0;
         margin-bottom: 0
     }
 
     .media {
-        padding: 16px 12px;
         -webkit-transition: background-color .2s linear;
         transition: background-color .2s linear
     }
@@ -200,7 +201,11 @@
     .media-chat .media-body p.meta {
         background-color: transparent !important;
         padding: 0;
-        opacity: .8
+        opacity: .8;
+
+        .time {
+            color: #4d5259;
+        }
     }
 
     .media-meta-day {
@@ -215,7 +220,7 @@
     }
 
     .media {
-        padding: 16px 12px;
+        // padding: 16px 12px;
         -webkit-transition: background-color .2s linear;
         transition: background-color .2s linear
     }
@@ -257,7 +262,7 @@
     }
 
     .media {
-        padding: 16px 12px;
+
         -webkit-transition: background-color .2s linear;
         transition: background-color .2s linear
     }

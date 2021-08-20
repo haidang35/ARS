@@ -39,6 +39,8 @@ class ChatBoxController extends Controller
             "user_received" => $request->user_received
         ]);
 
+
+
         broadcast(new MessageEvent($message->load("UserSending")))->toOthers();
 
         return response()->json($message);
@@ -48,12 +50,17 @@ class ChatBoxController extends Controller
     {
         $userId = auth()->user()->id;
         $listPeopleChat = User::where("roleId", 1)->whereNotIn("id", [$userId])->get();
-        $messages = Message::where("user_received", $userId)->get();
+        $messages = [];
+        $messages = Message::with("UserSending")->with("UserReceived")->where("user_received", $userId)->get();
+        $userSending = "";
+        $userSendingId = 0;
         foreach ($messages as $item) {
-            if ($item["user_received"] == $userId) {
-                $userChat = User::find($item["user_id"]);
-                $listPeopleChat[] = $userChat;
-                break;
+            $userSending = $item->UserSending()->first();
+            if ($userSending["roleId"] == 3) {
+                if ($userSending["id"] !== $userSendingId) {
+                    $listPeopleChat[] = $userSending;
+                    $userSendingId = $userSending["id"];
+                }
             }
         }
         return response()->json($listPeopleChat);

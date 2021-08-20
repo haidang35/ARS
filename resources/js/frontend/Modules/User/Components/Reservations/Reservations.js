@@ -12,6 +12,7 @@ import TicketDetails from "./Components/TicketDetails/TicketDetails";
 import { getDateTimeNow } from "../../../../Helpers/DateTime/ConvertDateTime";
 import { Redirect } from "react-router-dom";
 import ModalNotice from "../../../../Shared/Components/Modal/ModalNotice";
+import ChatBox from "../ChatBox/ChatBox";
 
 class Reservations extends Component {
     constructor(props) {
@@ -183,6 +184,7 @@ class Reservations extends Component {
                         />
                     </div>
                 </div>
+                <ChatBox />
             </div>
         );
     }

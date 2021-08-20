@@ -14,6 +14,7 @@ import Register from "../../Origin/User/Register/Register";
 import CustomerProfile from "../Components/CustomerProfile/CustomerProfile";
 import AuthService from "../../../Shared/Service/AuthService";
 import HomeMain from "../Components/HomeMain/HomeMain";
+import ChatBox from "../Components/ChatBox/ChatBox";
 
 class Home extends Component {
     constructor(props) {

@@ -8,6 +8,7 @@ import BookingTicketList from "./Components/BookingTicketList/BookingTicketList"
 import HeaderBookingTicket from "./Components/HeaderBookingTicket/HeaderBookingTicket";
 import UserService from "../../../User/Shared/UserService/UserService";
 import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
+import ChatBox from "../ChatBox/ChatBox";
 
 class ChooseFlight extends Component {
     constructor(props) {
@@ -720,6 +721,7 @@ class ChooseFlight extends Component {
                         </div>
                     </div>
                 </div>
+                <ChatBox />
             </div>
         );
     }

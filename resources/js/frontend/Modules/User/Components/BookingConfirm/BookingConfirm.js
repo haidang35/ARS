@@ -15,6 +15,7 @@ import { getTime } from "../../../../Helpers/DateTime/ConvertDateTime";
 import Payment from "./Components/Payment/Payment";
 import UserService from "../../../User/Shared/UserService/UserService";
 import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
+import ChatBox from "../ChatBox/ChatBox";
 
 class BookingConfirm extends Component {
     constructor(props) {
@@ -139,6 +140,7 @@ class BookingConfirm extends Component {
                         </div>
                     </div>
                 </div>
+                <ChatBox />
             </div>
         );
     }
