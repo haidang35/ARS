@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import { Suspense } from "react";
 import { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import DashBoard from "../Components/DashBoard/DashBoard";
 import Destination from "../Components/Destination/Destination";
 import Header from "../Shared/Components/Header/Header";
@@ -43,7 +43,7 @@ class AdminDashBoard extends Component {
                                     <Suspense>
                                         <Route
                                             exact
-                                            path={`/admin`}
+                                            path={`/admin/dashboard`}
                                             component={DashBoard}
                                         />
                                         <Route
@@ -119,4 +119,4 @@ class AdminDashBoard extends Component {
     }
 }
 
-export default AdminDashBoard;
+export default withRouter(AdminDashBoard);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -42,6 +43,9 @@ Route::post('user/register', [AuthController::class, "register"]);
 Route::post('user/login', [AuthController::class, "login"]);
 Route::post('admin/login', [AuthController::class, "adminLogin"]);
 Route::post('admin/register', [AuthController::class, "adminRegister"]);
+
+//Overview
+Route::get('overview-info', [AdminController::class, "getOverviewInfo"]);
 
 
 //Destination

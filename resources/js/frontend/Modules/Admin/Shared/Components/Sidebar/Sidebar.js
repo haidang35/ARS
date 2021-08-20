@@ -2,7 +2,12 @@ import React from "react";
 import { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Sidebar.scss";
-
+import { FaPlane, FaTicketAlt } from "react-icons/fa";
+import { RiPlaneFill, RiReservedFill } from "react-icons/ri";
+import { MdLocationOn, MdDashboard } from "react-icons/md";
+import { SiFloatplane } from "react-icons/si";
+import { HiUserGroup } from "react-icons/hi";
+import { BsFillChatSquareDotsFill } from "react-icons/bs";
 class SideBar extends Component {
     constructor(props) {
         super(props);
@@ -34,57 +39,76 @@ class SideBar extends Component {
                         <ul className="menu">
                             <li className="sidebar-title">Menu</li>
                             <li className="sidebar-item  ">
-                                <NavLink to="/admin" className="sidebar-link">
-                                    <i className="bi bi-grid-fill" />
+                                <NavLink
+                                    to="/admin/dashboard"
+                                    className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
+                                >
+                                    <MdDashboard style={{ fontSize: "25px" }} />
                                     <span>Dashboard</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/flights"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <RiPlaneFill style={{ fontSize: "25px" }} />
                                     <span>Flights</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/destinations"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <MdLocationOn
+                                        style={{ fontSize: "25px" }}
+                                    />
                                     <span>Destinations</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/airlines"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <SiFloatplane
+                                        style={{ fontSize: "25px" }}
+                                    />
                                     <span>Airlines</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/tickets"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <FaTicketAlt style={{ fontSize: "25px" }} />
                                     <span>Tickets</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/bookings"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <RiReservedFill
+                                        style={{ fontSize: "25px" }}
+                                    />
                                     <span>Bookings</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/passengers"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <HiUserGroup style={{ fontSize: "25px" }} />
                                     <span>Passengers</span>
                                 </NavLink>
                                 <NavLink
                                     to="/admin/chat-box"
                                     className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
                                 >
-                                    <i className="bi bi-grid-fill" />
+                                    <BsFillChatSquareDotsFill
+                                        style={{ fontSize: "25px" }}
+                                    />
                                     <span>Chat Box</span>
                                 </NavLink>
                             </li>

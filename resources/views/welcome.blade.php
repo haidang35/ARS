@@ -13,19 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css"
         rel="stylesheet" />
-
-
 </head>
 
 <body>
     <div id="app"></div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendors/apexcharts/apexcharts.js"></script>
-<script src="assets/js/pages/dashboard.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script> --}}
+<script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+<script src="{{ asset('ssets/js/main.js') }}a"></script>
 {{-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> --}}
 
 </html>

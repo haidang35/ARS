@@ -5,6 +5,9 @@ import ModalNotice2 from "../../../../Shared/Components/Modal/ModalNotice2";
 import "./Login.scss";
 import AuthService from "../../../../Shared/Service/AuthService";
 import { goTo } from "../../../../Helpers/Redirect/Redirect";
+import { FaUserCircle } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { IoSend } from "react-icons/io5";
 class Login extends Form {
     constructor(props) {
         super(props);
@@ -45,13 +48,13 @@ class Login extends Form {
                         "adminId",
                         JSON.stringify(res.data.user.id)
                     );
-                    goTo("admin");
+                    localStorage.setItem(
+                        "adminInfo",
+                        JSON.stringify(res.data.user)
+                    );
+                    goTo("admin/dashboard");
                 })
                 .catch((err) => {
-                    console.log(
-                        "🚀 ~ file: Login.js ~ line 51 ~ Login ~ err",
-                        err
-                    );
                     this.setState({
                         message: "Bạn không có quyền truy cập vào trang này !!",
                     });
@@ -71,7 +74,12 @@ class Login extends Form {
                             </Typography>
                             <div className="login">
                                 <div className="login__field">
-                                    <i className="login__icon fas fa-user" />
+                                    <FaUserCircle
+                                        style={{
+                                            fontSize: "25px",
+                                            marginRight: "0.5rem",
+                                        }}
+                                    />
                                     <input
                                         type="email"
                                         name="username"
@@ -85,7 +93,12 @@ class Login extends Form {
                                     />
                                 </div>
                                 <div className="login__field">
-                                    <i className="login__icon fas fa-lock" />
+                                    <RiLockPasswordFill
+                                        style={{
+                                            fontSize: "25px",
+                                            marginRight: "0.5rem",
+                                        }}
+                                    />
                                     <input
                                         type="password"
                                         name="password"
@@ -103,7 +116,12 @@ class Login extends Form {
                                     className="button login__submit"
                                 >
                                     <span className="button__text">Log In</span>
-                                    <i className="button__icon fas fa-chevron-right" />
+                                    <IoSend
+                                        style={{
+                                            fontSize: "25px",
+                                            marginLeft: "1rem",
+                                        }}
+                                    />
                                 </button>
                             </div>
                         </div>

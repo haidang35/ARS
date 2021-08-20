@@ -189,7 +189,31 @@ class ChatBox extends Component {
                                                                             25
                                                                         </span>
                                                                     </h5>
-                                                                    <p></p>
+                                                                    <button
+                                                                        className={
+                                                                            item.roleId ===
+                                                                            1
+                                                                                ? "btn btn-sm btn-success"
+                                                                                : item.roleId ===
+                                                                                  2
+                                                                                ? "btn btn-sm btn-info"
+                                                                                : item.roleId ===
+                                                                                  3
+                                                                                ? "btn btn-sm btn-warning"
+                                                                                : ""
+                                                                        }
+                                                                    >
+                                                                        {item.roleId ===
+                                                                        1
+                                                                            ? "Admin"
+                                                                            : item.roleId ===
+                                                                              2
+                                                                            ? "Agent"
+                                                                            : item.roleId ===
+                                                                              3
+                                                                            ? "Customer"
+                                                                            : ""}
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>

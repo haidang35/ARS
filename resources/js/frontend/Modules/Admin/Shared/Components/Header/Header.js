@@ -14,6 +14,7 @@ class Header extends Component {
     };
 
     render() {
+        const adminInfo = JSON.parse(localStorage.getItem("adminInfo" || ""));
         return (
             <header className="mb-3">
                 <nav className="navbar navbar-expand navbar-light ">
@@ -93,17 +94,34 @@ class Header extends Component {
                             </ul>
                             <div className="dropdown">
                                 <a
-                                    href="#"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
+                                    style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                    }}
                                 >
                                     <div className="user-menu d-flex">
                                         <div className="user-name text-end me-3">
-                                            <h6 className="mb-0 text-gray-600">
-                                                John Ducky
+                                            <h6
+                                                className="mb-0 text-gray-600"
+                                                style={{
+                                                    textDecoration: "none",
+                                                }}
+                                            >
+                                                {adminInfo.name}
                                             </h6>
-                                            <p className="mb-0 text-sm text-gray-600">
-                                                Administrator
+                                            <p
+                                                className="mb-0 text-sm text-gray-600"
+                                                style={{
+                                                    textDecoration: "none",
+                                                }}
+                                            >
+                                                {adminInfo.roleId == 1
+                                                    ? "Administrator"
+                                                    : adminInfo.roleId == 2
+                                                    ? "Agent"
+                                                    : ""}
                                             </p>
                                         </div>
                                         <div className="user-img d-flex align-items-center">
@@ -119,10 +137,10 @@ class Header extends Component {
                                 >
                                     <li>
                                         <h6 className="dropdown-header">
-                                            Hello, John!
+                                            {`Hello, ${adminInfo.name}`}
                                         </h6>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a className="dropdown-item" href="#">
                                             <i className="icon-mid bi bi-person me-2" />{" "}
                                             My Profile
@@ -139,7 +157,7 @@ class Header extends Component {
                                             <i className="icon-mid bi bi-wallet me-2" />
                                             Wallet
                                         </a>
-                                    </li>
+                                    </li> */}
                                     <li>
                                         <hr className="dropdown-divider" />
                                     </li>
