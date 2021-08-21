@@ -1,0 +1,39 @@
+.support-info {
+    margin-bottom: 3rem;
+    background-color: #dddfe8;
+    padding: 1.5rem 0 2.5rem;
+
+    .title {
+        margin-bottom: 2rem;
+    }
+
+    .support-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .img-box {
+            height: 380px;
+
+            .img-support {
+                width: 260px;
+            }
+
+            .img-support-2 {
+                width: 300px;
+                height: 360px;
+            }
+
+            .img-support-3 {
+                height: 360px;
+            }
+        }
+
+
+        .content {
+            margin-top: 1rem;
+            text-align: center;
+        }
+    }
+}

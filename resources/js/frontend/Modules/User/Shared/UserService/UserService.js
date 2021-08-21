@@ -11,6 +11,8 @@ const API_ENPOINT = {
     GET_FLIGHT_ROUTE: "user/find-route",
     PAYMENT_BOOKING: "user/booking/payment/",
     GET_BOOKING_INFO: "user/booking/",
+    GET_TICKET_LOCATION_DEPARTURE: "tickets/location/",
+    GET_DISCOUNT_TICKET: "discount-tickets",
 };
 
 class UserService {
@@ -68,6 +70,16 @@ class UserService {
         return await axios.get(
             BASE_URL + API_ENPOINT.GET_BOOKING_INFO + bookingId
         );
+    }
+
+    async getTicketsWithLocationDeparture(departureId) {
+        return await axios.get(
+            BASE_URL + API_ENPOINT.GET_TICKET_LOCATION_DEPARTURE + departureId
+        );
+    }
+
+    async getDiscountTicket() {
+        return await axios.get(BASE_URL + API_ENPOINT.GET_DISCOUNT_TICKET);
     }
 }
 

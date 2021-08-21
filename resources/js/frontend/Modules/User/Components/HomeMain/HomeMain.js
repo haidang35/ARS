@@ -1,29 +1,128 @@
+import axios from "axios";
 import React from "react";
 import { Component } from "react";
+import { URL_GET_IP_LOCATION } from "../../../../Constances/const";
 import ChatBox from "../ChatBox/ChatBox";
 import FavouriteDestination from "../FavouriteDestination/FavouriteDestination";
-import HomePage from "../HomePage/HomePage";
+import BookingHeader from "./Components/BookingHeader/BookingHeader";
+import SupportInfo from "./Components/SupportInfo/SupportInfo";
+import UserService from "../../Shared/UserService/UserService";
+import TicketFromLocation from "./Components/TicketFromLocation/TicketFromLocation";
+const publicIp = require("public-ip");
 
 class HomeMain extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            destinationChoosed: "",
+            location: "",
+            destinationLocation: {},
+            destinationList: [],
+            departure: {},
+            destination: {},
+            ticketsWithLocation: [],
         };
     }
 
+    componentDidMount() {
+        this.getDestinationList();
+    }
+
     getDestinationChoosed = (data) => {
-        this.setState({ destinationChoosed: data });
+        this.setState({ destination: data });
         window.scrollTo(0, 0);
     };
 
+    getDestinationList = () => {
+        UserService.getAllDestination().then((res) => {
+            this.setState({
+                destinationList: res.data,
+            });
+            this.getIpAddress(res.data);
+        });
+    };
+
+    getIpAddress = async (destinationList) => {
+        await axios
+            .get(URL_GET_IP_LOCATION + (await publicIp.v4()).toString())
+            .then((res) => {
+                this.setState({
+                    location: res.data,
+                });
+                this.getMyLocation(res.data, destinationList);
+                this.getTicketWithLocationDeparture();
+            });
+    };
+
+    getTicketWithLocationDeparture = () => {
+        const { departure } = this.state;
+        if (Object.keys(departure).length > 0) {
+            UserService.getTicketsWithLocationDeparture(departure.id).then(
+                (res) => {
+                    this.setState({
+                        ticketsWithLocation: res.data,
+                    });
+                }
+            );
+        }
+    };
+
+    onChangeDeparture = (data) => {
+        this.setState({
+            departure: data,
+        });
+    };
+
+    onChangeDestination = (data) => {
+        this.setState({
+            destination: data,
+        });
+    };
+
+    getMyLocation = (location, destinationList) => {
+        const currentCity = location.city;
+        destinationList.forEach((item) => {
+            let city = item.city
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/đ/g, "d")
+                .replace(/Đ/g, "D");
+            city = city.split(" ").join("");
+            if (city.toLowerCase().indexOf(currentCity.toLowerCase()) !== -1) {
+                this.setState({
+                    departure: item,
+                    destinationLocation: item,
+                });
+                localStorage.setItem("myLocation", JSON.stringify(item));
+            }
+        });
+    };
+
     render() {
+        const {
+            location,
+            destinationList,
+            ticketsWithLocation,
+            departure,
+            destination,
+        } = this.state;
         return (
             <div>
-                <HomePage destinationChoosed={this.state.destinationChoosed} />
+                <BookingHeader
+                    destinationList={destinationList}
+                    location={location}
+                    departure={departure}
+                    destination={destination}
+                    onChangeDeparture={this.onChangeDeparture}
+                    onChangeDestination={this.onChangeDestination}
+                />
+                <TicketFromLocation
+                    location={location}
+                    ticketList={ticketsWithLocation}
+                />
                 <FavouriteDestination
                     getDestinationChoosed={this.getDestinationChoosed}
                 />
+                <SupportInfo />
                 <ChatBox />
             </div>
         );

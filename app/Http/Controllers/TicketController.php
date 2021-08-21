@@ -82,6 +82,29 @@ class TicketController extends Controller
         return response()->json($ticket);
     }
 
+    public function getTicketHasDepartureLocation($destinationId)
+    {
+        $tickets = Ticket::all();
+        foreach ($tickets as $item) {
+            $flight = Flight::where("departure_id", $destinationId)->with("Airline")->with("Destination")->with("Departure")->find($item["flight_id"]);
+            $item["flight"] = $flight;
+        }
+        return response()->json($tickets);
+    }
+
+    public function getDiscountTickets()
+    {
+        $discountTickets = Ticket::all();
+        $discTickets = [];
+        foreach ($discountTickets as $item) {
+            if (($item["price"] + $item["tax"]) < 2000000) {
+                $item["flight"] = Flight::with("Airline")->with("Departure")->with("Destination")->find($item["flight_id"]);
+                $discTickets[] = $item;
+            }
+        }
+        return response()->json($discTickets);
+    }
+
 
 
     // -------- User --------- //

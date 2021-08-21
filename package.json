@@ -33,6 +33,7 @@
         "date-fns": "^2.23.0",
         "dayjs": "^1.10.6",
         "laravel-echo": "^1.11.1",
+        "public-ip": "^4.0.4",
         "pusher-js": "^7.0.3",
         "react-chartjs-2": "^3.0.4",
         "react-icons": "^4.2.0",

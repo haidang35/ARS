@@ -1,0 +1,90 @@
+@import "../../../../Shared//Style/variables";
+
+.discount-tickets {
+    margin-top: 2rem;
+
+    .content-box {
+        .discount-ticket-list {
+
+            .ticket-item {
+                background-color: #ffff;
+                border-radius: 10px;
+                padding: 1rem;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                margin-bottom: 1.5rem;
+
+                .img-box {
+                    height: 14rem;
+                    overflow: hidden;
+                    border-radius: 10px;
+
+                    img {
+                        width: 500px;
+                    }
+
+                }
+
+                .destination-name {
+                    font-size: 30px;
+                    margin-top: 1rem;
+                }
+
+                .flight-info {
+                    .logo-airline-box {
+                        height: 100px;
+                        display: flex;
+                        align-items: center;
+
+                        .logo-airline {
+                            width: 100px;
+                        }
+                    }
+
+
+                    .info {
+                        margin-top: 1rem;
+
+                        .item-info {
+                            font-size: 20px;
+                        }
+                    }
+                }
+
+                .price-info {
+                    margin-top: 1rem;
+                    width: 100%;
+                    position: relative;
+
+                    .title-box {
+                        display: flex;
+                        align-items: center;
+
+                        .icon {
+                            color: $background-btn;
+                            font-size: 25px;
+                            margin-right: 0.5rem;
+                        }
+
+                        .title {
+                            color: black;
+                            font-size: 20px;
+
+                        }
+                    }
+
+
+                    .price {
+                        position: absolute;
+                        color: rgb(20, 75, 224);
+                        font-size: 20px;
+                        right: 0;
+                        bottom: 0;
+                        top: 0;
+                        font-weight: 500;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

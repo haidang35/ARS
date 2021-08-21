@@ -79,6 +79,8 @@ Route::get('tickets/{id}', [TicketController::class, "getTicketDetails"]);
 Route::patch('tickets/update/{id}', [TicketController::class, "updateTicketInfo"]);
 Route::post('tickets', [TicketController::class, "addNewTicket"]);
 Route::delete('tickets/{id}', [TicketController::class, "deleteTicket"]);
+Route::get('tickets/location/{destinationId}', [TicketController::class, "getTicketHasDepartureLocation"]);
+Route::get('discount-tickets', [TicketController::class, "getDiscountTickets"]);
 
 // Booking
 Route::get('bookings', [BookingController::class,  "getAllBooking"]);

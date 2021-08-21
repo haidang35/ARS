@@ -31,10 +31,7 @@ class ChatBox extends Component {
     fetchMessages = () => {
         AuthService.fetchMyMessages().then((res) => {
             let messages = res.data;
-            console.log(
-                "🚀 ~ file: ChatBox.js ~ line 33 ~ ChatBox ~ AuthService.fetchMyMessages ~ messages",
-                messages
-            );
+
             messages = messages.sort((item1, item2) => {
                 const sendTimeMs1 = new Date(item1.created_at);
                 const sendTimeMs2 = new Date(item2.created_at);

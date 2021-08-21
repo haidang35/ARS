@@ -2,8 +2,6 @@ import React from "react";
 import { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.scss";
-import HomePage from "../Components/HomePage/HomePage";
-import Navbar from "../Shared/Components/Navbar/Navbar";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Suspense } from "react";
 import ChooseFlight from "../Components/ChooseFlight/ChooseFlight";
@@ -14,7 +12,7 @@ import Register from "../../Origin/User/Register/Register";
 import CustomerProfile from "../Components/CustomerProfile/CustomerProfile";
 import AuthService from "../../../Shared/Service/AuthService";
 import HomeMain from "../Components/HomeMain/HomeMain";
-import ChatBox from "../Components/ChatBox/ChatBox";
+import DiscountTickets from "../Components/DiscountTickets/DiscountTickets";
 
 class Home extends Component {
     constructor(props) {
@@ -68,6 +66,10 @@ class Home extends Component {
                                         <Redirect to="/" />
                                     );
                                 }}
+                            />
+                            <Route
+                                path={"/discount-tickets"}
+                                component={DiscountTickets}
                             />
                         </Suspense>
                     </Switch>
