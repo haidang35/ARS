@@ -20,4 +20,14 @@ class Destination extends Model
         "favourite",
         "image"
     ];
+
+    public function Flight()
+    {
+        return $this->hasMany(Flight::class);
+    }
+
+    public function Image()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

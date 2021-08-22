@@ -90,21 +90,6 @@ class Destination extends Component {
             });
     };
 
-    onUpdateFavouriteDestination = (id) => {
-        DestinationService.updateFavoriteDestination(id, { favourite: 0 })
-            .then((res) => {
-                this.setState({
-                    message: "Hủy địa điểm yêu thích thành công",
-                });
-                this.getDestinationList();
-            })
-            .catch((err) => {
-                this.setState({
-                    message: "Hủy địa điểm yêu thích thất bại",
-                });
-            });
-    };
-
     onDeleteDestination = (id) => {
         DestinationService.deleteDestination(id)
             .then((res) => {
@@ -215,7 +200,6 @@ class Destination extends Component {
                                                 <th>Mã quốc gia</th>
                                                 <th>Quốc gia</th>
                                                 <th></th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -250,41 +234,7 @@ class Destination extends Component {
                                                         <td className="text-bold-500">
                                                             {item.country}
                                                         </td>
-                                                        <td>
-                                                            {item.favourite ==
-                                                            0 ? (
-                                                                <button
-                                                                    className="btn btn-info"
-                                                                    data-toggle="modal"
-                                                                    data-target={`#addFavouriteDesination${item.id}`}
-                                                                >
-                                                                    Chọn địa
-                                                                    điểm yêu
-                                                                    thích
-                                                                </button>
-                                                            ) : (
-                                                                <button
-                                                                    onClick={() =>
-                                                                        this.onUpdateFavouriteDestination(
-                                                                            item.id
-                                                                        )
-                                                                    }
-                                                                    className="btn btn-danger"
-                                                                >
-                                                                    Hủy địa điểm
-                                                                    yêu thích
-                                                                </button>
-                                                            )}
-                                                            <AddFavouriteDestination
-                                                                onSubmitImage={
-                                                                    this
-                                                                        .onSubmitImage
-                                                                }
-                                                                destinationId={
-                                                                    item.id
-                                                                }
-                                                            />
-                                                        </td>
+
                                                         <td>
                                                             <Link
                                                                 to={`/admin/destinations/${item.id}`}

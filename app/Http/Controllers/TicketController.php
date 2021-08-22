@@ -86,7 +86,8 @@ class TicketController extends Controller
     {
         $tickets = Ticket::all();
         foreach ($tickets as $item) {
-            $flight = Flight::where("departure_id", $destinationId)->with("Airline")->with("Destination")->with("Departure")->find($item["flight_id"]);
+            $flight = Flight::where("departure_id", $destinationId)->with("Airline")->with("Departure")->find($item["flight_id"]);
+            $flight["destination"] = Destination::with("Image")->find($flight["destination_id"]);
             $item["flight"] = $flight;
         }
         return response()->json($tickets);
@@ -98,7 +99,12 @@ class TicketController extends Controller
         $discTickets = [];
         foreach ($discountTickets as $item) {
             if (($item["price"] + $item["tax"]) < 2000000) {
-                $item["flight"] = Flight::with("Airline")->with("Departure")->with("Destination")->find($item["flight_id"]);
+
+                $flight = Flight::with("Airline")->with("Departure")->find($item["flight_id"]);
+                $flight["destination"] = Destination::with("Image")->find($flight["destination_id"]);
+                $item["flight"] = $flight;
+
+
                 $discTickets[] = $item;
             }
         }

@@ -20,8 +20,7 @@ class AddFavouriteDestination extends Form {
 
     onSubmitImage = () => {
         const { image } = this.state;
-        const { destinationId } = this.props;
-        this.props.onSubmitImage(image, destinationId);
+        this.props.onSubmitImage(image);
     };
 
     render() {
@@ -30,7 +29,7 @@ class AddFavouriteDestination extends Form {
             <div>
                 <div
                     className="modal fade"
-                    id={`addFavouriteDesination${destinationId}`}
+                    id={`addImageDestination${destinationId}`}
                     tabIndex={-1}
                     role="dialog"
                     aria-labelledby="exampleModalFormTitle"

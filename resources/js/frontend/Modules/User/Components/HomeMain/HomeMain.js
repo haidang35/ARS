@@ -17,8 +17,8 @@ class HomeMain extends Component {
             location: "",
             destinationLocation: {},
             destinationList: [],
-            departure: {},
-            destination: {},
+            departure: "",
+            destination: "",
             ticketsWithLocation: [],
         };
     }
@@ -42,6 +42,7 @@ class HomeMain extends Component {
     };
 
     getIpAddress = async (destinationList) => {
+        let ipAddress = (await publicIp.v4()).toString();
         await axios
             .get(URL_GET_IP_LOCATION + (await publicIp.v4()).toString())
             .then((res) => {
@@ -50,6 +51,7 @@ class HomeMain extends Component {
                 });
                 this.getMyLocation(res.data, destinationList);
                 this.getTicketWithLocationDeparture();
+                this.checkMyLocationIsExist(destinationList);
             });
     };
 
@@ -78,7 +80,7 @@ class HomeMain extends Component {
         });
     };
 
-    getMyLocation = (location, destinationList) => {
+    getMyLocation = async (location, destinationList) => {
         const currentCity = location.city;
         destinationList.forEach((item) => {
             let city = item.city
@@ -95,6 +97,19 @@ class HomeMain extends Component {
                 localStorage.setItem("myLocation", JSON.stringify(item));
             }
         });
+    };
+
+    checkMyLocationIsExist = async (destinationList) => {
+        if (this.state.departure == "") {
+            let ipAddress = "27.67.4.231";
+            await axios.get(URL_GET_IP_LOCATION + ipAddress).then((res) => {
+                this.setState({
+                    location: res.data,
+                });
+                this.getMyLocation(res.data, destinationList);
+                this.getTicketWithLocationDeparture();
+            });
+        }
     };
 
     render() {

@@ -31,8 +31,8 @@ class FavouriteDestination extends Component {
 
     render() {
         const { favouriteDestinations } = this.state;
-        let favDes = [];
         let hasData = false;
+        let favDes = [];
         if (
             Array.isArray(favouriteDestinations) &&
             favouriteDestinations.length > 0
@@ -57,7 +57,9 @@ class FavouriteDestination extends Component {
                                         `url('${
                                             hasData
                                                 ? URL_IMAGE_DESTINATION +
-                                                  favDes[0].image
+                                                  favDes[0].image[0][
+                                                      "image_name"
+                                                  ]
                                                 : ""
                                         }')`,
                                     backgroundRepeat: hasData
@@ -97,7 +99,9 @@ class FavouriteDestination extends Component {
                                         `url('${
                                             hasData
                                                 ? URL_IMAGE_DESTINATION +
-                                                  favDes[1].image
+                                                  favDes[1].image[0][
+                                                      "image_name"
+                                                  ]
                                                 : ""
                                         }')`,
                                     backgroundRepeat: hasData
@@ -137,7 +141,9 @@ class FavouriteDestination extends Component {
                                         `url('${
                                             hasData
                                                 ? URL_IMAGE_DESTINATION +
-                                                  favDes[2].image
+                                                  favDes[2].image[0][
+                                                      "image_name"
+                                                  ]
                                                 : ""
                                         }')`,
                                     backgroundRepeat: hasData
@@ -179,7 +185,9 @@ class FavouriteDestination extends Component {
                                                 `url('${
                                                     hasData
                                                         ? URL_IMAGE_DESTINATION +
-                                                          favDes[3].image
+                                                          favDes[3].image[0][
+                                                              "image_name"
+                                                          ]
                                                         : ""
                                                 }')`,
                                             backgroundRepeat: hasData
@@ -224,7 +232,9 @@ class FavouriteDestination extends Component {
                                                 `url('${
                                                     hasData
                                                         ? URL_IMAGE_DESTINATION +
-                                                          favDes[4].image
+                                                          favDes[4].image[0][
+                                                              "image_name"
+                                                          ]
                                                         : ""
                                                 }')`,
                                             backgroundRepeat: hasData

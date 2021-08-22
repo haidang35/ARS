@@ -3,9 +3,19 @@ import { Component } from "react";
 import "./DiscountTickets.scss";
 import SubNavbar from "../../Shared/Components/SubNavbar/SubNavbar";
 import SearchFlightBar from "../../Components/SearchFlightBar/SearchFlightBar";
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { RiErrorWarningLine } from "react-icons/ri";
 import UserService from "../../Shared/UserService/UserService";
+import {
+    dateConvert,
+    getDate,
+} from "../../../../Helpers/DateTime/ConvertDateTime";
+import { formatCurrency } from "../../../../Helpers/FormatCurrency";
+import {
+    URL_IMAGE_AIRLINE,
+    URL_IMAGE_DESTINATION,
+} from "../../../../Constances/const";
+import { goTo } from "../../../../Helpers/Redirect/Redirect";
 
 class DiscountTickets extends Component {
     constructor(props) {
@@ -53,20 +63,41 @@ class DiscountTickets extends Component {
                                                         <div className="col-md-4">
                                                             <div className="ticket-item">
                                                                 <div className="img-box">
-                                                                    <img src="http://divui.com/blog/wp-content/uploads/2017/11/kinh-nghiem-du-lich-sapa-1.jpg" />
+                                                                    <img
+                                                                        src={
+                                                                            URL_IMAGE_DESTINATION +
+                                                                            item
+                                                                                .flight
+                                                                                .destination
+                                                                                .image[0][
+                                                                                "image_name"
+                                                                            ]
+                                                                        }
+                                                                    />
                                                                 </div>
                                                                 <Typography
                                                                     variant="h6"
                                                                     className="destination-name"
                                                                 >
-                                                                    Hồ Chí Minh
+                                                                    {
+                                                                        item
+                                                                            .flight
+                                                                            .destination
+                                                                            .city
+                                                                    }
                                                                 </Typography>
                                                                 <div className="flight-info">
                                                                     <div className="row">
                                                                         <div className="col-md-3">
                                                                             <div className="logo-airline-box">
                                                                                 <img
-                                                                                    src="https://static.wixstatic.com/media/9d8ed5_b328a87c44a04887ab0d35ef93991f16~mv2.png/v1/fill/w_1000,h_626,al_c,usm_0.66_1.00_0.01/9d8ed5_b328a87c44a04887ab0d35ef93991f16~mv2.png"
+                                                                                    src={
+                                                                                        URL_IMAGE_AIRLINE +
+                                                                                        item
+                                                                                            .flight
+                                                                                            .airline
+                                                                                            .logo
+                                                                                    }
                                                                                     className="logo-airline"
                                                                                 />
                                                                             </div>
@@ -77,45 +108,59 @@ class DiscountTickets extends Component {
                                                                                     variant="h6"
                                                                                     className="item-info"
                                                                                 >
-                                                                                    17-08-2021
+                                                                                    {dateConvert(
+                                                                                        item
+                                                                                            .flight
+                                                                                            .departure_datetime
+                                                                                    )}
                                                                                 </Typography>
                                                                                 <Typography
                                                                                     variant="h6"
                                                                                     className="item-info"
                                                                                 >
-                                                                                    HAN
-                                                                                    -
-                                                                                    PQC,
-                                                                                    Bamboo
-                                                                                    Airways
+                                                                                    {`${item.flight.departure.airport_code} - ${item.flight.destination.airport_code}, ${item.flight.airline.airline_name}`}
                                                                                 </Typography>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div className="price-info">
-                                                                    <div className="title-box">
-                                                                        <Typography
-                                                                            variant="body1"
-                                                                            className="title"
-                                                                        >
-                                                                            <RiErrorWarningLine className="icon" />
-                                                                            Hạn
-                                                                            chế
-                                                                            vừa
-                                                                            phải
-                                                                        </Typography>
-                                                                    </div>
-
                                                                     <Typography
-                                                                        variant="body1"
+                                                                        variant="h6"
                                                                         className="price"
                                                                     >
-                                                                        Giá chỉ
-                                                                        từ
-                                                                        500.000
-                                                                        đ
+                                                                        {`Giá chỉ từ ${formatCurrency(
+                                                                            item.price +
+                                                                                item.tax
+                                                                        )}`}
                                                                     </Typography>
+
+                                                                    <Button
+                                                                        variant="contained"
+                                                                        color="primary"
+                                                                        className="btn-view"
+                                                                        onClick={() =>
+                                                                            goTo(
+                                                                                `search-flight?departure=${
+                                                                                    item
+                                                                                        .flight
+                                                                                        .departure
+                                                                                        .id
+                                                                                }&destination=${
+                                                                                    item
+                                                                                        .flight
+                                                                                        .destination
+                                                                                        .id
+                                                                                }&time=${getDate(
+                                                                                    item
+                                                                                        .flight
+                                                                                        .departure_datetime
+                                                                                )}`
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        Xem
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </div>

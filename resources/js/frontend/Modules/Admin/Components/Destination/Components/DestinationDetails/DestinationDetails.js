@@ -4,7 +4,39 @@ import Form from "../../../../../../Shared/Components/Form/Form";
 import FormError from "../../../../../../Shared/Components/Form/FormError";
 import "../DestinationDetails.scss";
 import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess";
-import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";   
+import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import ImageList from "@material-ui/core/ImageList";
+import ImageListItem from "@material-ui/core/ImageListItem";
+import ImageListItemBar from "@material-ui/core/ImageListItemBar";
+import IconButton from "@material-ui/core/IconButton";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import AddFavouriteDestination from "../AddFavouriteDestination/AddFavouriteDestination";
+import { URL_IMAGE_DESTINATION } from "../../../../../../Constances/const";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
+        backgroundColor: theme.palette.background.paper,
+    },
+    imageList: {
+        width: 500,
+        height: 450,
+        // Promote the list into its own layer in Chrome. This cost memory, but helps keep FPS high.
+        transform: "translateZ(0)",
+    },
+    titleBar: {
+        background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+            "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    },
+    icon: {
+        color: "white",
+    },
+}));
 class DestinationDetails extends Form {
     constructor(props) {
         super(props);
@@ -19,13 +51,15 @@ class DestinationDetails extends Form {
             }),
             provinceOrg: "",
             onEdit: false,
-            message:"",
-            updateMessage:"",
-            errorMessage:""
+            message: "",
+            updateMessage: "",
+            errorMessage: "",
+            imageList: [],
         };
     }
     componentDidMount() {
         this.getDestinationDetails();
+        this.getImageList();
     }
     getDestinationDetails = () => {
         const { id } = this.props.match.params;
@@ -84,16 +118,43 @@ class DestinationDetails extends Form {
                 .then((res) => {
                     console.log(res.data);
                     this.setState({
-                        updateMessage:"Update destination successfully "
-                    })
+                        updateMessage: "Update destination successfully ",
+                    });
                 })
                 .catch((err) => {
                     this.setState({
-                        errorMessage:"Update destionation failed"
-                    })
+                        errorMessage: "Update destionation failed",
+                    });
                 });
             this.setState({ onEdit: false });
         }
+    };
+
+    onAddImage = (data) => {
+        const { id } = this.props.match.params;
+        let formData = new FormData();
+        formData.append("image", data);
+        DestinationService.uploadImageDestination(id, formData)
+            .then((res) => {
+                this.setState({
+                    message: `Upload image successful !!`,
+                });
+                this.getImageList();
+            })
+            .catch((err) => {
+                this.setState({
+                    errorMessage: `Upload image failed !!`,
+                });
+            });
+    };
+
+    getImageList = () => {
+        const { id } = this.props.match.params;
+        DestinationService.getImageList(id).then((res) => {
+            this.setState({
+                imageList: res.data,
+            });
+        });
     };
     render() {
         const {
@@ -105,60 +166,63 @@ class DestinationDetails extends Form {
             country,
             dirty,
         } = this.state.form;
-        const {updateMessage,errorMessage} = this.state;
+        const { updateMessage, errorMessage, onEdit, imageList } = this.state;
+
         if (updateMessage.length > 0 || errorMessage.length > 0) {
             const timer = setTimeout(() => {
                 this.setState({
                     updateMessage: "",
                     errorMessage: "",
                 });
-            }, 5000);
+            }, 10000);
         }
-        const { onEdit } = this.state;
+        const { classes } = this.props;
+        const { id } = this.props.match.params;
         return (
-            <div>
-               
+            <div className="destination-details">
                 <div className="card">
                     <div className="card-header">
-                        <h4 className="card-title" style={{marginLeft:"20px"}}>
+                        <h4
+                            className="card-title"
+                            style={{ marginLeft: "20px" }}
+                        >
                             Thông tin chi tiết của điểm đến
                             <div className="float-right">
-                            {!onEdit ? (
-                                <button
-                                    style={{marginRight:"20px"}}
-                                    onClick={this.onEditInfo}
-                                    className="btn btn-primary"
-                                >
-                                    Edit
-                                </button>
-                            ) : (
-                                <div>
+                                {!onEdit ? (
                                     <button
-                                        onClick={this.onSaveChangeInfo}
-                                        className="btn btn-success"
-                                        style={{
-                                            marginLeft: "1rem",
-                                            marginRight: "1rem",
-                                        }}
+                                        style={{ marginRight: "20px" }}
+                                        onClick={this.onEditInfo}
+                                        className="btn btn-primary"
                                     >
-                                        Save
+                                        Edit
                                     </button>
-                                    <button
-                                        style={{
-                                          
-                                            marginRight: "22px"
-                                        }}
-                                        onClick={this.onCancelEdit}
-                                        className="btn btn-warning"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            )}
-                        </div>
+                                ) : (
+                                    <div>
+                                        <button
+                                            onClick={this.onSaveChangeInfo}
+                                            className="btn btn-success"
+                                            style={{
+                                                marginLeft: "1rem",
+                                                marginRight: "1rem",
+                                            }}
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            style={{
+                                                marginRight: "22px",
+                                            }}
+                                            onClick={this.onCancelEdit}
+                                            className="btn btn-warning"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </h4>
-                        <div style={{marginTop:"54px"}}>
-                            <AlertSuccess message={this.state.updateMessage}/>
+                        <div style={{ marginTop: "54px" }}>
+                            <AlertSuccess message={this.state.updateMessage} />
                             <AlertDanger message={this.state.errorMessage} />
                         </div>
                     </div>
@@ -168,9 +232,18 @@ class DestinationDetails extends Form {
                                 <div className="card">
                                     <div className="card-content">
                                         <div className="card-body">
-                                            <form className="form" style={{padding:"20px"}}>
+                                            <form
+                                                className="form"
+                                                style={{ padding: "20px" }}
+                                            >
                                                 <div className="row">
-                                                    <div className="col-md-6 col-12" style={{paddingRight:"20px"}}>
+                                                    <div
+                                                        className="col-md-6 col-12"
+                                                        style={{
+                                                            paddingRight:
+                                                                "20px",
+                                                        }}
+                                                    >
                                                         <div>
                                                             <label htmlFor="first-name-column">
                                                                 Thành phố
@@ -208,7 +281,12 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12" style={{paddingLeft:"20px"}}>
+                                                    <div
+                                                        className="col-md-6 col-12"
+                                                        style={{
+                                                            paddingLeft: "20px",
+                                                        }}
+                                                    >
                                                         <div>
                                                             <label htmlFor="first-name-column">
                                                                 Tỉnh
@@ -236,8 +314,19 @@ class DestinationDetails extends Form {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="row" style={{marginTop:"20px"}}>
-                                                    <div className="col-md-6 col-12" style={{paddingRight:"20px"}}>
+                                                <div
+                                                    className="row"
+                                                    style={{
+                                                        marginTop: "20px",
+                                                    }}
+                                                >
+                                                    <div
+                                                        className="col-md-6 col-12"
+                                                        style={{
+                                                            paddingRight:
+                                                                "20px",
+                                                        }}
+                                                    >
                                                         <div>
                                                             <label htmlFor="last-name-column">
                                                                 Mã sân bay
@@ -275,7 +364,12 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12" style={{paddingLeft:"20px"}}>
+                                                    <div
+                                                        className="col-md-6 col-12"
+                                                        style={{
+                                                            paddingLeft: "20px",
+                                                        }}
+                                                    >
                                                         <div>
                                                             <label htmlFor="city-column">
                                                                 Sân bay
@@ -314,8 +408,19 @@ class DestinationDetails extends Form {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="row" style={{marginTop:"20px"}}>
-                                                    <div className="col-md-6 col-12" style={{paddingRight:"20px"}}>
+                                                <div
+                                                    className="row"
+                                                    style={{
+                                                        marginTop: "20px",
+                                                    }}
+                                                >
+                                                    <div
+                                                        className="col-md-6 col-12"
+                                                        style={{
+                                                            paddingRight:
+                                                                "20px",
+                                                        }}
+                                                    >
                                                         <div>
                                                             <label htmlFor="country-floating">
                                                                 Quốc gia
@@ -353,7 +458,12 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <div className="col-md-6 col-12" style={{paddingLeft:"20px"}}>
+                                                    <div
+                                                        className="col-md-6 col-12"
+                                                        style={{
+                                                            paddingLeft: "20px",
+                                                        }}
+                                                    >
                                                         <div>
                                                             <label htmlFor="company-column">
                                                                 Mã quốc gia
@@ -391,7 +501,7 @@ class DestinationDetails extends Form {
                                                             )}
                                                         </div>
                                                     </div>
-                                                </div>     
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -400,8 +510,72 @@ class DestinationDetails extends Form {
                         </div>
                     </section>
                 </div>
+                <div className="image-list">
+                    <div className="card">
+                        <div className="card-header">
+                            {" "}
+                            <div className="float-right">
+                                <button
+                                    className="btn btn-primary"
+                                    data-toggle="modal"
+                                    data-target={`#addImageDestination${id}`}
+                                >
+                                    Thêm ảnh
+                                </button>
+                            </div>
+                            <h3 className="card-title">Image List</h3>
+                        </div>
+                        <div className="card-content">
+                            <div className="card-body">
+                                <ImageList
+                                    rowHeight={200}
+                                    gap={1}
+                                    className={classes.imageList}
+                                >
+                                    {imageList.map((item) => {
+                                        return (
+                                            <ImageListItem
+                                                key={item.id}
+                                                cols={1}
+                                                rows={3}
+                                            >
+                                                <img
+                                                    src={
+                                                        URL_IMAGE_DESTINATION +
+                                                        item.image_name
+                                                    }
+                                                    alt={"Hello"}
+                                                />
+                                                <ImageListItemBar
+                                                    title={"Hello"}
+                                                    position="top"
+                                                    actionIcon={
+                                                        <IconButton
+                                                            aria-label={`star`}
+                                                            className={
+                                                                classes.icon
+                                                            }
+                                                        >
+                                                            <StarBorderIcon />
+                                                        </IconButton>
+                                                    }
+                                                    actionPosition="left"
+                                                    className={classes.titleBar}
+                                                />
+                                            </ImageListItem>
+                                        );
+                                    })}
+                                </ImageList>
+                            </div>
+                            <AddFavouriteDestination
+                                onSubmitImage={this.onAddImage}
+                                destinationId={id}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
 }
-export default DestinationDetails;
+export default withStyles(useStyles)(DestinationDetails);

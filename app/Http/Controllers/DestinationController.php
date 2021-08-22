@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Destination;
+use App\Models\Image;
 
 class DestinationController extends Controller
 {
@@ -59,8 +60,9 @@ class DestinationController extends Controller
 
     public function getFavouriteDestinations()
     {
-        $favouriteDestinations = Destination::where("favourite", 1)->get();
-        return  response()->json($favouriteDestinations);
+        $destinations = Destination::withCount("Flight")->with("Image")->get();
+        collect($destinations)->sortBy('flight_count')->reverse()->toArray();
+        return  response()->json($destinations->take(5));
     }
 
     public function uploadImageDestination($id, Request $request)
@@ -70,12 +72,12 @@ class DestinationController extends Controller
         ]);
         $imageName = time() . "." . $request->image->extension();
         $request->image->move(public_path("images/destination"), $imageName);
-        $destination = Destination::find($id);
-        $destination->update([
-            "image" => $imageName,
-            "favourite" => 1
+        $newImg = Image::create([
+            "destination_id" => $id,
+            "image_name" => $imageName
         ]);
-        return $destination;
+
+        return $newImg;
     }
 
     public function deleteDestination($id)
@@ -83,5 +85,11 @@ class DestinationController extends Controller
         $destination = Destination::find($id);
         $destination->delete();
         return response()->json($destination);
+    }
+
+    public function getImageList($destinationId)
+    {
+        $images = Image::where("destination_id", $destinationId)->get();
+        return response()->json($images);
     }
 }

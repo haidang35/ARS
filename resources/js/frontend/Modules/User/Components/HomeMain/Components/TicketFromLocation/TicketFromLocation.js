@@ -5,7 +5,11 @@ import "./TicketFromLocation.scss";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { formatCurrency } from "../../../../../../Helpers/FormatCurrency";
 import { dateConvert } from "../../../../../../Helpers/DateTime/ConvertDateTime";
-import { URL_IMAGE_AIRLINE } from "../../../../../../Constances/const";
+import {
+    URL_IMAGE_AIRLINE,
+    URL_IMAGE_DESTINATION,
+} from "../../../../../../Constances/const";
+import { Link } from "react-router-dom";
 
 class TicketFromLocation extends Component {
     constructor(props) {
@@ -21,10 +25,6 @@ class TicketFromLocation extends Component {
                 ticketListLocation.push(ticketList[i]);
             }
         }
-        const lets = ticketListLocation.map((e) => {
-            console.log(e);
-        });
-
         return (
             <div>
                 <div className="ticket-from-location">
@@ -37,12 +37,14 @@ class TicketFromLocation extends Component {
                                 {` Xem vé máy bay giá rẻ nhất khởi hành trong vòng 90
                             ngày tới. Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
                             </Typography>
-                            <Typography
-                                variant="body1"
-                                className="float-right view-more"
-                            >
-                                Xem thêm các ưu đãi khác
-                            </Typography>
+                            <Link to="discount-tickets">
+                                <Typography
+                                    variant="body1"
+                                    className="float-right view-more"
+                                >
+                                    Xem thêm các ưu đãi khác
+                                </Typography>
+                            </Link>
                         </div>
 
                         <div className="ticket-list">
@@ -52,7 +54,16 @@ class TicketFromLocation extends Component {
                                         <div key={item.id} className="col-md-4">
                                             <div className="ticket-item">
                                                 <div className="img-box">
-                                                    <img src="http://divui.com/blog/wp-content/uploads/2017/11/kinh-nghiem-du-lich-sapa-1.jpg" />
+                                                    <img
+                                                        src={
+                                                            URL_IMAGE_DESTINATION +
+                                                            item.flight
+                                                                .destination
+                                                                .image[0][
+                                                                "image_name"
+                                                            ]
+                                                        }
+                                                    />
                                                 </div>
                                                 <Typography
                                                     variant="h6"

@@ -103,3 +103,6 @@ Route::put('user/booking/payment/{id}', [UserController::class, "paymentBooking"
 Route::get('user/booking/{id}', [UserController::class, "getBookingInfo"]);
 Route::post('user/find-route', [UserController::class, "findRouteFlight"]);
 Route::get('user/payment', [UserController::class, "bookingPayment"]);
+
+//Image
+Route::get("destinations/images/{id}", [DestinationController::class, "getImageList"]);
