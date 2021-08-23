@@ -43,7 +43,7 @@ class PassengerInfo extends Component {
                             <tbody>
                                 {passengerList.map((item) => {
                                     return (
-                                        <tr>
+                                        <tr key={item.id}>
                                             <td className="content-item">
                                                 {loop++}
                                             </td>

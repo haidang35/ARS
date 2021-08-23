@@ -205,4 +205,28 @@ class UserController extends Controller
         $message = "";
         return new MailCheckout($message);
     }
+
+    public function cancelBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking_ticket = BookingTicket::where("booking_id", $booking["id"])->first();
+        $ticket = Ticket::findOrFail($booking_ticket["ticket_id"]);
+        $flight = Flight::with("Departure")->with("Destination")->findOrFail($ticket["flight_id"]);
+        $booking["flight"] = $flight;
+        $passengers = BookingTicket::where('booking_id', $booking["id"])->get();
+        foreach ($passengers as $item) {
+            $item->delete();
+        }
+        $booking->delete();
+        return response()->json($booking);
+    }
+
+    public function getBookingDetails($id)
+    {
+        $booking = Booking::find($id);
+        $bookingTicket = BookingTicket::where("booking_id", $booking["id"])->first();
+        $flight = Flight::with("Departure")->with("Destination")->with("Airline")->find($bookingTicket["flight_id"]);
+        $booking["flight"] = $flight;
+        return $booking;
+    }
 }

@@ -1,0 +1,43 @@
+@import "../../../../../../Shared/Style/variables";
+
+.payment-notice-box {
+    background-color: #ffff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 2rem;
+
+    .title-box {
+        background-color: $background-color;
+        padding: 1rem;
+
+        .title {
+            color: white;
+            text-transform: uppercase;
+            font-size: 17px;
+        }
+    }
+
+    .content {
+        border-bottom: 1px solid rgb(194, 193, 193);
+        padding: 2rem;
+
+        .payment-info-list {
+            .info-item {
+                .img-box {
+
+                    height: 100px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                img {
+                    width: 110px;
+                }
+            }
+        }
+
+
+
+    }
+}

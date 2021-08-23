@@ -4,12 +4,18 @@ import { Link } from "react-router-dom";
 import { dateConvert } from "../../../../../../Helpers/DateTime/ConvertDateTime";
 import { formatCurrency } from "../../../../../../Helpers/FormatCurrency";
 import AuthService from "../../../../../../Shared/Service/AuthService";
+import AlertModal from "../../../../../../Shared/Components/Modal/AlertModal";
+import UserService from "../../../../Shared/UserService/UserService";
+import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess";
+import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";
 
 class BookingList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             myBookingFlight: [],
+            message: "",
+            errMessage: "",
         };
     }
 
@@ -25,8 +31,31 @@ class BookingList extends Component {
         });
     };
 
+    cancelBooking = (id) => {
+        UserService.cancelBooking(id)
+            .then((res) => {
+                this.setState({
+                    message: `Hủy đặt vé chuyến bay ${res.data.flight.departure.city} - ${res.data.flight.destination.city} thành công`,
+                });
+                this.getMyBookingFlight();
+            })
+            .catch((err) => {
+                this.setState({
+                    errMessage: `Hủy đặt vé thất bại, vui lòng thử lại sau`,
+                });
+            });
+    };
+
     render() {
-        const { myBookingFlight } = this.state;
+        const { myBookingFlight, message, errMessage } = this.state;
+        if (message.length > 0 || errMessage.length > 0) {
+            const timer = setTimeout(() => {
+                this.setState({
+                    message: "",
+                    errMessage: "",
+                });
+            }, 10000);
+        }
         let loop = 1;
         return (
             <div>
@@ -37,6 +66,8 @@ class BookingList extends Component {
                         </div>
                         <div className="card-content">
                             <div className="card-body">
+                                <AlertSuccess message={message} />
+                                <AlertDanger message={errMessage} />
                                 <div className="table-responsive">
                                     <table className="table table-lg">
                                         <thead>
@@ -46,6 +77,7 @@ class BookingList extends Component {
                                                 <th>Điểm đến - điểm đi</th>
                                                 <th>Mã chuyến bay</th>
                                                 <th>Tổng cộng</th>
+                                                <th>Trạng thái thanh toán</th>
                                                 <th>Trạng thái</th>
                                                 <th></th>
                                             </tr>
@@ -53,7 +85,7 @@ class BookingList extends Component {
                                         <tbody>
                                             {myBookingFlight.map((item) => {
                                                 return (
-                                                    <tr>
+                                                    <tr key={item.id}>
                                                         <td className="text-bold-500">
                                                             {loop++}
                                                         </td>
@@ -75,6 +107,12 @@ class BookingList extends Component {
                                                             {formatCurrency(
                                                                 item.into_money
                                                             )}
+                                                        </td>
+                                                        <td>
+                                                            {item.payment_status ===
+                                                            0
+                                                                ? "Chưa thanh toán"
+                                                                : "Đã thanh toán"}
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.status ==
@@ -106,6 +144,28 @@ class BookingList extends Component {
                                                                     Xem chi tiết
                                                                 </button>
                                                             </Link>
+                                                            <button
+                                                                className="btn btn-danger"
+                                                                style={{
+                                                                    marginTop:
+                                                                        "1rem",
+                                                                }}
+                                                                data-toggle="modal"
+                                                                data-target={`#alertModal${item.id}`}
+                                                            >
+                                                                Hủy đặt vé
+                                                            </button>
+                                                            <AlertModal
+                                                                id={item.id}
+                                                                title={
+                                                                    "Thông báo"
+                                                                }
+                                                                message={`Bạn có chắc chắn muốn hủy đặt vé ${item.flight.departure.city} - ${item.flight.destination.city}`}
+                                                                onConfirm={
+                                                                    this
+                                                                        .cancelBooking
+                                                                }
+                                                            />
                                                         </td>
                                                     </tr>
                                                 );

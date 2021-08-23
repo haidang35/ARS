@@ -42,7 +42,6 @@ class HomeMain extends Component {
     };
 
     getIpAddress = async (destinationList) => {
-        let ipAddress = (await publicIp.v4()).toString();
         await axios
             .get(URL_GET_IP_LOCATION + (await publicIp.v4()).toString())
             .then((res) => {

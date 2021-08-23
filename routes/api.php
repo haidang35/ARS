@@ -31,6 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/get-password', [AuthController::class, "getMyPassword"]);
     Route::put('user/update-password', [AuthController::class, "updatePassword"]);
     Route::patch('user/update-info', [AuthController::class, "upDateMyInfo"]);
+    Route::delete('user/booking/{id}', [UserController::class, "cancelBooking"]);
+    // Route::get('user/booking/{id}', [UserController::class, "getBookingDetails"]);
 
     //Message
     Route::get('my-message', [ChatBoxController::class, "fetchMessage"]);

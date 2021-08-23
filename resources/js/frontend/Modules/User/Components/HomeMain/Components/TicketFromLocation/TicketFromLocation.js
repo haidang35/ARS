@@ -4,12 +4,16 @@ import { Component } from "react";
 import "./TicketFromLocation.scss";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { formatCurrency } from "../../../../../../Helpers/FormatCurrency";
-import { dateConvert } from "../../../../../../Helpers/DateTime/ConvertDateTime";
+import {
+    dateConvert,
+    getDate,
+} from "../../../../../../Helpers/DateTime/ConvertDateTime";
 import {
     URL_IMAGE_AIRLINE,
     URL_IMAGE_DESTINATION,
 } from "../../../../../../Constances/const";
 import { Link } from "react-router-dom";
+import { goTo } from "../../../../../../Helpers/Redirect/Redirect";
 
 class TicketFromLocation extends Component {
     constructor(props) {
@@ -51,7 +55,23 @@ class TicketFromLocation extends Component {
                             <div className="row">
                                 {ticketListLocation.map((item) => {
                                     return (
-                                        <div key={item.id} className="col-md-4">
+                                        <div
+                                            key={item.id}
+                                            className="col-md-4"
+                                            onClick={() =>
+                                                goTo(
+                                                    `search-flight?departure=${
+                                                        item.flight.departure.id
+                                                    }&destination=${
+                                                        item.flight.destination
+                                                            .id
+                                                    }&time=${getDate(
+                                                        item.flight
+                                                            .departure_datetime
+                                                    )}`
+                                                )
+                                            }
+                                        >
                                             <div className="ticket-item">
                                                 <div className="img-box">
                                                     <img

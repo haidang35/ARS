@@ -16,6 +16,7 @@ import Payment from "./Components/Payment/Payment";
 import UserService from "../../../User/Shared/UserService/UserService";
 import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
 import ChatBox from "../ChatBox/ChatBox";
+import PaymentNoticeBox from "./Components/PaymentNoticeBox/PaymentNoticeBox";
 
 class BookingConfirm extends Component {
     constructor(props) {
@@ -121,6 +122,9 @@ class BookingConfirm extends Component {
                                     data={bookingInfo}
                                     onPaymentBooking={this.onPaymentBooking}
                                 />
+                            ) : bookingInfo.payment_status === 0 &&
+                              bookingInfo.payment_method === 2 ? (
+                                <PaymentNoticeBox data={bookingInfo} />
                             ) : (
                                 ""
                             )}

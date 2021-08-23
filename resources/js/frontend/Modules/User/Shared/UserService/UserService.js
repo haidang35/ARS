@@ -13,6 +13,7 @@ const API_ENPOINT = {
     GET_BOOKING_INFO: "user/booking/",
     GET_TICKET_LOCATION_DEPARTURE: "tickets/location/",
     GET_DISCOUNT_TICKET: "discount-tickets",
+    CANCEL_BOOKING: "user/booking/",
 };
 
 class UserService {
@@ -80,6 +81,12 @@ class UserService {
 
     async getDiscountTicket() {
         return await axios.get(BASE_URL + API_ENPOINT.GET_DISCOUNT_TICKET);
+    }
+
+    async cancelBooking(bookingId) {
+        return await axios.delete(
+            BASE_URL + API_ENPOINT.CANCEL_BOOKING + bookingId
+        );
     }
 }
 
