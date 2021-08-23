@@ -42,7 +42,7 @@ window.Echo = new Echo({
     disableStats: true,
 });
 
-// window.Echo.channel("ChatMessage").listen("MessageEvent", (e) => {
+// window.Echo.channel("Notification").listen("NotificationEvent", (e) => {
 //     console.log("message", e);
 // });
 

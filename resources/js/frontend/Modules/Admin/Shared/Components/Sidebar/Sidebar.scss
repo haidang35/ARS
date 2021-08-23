@@ -1,6 +1,13 @@
 .sidebar-admin {
     .sidebar-wrapper {
-       box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.411);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.411);
+    }
+
+    .notice-number {
+        background-color: rgba(161, 141, 182, 0.459);
+        color: #ffff;
+        padding: 3px 10px;
+        border-radius: 50%;
     }
 
 

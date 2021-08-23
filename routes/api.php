@@ -10,9 +10,11 @@ use App\Http\Controllers\FlightController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ChatBoxController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\UserController;
 use App\Models\Destination;
+use App\Models\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,3 +110,8 @@ Route::get('user/payment', [UserController::class, "bookingPayment"]);
 
 //Image
 Route::get("destinations/images/{id}", [DestinationController::class, "getImageList"]);
+
+//Notification
+Route::get("notifications", [NotificationController::class, "getNotificationList"]);
+Route::get("notifications/new", [NotificationController::class, "getNewNotification"]);
+Route::patch("notifications/update", [NotificationController::class, "updateReadNotification"]);

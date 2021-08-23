@@ -7,14 +7,51 @@ import { RiPlaneFill, RiReservedFill } from "react-icons/ri";
 import { MdLocationOn, MdDashboard } from "react-icons/md";
 import { SiFloatplane } from "react-icons/si";
 import { HiUserGroup } from "react-icons/hi";
+import { IoNotificationsSharp } from "react-icons/io5";
 import { BsFillChatSquareDotsFill } from "react-icons/bs";
+import NotificationService from "../../../../Admin/Components/Notification/Shared/NotificationService";
 class SideBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            newNotification: 0,
+        };
     }
 
+    componentDidMount() {
+        this.getNewNotification();
+        this.getNewNotificationRealTime();
+    }
+
+    getNewNotificationRealTime = () => {
+        window.Echo.channel("Notification").listen(
+            "NotificationEvent",
+            (event) => {
+                let { newNotification } = this.state;
+                newNotification += 1;
+                this.setState({ newNotification });
+            }
+        );
+    };
+
+    getNewNotification = () => {
+        NotificationService.getNewNotifications().then((res) => {
+            this.setState({
+                newNotification: res.data.length,
+            });
+        });
+    };
+
+    onUpdateNewNotification = () => {
+        NotificationService.updateNotification().then((res) => {
+            this.setState({
+                newNotification: 0,
+            });
+        });
+    };
+
     render() {
+        const { newNotification } = this.state;
         return (
             <div id="sidebar" className="sidebar-admin active">
                 <div className="sidebar-wrapper active">
@@ -100,6 +137,24 @@ class SideBar extends Component {
                                 >
                                     <HiUserGroup style={{ fontSize: "25px" }} />
                                     <span>Passengers</span>
+                                </NavLink>
+                                <NavLink
+                                    onClick={this.onUpdateNewNotification}
+                                    to="/admin/notifications"
+                                    className="sidebar-link"
+                                    activeStyle={{ backgroundColor: "#d7ebef" }}
+                                >
+                                    <IoNotificationsSharp
+                                        style={{ fontSize: "25px" }}
+                                    />
+                                    <span>Notifications</span>
+                                    {newNotification > 0 ? (
+                                        <span className="notice-number">
+                                            {newNotification}
+                                        </span>
+                                    ) : (
+                                        ""
+                                    )}
                                 </NavLink>
                                 <NavLink
                                     to="/admin/chat-box"

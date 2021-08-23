@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
 use App\Mail\MailCheckout;
 use App\Models\Booking;
 use App\Models\BookingTicket;
 use App\Models\Destination;
 use App\Models\Flight;
+use App\Models\Notification as ModelsNotification;
 use App\Models\Passenger;
 use App\Models\Ticket;
+use App\Models\User;
+use App\Notifications\OffersNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class UserController extends Controller
 {
@@ -158,7 +163,7 @@ class UserController extends Controller
         }
         $booking["passengers"] = $passengersBooking;
         $booking["into_money"] = $into_money;
-
+        $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"]);
         return $booking;
     }
 
@@ -228,5 +233,31 @@ class UserController extends Controller
         $flight = Flight::with("Departure")->with("Destination")->with("Airline")->find($bookingTicket["flight_id"]);
         $booking["flight"] = $flight;
         return $booking;
+    }
+
+    // public function sendNotification()
+    // {
+    //     $users = User::where("roleId", 1)->get();
+    //     $offerData = [
+    //         'name' => 'BOGO',
+    //         'body' => 'You received an offer.',
+    //         'thanks' => 'Thank you',
+    //         'offerText' => 'Check out the offer',
+    //         'offerUrl' => url('/'),
+    //         'offer_id' => 007
+    //     ];
+    //     foreach ($users as $item) {
+    //         Notification::send($item, new OffersNotification($offerData));
+    //     }
+    //     return "Success";
+    // }
+
+    public function sendNotification($title, $content)
+    {
+        $notice = ModelsNotification::create([
+            "title" => $title,
+            "content" => $content
+        ]);
+        broadcast(new NotificationEvent($notice->load("User")))->toOthers();
     }
 }

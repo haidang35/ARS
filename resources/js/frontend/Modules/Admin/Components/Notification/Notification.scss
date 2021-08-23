@@ -1,0 +1,18 @@
+.notification-admin {
+    .notice-list {
+        .notice-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .notice-icon {
+                font-size: 30px;
+                margin-right: 1rem;
+            }
+
+            .notice-content {
+                font-size: 18px;
+            }
+        }
+    }
+}

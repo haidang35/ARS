@@ -23,6 +23,7 @@ import TicketDetails from "../Components/Ticket/Components/TicketDetails/TicketD
 import FlightDetails from "../Components/Flight/Components/FlightDetails/FlightDetails";
 import DestinationDetails from "../Components/Destination/Components/DestinationDetails/DestinationDetails";
 import ChatBox from "../Components/Chat/ChatBox";
+import Notification from "../Components/Notification/Notification";
 
 class AdminDashBoard extends Component {
     constructor(props) {
@@ -107,6 +108,11 @@ class AdminDashBoard extends Component {
                                             exact
                                             path="/admin/chat-box"
                                             component={ChatBox}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/admin/notifications"
+                                            component={Notification}
                                         />
                                     </Suspense>
                                 </Switch>
