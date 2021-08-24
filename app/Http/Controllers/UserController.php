@@ -163,7 +163,8 @@ class UserController extends Controller
         }
         $booking["passengers"] = $passengersBooking;
         $booking["into_money"] = $into_money;
-        $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"]);
+        $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"], $booking["id"]);
+
         return $booking;
     }
 
@@ -252,11 +253,12 @@ class UserController extends Controller
     //     return "Success";
     // }
 
-    public function sendNotification($title, $content)
+    public function sendNotification($title, $content, $data)
     {
         $notice = ModelsNotification::create([
             "title" => $title,
-            "content" => $content
+            "content" => $content,
+            "data" => $data
         ]);
         broadcast(new NotificationEvent($notice->load("User")))->toOthers();
     }

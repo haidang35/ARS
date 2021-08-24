@@ -18,6 +18,7 @@ class CreateTableNotification extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
             $table->text("title");
             $table->text("content")->nullable();
+            $table->integer("data");
             $table->tinyInteger("read")->default(0);
             $table->timestamps();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");

@@ -43,10 +43,13 @@ class SideBar extends Component {
     };
 
     onUpdateNewNotification = () => {
-        NotificationService.updateNotification().then((res) => {
-            this.setState({
-                newNotification: 0,
-            });
+        // NotificationService.updateNotification().then((res) => {
+        //     this.setState({
+        //         newNotification: 0,
+        //     });
+        // });
+        this.setState({
+            newNotification: 0,
         });
     };
 
