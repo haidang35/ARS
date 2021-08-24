@@ -20,38 +20,52 @@ class Flight extends Model
         "destination_id",
         "capacity",
         "seats_reserved",
-        "seats_available"
+        "seats_available",
+        "status"
 
     ];
 
-    public function Destination() {
+    public function Destination()
+    {
         return $this->belongsTo(Destination::class);
     }
 
-    public function Ticket() {
+    public function Ticket()
+    {
         return $this->hasMany(Ticket::class);
     }
 
-    public function Departure() {
+    public function Departure()
+    {
         return $this->belongsTo(Destination::class);
     }
 
-    public function Airline() {
+    public function Airline()
+    {
         return $this->belongsTo(Airline::class);
     }
 
-    public function scopeDepartureTime($query, $departureTime) {
+    public function scopeDepartureTime($query, $departureTime)
+    {
         $time = new Carbon($departureTime);
         return $query->whereDate("departure_datetime", $time->toDateString());
     }
 
-    public function scopeDeparture($query, $departureId) {
+    public function scopeDeparture($query, $departureId)
+    {
         return $query->where("departure_id", $departureId);
     }
 
-    public function scopeDestination($query, $destinationId) {
+    public function scopeDestination($query, $destinationId)
+    {
         return $query->where("destination_id", $destinationId);
     }
 
-    
+    public function scopeSearchFlight($query, $searchValue)
+    {
+        if ($searchValue == "" || $searchValue == null) {
+            return $query;
+        }
+        return $query->where("flight_code", 'LIKE', "%" . $searchValue . "%");
+    }
 }

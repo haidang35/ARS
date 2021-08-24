@@ -8,6 +8,7 @@ import {
     getTime,
 } from "../../../../../../Helpers/DateTime/ConvertDateTime";
 import { formatCurrency } from "../../../../../../Helpers/FormatCurrency";
+import { URL_IMAGE_AIRLINE } from "../../../../../../Constances/const";
 
 class FlightDetails extends Component {
     constructor(props) {
@@ -35,7 +36,10 @@ class FlightDetails extends Component {
                                     <div className="logo-box">
                                         <img
                                             className="logo"
-                                            src="https://static.wixstatic.com/media/9d8ed5_b328a87c44a04887ab0d35ef93991f16~mv2.png/v1/fill/w_1000,h_626,al_c,usm_0.66_1.00_0.01/9d8ed5_b328a87c44a04887ab0d35ef93991f16~mv2.png"
+                                            src={
+                                                URL_IMAGE_AIRLINE +
+                                                data.flight.airline.logo
+                                            }
                                         />
                                     </div>
                                 </div>

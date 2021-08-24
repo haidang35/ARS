@@ -13,6 +13,7 @@ import CustomerProfile from "../Components/CustomerProfile/CustomerProfile";
 import AuthService from "../../../Shared/Service/AuthService";
 import HomeMain from "../Components/HomeMain/HomeMain";
 import DiscountTickets from "../Components/DiscountTickets/DiscountTickets";
+import SearchFlightInfo from "../Components/SearchFligthInfo/SearchFlightInfo";
 
 class Home extends Component {
     constructor(props) {
@@ -70,6 +71,10 @@ class Home extends Component {
                             <Route
                                 path={"/discount-tickets"}
                                 component={DiscountTickets}
+                            />
+                            <Route
+                                path={"/flight-info"}
+                                component={SearchFlightInfo}
                             />
                         </Suspense>
                     </Switch>

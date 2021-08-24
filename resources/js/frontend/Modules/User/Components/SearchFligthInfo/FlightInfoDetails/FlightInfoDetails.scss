@@ -1,0 +1,25 @@
+.flight-info-details {
+    background-color: #ffff;
+    height: 200px;
+    border-radius: 10px;
+    display: flex;
+
+    .img-box {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        img {
+            width: 350px;
+        }
+    }
+
+    .flight-info {
+        width: 100%;
+        padding: 2rem;
+
+        .info-item {
+            font-size: 21px;
+        }
+    }
+}

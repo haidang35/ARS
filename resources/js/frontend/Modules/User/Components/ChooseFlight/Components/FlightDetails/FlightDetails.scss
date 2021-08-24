@@ -28,8 +28,14 @@
             padding-bottom: 1rem;
 
             .logo-box {
+                width: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+
                 .logo {
-                    width: 150px;
+                    width: 130px;
                 }
             }
 

@@ -18,6 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { goTo } from "../../../../../Helpers/Redirect/Redirect";
+import { IoSearchCircle } from "react-icons/io5";
 
 const StyledMenu = withStyles({
     paper: {
@@ -55,6 +56,7 @@ class Navbar extends Component {
         super(props);
         this.state = {
             openUserMenu: false,
+            search: "",
         };
     }
 
@@ -79,6 +81,20 @@ class Navbar extends Component {
         localStorage.removeItem("userInfo");
         goTo("");
     };
+
+    handleChangeSearch = (ev) => {
+        this.setState({
+            search: ev.target.value,
+        });
+    };
+
+    onSearchFLightInfo = (ev) => {
+        const { search } = this.state;
+        if (ev.key === "Enter") {
+            goTo(`flight-info?search=${search}`);
+        }
+    };
+
     render() {
         const isLogged = !!AuthService.userId;
         let userInfo = {};
@@ -136,6 +152,18 @@ class Navbar extends Component {
                                         </Typography>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="search-bar">
+                                <input
+                                    type="text"
+                                    placeholder="Search ..."
+                                    name="search"
+                                    className="search-input"
+                                    value={this.state.search}
+                                    onChange={this.handleChangeSearch}
+                                    onKeyDown={this.onSearchFLightInfo}
+                                />
+                                <IoSearchCircle className="search-icon" />
                             </div>
 
                             {!isLogged ? (

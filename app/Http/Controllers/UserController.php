@@ -154,6 +154,7 @@ class UserController extends Controller
                 "passenger_name" => $item["passenger_name"],
                 "gender" => $item["gender"],
                 "birthday" => $item["birthday"],
+                "identity_card" => $item["passenger_type"] == 1 ? $item["identity_card"] : null,
                 "passenger_type" => $item["passenger_type"],
 
             ];
@@ -261,5 +262,12 @@ class UserController extends Controller
             "data" => $data
         ]);
         broadcast(new NotificationEvent($notice->load("User")))->toOthers();
+    }
+
+    public function searchFlightInfo(Request $request)
+    {
+        $search = $request->search;
+        $searchResults = Flight::with("Airline")->with("Destination")->with("Departure")->searchFlight($search)->get();
+        return response()->json($searchResults);
     }
 }

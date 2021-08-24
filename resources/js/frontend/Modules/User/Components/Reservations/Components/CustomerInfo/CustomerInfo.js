@@ -28,6 +28,7 @@ class CustomerInfo extends Component {
                             name: { value: "", err: "" },
                             birthday: { value: "", err: "" },
                             gender: { value: "Nam", err: "" },
+                            identity_card: { value: "", err: "" },
                         };
                         adults.push(data);
                     }
@@ -165,6 +166,7 @@ class CustomerInfo extends Component {
                         passenger_name: item.name.value,
                         gender: item.gender.value,
                         birthday: item.birthday.value,
+                        identity_card: item.identity_card.value,
                         passenger_type: 1,
                     };
                     data.push(itemData);
@@ -236,7 +238,7 @@ class CustomerInfo extends Component {
                                         Giới tính
                                     </Typography>
                                 </div>
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <Typography
                                         variant="h6"
                                         className="sub-title"
@@ -250,6 +252,14 @@ class CustomerInfo extends Component {
                                         className="sub-title"
                                     >
                                         Ngày sinh
+                                    </Typography>
+                                </div>
+                                <div className="col-md-2">
+                                    <Typography
+                                        variant="h6"
+                                        className="sub-title"
+                                    >
+                                        CMND/CCCD
                                     </Typography>
                                 </div>
                             </div>
@@ -289,7 +299,7 @@ class CustomerInfo extends Component {
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <input
                                                     type="text"
                                                     name="name"
@@ -315,7 +325,7 @@ class CustomerInfo extends Component {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <input
                                                     type="date"
                                                     name="birthday"
@@ -335,6 +345,34 @@ class CustomerInfo extends Component {
                                                     <FormError
                                                         err={
                                                             "Vui lòng nhập ngày sinh"
+                                                        }
+                                                    />
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                            <div className="col-md-2">
+                                                <input
+                                                    type="text"
+                                                    name="identity_card"
+                                                    required
+                                                    className="form-control"
+                                                    value={
+                                                        item.identity_card.value
+                                                    }
+                                                    onChange={(ev) =>
+                                                        this.setValue(
+                                                            ev,
+                                                            1,
+                                                            item.id
+                                                        )
+                                                    }
+                                                />
+                                                {item.identity_card.err ==
+                                                    "*" && !isValid ? (
+                                                    <FormError
+                                                        err={
+                                                            "Vui lòng nhập CMND/CCCD"
                                                         }
                                                     />
                                                 ) : (
@@ -404,7 +442,7 @@ class CustomerInfo extends Component {
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <input
                                                     type="text"
                                                     name="name"
@@ -430,7 +468,7 @@ class CustomerInfo extends Component {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <input
                                                     type="date"
                                                     name="birthday"
@@ -519,7 +557,7 @@ class CustomerInfo extends Component {
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <input
                                                     type="text"
                                                     name="name"
@@ -545,7 +583,7 @@ class CustomerInfo extends Component {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col-md-4">
+                                            <div className="col-md-3">
                                                 <input
                                                     type="date"
                                                     name="birthday"

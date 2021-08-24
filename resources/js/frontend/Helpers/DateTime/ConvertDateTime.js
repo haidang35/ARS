@@ -106,3 +106,23 @@ export const convertMonthAndDate = (date) => {
     }
     return month + " " + newDate.getDate();
 };
+
+export const getInterval = (date1, date2) => {
+    const newDate1 = new Date(date1);
+    const newDate2 = new Date(date2);
+    let time = "";
+    if (newDate1.getTime() > newDate2.getTime()) {
+        time = newDate1.getTime() - newDate2.getTime();
+    } else if (newDate1.getTime() < newDate2.getTime()) {
+        time = newDate2.getTime() - newDate1.getTime();
+    }
+    let d = Number(time);
+    const h = Math.floor(d / (1000 * 3600));
+    const m = Math.floor(d % (1000 * 3600)) / 60;
+    const s = Math.floor((d % (1000 * 3600)) % 60);
+    let diffTime = h + " giờ " + m + " phút";
+    if (m === 0) {
+        diffTime = h + " giờ ";
+    }
+    return diffTime;
+};
