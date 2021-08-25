@@ -56,9 +56,18 @@ class PaymentNoticeBox extends Component {
                                                 </div>
                                                 <div className="col-md-12">
                                                     <Typography variant="h6">
-                                                        {` Nội dung chuyển khoản: "
-                                                        ${data.contact_name} - ${data.contact_phone} - Đặt vé ${data.flight.departure.airport_code}
-                                                        - ${data.flight.destination.airport_code}`}
+                                                        {` Nội dung chuyển khoản:`}
+                                                        <span
+                                                            style={{
+                                                                fontStyle:
+                                                                    "italic",
+                                                            }}
+                                                        >
+                                                            {" "}
+                                                            {`"
+                                                        ${data.contact_name} - ${data.contact_phone} - Đặt vé #${data.booking_code}
+                                                        "`}
+                                                        </span>
                                                     </Typography>
                                                 </div>
                                             </div>

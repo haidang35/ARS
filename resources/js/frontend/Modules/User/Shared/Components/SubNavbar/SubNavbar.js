@@ -18,6 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { goTo } from "../../../../../Helpers/Redirect/Redirect";
+import { IoSearchCircle } from "react-icons/io5";
 
 const StyledMenu = withStyles({
     paper: {
@@ -56,6 +57,7 @@ class SubNavbar extends Component {
             openUserMenu: false,
             onLogin: false,
             onLogout: false,
+            search: "",
         };
     }
 
@@ -81,6 +83,19 @@ class SubNavbar extends Component {
         localStorage.removeItem("userId");
         localStorage.removeItem("userInfo");
         goTo("");
+    };
+
+    handleChangeSearch = (ev) => {
+        this.setState({
+            search: ev.target.value,
+        });
+    };
+
+    onSearchFLightInfo = (ev) => {
+        const { search } = this.state;
+        if (ev.key === "Enter") {
+            goTo(`flight-info?search=${search}`);
+        }
     };
     render() {
         const isLogged = !!AuthService.userId;
@@ -144,6 +159,32 @@ class SubNavbar extends Component {
                                         </Typography>
                                     </div>
                                 </div>
+                            </div>
+                            <div
+                                className="search-bar"
+                                style={
+                                    isLogged
+                                        ? { marginLeft: "5%" }
+                                        : { marginLeft: "18%" }
+                                }
+                            >
+                                <input
+                                    type="text"
+                                    placeholder="Search ..."
+                                    name="search"
+                                    className="search-input"
+                                    value={this.state.search}
+                                    onChange={this.handleChangeSearch}
+                                    onKeyDown={this.onSearchFLightInfo}
+                                />
+                                <IoSearchCircle
+                                    onClick={() =>
+                                        goTo(
+                                            `flight-info?search=${this.state.search}`
+                                        )
+                                    }
+                                    className="search-icon"
+                                />
                             </div>
                             {!isLogged ? (
                                 <div className="btn-login-box">

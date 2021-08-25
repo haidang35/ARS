@@ -47,17 +47,27 @@ class Flight extends Model
 
     public function scopeDepartureTime($query, $departureTime)
     {
+        if ($departureTime == null && $departureTime == "") {
+            return $query;
+        }
         $time = new Carbon($departureTime);
         return $query->whereDate("departure_datetime", $time->toDateString());
     }
 
     public function scopeDeparture($query, $departureId)
+
     {
+        if ($departureId == null && $departureId == "") {
+            return $query;
+        }
         return $query->where("departure_id", $departureId);
     }
 
     public function scopeDestination($query, $destinationId)
     {
+        if ($destinationId == null && $destinationId == "") {
+            return $query;
+        }
         return $query->where("destination_id", $destinationId);
     }
 

@@ -153,7 +153,15 @@ class Navbar extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="search-bar">
+
+                            <div
+                                className="search-bar"
+                                style={
+                                    isLogged
+                                        ? { marginLeft: "5%" }
+                                        : { marginLeft: "18%" }
+                                }
+                            >
                                 <input
                                     type="text"
                                     placeholder="Search ..."
@@ -163,7 +171,14 @@ class Navbar extends Component {
                                     onChange={this.handleChangeSearch}
                                     onKeyDown={this.onSearchFLightInfo}
                                 />
-                                <IoSearchCircle className="search-icon" />
+                                <IoSearchCircle
+                                    onClick={() =>
+                                        goTo(
+                                            `flight-info?search=${this.state.search}`
+                                        )
+                                    }
+                                    className="search-icon"
+                                />
                             </div>
 
                             {!isLogged ? (

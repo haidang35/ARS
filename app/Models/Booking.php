@@ -11,6 +11,7 @@ class Booking extends Model
     use HasFactory;
     protected $table = "bookings";
     protected $fillable = [
+        "booking_code",
         "booking_date",
         "trip_type",
         "contact_name",
@@ -30,5 +31,10 @@ class Booking extends Model
     public function passenger(): HasMany
     {
         return $this->hasMany(BookingTicket::class);
+    }
+
+    public function scopeCode($query, $bookingCode)
+    {
+        return $query->where("booking_code", $bookingCode);
     }
 }

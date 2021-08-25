@@ -84,7 +84,10 @@ class BookingConfirm extends Component {
                                             className="notice-title"
                                             variant="h6"
                                         >
-                                            Quý khách đã đặt chỗ thành công
+                                            {`Quý khách đã đặt chỗ thành công, mã đặt vé của quý khách là: `}
+                                            <span
+                                                style={{ color: "#7b61f2" }}
+                                            >{`#${bookingInfo.booking_code}`}</span>
                                         </Typography>
                                     ) : (
                                         ""

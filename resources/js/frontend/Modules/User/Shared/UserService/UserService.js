@@ -15,6 +15,7 @@ const API_ENDPOINT = {
     GET_DISCOUNT_TICKET: "discount-tickets",
     CANCEL_BOOKING: "user/booking/",
     SEARCH_FLIGHT_INFO: "user/search/flight",
+    GET_BOOKING_INFO_WITH_CODE: "user/booking-info/",
 };
 
 class UserService {
@@ -94,6 +95,12 @@ class UserService {
         return await axios.post(
             BASE_URL + API_ENDPOINT.SEARCH_FLIGHT_INFO,
             data
+        );
+    }
+
+    async getBookingInfoWithCode(bookingCode) {
+        return await axios.get(
+            BASE_URL + API_ENDPOINT.GET_BOOKING_INFO_WITH_CODE + bookingCode
         );
     }
 }

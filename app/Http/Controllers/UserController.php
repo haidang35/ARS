@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NotificationEvent;
+use App\Mail\ConfirmMail;
 use App\Mail\MailCheckout;
 use App\Models\Booking;
 use App\Models\BookingTicket;
@@ -14,9 +15,11 @@ use App\Models\Ticket;
 use App\Models\User;
 use App\Notifications\OffersNotification;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -123,7 +126,9 @@ class UserController extends Controller
 
     public function bookingFlightTicket(Request $request)
     {
+        $bookingCode = strtoupper(Str::random(5) . rand(1000, 9999));
         $bookingInfo = [
+            "booking_code" => $bookingCode,
             "booking_date" => $request->booking_date,
             "trip_type" => $request->trip_type,
             "contact_name" => $request->contact_name,
@@ -165,7 +170,17 @@ class UserController extends Controller
         $booking["passengers"] = $passengersBooking;
         $booking["into_money"] = $into_money;
         $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"], $booking["id"]);
-
+        $departureTime = new DateTime($booking["flight"]["departure_datetime"]);
+        $arrivalTime = new DateTime($booking["flight"]["arrival_datetime"]);
+        $time = $arrivalTime->diff($departureTime);
+        $offer = [
+            'title' => 'Thông báo xác nhận yêu cầu đặt vé từ quý khách',
+            'url' => 'http://127.0.0.1:8000/booking-info/' . $booking["booking_code"],
+            'data' => $booking,
+            "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"
+        ];
+        $email = $booking["contact_email"];
+        Mail::to($email)->send(new ConfirmMail($offer));
         return $booking;
     }
 
@@ -267,7 +282,24 @@ class UserController extends Controller
     public function searchFlightInfo(Request $request)
     {
         $search = $request->search;
-        $searchResults = Flight::with("Airline")->with("Destination")->with("Departure")->searchFlight($search)->get();
+        $scopeDeparture = $request->scopeDeparture;
+        $scopeDestination = $request->scopeDestination;
+        $scopeDepartureDate = $request->scopeDepartureDate;
+        $searchResults = Flight::with("Airline")->with("Destination")->with("Departure")->searchFlight($search)
+            ->departure($scopeDeparture)->destination($scopeDestination)->departureTime($scopeDepartureDate)->get();
         return response()->json($searchResults);
+    }
+
+    public function getBookingInfoWithCode($bookingCode)
+    {
+        $bookingInfo = Booking::code($bookingCode)->first();
+        $passengers = BookingTicket::where("booking_id", $bookingInfo["id"])->get();
+        $bookingTicket = BookingTicket::where("booking_id", $bookingInfo["id"])->first();
+        $ticket = Ticket::find($bookingTicket["ticket_id"]);
+        $flight = Flight::with("Airline")->with("Departure")->with("Destination")->find($ticket["flight_id"]);
+        $bookingInfo["ticket"] = $ticket;
+        $bookingInfo["flight"] = $flight;
+        $bookingInfo["passenger"] = $passengers;
+        return response()->json($bookingInfo);
     }
 }

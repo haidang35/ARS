@@ -14,6 +14,7 @@ import AuthService from "../../../Shared/Service/AuthService";
 import HomeMain from "../Components/HomeMain/HomeMain";
 import DiscountTickets from "../Components/DiscountTickets/DiscountTickets";
 import SearchFlightInfo from "../Components/SearchFligthInfo/SearchFlightInfo";
+import ViewBookingInfo from "../Components/ViewBookingInfo/ViewBookingInfo";
 
 class Home extends Component {
     constructor(props) {
@@ -57,6 +58,10 @@ class Home extends Component {
                             <Route
                                 path={"/reservation/confirm"}
                                 component={BookingConfirm}
+                            />
+                            <Route
+                                path={"/booking-info/:code"}
+                                component={ViewBookingInfo}
                             />
                             <Route
                                 path={"/customer-info"}

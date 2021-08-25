@@ -618,7 +618,6 @@ class Booking extends Component {
                                                 <th>Hãng hàng không </th>
                                                 <th>Tổng tiền</th>
                                                 <th>Trạng thái thanh toán</th>
-                                                <th>Trạng thái</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -681,111 +680,9 @@ class Booking extends Component {
                                                                 ? "Chưa thanh toán"
                                                                 : "Đã thanh toán"}
                                                         </td>
-                                                        <td className="text-bold-500">
-                                                            {item.status ==
-                                                            1 ? (
-                                                                <button className="btn btn-sm btn-warning">
-                                                                    Chờ xác nhận
-                                                                </button>
-                                                            ) : item.status ==
-                                                              2 ? (
-                                                                <button className="btn btn-sm btn-success">
-                                                                    Đã xác nhận
-                                                                </button>
-                                                            ) : item.status ==
-                                                              3 ? (
-                                                                <button className="btn btn-sm btn-danger">
-                                                                    Đã hủy
-                                                                </button>
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </td>
+
                                                         <td>
                                                             <div className="btn-group-table">
-                                                                {item.status ==
-                                                                    1 ||
-                                                                item.status ==
-                                                                    3 ? (
-                                                                    <button
-                                                                        onClick={() =>
-                                                                            this.confirmBooking(
-                                                                                item.id
-                                                                            )
-                                                                        }
-                                                                        className="btn btn-success rounded-pill"
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            justifyContent:
-                                                                                "center",
-                                                                            alignItems:
-                                                                                "center",
-                                                                        }}
-                                                                    >
-                                                                        {itemLoadingConfirm ==
-                                                                        item.id ? (
-                                                                            <div
-                                                                                className="spinner-border text-warning"
-                                                                                role="status"
-                                                                                style={{
-                                                                                    marginRight:
-                                                                                        "7px",
-                                                                                }}
-                                                                            >
-                                                                                <span className="visually-hidden">
-                                                                                    Loading...
-                                                                                </span>
-                                                                            </div>
-                                                                        ) : (
-                                                                            ""
-                                                                        )}
-                                                                        {itemLoadingConfirm ==
-                                                                        item.id
-                                                                            ? "Confirming"
-                                                                            : "Confirm"}
-                                                                    </button>
-                                                                ) : (
-                                                                    <button
-                                                                        onClick={() =>
-                                                                            this.cancelBooking(
-                                                                                item.id
-                                                                            )
-                                                                        }
-                                                                        className="btn btn-danger rounded-pill"
-                                                                        style={{
-                                                                            display:
-                                                                                "flex",
-                                                                            justifyContent:
-                                                                                "center",
-                                                                            alignItems:
-                                                                                "center",
-                                                                        }}
-                                                                    >
-                                                                        {itemLoadingConfirm ==
-                                                                        item.id ? (
-                                                                            <div
-                                                                                className="spinner-border text-warning"
-                                                                                role="status"
-                                                                                style={{
-                                                                                    marginRight:
-                                                                                        "7px",
-                                                                                }}
-                                                                            >
-                                                                                <span className="visually-hidden">
-                                                                                    Loading...
-                                                                                </span>
-                                                                            </div>
-                                                                        ) : (
-                                                                            ""
-                                                                        )}
-                                                                        {itemLoadingConfirm ==
-                                                                        item.id
-                                                                            ? "Đang hủy"
-                                                                            : "Hủy bỏ"}
-                                                                    </button>
-                                                                )}
-
                                                                 <Link
                                                                     to={`/admin/bookings/${item.id}`}
                                                                 >

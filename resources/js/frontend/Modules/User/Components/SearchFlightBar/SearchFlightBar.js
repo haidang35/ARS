@@ -318,7 +318,6 @@ class SearchFlightBar extends Component {
                         <div className="col-md-4">
                             <div className="input-departure">
                                 <CssTextField
-                                    checked={tripType == 1}
                                     required
                                     onClick={this.handleChangeDeparture}
                                     id="standard-required"
@@ -351,7 +350,6 @@ class SearchFlightBar extends Component {
                         <div className="col-md-4">
                             <div className="input-destination">
                                 <CssTextField
-                                    checked={tripType == 2}
                                     required
                                     onClick={this.handleChangeDestination}
                                     id="standard-required"

@@ -13,6 +13,8 @@ import { getDateTimeNow } from "../../../../Helpers/DateTime/ConvertDateTime";
 import { Redirect } from "react-router-dom";
 import ModalNotice from "../../../../Shared/Components/Modal/ModalNotice";
 import ChatBox from "../ChatBox/ChatBox";
+import { Backdrop, CircularProgress } from "@material-ui/core";
+import { FaSlash } from "react-icons/fa";
 
 class Reservations extends Component {
     constructor(props) {
@@ -23,6 +25,7 @@ class Reservations extends Component {
             bookingInfo: {},
             redirect: false,
             message: "",
+            bookingConfirmLoading: false,
         };
     }
 
@@ -87,6 +90,9 @@ class Reservations extends Component {
         ) {
             const trip_type = JSON.parse(localStorage.getItem("tripType"));
             const userId = JSON.parse(localStorage.getItem("userId" || ""));
+            this.setState({
+                bookingConfirmLoading: true,
+            });
 
             const data = {
                 booking_date: getDateTimeNow(),
@@ -109,6 +115,7 @@ class Reservations extends Component {
                     this.setState({
                         bookingInfo: res.data,
                         redirect: true,
+                        bookingConfirmLoading: false,
                     });
                 })
                 .catch((err) => {
@@ -184,6 +191,15 @@ class Reservations extends Component {
                         />
                     </div>
                 </div>
+                <Backdrop
+                    open={this.state.bookingConfirmLoading}
+                    style={{ zIndex: "1000" }}
+                >
+                    <CircularProgress
+                        color="inherit"
+                        style={{ color: "#ffff" }}
+                    />
+                </Backdrop>
                 <ChatBox />
             </div>
         );

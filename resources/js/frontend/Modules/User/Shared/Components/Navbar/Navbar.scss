@@ -10,7 +10,7 @@
         padding-left: 0;
 
         .list-menu {
-            margin-left: 24rem;
+            margin-left: 18rem;
 
             .hotline {
                 display: flex;
@@ -50,7 +50,7 @@
         height: 50px;
         background-color: rgba(255, 255, 255, 0.363);
         border-radius: 35px;
-        margin-left: 12%;
+        margin-right: 2%;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -62,8 +62,9 @@
             width: 100%;
             height: 100%;
             background: none;
-            color: #ffff;
+            color: rgb(31, 30, 30);
             font-size: 18px;
+            font-weight: 500;
         }
 
         .search-icon {
