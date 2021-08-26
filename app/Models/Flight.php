@@ -19,6 +19,10 @@ class Flight extends Model
         "departure_id",
         "destination_id",
         "capacity",
+        "business_seats",
+        "economy_seats",
+        "first_economy_seats",
+        "exit_seats",
         "seats_reserved",
         "seats_available",
         "status"

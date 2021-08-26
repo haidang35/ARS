@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\Price;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -48,9 +49,21 @@ class FlightController extends Controller
             "destination_id" => $request->destination_id,
             "capacity" => $request->capacity,
             "seats_reserved" => $request->seats_reserved,
-            "seats_available" => $request->seats_available
+            "seats_available" => $request->seats_available,
+            "business_seats" => $request->business_seats,
+            "economy_seats" => $request->economy_seats,
+            "exit_seats" => $request->exit_seats,
+            "first_economy_seats" => $request->first_economy_seats
         ];
         $flight = Flight::create($data);
+        $priceData = $request->price_data;
+        foreach ($priceData as $item) {
+            Price::create([
+                "flight_id" => $flight["id"],
+                "class" => $item["class"],
+                "price" => $item["price"]
+            ]);
+        }
         return response()->json($flight);
     }
 

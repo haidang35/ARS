@@ -1,0 +1,47 @@
+.first-economy-seat {
+    .seats-row {
+        display: flex;
+        align-items: center;
+
+        .seat-list-left {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-grow: 1;
+
+            .seat-item {
+                .seat-icon {
+                    font-size: 55px;
+                    color: rgb(20, 174, 235);
+
+                }
+            }
+        }
+
+        .number-list {
+            width: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .number-item {
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+
+        .seat-list-right {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-grow: 1;
+
+            .seat-item {
+                .seat-icon {
+                    font-size: 55px;
+                    color: rgb(20, 174, 235);
+                }
+            }
+        }
+    }
+}

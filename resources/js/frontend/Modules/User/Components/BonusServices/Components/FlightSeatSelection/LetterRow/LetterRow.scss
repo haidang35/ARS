@@ -1,0 +1,38 @@
+.letter-row {
+    margin-bottom: 1.5rem;
+
+    .letter-box {
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+
+        .letters-left {
+            display: flex;
+            flex-grow: 2;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        .letter-space-number {
+            width: 1%;
+        }
+
+        .letters-right {
+            display: flex;
+            flex-grow: 2;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        .letter {
+            font-size: 22px;
+            font-weight: 600;
+
+        }
+
+
+    }
+
+}

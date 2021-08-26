@@ -1,0 +1,113 @@
+@import "../../../../../../Shared//Style/variables";
+
+.flight-seat-selection {
+    margin-top: 2rem;
+    background-color: #ffff;
+    padding: 2rem;
+
+    .passenger-list {
+        .title-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .passengers-box {
+            margin-top: 2rem;
+
+            .passenger-item {
+                width: 100%;
+                height: 80px;
+                background-color: #ffff;
+                border-radius: 10px;
+                border: 1px solid black;
+                padding: 10px;
+                cursor: pointer;
+                margin-bottom: 1rem;
+
+                .passenger-name {
+                    font-size: 18px;
+                    color: black;
+                }
+
+                .seat-status {
+                    font-size: 16px;
+                    color: black;
+                    font-weight: 600;
+
+                    .icon-arrow {
+                        font-size: 20px;
+                    }
+
+                }
+
+                .seat-status-active {
+                    color: rgb(12, 165, 12);
+
+                    .checked-icon {
+                        font-size: 20px;
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                .seat-selected-info {
+                    display: flex;
+                    align-items: center;
+                    background-color: rgb(12, 165, 12);
+                    padding: .2rem;
+                    border-radius: 10px;
+                    overflow: hidden;
+
+                    .seat-icon {
+                        font-size: 35px;
+                        color: #ffff;
+                        margin-right: 0.5rem;
+                        margin-left: .5rem;
+                    }
+
+                    .seat-name {
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #ffff;
+                    }
+
+                    .seat-price {
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #ffff;
+                    }
+
+                    .close-icon {
+                        font-size: 25px;
+                        color: #ffff;
+                        margin-left: 21%;
+
+                    }
+                }
+
+            }
+        }
+
+
+    }
+
+    .seat-map {
+        .title-box {
+            .title {
+                text-align: center;
+            }
+        }
+
+        .seats-diagram {
+            width: 100%;
+
+
+            .seat-list {
+                margin-top: 1rem;
+
+                .carbin {
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+}

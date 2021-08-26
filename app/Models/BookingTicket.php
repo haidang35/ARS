@@ -16,6 +16,7 @@ class BookingTicket extends Model
         "gender",
         "birthday",
         "identity_card",
+        "booking_seat",
         "passenger_type"
     ];
 

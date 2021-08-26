@@ -15,6 +15,7 @@ import HomeMain from "../Components/HomeMain/HomeMain";
 import DiscountTickets from "../Components/DiscountTickets/DiscountTickets";
 import SearchFlightInfo from "../Components/SearchFligthInfo/SearchFlightInfo";
 import ViewBookingInfo from "../Components/ViewBookingInfo/ViewBookingInfo";
+import BonusServices from "../Components/BonusServices/BonusServices";
 
 class Home extends Component {
     constructor(props) {
@@ -54,6 +55,10 @@ class Home extends Component {
                             <Route
                                 path={"/reservations/ticket/:id"}
                                 component={Reservations}
+                            />
+                            <Route
+                                path={"/bonus-services"}
+                                component={BonusServices}
                             />
                             <Route
                                 path={"/reservation/confirm"}

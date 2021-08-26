@@ -1,0 +1,67 @@
+.flight-seat-setting {
+    margin-top: 4rem;
+
+    .seat-map {
+        .title-box {
+            .title {
+                text-align: center;
+            }
+        }
+
+        .seats-diagram {
+            width: 100%;
+
+
+            .seat-list {
+                margin-top: 1rem;
+
+                .carbin {
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+
+    .set-seats {
+        margin-top: 10%;
+
+        .set-business-seats {
+            display: flex;
+            align-items: center;
+            background-color: rgb(233, 194, 23);
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+
+            .add-icon {
+                font-size: 35px;
+                margin-right: 0.5rem;
+                color: #ffff;
+            }
+
+            .set-title {
+                color: #ffff;
+            }
+        }
+
+        .set-first-seats {
+            background-color: rgb(23, 132, 233);
+
+        }
+
+        .set-economy-seats {
+            background-color: rgb(19, 179, 80);
+
+        }
+
+        .set-exit-seats {
+            background-color: rgb(171, 15, 177);
+
+        }
+
+        .set-decrease-seats {
+            background-color: rgb(233, 72, 23);
+        }
+    }
+}
