@@ -110,17 +110,22 @@ class Reservations extends Component {
                 passengers: this.customerInfo,
                 user_id: userId,
             };
-            UserService.bookingFlightTicket(data)
-                .then((res) => {
-                    this.setState({
-                        bookingInfo: res.data,
-                        redirect: true,
-                        bookingConfirmLoading: false,
-                    });
-                })
-                .catch((err) => {
-                    console.log("booking failed ");
-                });
+            this.setState({
+                bookingInfo: data,
+                bookingConfirmLoading: false,
+                redirect: true,
+            });
+            // UserService.bookingFlightTicket(data)
+            //     .then((res) => {
+            //         this.setState({
+            //             bookingInfo: res.data,
+            //             redirect: true,
+            //             bookingConfirmLoading: false,
+            //         });
+            //     })
+            //     .catch((err) => {
+            //         console.log("booking failed ");
+            //     });
             window.scrollTo(0, 0);
         } else if (
             this.paymentMethod == "" &&
@@ -149,7 +154,7 @@ class Reservations extends Component {
             return (
                 <Redirect
                     to={{
-                        pathname: "/reservation/confirm",
+                        pathname: "/reservation/bonus-services",
                         state: bookingInfo,
                     }}
                 />

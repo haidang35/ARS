@@ -19,7 +19,7 @@
                 height: 80px;
                 background-color: #ffff;
                 border-radius: 10px;
-                border: 1px solid black;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                 padding: 10px;
                 cursor: pointer;
                 margin-bottom: 1rem;
@@ -39,6 +39,10 @@
                     }
 
                 }
+
+
+
+
 
                 .seat-status-active {
                     color: rgb(12, 165, 12);
@@ -83,6 +87,13 @@
 
                     }
                 }
+
+            }
+
+
+
+            .passenger-item-active {
+                border: 3px solid rgba(16, 111, 219, 0.644);
 
             }
         }

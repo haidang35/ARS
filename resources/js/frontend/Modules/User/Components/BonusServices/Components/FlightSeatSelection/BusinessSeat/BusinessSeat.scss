@@ -10,12 +10,34 @@
             flex-grow: 1;
 
             .seat-item {
-                .seat-icon {
-                    font-size: 55px;
-                    color: rgb(235, 195, 20);
+                width: 45px;
+                height: 45px;
+                border: 3px solid rgb(235, 195, 20);
+                border-radius: 10px;
+                margin-left: 10px;
+                margin-top: 12px;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
+                .icon-checked {
+                    font-size: 25px;
+                    color: #ffff;
                 }
+
+                .icon-prevent {
+                    font-size: 25px;
+                    color: #ffff;
+                }
+
             }
+
+
+        }
+
+        .seat-reserved {
+            background-color: rgb(235, 195, 20);
         }
 
         .number-list {
@@ -37,9 +59,25 @@
             flex-grow: 1;
 
             .seat-item {
-                .seat-icon {
-                    font-size: 55px;
-                    color: rgb(235, 195, 20);
+                width: 45px;
+                height: 45px;
+                border: 3px solid rgb(235, 195, 20);
+                border-radius: 10px;
+                margin-right: 10px;
+                margin-top: 12px;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon-checked {
+                    font-size: 25px;
+                    color: #ffff;
+                }
+
+                .icon-prevent {
+                    font-size: 25px;
+                    color: #ffff;
                 }
             }
         }

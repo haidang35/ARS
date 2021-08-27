@@ -16,6 +16,10 @@ const API_ENDPOINT = {
     CANCEL_BOOKING: "user/booking/",
     SEARCH_FLIGHT_INFO: "user/search/flight",
     GET_BOOKING_INFO_WITH_CODE: "user/booking-info/",
+    GET_SEAT_PRICE_FLIGHT_INFO: "user/ticket/seats/",
+    CHOOSE_FLIGHT_SEAT: "user/choose-seat/",
+    CANCEL_CHOOSE_FLIGHT_SEAT: "user/cancel-choose-seat/",
+    GET_FLIGHT_SEATS: "user/flight-seats/",
 };
 
 class UserService {
@@ -101,6 +105,32 @@ class UserService {
     async getBookingInfoWithCode(bookingCode) {
         return await axios.get(
             BASE_URL + API_ENDPOINT.GET_BOOKING_INFO_WITH_CODE + bookingCode
+        );
+    }
+
+    async getSeatAndPriceFlightInfo(ticketId) {
+        return await axios.get(
+            BASE_URL + API_ENDPOINT.GET_SEAT_PRICE_FLIGHT_INFO + ticketId
+        );
+    }
+
+    async chooseSeatFlight(ticketId, data) {
+        return await axios.post(
+            BASE_URL + API_ENDPOINT.CHOOSE_FLIGHT_SEAT + ticketId,
+            data
+        );
+    }
+
+    async cancelChooseSeatFLight(ticketId, data) {
+        return await axios.post(
+            BASE_UR + API_ENDPOINT.CANCEL_CHOOSE_FLIGHT_SEAT + ticketId,
+            data
+        );
+    }
+
+    async getFlightSeats(ticketId) {
+        return await axios.get(
+            BASE_URL + API_ENDPOINT.GET_FLIGHT_SEATS + ticketId
         );
     }
 }

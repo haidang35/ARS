@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\FlightSeat;
 use App\Models\Price;
 use Illuminate\Http\Request;
 
@@ -72,5 +73,10 @@ class FlightController extends Controller
         $flight = Flight::findOrFail($id);
         $flight->delete();
         return $flight;
+    }
+    public function getFlightClasses($id)
+    {
+        $flightClasses = Price::where("flight_id", $id)->with("Flight")->get();
+        return response()->json($flightClasses);
     }
 }

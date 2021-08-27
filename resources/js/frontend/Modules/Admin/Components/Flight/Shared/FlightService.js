@@ -7,6 +7,7 @@ const API_ENPOINT = {
     UPDATE_FLIGHT_INFO: "flights/update/",
     ADD_NEW_FLIGHT: "flights",
     DELETE_FLIGHT: "flights/",
+    GET_CLASS_PRICE_FLIGHT: "flights/class/",
 };
 
 class FlightService {
@@ -38,6 +39,12 @@ class FlightService {
 
     async deleteFlight(id) {
         return await axios.delete(BASE_URL + API_ENPOINT.DELETE_FLIGHT + id);
+    }
+
+    async getClassAndPrice(flightId) {
+        return await axios.get(
+            BASE_URL + API_ENPOINT.GET_CLASS_PRICE_FLIGHT + flightId
+        );
     }
 }
 

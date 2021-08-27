@@ -49,6 +49,16 @@ class Flight extends Model
         return $this->belongsTo(Airline::class);
     }
 
+    public function Price()
+    {
+        return $this->hasMany(Price::class);
+    }
+
+    public function FlightSeat()
+    {
+        return $this->hasOne(FlightSeat::class);
+    }
+
     public function scopeDepartureTime($query, $departureTime)
     {
         if ($departureTime == null && $departureTime == "") {

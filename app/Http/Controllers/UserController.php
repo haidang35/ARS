@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\BookingTicket;
 use App\Models\Destination;
 use App\Models\Flight;
+use App\Models\FlightSeat;
 use App\Models\Notification as ModelsNotification;
 use App\Models\Passenger;
 use App\Models\Ticket;
@@ -302,5 +303,42 @@ class UserController extends Controller
         $bookingInfo["flight"] = $flight;
         $bookingInfo["passenger"] = $passengers;
         return response()->json($bookingInfo);
+    }
+
+    public function getSeatsFlightInfo($id)
+    {
+        $ticket = Ticket::find($id);
+        $flight = Flight::with("FlightSeat")->with("Airline")->with("Destination")->with("Departure")->with("Price")->find($ticket["flight_id"]);
+        return response()->json($flight);
+    }
+
+    public function getFlightSeat($ticketId)
+    {
+        $ticket = Ticket::find($ticketId);
+        $flight = Flight::with("FlightSeat")->find($ticket["flight_id"]);
+        $flightSeats = FlightSeat::where("flight_id", $flight["id"])->get();
+        return response()->json($flightSeats);
+    }
+
+    public function chooseFlightSeat($ticketId, Request $request)
+    {
+        $seatCode = $request->seat_code;
+        $ticket = Ticket::find($ticketId);
+        $flight = Flight::with("FlightSeat")->find($ticket["flight_id"]);
+        $flightSeat = FlightSeat::create([
+            "flight_id" => $flight["id"],
+            "seat_code_reserved" => $seatCode
+        ]);
+        return response()->json($flight);
+    }
+
+    public function cancelChooseFlightSeat($ticketId, Request $request)
+    {
+        $seatCode = $request->seat_code;
+        $ticket = Ticket::find($ticketId);
+        $flight = Flight::with("FlightSeat")->find($ticket["flight_id"]);
+        $flightSeat = FlightSeat::where("flight_id", $flight["id"])->where("seat_code_reserved", $seatCode)->first();
+        $flightSeat->delete();
+        return response()->json("Cancel choose seat success");
     }
 }

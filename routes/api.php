@@ -14,6 +14,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\UserController;
 use App\Models\Destination;
+use App\Models\Flight;
 use App\Models\Notification;
 
 /*
@@ -74,7 +75,9 @@ Route::get('flights', [FlightController::class, "getAllFlight"]);
 Route::get('flights/{id}', [FlightController::class, "getFlightDetails"]);
 Route::patch('flights/update/{id}', [FlightController::class, "updateFlightInfo"]);
 Route::post('flights', [FlightController::class, "addNewFlight"]);
-ROute::delete('flighs/{id}', [FlightController::class, "deleteFlight"]);
+Route::delete('flights/{id}', [FlightController::class, "deleteFlight"]);
+Route::get('flights/class/{id}', [FlightController::class, "getFlightClasses"]);
+
 
 
 // Ticket
@@ -109,6 +112,10 @@ Route::post('user/find-route', [UserController::class, "findRouteFlight"]);
 Route::get('user/payment', [UserController::class, "bookingPayment"]);
 Route::post('user/search/flight', [UserController::class, "searchFlightInfo"]);
 Route::get('user/booking-info/{bookingCode}', [UserController::class, "getBookingInfoWithCode"]);
+Route::get('user/ticket/seats/{id}', [UserController::class, "getSeatsFlightInfo"]);
+Route::get('user/flight-seats/{ticketId}', [UserController::class, "getFlightSeat"]);
+Route::post('user/choose-seat/{ticketId}', [UserController::class, "chooseFlightSeat"]);
+Route::post('user/cancel-choose-seat/{ticketId}', [UserController::class, "cancelChooseFlightSeat"]);
 
 //Image
 Route::get("destinations/images/{id}", [DestinationController::class, "getImageList"]);

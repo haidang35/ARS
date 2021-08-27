@@ -12,7 +12,8 @@ class Price extends Model
     protected $fillable = [
         "flight_id",
         "class",
-        "price"
+        "price",
+
     ];
 
     public function Flight()

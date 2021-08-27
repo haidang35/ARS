@@ -163,6 +163,7 @@ class CustomerInfo extends Component {
             if (adults.length > 0) {
                 adults.forEach((item) => {
                     const itemData = {
+                        id: Math.floor(Math.random() * 1000000),
                         passenger_name: item.name.value,
                         gender: item.gender.value,
                         birthday: item.birthday.value,
@@ -175,6 +176,7 @@ class CustomerInfo extends Component {
             if (children.length > 0) {
                 children.forEach((item) => {
                     const itemData = {
+                        id: Math.floor(Math.random() * 1000000),
                         passenger_name: item.name.value,
                         gender: item.gender.value,
                         birthday: item.birthday.value,
@@ -186,6 +188,7 @@ class CustomerInfo extends Component {
             if (infants.length > 0) {
                 infants.forEach((item) => {
                     const itemData = {
+                        id: Math.floor(Math.random() * 1000000),
                         passenger_name: item.name.value,
                         gender: item.gender.value,
                         birthday: item.birthday.value,

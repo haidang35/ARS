@@ -3,6 +3,8 @@ import { Component } from "react";
 import "./EmergencyExitSeat.scss";
 import { Typography } from "@material-ui/core";
 import { BiRectangle } from "react-icons/bi";
+import { MdDoNotDisturbAlt } from "react-icons/md";
+import { FaUserCheck } from "react-icons/fa";
 
 class EmergencyExitSeat extends Component {
     constructor(props) {
@@ -10,9 +12,19 @@ class EmergencyExitSeat extends Component {
         this.state = {};
     }
 
+    onChooseSeatForPassenger = (rowNumber, code, price) => {
+        this.props.setSeatCodePassenger(rowNumber + code, price);
+    };
+
     render() {
-        const { seats, price, rowNumberFrom } = this.props;
+        const { seats, price, rowNumberFrom, seatsReserved, passengers } =
+            this.props;
+        let passengerList = [];
+        if (Array.isArray(passengers)) {
+            passengerList = passengers;
+        }
         let seatsRow = [];
+
         let seatRowNumber = rowNumberFrom;
         for (let i = 0; i < seats / 6; i++) {
             const seatItem = { rowNumber: i, price: 5000, seatRowNumber };
@@ -34,6 +46,26 @@ class EmergencyExitSeat extends Component {
             };
             seatsRight.push(seatRightItem);
         }
+
+        const checkSeatReserved = (seatCurrent) => {
+            let result = false;
+            seatsReserved.forEach((item) => {
+                if (item.seat_code_reserved === seatCurrent) {
+                    result = true;
+                }
+            });
+            return result;
+        };
+
+        const checkSeatChoosed = (seatCurrent) => {
+            let result = false;
+            passengerList.forEach((item) => {
+                if (item.seat_code === seatCurrent) {
+                    result = true;
+                }
+            });
+            return result;
+        };
         return (
             <div>
                 <div className="emergency-exit-seat">
@@ -45,15 +77,39 @@ class EmergencyExitSeat extends Component {
                                         return (
                                             <div
                                                 key={seat.seatCode}
-                                                className="seat-item"
-                                                onClick={() =>
-                                                    console.log(
+                                                className={`seat-item ${
+                                                    checkSeatReserved(
+                                                        item.seatRowNumber +
+                                                            seat.seatCode
+                                                    ) ||
+                                                    checkSeatChoosed(
                                                         item.seatRowNumber +
                                                             seat.seatCode
                                                     )
+                                                        ? `seat-reserved`
+                                                        : ``
+                                                }`}
+                                                onClick={() =>
+                                                    this.onChooseSeatForPassenger(
+                                                        item.seatRowNumber,
+                                                        seat.seatCode,
+                                                        item.price
+                                                    )
                                                 }
                                             >
-                                                <BiRectangle className="seat-icon" />
+                                                {checkSeatReserved(
+                                                    item.seatRowNumber +
+                                                        seat.seatCode
+                                                ) ? (
+                                                    <MdDoNotDisturbAlt className="icon-prevent" />
+                                                ) : checkSeatChoosed(
+                                                      item.seatRowNumber +
+                                                          seat.seatCode
+                                                  ) ? (
+                                                    <FaUserCheck className="icon-checked" />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                         );
                                     })}
@@ -73,15 +129,39 @@ class EmergencyExitSeat extends Component {
                                         return (
                                             <div
                                                 key={seat.seatCode}
-                                                className="seat-item"
-                                                onClick={() =>
-                                                    console.log(
+                                                className={`seat-item ${
+                                                    checkSeatReserved(
+                                                        item.seatRowNumber +
+                                                            seat.seatCode
+                                                    ) ||
+                                                    checkSeatChoosed(
                                                         item.seatRowNumber +
                                                             seat.seatCode
                                                     )
+                                                        ? `seat-reserved`
+                                                        : ``
+                                                }`}
+                                                onClick={() =>
+                                                    this.onChooseSeatForPassenger(
+                                                        item.seatRowNumber,
+                                                        seat.seatCode,
+                                                        item.price
+                                                    )
                                                 }
                                             >
-                                                <BiRectangle className="seat-icon" />
+                                                {checkSeatReserved(
+                                                    item.seatRowNumber +
+                                                        seat.seatCode
+                                                ) ? (
+                                                    <MdDoNotDisturbAlt className="icon-prevent" />
+                                                ) : checkSeatChoosed(
+                                                      item.seatRowNumber +
+                                                          seat.seatCode
+                                                  ) ? (
+                                                    <FaUserCheck className="icon-checked" />
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
                                         );
                                     })}

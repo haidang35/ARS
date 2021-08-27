@@ -57,7 +57,7 @@ class Home extends Component {
                                 component={Reservations}
                             />
                             <Route
-                                path={"/bonus-services"}
+                                path={"/reservation/bonus-services"}
                                 component={BonusServices}
                             />
                             <Route
