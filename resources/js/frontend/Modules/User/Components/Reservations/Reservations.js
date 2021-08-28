@@ -93,6 +93,7 @@ class Reservations extends Component {
             this.setState({
                 bookingConfirmLoading: true,
             });
+            const { flightTicket } = this.state;
 
             const data = {
                 booking_date: getDateTimeNow(),
@@ -109,23 +110,14 @@ class Reservations extends Component {
                 payment_status: 0,
                 passengers: this.customerInfo,
                 user_id: userId,
+                ticket: flightTicket,
             };
             this.setState({
                 bookingInfo: data,
                 bookingConfirmLoading: false,
                 redirect: true,
             });
-            // UserService.bookingFlightTicket(data)
-            //     .then((res) => {
-            //         this.setState({
-            //             bookingInfo: res.data,
-            //             redirect: true,
-            //             bookingConfirmLoading: false,
-            //         });
-            //     })
-            //     .catch((err) => {
-            //         console.log("booking failed ");
-            //     });
+
             window.scrollTo(0, 0);
         } else if (
             this.paymentMethod == "" &&

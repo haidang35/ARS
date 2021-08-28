@@ -16,6 +16,9 @@ import EmergencyExitSeat from "./EmergencyExitSeat/EmergencyExitSeat";
 import BookingInfo from "../BookingInfo/BookingInfo";
 import UserService from "../../../../Shared/UserService/UserService";
 import { forEach } from "lodash";
+import BookingDetails from "../BookingDetails/BookingDetails";
+import TicketDetails from "../../../Reservations/Components/TicketDetails/TicketDetails";
+import SeatPriceInfo from "./SeatPriceInfo/SeatPriceInfo";
 class FlightSeatSelection extends Component {
     constructor(props) {
         super(props);
@@ -23,21 +26,24 @@ class FlightSeatSelection extends Component {
             rowNumberFrom: 1,
             passengerChooseSeat: "",
             bookingInfo: {},
+            seatReserveFee: 0,
         };
     }
 
     componentDidMount() {}
 
     componentWillReceiveProps = (nextProps) => {
-        let { bookingInfo } = nextProps;
-        let passengers = bookingInfo.passengers;
-        passengers.forEach((item) => {
-            (item["seat_code"] = ""), (item["price"] = "");
-        });
-        bookingInfo.passengers = passengers;
-        this.setState({
-            bookingInfo: bookingInfo,
-        });
+        let { bookingInfo, updateData } = nextProps;
+        if (updateData) {
+            let passengers = bookingInfo.passengers;
+            passengers.forEach((item) => {
+                (item["seat_code"] = ""), (item["price"] = "");
+            });
+            bookingInfo.passengers = passengers;
+            this.setState({
+                bookingInfo: bookingInfo,
+            });
+        }
     };
 
     setPassengerSeat = (data) => {
@@ -47,22 +53,53 @@ class FlightSeatSelection extends Component {
     };
 
     setSeatCodeForPassengerChoosed = (seatCode, price) => {
-        let { passengerChooseSeat, bookingInfo } = this.state;
+        let { passengerChooseSeat, bookingInfo, seatReserveFee } = this.state;
+        let seatFee = 0;
+        let seatCodeRemove = "";
         let { passengers } = bookingInfo;
+        let intoMoney = bookingInfo.ticket.into_money;
         passengers.forEach((item) => {
             if (item.id === passengerChooseSeat.id) {
+                if (
+                    item["seat_code"] !== "" &&
+                    item["seat_code"] !== seatCode &&
+                    seatCode !== ""
+                ) {
+                    seatCodeRemove = item["seat_code"];
+                    intoMoney -= item["price"];
+                } else if (seatCode == "") {
+                    seatCodeRemove = item["seat_code"];
+                }
                 item["seat_code"] = seatCode;
                 item["price"] = price;
+                if (seatCode !== "") {
+                    intoMoney += price;
+                } else {
+                    intoMoney -= price;
+                }
+                UserService.chooseSeatFlight(bookingInfo.ticket_id, {
+                    seat_code: seatCode,
+                    seat_code_remove: seatCodeRemove,
+                }).then((res) => {
+                    console.log("choose seat success");
+                });
+            }
+            if (item["seat_code"] !== "") {
+                seatFee += item["price"];
             }
         });
+
+        seatReserveFee = seatFee;
+        bookingInfo.ticket.into_money = intoMoney;
+        bookingInfo.into_money = intoMoney;
         bookingInfo.passengers = passengers;
-        this.setState({ bookingInfo });
-        console.log("b", bookingInfo);
+        this.props.updateBookingInfo(bookingInfo);
+        this.setState({ bookingInfo, seatReserveFee });
     };
 
     render() {
-        const { flightInfo, seatsReserved } = this.props;
-        const { bookingInfo, passengerChooseSeat } = this.state;
+        const { flightInfo, seatsReserved, onContinue } = this.props;
+        const { bookingInfo, passengerChooseSeat, seatReserveFee } = this.state;
         const prices = flightInfo.price;
         let businessSeatPrice = 0;
         let economySeatPrice = 0;
@@ -82,11 +119,19 @@ class FlightSeatSelection extends Component {
         const firstEconomySeats = flightInfo.first_economy_seats;
         const economySeats = flightInfo.economy_seats;
         const emergencyExitSeats = flightInfo.exit_seats;
+
+        // if (onContinue) {
+        //     // this.props.updateBookingInfo(bookingInfo);
+        // }
         return (
             <div>
                 <div className="flight-seat-selection">
                     <div className="row">
                         <div className="col-md-4">
+                            <TicketDetails
+                                data={bookingInfo.ticket}
+                                seatReserveFee={seatReserveFee}
+                            />
                             <BookingInfo
                                 bookingInfo={bookingInfo}
                                 passengerChoosedSeat={
@@ -293,7 +338,14 @@ class FlightSeatSelection extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-2"></div>
+                        <div className="col-md-2">
+                            <SeatPriceInfo
+                                businessPrice={businessSeatPrice}
+                                economyPrice={economySeatPrice}
+                                deluxePrice={firstEconomySeatPrice}
+                                exitPrice={emergencyExitSeatPrice}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

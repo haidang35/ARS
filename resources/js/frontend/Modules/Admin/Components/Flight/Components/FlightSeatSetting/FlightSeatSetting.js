@@ -75,12 +75,18 @@ class FlightSeatSetting extends Form {
                                             <BusinessSeat
                                                 seats={businessSeats}
                                                 rowNumberFrom={1}
+                                                price={businessPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                             <FirstEconomySeat
                                                 seats={firstEconomySeats}
                                                 rowNumberFrom={
                                                     businessSeats / 6 + 1
                                                 }
+                                                price={firstEconomyPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                             <EconomySeat
                                                 seats={30}
@@ -89,6 +95,9 @@ class FlightSeatSetting extends Form {
                                                     firstEconomySeats / 6 +
                                                     1
                                                 }
+                                                price={economyPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                         </div>
                                         <div className="carbin second-carbirn">
@@ -101,6 +110,9 @@ class FlightSeatSetting extends Form {
                                                     30 / 6 +
                                                     1
                                                 }
+                                                price={economyPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                             <EmergencyExitSeat
                                                 seats={6}
@@ -111,6 +123,9 @@ class FlightSeatSetting extends Form {
                                                     24 / 6 +
                                                     1
                                                 }
+                                                price={exitPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                         </div>
                                         <div className="carbin third-carbirn">
@@ -124,6 +139,9 @@ class FlightSeatSetting extends Form {
                                                     6 / 6 +
                                                     1
                                                 }
+                                                price={exitPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                             <EconomySeat
                                                 seats={54}
@@ -136,6 +154,9 @@ class FlightSeatSetting extends Form {
                                                     6 / 6 +
                                                     1
                                                 }
+                                                price={economyPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                         </div>
                                         <div className="carbin fourth-carbirn">
@@ -152,6 +173,9 @@ class FlightSeatSetting extends Form {
                                                     54 / 6 +
                                                     1
                                                 }
+                                                price={exitPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                         </div>
                                         <div className="carbin fifth-carbirn">
@@ -169,6 +193,9 @@ class FlightSeatSetting extends Form {
                                                     6 / 6 +
                                                     1
                                                 }
+                                                price={economyPrice}
+                                                seatsReserved={[]}
+                                                passengers={[]}
                                             />
                                         </div>
                                     </div>

@@ -1,0 +1,55 @@
+@import "../../../../../../Shared/Style/variables";
+
+.checkout-bar {
+
+    position: fixed;
+    width: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 73px;
+    background-color: $background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .booking-price-total {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .price-total {
+            color: #ffff;
+            font-size: 25px;
+            margin-right: 1rem;
+        }
+
+        .price-info {
+            color: #ffff;
+            font-size: 18px;
+        }
+    }
+
+    .btn-continue {
+        float: right;
+        padding: 7px 2rem;
+        color: #ffff;
+        font-size: 19px;
+        background: $background-linear-btn;
+    }
+
+    .btn-back {
+        float: left;
+        padding: 7px 2rem;
+        color: #ffff;
+        font-size: 19px;
+        background: none;
+        border: 2px solid #ffff;
+    }
+
+    .btn-back:hover {
+        background: none;
+
+    }
+
+}

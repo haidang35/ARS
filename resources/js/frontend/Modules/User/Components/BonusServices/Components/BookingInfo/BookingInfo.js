@@ -7,6 +7,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { BiRectangle } from "react-icons/bi";
 import { Typography } from "@material-ui/core";
 import { formatCurrency } from "../../../../../../Helpers/FormatCurrency";
+import TicketDetails from "../../../Reservations/Components/TicketDetails/TicketDetails";
 
 class BookingInfo extends Component {
     constructor(props) {
@@ -25,11 +26,11 @@ class BookingInfo extends Component {
             <div>
                 <div className="booking-info-service">
                     <div className="passenger-list">
-                        <div className="title-box">
+                        {/* <div className="title-box">
                             <Typography variant="h6">Hà Nội </Typography>
                             <span> - </span>
                             <Typography variant="h6"> Đà Nẵng</Typography>
-                        </div>
+                        </div> */}
                         <div className="passengers-box">
                             {passengers.map((item) => {
                                 return (
@@ -91,11 +92,15 @@ class BookingInfo extends Component {
 
                                                         <IoCloseSharp
                                                             className="close-icon"
-                                                            onClick={() =>
-                                                                this.props.setSeatCodePassenger(
-                                                                    "",
-                                                                    ""
-                                                                )
+                                                            onClick={
+                                                                passengerChoosedSeat.id ===
+                                                                item.id
+                                                                    ? () =>
+                                                                          this.props.setSeatCodePassenger(
+                                                                              "",
+                                                                              item.price
+                                                                          )
+                                                                    : {}
                                                             }
                                                         />
                                                     </div>

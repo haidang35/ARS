@@ -1,0 +1,87 @@
+$business-color: #ebc314;
+$economy-color: #07af3f;
+$deluxe-color: #14aeeb;
+$exit-color: #dd19d3;
+
+.seat-price-info {
+
+    .price-info-box {
+        margin-top: 20%;
+
+
+        .seat-icon {
+            font-size: 55px;
+        }
+
+        .seat-title {}
+
+        .seat-price {
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .seat-desc {}
+    }
+
+    .business-info {
+        margin-top: 48%;
+
+        .seat-icon {
+            color: $business-color;
+        }
+
+        .seat-title {
+            color: $business-color;
+        }
+
+        .seat-price {
+            color: $business-color;
+        }
+    }
+
+    .economy-info {
+        margin-top: 70%;
+
+        .seat-icon {
+            color: $economy-color;
+        }
+
+        .seat-title {
+            color: $economy-color;
+        }
+
+        .seat-price {
+            color: $economy-color;
+        }
+    }
+
+    .deluxe-info {
+        .seat-icon {
+            color: $deluxe-color;
+        }
+
+        .seat-title {
+            color: $deluxe-color;
+        }
+
+        .seat-price {
+            color: $deluxe-color;
+        }
+    }
+
+    .exit-info {
+        margin-top: 129%;
+
+        .seat-icon {
+            color: $exit-color;
+        }
+
+        .seat-title {
+            color: $exit-color;
+        }
+
+        .seat-price {
+            color: $exit-color;
+        }
+    }
+}

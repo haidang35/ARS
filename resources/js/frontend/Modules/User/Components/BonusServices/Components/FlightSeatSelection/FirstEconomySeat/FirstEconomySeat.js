@@ -26,7 +26,7 @@ class FirstEconomySeat extends Component {
         let seatsRow = [];
         let seatRowNumber = rowNumberFrom;
         for (let i = 0; i < seats / 6; i++) {
-            const seatItem = { rowNumber: i, price: 5000, seatRowNumber };
+            const seatItem = { rowNumber: i, price: price, seatRowNumber };
             seatRowNumber++;
             seatsRow.push(seatItem);
         }

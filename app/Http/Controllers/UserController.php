@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChooseSeatFlightEvent;
 use App\Events\NotificationEvent;
 use App\Mail\ConfirmMail;
 use App\Mail\MailCheckout;
@@ -163,10 +164,15 @@ class UserController extends Controller
                 "birthday" => $item["birthday"],
                 "identity_card" => $item["passenger_type"] == 1 ? $item["identity_card"] : null,
                 "passenger_type" => $item["passenger_type"],
+                "booking_seat" => $item["seat_code"] !== "" ? $item["seat_code"] : null,
 
             ];
             $into_money += $ticket->price + $ticket->tax;
             $bookingTicket = BookingTicket::create($bookingTicketInfo);
+            FlightSeat::create([
+                "flight_id" => $flight["id"],
+                "seat_code_reserved" => $item["seat_code"]
+            ]);
             $passengersBooking[] = $bookingTicket;
         }
         $booking["passengers"] = $passengersBooking;
@@ -323,12 +329,15 @@ class UserController extends Controller
     public function chooseFlightSeat($ticketId, Request $request)
     {
         $seatCode = $request->seat_code;
+        $seatCodeRemoce = $request->seat_code_remove;
         $ticket = Ticket::find($ticketId);
         $flight = Flight::with("FlightSeat")->find($ticket["flight_id"]);
-        $flightSeat = FlightSeat::create([
-            "flight_id" => $flight["id"],
-            "seat_code_reserved" => $seatCode
-        ]);
+        $message = [
+            "ticket" => $ticket,
+            "seat_code" => $seatCode,
+            "seat_code_remove" => $seatCodeRemoce
+        ];
+        broadcast(new ChooseSeatFlightEvent($message))->toOthers();
         return response()->json($flight);
     }
 

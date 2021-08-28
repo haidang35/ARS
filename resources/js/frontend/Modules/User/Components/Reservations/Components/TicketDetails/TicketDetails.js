@@ -38,6 +38,8 @@ class TicketDetails extends Component {
 
     render() {
         const { data } = this.state;
+        const { seatReserveFee } = this.props;
+
         let passenger = [];
         if (Array.isArray(data.passenger)) {
             data.passenger.forEach((item) => {
@@ -168,6 +170,31 @@ class TicketDetails extends Component {
                                                     </div>
                                                 );
                                             })}
+                                            {seatReserveFee > 0 ? (
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <Typography
+                                                            variant="h5"
+                                                            className="add-fee"
+                                                        >
+                                                            Ghế ngồi
+                                                        </Typography>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <Typography
+                                                            variant="h4"
+                                                            className="add-fee right"
+                                                        >
+                                                            {formatCurrency(
+                                                                seatReserveFee
+                                                            )}
+                                                        </Typography>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <Typography
