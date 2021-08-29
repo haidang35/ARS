@@ -17,6 +17,23 @@ class FlightController extends Controller
     public function getFlightDetails($id)
     {
         $flight = Flight::with("Destination")->with("Departure")->with("Airline")->find($id);
+        $classesPrice = Price::where("flight_id", $flight["id"])->get();
+        foreach ($classesPrice as $item) {
+            switch ($item["class"]) {
+                case 1:
+                    $flight["business_price"] = $item["price"];
+                    break;
+                case 2:
+                    $flight["deluxe_price"] = $item["price"];
+                    break;
+                case 3:
+                    $flight["economy_price"] = $item["price"];
+                    break;
+                case 4:
+                    $flight["exit_price"] = $item["price"];
+                    break;
+            }
+        }
         return response()->json($flight);
     }
     public function updateFlightInfo($id, Request $request)
@@ -78,5 +95,11 @@ class FlightController extends Controller
     {
         $flightClasses = Price::where("flight_id", $id)->with("Flight")->get();
         return response()->json($flightClasses);
+    }
+
+    public function getSeatReserved($id)
+    {
+        $seatsReserved = FlightSeat::where("flight_id", $id)->get();
+        return response()->json($seatsReserved);
     }
 }

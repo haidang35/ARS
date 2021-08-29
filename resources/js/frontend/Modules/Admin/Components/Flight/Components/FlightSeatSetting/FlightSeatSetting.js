@@ -65,7 +65,7 @@ class FlightSeatSetting extends Form {
                             <div className="seat-map">
                                 <div className="title-box">
                                     <Typography className="title" variant="h6">
-                                        Chọn chỗ ngồi
+                                        Thiết lập sơ đồ hàng ghế
                                     </Typography>
                                 </div>
                                 <div className="seats-diagram">

@@ -89,12 +89,22 @@ class EmergencyExitSeat extends Component {
                                                         ? `seat-reserved`
                                                         : ``
                                                 }`}
-                                                onClick={() =>
-                                                    this.onChooseSeatForPassenger(
-                                                        item.seatRowNumber,
-                                                        seat.seatCode,
-                                                        item.price
+                                                onClick={
+                                                    !checkSeatReserved(
+                                                        item.seatRowNumber +
+                                                            seat.seatCode
+                                                    ) &&
+                                                    !checkSeatChoosed(
+                                                        item.seatRowNumber +
+                                                            seat.seatCode
                                                     )
+                                                        ? () =>
+                                                              this.onChooseSeatForPassenger(
+                                                                  item.seatRowNumber,
+                                                                  seat.seatCode,
+                                                                  item.price
+                                                              )
+                                                        : () => {}
                                                 }
                                             >
                                                 {checkSeatReserved(
@@ -141,12 +151,22 @@ class EmergencyExitSeat extends Component {
                                                         ? `seat-reserved`
                                                         : ``
                                                 }`}
-                                                onClick={() =>
-                                                    this.onChooseSeatForPassenger(
-                                                        item.seatRowNumber,
-                                                        seat.seatCode,
-                                                        item.price
+                                                onClick={
+                                                    !checkSeatReserved(
+                                                        item.seatRowNumber +
+                                                            seat.seatCode
+                                                    ) &&
+                                                    !checkSeatChoosed(
+                                                        item.seatRowNumber +
+                                                            seat.seatCode
                                                     )
+                                                        ? () =>
+                                                              this.onChooseSeatForPassenger(
+                                                                  item.seatRowNumber,
+                                                                  seat.seatCode,
+                                                                  item.price
+                                                              )
+                                                        : () => {}
                                                 }
                                             >
                                                 {checkSeatReserved(

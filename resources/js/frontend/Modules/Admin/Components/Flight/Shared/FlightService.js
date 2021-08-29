@@ -8,6 +8,7 @@ const API_ENPOINT = {
     ADD_NEW_FLIGHT: "flights",
     DELETE_FLIGHT: "flights/",
     GET_CLASS_PRICE_FLIGHT: "flights/class/",
+    GET_SEAT_RESERVED: "flights/seats-reserved/",
 };
 
 class FlightService {
@@ -44,6 +45,12 @@ class FlightService {
     async getClassAndPrice(flightId) {
         return await axios.get(
             BASE_URL + API_ENPOINT.GET_CLASS_PRICE_FLIGHT + flightId
+        );
+    }
+
+    async getSeatsReserved(flightId) {
+        return await axios.get(
+            BASE_URL + API_ENPOINT.GET_SEAT_RESERVED + flightId
         );
     }
 }

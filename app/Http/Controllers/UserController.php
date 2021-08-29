@@ -175,6 +175,10 @@ class UserController extends Controller
             ]);
             $passengersBooking[] = $bookingTicket;
         }
+        $flight->update([
+            "seats_available" => $flight["seats_available"] - count($passengers),
+            "seats_reserved" => $flight["seats_reserved"] + count($passengers)
+        ]);
         $booking["passengers"] = $passengersBooking;
         $booking["into_money"] = $into_money;
         $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"], $booking["id"]);

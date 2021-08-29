@@ -77,7 +77,7 @@ Route::patch('flights/update/{id}', [FlightController::class, "updateFlightInfo"
 Route::post('flights', [FlightController::class, "addNewFlight"]);
 Route::delete('flights/{id}', [FlightController::class, "deleteFlight"]);
 Route::get('flights/class/{id}', [FlightController::class, "getFlightClasses"]);
-
+Route::get('flights/seats-reserved/{id}', [FlightController::class, "getSeatReserved"]);
 
 
 // Ticket
