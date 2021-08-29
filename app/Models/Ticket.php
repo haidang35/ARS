@@ -17,12 +17,15 @@ class Ticket extends Model
         "carbin_bag",
         "checkin_bag",
         "price",
-        "tax"
+        "tax",
+        "business_seat_fee",
+        "economy_seat_fee",
+        "deluxe_seat_fee",
+        "exit_seat_fee",
     ];
 
-    public function Flight() {
+    public function Flight()
+    {
         return $this->belongsTo(Flight::class);
     }
-
-   
 }

@@ -17,6 +17,10 @@ class AddNewTicket extends Form {
                 checkin_bag: "",
                 price: "",
                 tax: "",
+                business_seat_fee: "",
+                economy_seat_fee: "",
+                deluxe_seat_fee: "",
+                exit_seat_fee: "",
             }),
             classesFlight: [],
             classChoosed: {},
@@ -96,6 +100,10 @@ class AddNewTicket extends Form {
                 checkin_bag: form.checkin_bag.value,
                 price: form.price.value,
                 tax: form.tax.value,
+                business_seat_fee: form.business_seat_fee.value,
+                economy_seat_fee: form.economy_seat_fee.value,
+                deluxe_seat_fee: form.deluxe_seat_fee.value,
+                exit_seat_fee: form.exit_seat_fee.value,
             };
             this.props.onSubmitInfo(data);
         }
@@ -113,6 +121,10 @@ class AddNewTicket extends Form {
             price,
             tax,
             dirty,
+            business_seat_fee,
+            exit_seat_fee,
+            economy_seat_fee,
+            deluxe_seat_fee,
         } = this.state.form;
         const { classesFlight } = this.state;
 
@@ -323,7 +335,7 @@ class AddNewTicket extends Form {
                                                             "carbin_bag"
                                                         )
                                                     }
-                                                ></input>
+                                                />
                                                 {dirty &&
                                                 carbin_bag.err === "*" ? (
                                                     <FormError err="Carbin baggage cannot be empty" />
@@ -346,7 +358,7 @@ class AddNewTicket extends Form {
                                                             "checkin_bag"
                                                         )
                                                     }
-                                                ></input>
+                                                />
                                                 {dirty &&
                                                 checkin_bag.err === "*" ? (
                                                     <FormError err="Checkin baggage cannot be empty" />
@@ -368,7 +380,7 @@ class AddNewTicket extends Form {
                                                     name="price"
                                                     className="form-control"
                                                     value={price.value}
-                                                ></input>
+                                                />
                                                 {dirty && price.err === "*" ? (
                                                     <FormError err="Price cannot be empty" />
                                                 ) : (
@@ -390,9 +402,128 @@ class AddNewTicket extends Form {
                                                             "tax"
                                                         )
                                                     }
-                                                ></input>
+                                                />
                                                 {dirty && tax.err === "*" ? (
                                                     <FormError err="Tax cannot be empty" />
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="row"
+                                        style={{ marginTop: "20px" }}
+                                    >
+                                        <div className="col-sm-6">
+                                            <div>
+                                                <label>
+                                                    Phí đặt ghế hạng thương gia
+                                                </label>
+                                                <input
+                                                    required
+                                                    name="business_seat_fee"
+                                                    className="form-control"
+                                                    value={
+                                                        business_seat_fee.value
+                                                    }
+                                                    onChange={(ev) =>
+                                                        this._setValue(
+                                                            ev,
+                                                            "business_seat_fee"
+                                                        )
+                                                    }
+                                                />
+                                                {dirty &&
+                                                business_seat_fee.err ===
+                                                    "*" ? (
+                                                    <FormError err="Business seat fee cannot be empty" />
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div>
+                                                <label>
+                                                    Phí đặt ghế hạng phổ thông
+                                                    đặc biệt
+                                                </label>
+                                                <input
+                                                    required
+                                                    name="deluxe_seat_fee"
+                                                    className="form-control"
+                                                    value={
+                                                        deluxe_seat_fee.value
+                                                    }
+                                                    onChange={(ev) =>
+                                                        this._setValue(
+                                                            ev,
+                                                            "deluxe_seat_fee"
+                                                        )
+                                                    }
+                                                />
+                                                {dirty &&
+                                                deluxe_seat_fee.err === "*" ? (
+                                                    <FormError err="Deluxe seat fee cannot be empty" />
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="row"
+                                        style={{ marginTop: "20px" }}
+                                    >
+                                        <div className="col-sm-6">
+                                            <div>
+                                                <label>
+                                                    Phí đặt chỗ hạng phổ thông
+                                                </label>
+                                                <input
+                                                    required
+                                                    name="economy_seat_fee"
+                                                    className="form-control"
+                                                    value={
+                                                        economy_seat_fee.value
+                                                    }
+                                                    onChange={(ev) =>
+                                                        this._setValue(
+                                                            ev,
+                                                            "economy_seat_fee"
+                                                        )
+                                                    }
+                                                />
+                                                {dirty &&
+                                                economy_seat_fee.err === "*" ? (
+                                                    <FormError err="Economy seat fee cannot be empty" />
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div>
+                                                <label>
+                                                    Thuế đặt ghế gần cửa thoát
+                                                    hiểm
+                                                </label>
+                                                <input
+                                                    required
+                                                    name="exit_seat_fee"
+                                                    className="form-control"
+                                                    value={exit_seat_fee.value}
+                                                    onChange={(ev) =>
+                                                        this._setValue(
+                                                            ev,
+                                                            "exit_seat_fee"
+                                                        )
+                                                    }
+                                                />
+                                                {dirty &&
+                                                exit_seat_fee.err === "*" ? (
+                                                    <FormError err="Emergency exit seat fee cannot be empty" />
                                                 ) : (
                                                     ""
                                                 )}

@@ -86,7 +86,9 @@ class BookingInfo extends Component {
                                                                 variant="body1"
                                                                 className="seat-price"
                                                             >
-                                                                {`+${item.price}`}
+                                                                {`+${formatCurrency(
+                                                                    item.price
+                                                                )}`}
                                                             </Typography>
                                                         </div>
 

@@ -315,10 +315,11 @@ class UserController extends Controller
     {
         $ticket = Ticket::find($id);
         $flight = Flight::with("FlightSeat")->with("Airline")->with("Destination")->with("Departure")->with("Price")->find($ticket["flight_id"]);
+        $flight["ticket"] = $ticket;
         return response()->json($flight);
     }
 
-    public function getFlightSeat($ticketId)
+    public function getFlightSeatReserved($ticketId)
     {
         $ticket = Ticket::find($ticketId);
         $flight = Flight::with("FlightSeat")->find($ticket["flight_id"]);

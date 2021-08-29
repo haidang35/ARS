@@ -113,7 +113,7 @@ Route::get('user/payment', [UserController::class, "bookingPayment"]);
 Route::post('user/search/flight', [UserController::class, "searchFlightInfo"]);
 Route::get('user/booking-info/{bookingCode}', [UserController::class, "getBookingInfoWithCode"]);
 Route::get('user/ticket/seats/{id}', [UserController::class, "getSeatsFlightInfo"]);
-Route::get('user/flight-seats/{ticketId}', [UserController::class, "getFlightSeat"]);
+Route::get('user/flight-seats/{ticketId}', [UserController::class, "getFlightSeatReserved"]);
 Route::post('user/choose-seat/{ticketId}', [UserController::class, "chooseFlightSeat"]);
 Route::post('user/cancel-choose-seat/{ticketId}', [UserController::class, "cancelChooseFlightSeat"]);
 

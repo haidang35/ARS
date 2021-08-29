@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airline;
+use App\Models\Booking;
 use App\Models\Destination;
 use App\Models\Flight;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,8 +17,8 @@ class AdminController extends Controller
         $destinations = Destination::all();
         $airlines = Airline::all();
         $flights = Flight::all();
-        $tickets = Flight::all();
-        $bookings = Flight::all();
+        $tickets = Ticket::all();
+        $bookings = Booking::all();
         $overview["destinations"] = $destinations;
         $overview["airlines"] = $airlines;
         $overview["flights"] = $flights;

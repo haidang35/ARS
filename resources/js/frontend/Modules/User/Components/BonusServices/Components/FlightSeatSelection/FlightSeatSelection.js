@@ -101,19 +101,11 @@ class FlightSeatSelection extends Component {
         const { flightInfo, seatsReserved, onContinue } = this.props;
         const { bookingInfo, passengerChooseSeat, seatReserveFee } = this.state;
         const prices = flightInfo.price;
-        let businessSeatPrice = 0;
-        let economySeatPrice = 0;
-        let firstEconomySeatPrice = 0;
-        let emergencyExitSeatPrice = 0;
-        if (Array.isArray(prices)) {
-            prices.forEach((item) => {
-                if (item.class === 1) businessSeatPrice = item.price;
-                if (item.class === 2) firstEconomySeatPrice = item.price;
-                if (item.class === 3) economySeatPrice = item.price;
-                if (item.class === 4) emergencyExitSeatPrice = item.price;
-            });
-        }
-
+        const ticket = Object.assign({}, flightInfo.ticket);
+        let businessSeatPrice = ticket.business_seat_fee;
+        let economySeatPrice = ticket.economy_seat_fee;
+        let firstEconomySeatPrice = ticket.deluxe_seat_fee;
+        let emergencyExitSeatPrice = ticket.exit_seat_fee;
         const capacity = flightInfo.capacity;
         const businessSeats = flightInfo.business_seats;
         const firstEconomySeats = flightInfo.first_economy_seats;

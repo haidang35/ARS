@@ -24,143 +24,152 @@ class TicketFromLocation extends Component {
     render() {
         const { ticketList, location } = this.props;
         let ticketListLocation = [];
-        if (Array.isArray(ticketList) && ticketList.length > 0) {
+        if (Array.isArray(ticketList) && ticketList.length >= 3) {
             for (let i = 0; i < 3; i++) {
                 ticketListLocation.push(ticketList[i]);
             }
         }
         return (
             <div>
-                <div className="ticket-from-location">
-                    <div className="wrap-container">
-                        <Typography variant="h4">
-                            {`Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
-                        </Typography>
-                        <div>
-                            <Typography variant="body1" className="float-left">
-                                {` Xem vé máy bay giá rẻ nhất khởi hành trong vòng 90
-                            ngày tới. Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
+                {ticketListLocation.length >= 3 ? (
+                    <div className="ticket-from-location">
+                        <div className="wrap-container">
+                            <Typography variant="h4">
+                                {`Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
                             </Typography>
-                            <Link to="discount-tickets">
+                            <div>
                                 <Typography
                                     variant="body1"
-                                    className="float-right view-more"
+                                    className="float-left"
                                 >
-                                    Xem thêm các ưu đãi khác
+                                    {` Xem vé máy bay giá rẻ nhất khởi hành trong vòng 90
+                            ngày tới. Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
                                 </Typography>
-                            </Link>
-                        </div>
+                                <Link to="discount-tickets">
+                                    <Typography
+                                        variant="body1"
+                                        className="float-right view-more"
+                                    >
+                                        Xem thêm các ưu đãi khác
+                                    </Typography>
+                                </Link>
+                            </div>
 
-                        <div className="ticket-list">
-                            <div className="row">
-                                {ticketListLocation.map((item) => {
-                                    return (
-                                        <div
-                                            key={item.id}
-                                            className="col-md-4"
-                                            onClick={() =>
-                                                goTo(
-                                                    `search-flight?departure=${
-                                                        item.flight.departure.id
-                                                    }&destination=${
-                                                        item.flight.destination
-                                                            .id
-                                                    }&time=${getDate(
-                                                        item.flight
-                                                            .departure_datetime
-                                                    )}`
-                                                )
-                                            }
-                                        >
-                                            <div className="ticket-item">
-                                                <div className="img-box">
-                                                    <img
-                                                        src={
-                                                            URL_IMAGE_DESTINATION +
+                            <div className="ticket-list">
+                                <div className="row">
+                                    {ticketListLocation.map((item) => {
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                className="col-md-4"
+                                                onClick={() =>
+                                                    goTo(
+                                                        `search-flight?departure=${
+                                                            item.flight
+                                                                .departure.id
+                                                        }&destination=${
+                                                            item.flight
+                                                                .destination.id
+                                                        }&time=${getDate(
+                                                            item.flight
+                                                                .departure_datetime
+                                                        )}`
+                                                    )
+                                                }
+                                            >
+                                                <div className="ticket-item">
+                                                    <div className="img-box">
+                                                        <img
+                                                            src={
+                                                                URL_IMAGE_DESTINATION +
+                                                                item.flight
+                                                                    .destination
+                                                                    .image[0][
+                                                                    "image_name"
+                                                                ]
+                                                            }
+                                                        />
+                                                    </div>
+                                                    <Typography
+                                                        variant="h6"
+                                                        className="destination-name"
+                                                    >
+                                                        {
                                                             item.flight
                                                                 .destination
-                                                                .image[0][
-                                                                "image_name"
-                                                            ]
+                                                                .city
                                                         }
-                                                    />
-                                                </div>
-                                                <Typography
-                                                    variant="h6"
-                                                    className="destination-name"
-                                                >
-                                                    {
-                                                        item.flight.destination
-                                                            .city
-                                                    }
-                                                </Typography>
-                                                <div className="flight-info">
-                                                    <div className="row">
-                                                        <div className="col-md-3">
-                                                            <div className="logo-airline-box">
-                                                                <img
-                                                                    className="logo-airline"
-                                                                    src={
-                                                                        URL_IMAGE_AIRLINE +
-                                                                        item
-                                                                            .flight
-                                                                            .airline
-                                                                            .logo
-                                                                    }
-                                                                />
+                                                    </Typography>
+                                                    <div className="flight-info">
+                                                        <div className="row">
+                                                            <div className="col-md-3">
+                                                                <div className="logo-airline-box">
+                                                                    <img
+                                                                        className="logo-airline"
+                                                                        src={
+                                                                            URL_IMAGE_AIRLINE +
+                                                                            item
+                                                                                .flight
+                                                                                .airline
+                                                                                .logo
+                                                                        }
+                                                                    />
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="col-md-8">
-                                                            <div className="info">
-                                                                <Typography
-                                                                    variant="h6"
-                                                                    className="item-info"
-                                                                >
-                                                                    {dateConvert(
-                                                                        item
-                                                                            .flight
-                                                                            .departure_datetime
-                                                                    )}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="h6"
-                                                                    className="item-info"
-                                                                >
-                                                                    {`${item.flight.departure.airport_code} - ${item.flight.destination.airport_code}, ${item.flight.airline.airline_name}`}
-                                                                </Typography>
+                                                            <div className="col-md-8">
+                                                                <div className="info">
+                                                                    <Typography
+                                                                        variant="h6"
+                                                                        className="item-info"
+                                                                    >
+                                                                        {dateConvert(
+                                                                            item
+                                                                                .flight
+                                                                                .departure_datetime
+                                                                        )}
+                                                                    </Typography>
+                                                                    <Typography
+                                                                        variant="h6"
+                                                                        className="item-info"
+                                                                    >
+                                                                        {`${item.flight.departure.airport_code} - ${item.flight.destination.airport_code}, ${item.flight.airline.airline_name}`}
+                                                                    </Typography>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="price-info">
-                                                    <div className="title-box">
+                                                    <div className="price-info">
+                                                        <div className="title-box">
+                                                            <Typography
+                                                                variant="body1"
+                                                                className="title"
+                                                            >
+                                                                <RiErrorWarningLine className="icon" />
+                                                                Hạn chế vừa phải
+                                                            </Typography>
+                                                        </div>
+
                                                         <Typography
                                                             variant="body1"
-                                                            className="title"
+                                                            className="price"
                                                         >
-                                                            <RiErrorWarningLine className="icon" />
-                                                            Hạn chế vừa phải
+                                                            {`Giá từ ${formatCurrency(
+                                                                item.price +
+                                                                    item.tax
+                                                            )}`}
                                                         </Typography>
                                                     </div>
-
-                                                    <Typography
-                                                        variant="body1"
-                                                        className="price"
-                                                    >
-                                                        {`Giá từ ${formatCurrency(
-                                                            item.price +
-                                                                item.tax
-                                                        )}`}
-                                                    </Typography>
                                                 </div>
                                             </div>
-                                        </div>
-                                    );
-                                })}
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    ""
+                )}
             </div>
         );
     }

@@ -66,7 +66,11 @@ class TicketController extends Controller
                 "carbin_bag" => $request->carbin_bag,
                 "checkin_bag" => $request->checkin_bag,
                 "price" => $request->price,
-                "tax" => $request->tax
+                "tax" => $request->tax,
+                "business_seat_fee" => $request->business_seat_fee,
+                "economy_seat_fee" => $request->economy_seat_fee,
+                "deluxe_seat_fee" => $request->deluxe_seat_fee,
+                "exit_seat_fee" => $request->exit_seat_fee,
             ];
             $ticket = Ticket::create($data);
             return response()->json($ticket);
