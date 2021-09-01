@@ -4,7 +4,7 @@ import { Component } from "react";
 import SubNavbar from "../../Shared/Components/SubNavbar/SubNavbar";
 import StepListBar from "../ChooseFlight/Components/StepList/StepList";
 import "./BookingConfirm.scss";
-import { GiCommercialAirplane } from "react-icons/gi";
+import { GiCommercialAirplane, GiTrumpet } from "react-icons/gi";
 import { IoAirplane, IoCloudyNight } from "react-icons/io5";
 import { FaCloud } from "react-icons/fa";
 import FlightBookingDetail from "./Components/FlightBookingDetail/FlightBookingDetail";
@@ -22,7 +22,7 @@ class BookingConfirm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookingInfo: {},
+            bookingsInfo: [],
         };
     }
 
@@ -32,9 +32,11 @@ class BookingConfirm extends Component {
 
     getBookingInfo = () => {
         const data = this.props.location.state;
-        UserService.getBookingInfo(data.id).then((res) => {
-            this.setState({
-                bookingInfo: res.data,
+        const { bookingsInfo } = this.state;
+        data.forEach((item) => {
+            UserService.getBookingInfo(item.id).then((res) => {
+                bookingsInfo.push(res.data);
+                this.setState({ bookingsInfo });
             });
         });
     };
@@ -50,13 +52,23 @@ class BookingConfirm extends Component {
     };
 
     render() {
-        const { bookingInfo } = this.state;
-        const flight = Object.assign({}, bookingInfo.flight);
-        const departure = Object.assign({}, flight.departure);
-        const destination = Object.assign({}, flight.destination);
-        const ticket = Object.assign({}, bookingInfo.ticket);
-        let bookingTime = new Date(bookingInfo.booking_date);
-        bookingTime.setHours(bookingTime.getHours() + 2);
+        const { bookingsInfo } = this.state;
+        let bookingTime = "";
+        let paymentMethod = 0;
+        let checkHasBookingInfo = false;
+        let checkPayment = GiTrumpet;
+        if (bookingsInfo.length > 0) {
+            checkHasBookingInfo = true;
+            paymentMethod = bookingsInfo[0].payment_method;
+            bookingTime = new Date(bookingsInfo[0].booking_date);
+            bookingTime.setHours(bookingTime.getHours() + 2);
+        }
+        bookingsInfo.forEach((item) => {
+            if (item.payment_status == 0) {
+                checkPayment = false;
+            }
+        });
+
         return (
             <div>
                 <SubNavbar />
@@ -79,21 +91,23 @@ class BookingConfirm extends Component {
                                         <FaCloud className="cloud-icon cloud-1" />
                                         <FaCloud className="cloud-icon cloud-2" />
                                     </div>
-                                    {bookingInfo.payment_status == 0 ? (
+                                    {checkHasBookingInfo ? (
                                         <Typography
                                             className="notice-title"
                                             variant="h6"
                                         >
                                             {`Quý khách đã đặt chỗ thành công, mã đặt vé của quý khách là: `}
                                             <span
-                                                style={{ color: "#7b61f2" }}
-                                            >{`#${bookingInfo.booking_code}`}</span>
+                                                style={{
+                                                    color: "#7b61f2",
+                                                }}
+                                            >{`#${bookingsInfo[0].booking_code}`}</span>
                                         </Typography>
                                     ) : (
                                         ""
                                     )}
 
-                                    {bookingInfo.payment_status == 0 ? (
+                                    {!checkPayment ? (
                                         <Typography
                                             variant="h6"
                                             className="notice-alert"
@@ -107,43 +121,53 @@ class BookingConfirm extends Component {
                                             khách hàng chưa thanh toán yêu cầu
                                             đặt vé sẽ bị hủy
                                         </Typography>
-                                    ) : bookingInfo.payment_status == 1 ? (
+                                    ) : (
                                         <Typography
                                             variant="h6"
                                             className="notice-payment-success"
                                         >
                                             Quý khách đã thanh toán thành công
                                         </Typography>
-                                    ) : (
-                                        ""
                                     )}
                                 </div>
                             </div>
-                            {bookingInfo.payment_status == 0 &&
-                            bookingInfo.payment_method == 3 ? (
+                            {paymentMethod === 3 && !checkPayment ? (
                                 <Payment
-                                    data={bookingInfo}
+                                    data={bookingsInfo}
                                     onPaymentBooking={this.onPaymentBooking}
                                 />
-                            ) : bookingInfo.payment_status === 0 &&
-                              bookingInfo.payment_method === 2 ? (
-                                <PaymentNoticeBox data={bookingInfo} />
+                            ) : paymentMethod === 2 && !checkPayment ? (
+                                <PaymentNoticeBox data={bookingsInfo} />
                             ) : (
                                 ""
                             )}
 
-                            <FlightBookingDetail
-                                flight={flight}
-                                ticket={ticket}
-                                destination={destination}
-                                departure={departure}
-                            />
-                            <PassengerInfo
-                                passengers={bookingInfo.passenger}
-                                ticket={ticket}
-                                booking={bookingInfo}
-                            />
-                            <ContactInfoBooking booking={bookingInfo} />
+                            {bookingsInfo.map((item) => {
+                                return (
+                                    <FlightBookingDetail
+                                        key={item.id}
+                                        flight={item.flight}
+                                        ticket={item.ticket}
+                                        destination={item.flight.destination}
+                                        departure={item.flight.departure}
+                                    />
+                                );
+                            })}
+
+                            {checkHasBookingInfo ? (
+                                <PassengerInfo
+                                    passengers={bookingsInfo[0].passenger}
+                                    ticket={bookingsInfo[0].ticket}
+                                    bookings={bookingsInfo}
+                                />
+                            ) : (
+                                ""
+                            )}
+                            {checkHasBookingInfo ? (
+                                <ContactInfoBooking booking={bookingsInfo[0]} />
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                 </div>

@@ -17,8 +17,14 @@ class BusinessSeat extends Component {
     };
 
     render() {
-        const { seats, price, rowNumberFrom, seatsReserved, passengers } =
-            this.props;
+        const {
+            seats,
+            price,
+            rowNumberFrom,
+            seatsReserved,
+            passengers,
+            ticketChoosed,
+        } = this.props;
 
         let seatsRow = [];
         let seatRowNumber = rowNumberFrom;
@@ -61,8 +67,14 @@ class BusinessSeat extends Component {
         const checkSeatChoosed = (seatCurrent) => {
             let result = false;
             passengers.forEach((item) => {
-                if (item.seat_code === seatCurrent) {
-                    result = true;
+                if (ticketChoosed === 0) {
+                    if (item.seat_code === seatCurrent) {
+                        result = true;
+                    }
+                } else if (ticketChoosed === 1) {
+                    if (item.seat_code_return === seatCurrent) {
+                        result = true;
+                    }
                 }
             });
             return result;

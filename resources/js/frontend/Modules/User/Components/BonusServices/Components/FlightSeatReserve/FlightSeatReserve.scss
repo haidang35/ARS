@@ -1,0 +1,67 @@
+.flight-seat-reserve {
+    margin-top: 4rem;
+    height: 230px;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+
+    .select-service {
+        height: 230px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .check-box {
+            width: 40px;
+            height: 40px;
+
+        }
+    }
+
+    .title-box {
+        height: 230px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .seat-icon {
+            font-size: 5rem;
+
+        }
+
+        .select-seat-title {
+            font-size: 28px;
+            font-weight: 500;
+        }
+    }
+
+    .description-box {
+        height: 230px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .desc-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+
+            .icon-check {
+                color: rgb(8, 177, 50);
+                font-size: 1.5rem;
+                margin-right: .7rem;
+            }
+
+            .desc-title {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .img-box {
+        height: 230px;
+        background-image: url("https://static.onecms.io/wp-content/uploads/sites/28/2018/03/empty-airplane-cabin-SEATSWAP0318.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

@@ -37,6 +37,12 @@ class TicketController extends Controller
         return response()->json($ticket);
     }
 
+    public function getTicketRoundtripDetails($firstId, $secondId)
+    {
+        $firstTicket = Ticket::find($firstId);
+        $secondTicket = Ticket::find($secondId);
+    }
+
     public function updateTicketInfo($id, Request $request)
     {
         $data = [

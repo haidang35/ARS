@@ -28,15 +28,23 @@ class TicketItem extends Component {
         });
     };
 
-    onChooseFlight = () => {
-        window.scrollTo(0, 0);
+    onChooseFlight = (data) => {
+        this.props.chooseTicket(data);
+        // window.scrollTo(0, 0);
     };
     render() {
-        const { data } = this.props;
-        console.log(
-            "🚀 ~ file: TicketItem.js ~ line 35 ~ TicketItem ~ render ~ data",
-            data
-        );
+        const { data, tripType, ticketsChoosed } = this.props;
+        const checkTicketChoosed = () => {
+            let result = false;
+            if (Array.isArray(ticketsChoosed)) {
+                ticketsChoosed.forEach((item) => {
+                    if (item.id === data.id) {
+                        result = true;
+                    }
+                });
+            }
+            return result;
+        };
         return (
             <div>
                 <div>
@@ -120,22 +128,30 @@ class TicketItem extends Component {
                                     <Typography className="price">
                                         {formatCurrency(data.total_price)}
                                     </Typography>
-                                    <Link
-                                        to={`/reservations/ticket/${data.id}`}
+                                    {/* <Link
+                                        to={
+                                            tripType == 1
+                                                ? `/reservations/ticket/${data.id}`
+                                                : false
+                                        }
                                         style={{
                                             textDecoration: "none",
                                             width: "100%",
                                         }}
+                                    > */}
+                                    <Button
+                                        onClick={() =>
+                                            this.onChooseFlight(data)
+                                        }
+                                        className="btn-choose"
+                                        variant="contained"
+                                        color="primary"
                                     >
-                                        <Button
-                                            onClick={this.onChooseFlight}
-                                            className="btn-choose"
-                                            variant="contained"
-                                            color="primary"
-                                        >
-                                            Chọn chuyến bay
-                                        </Button>
-                                    </Link>
+                                        {checkTicketChoosed()
+                                            ? " Hủy chọn"
+                                            : "Chọn chuyến bay"}
+                                    </Button>
+                                    {/* </Link> */}
                                 </div>
                             </div>
                         </div>

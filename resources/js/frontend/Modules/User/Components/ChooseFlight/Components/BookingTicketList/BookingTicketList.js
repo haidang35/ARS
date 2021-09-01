@@ -30,12 +30,21 @@ class BookingTicketList extends Component {
         });
     };
     render() {
-        const { flightList } = this.props;
+        const { flightList, tripType, chooseTicket, ticketsChoosed } =
+            this.props;
         return (
             <div>
                 <div className="booking-ticket-list">
                     {flightList.map((item) => {
-                        return <TicketItem key={item.id} data={item} />;
+                        return (
+                            <TicketItem
+                                key={item.id}
+                                data={item}
+                                tripType={tripType}
+                                chooseTicket={chooseTicket}
+                                ticketsChoosed={ticketsChoosed}
+                            />
+                        );
                     })}
                     {flightList.length == 0 ? (
                         <div className="notice-none-flight">

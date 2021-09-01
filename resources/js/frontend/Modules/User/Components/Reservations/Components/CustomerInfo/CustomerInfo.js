@@ -14,12 +14,13 @@ class CustomerInfo extends Component {
             children: [],
             infants: [],
             isValid: false,
+            updateData: true,
         };
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.data !== this.props.data) {
-            nextProps.data.passenger.forEach((item) => {
+        if (!nextProps.onReservation && this.state.updateData) {
+            nextProps.data[0].passenger.forEach((item) => {
                 if (item.passenger_type == 1 && item.quantity > 0) {
                     let { adults } = this.state;
                     for (let i = 0; i < item.quantity; i++) {
@@ -59,6 +60,7 @@ class CustomerInfo extends Component {
                     this.setState({ infants });
                 }
             });
+            this.setState({ updateData: false });
         }
 
         if (nextProps.onReservation == true) {
@@ -205,8 +207,8 @@ class CustomerInfo extends Component {
         const { data, onReservation } = this.props;
         const { adults, children, infants, isValid } = this.state;
         const passenger = [];
-        if (Array.isArray(data.passenger)) {
-            data.passenger.forEach((item) => {
+        if (Array.isArray(data) && data.length > 0) {
+            data[0].passenger.forEach((item) => {
                 if (item.quantity > 0) {
                     passenger.push(item);
                 }
@@ -400,8 +402,10 @@ class CustomerInfo extends Component {
                                                     >
                                                         <option>
                                                             {`Tổng cộng ${
-                                                                data.checkin_bag +
-                                                                data.carbin_bag
+                                                                data[0]
+                                                                    .checkin_bag +
+                                                                data[0]
+                                                                    .carbin_bag
                                                             }kg hành lý`}
                                                         </option>
                                                     </select>

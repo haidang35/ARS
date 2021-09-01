@@ -8,6 +8,7 @@ import BookingHeader from "./Components/BookingHeader/BookingHeader";
 import SupportInfo from "./Components/SupportInfo/SupportInfo";
 import UserService from "../../Shared/UserService/UserService";
 import TicketFromLocation from "./Components/TicketFromLocation/TicketFromLocation";
+import SearchFlightBar from "./Components/SearchFlightBar/SearchFlightBar";
 const publicIp = require("public-ip");
 
 class HomeMain extends Component {
@@ -59,6 +60,7 @@ class HomeMain extends Component {
         if (Object.keys(departure).length > 0) {
             UserService.getTicketsWithLocationDeparture(departure.id).then(
                 (res) => {
+                    console.log("resssssss", res.data);
                     this.setState({
                         ticketsWithLocation: res.data,
                     });
@@ -129,10 +131,12 @@ class HomeMain extends Component {
                     onChangeDeparture={this.onChangeDeparture}
                     onChangeDestination={this.onChangeDestination}
                 />
+
                 <TicketFromLocation
                     location={location}
                     ticketList={ticketsWithLocation}
                 />
+                <SearchFlightBar />
                 <FavouriteDestination
                     getDestinationChoosed={this.getDestinationChoosed}
                 />

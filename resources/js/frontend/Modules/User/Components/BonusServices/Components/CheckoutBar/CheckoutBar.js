@@ -12,6 +12,12 @@ class CheckoutBar extends Component {
 
     render() {
         const { data } = this.props;
+        console.log(
+            "🚀 ~ file: CheckoutBar.js ~ line 15 ~ CheckoutBar ~ render ~ data",
+            data
+        );
+        let intoMoney = 0;
+
         return (
             <div>
                 <div className="checkout-bar">

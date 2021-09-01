@@ -7,9 +7,11 @@ import {
     Button,
     FilledInput,
     FormControl,
+    FormControlLabel,
     IconButton,
     InputAdornment,
     InputLabel,
+    Radio,
     TextField,
     Typography,
     withStyles,
@@ -65,12 +67,23 @@ const StyleDatePicker = withStyles({
     },
 })(KeyboardDatePicker);
 
+const GreenRadio = withStyles({
+    root: {
+        color: "#28ec28",
+        "&$checked": {
+            color: "#28ec28",
+        },
+    },
+    checked: {},
+})((props) => <Radio color="default" {...props} />);
+
 class SearchFlightInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             search: "",
             results: [],
+            searchType: 1,
             onSearch: false,
             showSelectDeparture: false,
             showSelectDestination: false,
@@ -95,6 +108,12 @@ class SearchFlightInfo extends Component {
                 destinationList: res.data,
                 departureList: res.data,
             });
+        });
+    };
+
+    handleChangeSearchType = (ev) => {
+        this.setState({
+            searchType: ev.target.value,
         });
     };
 
@@ -194,6 +213,7 @@ class SearchFlightInfo extends Component {
             scopeDestination,
             searchDeparture,
             searchDestination,
+            searchType,
         } = this.state;
 
         departureList = departureList.filter((item) => {
@@ -223,6 +243,7 @@ class SearchFlightInfo extends Component {
                                 Tìm kiếm chuyến bay
                             </Typography>
                         </div>
+
                         <div className="search-form">
                             <div className="search-bar">
                                 <FiSearch className="search-icon" />

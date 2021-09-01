@@ -65,7 +65,7 @@ class PaymentNoticeBox extends Component {
                                                         >
                                                             {" "}
                                                             {`"
-                                                        ${data.contact_name} - ${data.contact_phone} - Đặt vé #${data.booking_code}
+                                                        ${data[0].contact_name} - ${data[0].contact_phone} - Đặt vé #${data[0].booking_code}
                                                         "`}
                                                         </span>
                                                     </Typography>

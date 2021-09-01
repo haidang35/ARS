@@ -20,12 +20,13 @@ class Reservations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flightTicket: {},
+            flightTickets: [],
             onReservation: false,
             bookingInfo: {},
             redirect: false,
             message: "",
             bookingConfirmLoading: false,
+            flightTicketRoundTrip: [],
         };
     }
 
@@ -38,7 +39,17 @@ class Reservations extends Component {
     }
 
     getFlightTicketInfo = () => {
-        const { id } = this.props.match.params;
+        const data = this.props.location.state;
+        if (data.tripType == 1) {
+            this.getTicketInfoOneWay();
+        } else if (data.tripType == 2) {
+            this.getTicketInfoRoundTrip();
+        }
+    };
+
+    getTicketInfoOneWay = () => {
+        const ticketData = this.props.location.state;
+        let { flightTickets } = this.state;
         let trip_type = JSON.parse(localStorage.getItem("tripType"));
         let passengerOrg = JSON.parse(localStorage.getItem("passengers"));
         let passenger = [
@@ -56,10 +67,53 @@ class Reservations extends Component {
             },
         ];
         let data = { trip_type, passenger };
+        UserService.getFlightTicketInfo(
+            ticketData.ticketsChoosed[0].id,
+            data
+        ).then((res) => {
+            flightTickets.push(res.data);
+            this.setState({ flightTickets });
+        });
+    };
+
+    getTicketInfoRoundTrip = () => {
+        const ticketData = this.props.location.state;
+        const ticketIdFirst = ticketData.ticketsChoosed[0].id;
+        const ticketIdSecond = ticketData.ticketsChoosed[1].id;
+        let trip_type = JSON.parse(localStorage.getItem("tripType"));
+        let passengerOrg = JSON.parse(localStorage.getItem("passengers"));
+        let passenger = [
+            {
+                passenger_type: 1,
+                quantity: passengerOrg.adults,
+            },
+            {
+                passenger_type: 2,
+                quantity: passengerOrg.children,
+            },
+            {
+                passenger_type: 3,
+                quantity: passengerOrg.infants,
+            },
+        ];
+        let data = { trip_type, passenger };
+        this.getFirstTicket(ticketIdFirst, data);
+        this.getSecondTicket(ticketIdSecond, data);
+    };
+
+    getFirstTicket = (id, data) => {
+        let { flightTickets } = this.state;
         UserService.getFlightTicketInfo(id, data).then((res) => {
-            this.setState({
-                flightTicket: res.data,
-            });
+            flightTickets.push(res.data);
+            this.setState({ flightTickets });
+        });
+    };
+
+    getSecondTicket = (id, data) => {
+        let { flightTickets } = this.state;
+        UserService.getFlightTicketInfo(id, data).then((res) => {
+            flightTickets.push(res.data);
+            this.setState({ flightTickets });
         });
     };
 
@@ -76,7 +130,7 @@ class Reservations extends Component {
     };
 
     onReservationTicket = async () => {
-        const { id } = this.props.match.params;
+        const ticketData = this.props.location.state;
         this.setState({
             onReservation: true,
         });
@@ -93,12 +147,16 @@ class Reservations extends Component {
             this.setState({
                 bookingConfirmLoading: true,
             });
-            const { flightTicket } = this.state;
+            const { flightTickets } = this.state;
+            let intoMoney = 0;
+            flightTickets.forEach((item) => {
+                intoMoney += item.into_money;
+            });
 
             const data = {
                 booking_date: getDateTimeNow(),
                 trip_type,
-                ticket_id: id,
+                ticket_id: ticketData.ticketsChoosed[0].id,
                 vocative: this.contactInfo.vocative,
                 contact_name: this.contactInfo.contact_name,
                 contact_phone: this.contactInfo.phone,
@@ -106,11 +164,11 @@ class Reservations extends Component {
                 address: this.contactInfo.address,
                 note: this.contactInfo.note,
                 payment_method: this.paymentMethod,
-                into_money: this.state.flightTicket.into_money,
+                into_money: intoMoney,
                 payment_status: 0,
                 passengers: this.customerInfo,
                 user_id: userId,
-                ticket: flightTicket,
+                ticket: flightTickets,
             };
             this.setState({
                 bookingInfo: data,
@@ -140,8 +198,13 @@ class Reservations extends Component {
     };
 
     render() {
-        const { flightTicket, onReservation, bookingInfo, redirect } =
-            this.state;
+        const {
+            flightTickets,
+            onReservation,
+            bookingInfo,
+            redirect,
+            flightTicketRoundTrip,
+        } = this.state;
         if (redirect) {
             return (
                 <Redirect
@@ -152,6 +215,10 @@ class Reservations extends Component {
                 />
             );
         }
+        let intoMoney = 0;
+        flightTickets.forEach((item) => {
+            intoMoney += item.into_money;
+        });
         return (
             <div>
                 <SubNavbar />
@@ -161,12 +228,15 @@ class Reservations extends Component {
                         <div className="main-content">
                             <div className="row">
                                 <div className="col-md-3">
-                                    <TicketDetails data={flightTicket} />
+                                    <TicketDetails
+                                        data={flightTickets}
+                                        intoMoney={intoMoney}
+                                    />
                                 </div>
                                 <div className="col-md-9">
-                                    <FlightChoosed data={flightTicket} />
+                                    <FlightChoosed data={flightTickets} />
                                     <CustomerInfo
-                                        data={flightTicket}
+                                        data={flightTickets}
                                         onReservation={onReservation}
                                         getCustomerInfo={this.getCustomerInfo}
                                     />
@@ -175,7 +245,7 @@ class Reservations extends Component {
                                         getContactInfo={this.getContactInfo}
                                     />
                                     <PaymentMethod
-                                        data={flightTicket}
+                                        data={flightTickets}
                                         onReservation={this.onReservationTicket}
                                         getPaymentMethod={this.getPaymentMethod}
                                     />

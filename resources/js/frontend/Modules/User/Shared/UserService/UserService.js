@@ -11,7 +11,7 @@ const API_ENDPOINT = {
     GET_FLIGHT_ROUTE: "user/find-route",
     PAYMENT_BOOKING: "user/booking/payment/",
     GET_BOOKING_INFO: "user/booking/",
-    GET_TICKET_LOCATION_DEPARTURE: "tickets/location/",
+    GET_TICKET_LOCATION_DEPARTURE: "tickets-location/",
     GET_DISCOUNT_TICKET: "discount-tickets",
     CANCEL_BOOKING: "user/booking/",
     SEARCH_FLIGHT_INFO: "user/search/flight",

@@ -128,72 +128,79 @@ class UserController extends Controller
 
     public function bookingFlightTicket(Request $request)
     {
-        $bookingCode = strtoupper(Str::random(5) . rand(1000, 9999));
-        $bookingInfo = [
-            "booking_code" => $bookingCode,
-            "booking_date" => $request->booking_date,
-            "trip_type" => $request->trip_type,
-            "contact_name" => $request->contact_name,
-            "vocative" => $request->vocative,
-            "contact_phone" => $request->contact_phone,
-            "contact_email" => $request->contact_email,
-            "address" => $request->address,
-            "note" => $request->note,
-            "payment_method" => $request->payment_method,
-            "status" => 1,
-            "into_money" => $request->into_money,
-            "payment_status" => $request->payment_status,
-            "user_id" => $request->user_id,
-
-        ];
-        $booking = Booking::create($bookingInfo);
-        $ticket = Ticket::findOrFail($request->ticket_id);
-        $booking["ticket"] = $ticket;
-        $flight = Flight::with("Destination")->with("Departure")->with("Airline")->find($ticket->flight_id);
-        $booking["flight"] = $flight;
-        $passengers = [];
-        $passengersBooking = [];
-        $passengers = $request->passengers;
-        $into_money = 0;
-        foreach ($passengers as $item) {
-            $bookingTicketInfo = [
-                "booking_id" => $booking->id,
-                "ticket_id" => $request->ticket_id,
-                "passenger_name" => $item["passenger_name"],
-                "gender" => $item["gender"],
-                "birthday" => $item["birthday"],
-                "identity_card" => $item["passenger_type"] == 1 ? $item["identity_card"] : null,
-                "passenger_type" => $item["passenger_type"],
-                "booking_seat" => $item["seat_code"] !== "" ? $item["seat_code"] : null,
+        $tickets = $request->ticket_id;
+        $bookingList = [];
+        foreach ($tickets as $ticket) {
+            $bookingCode = strtoupper(Str::random(5) . rand(1000, 9999));
+            $bookingInfo = [
+                "booking_code" => $bookingCode,
+                "booking_date" => $request->booking_date,
+                "trip_type" => $request->trip_type,
+                "contact_name" => $request->contact_name,
+                "vocative" => $request->vocative,
+                "contact_phone" => $request->contact_phone,
+                "contact_email" => $request->contact_email,
+                "address" => $request->address,
+                "note" => $request->note,
+                "payment_method" => $request->payment_method,
+                "status" => 1,
+                "into_money" => $request->into_money,
+                "payment_status" => $request->payment_status,
+                "user_id" => $request->user_id,
 
             ];
-            $into_money += $ticket->price + $ticket->tax;
-            $bookingTicket = BookingTicket::create($bookingTicketInfo);
-            FlightSeat::create([
-                "flight_id" => $flight["id"],
-                "seat_code_reserved" => $item["seat_code"]
+            $booking = Booking::create($bookingInfo);
+            $ticket = Ticket::findOrFail($ticket["id"]);
+            $booking["ticket"] = $ticket;
+            $flight = Flight::with("Destination")->with("Departure")->with("Airline")->find($ticket->flight_id);
+            $booking["flight"] = $flight;
+            $passengers = [];
+            $passengersBooking = [];
+            $passengers = $request->passengers;
+            $into_money = 0;
+            foreach ($passengers as $item) {
+                $bookingTicketInfo = [
+                    "booking_id" => $booking->id,
+                    "ticket_id" => $ticket["id"],
+                    "passenger_name" => $item["passenger_name"],
+                    "gender" => $item["gender"],
+                    "birthday" => $item["birthday"],
+                    "identity_card" => $item["passenger_type"] == 1 ? $item["identity_card"] : null,
+                    "passenger_type" => $item["passenger_type"],
+                    "booking_seat" => $item["seat_code"] !== "" ? $item["seat_code"] : null,
+
+                ];
+                $into_money += $ticket->price + $ticket->tax;
+                $bookingTicket = BookingTicket::create($bookingTicketInfo);
+                FlightSeat::create([
+                    "flight_id" => $flight["id"],
+                    "seat_code_reserved" => $item["seat_code"]
+                ]);
+                $passengersBooking[] = $bookingTicket;
+            }
+            $flight->update([
+                "seats_available" => $flight["seats_available"] - count($passengers),
+                "seats_reserved" => $flight["seats_reserved"] + count($passengers)
             ]);
-            $passengersBooking[] = $bookingTicket;
+            $booking["passengers"] = $passengersBooking;
+            $booking["into_money"] = $into_money;
+            $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"], $booking["id"]);
+            $departureTime = new DateTime($booking["flight"]["departure_datetime"]);
+            $arrivalTime = new DateTime($booking["flight"]["arrival_datetime"]);
+            $time = $arrivalTime->diff($departureTime);
+            $bookingList[] = $booking;
+            $offer = [
+                'title' => 'Thông báo xác nhận yêu cầu đặt vé từ quý khách',
+                'url' => 'http://127.0.0.1:8000/booking-info/' . $booking["booking_code"],
+                'data' => $booking,
+                "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"
+            ];
+
+            $email = $booking["contact_email"];
+            // Mail::to($email)->send(new ConfirmMail($offer));
         }
-        $flight->update([
-            "seats_available" => $flight["seats_available"] - count($passengers),
-            "seats_reserved" => $flight["seats_reserved"] + count($passengers)
-        ]);
-        $booking["passengers"] = $passengersBooking;
-        $booking["into_money"] = $into_money;
-        $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"], $booking["id"]);
-        $departureTime = new DateTime($booking["flight"]["departure_datetime"]);
-        $arrivalTime = new DateTime($booking["flight"]["arrival_datetime"]);
-        $time = $arrivalTime->diff($departureTime);
-        $offer = [
-            'title' => 'Thông báo xác nhận yêu cầu đặt vé từ quý khách',
-            'url' => 'http://127.0.0.1:8000/booking-info/' . $booking["booking_code"],
-            'data' => $booking,
-            "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"
-        ];
-        $email = $booking["contact_email"];
-        Mail::to($email)->send(new ConfirmMail($offer));
-        return $booking;
+
+        return response()->json($bookingList);
     }
 
     public function findRouteFlight(Request $request)

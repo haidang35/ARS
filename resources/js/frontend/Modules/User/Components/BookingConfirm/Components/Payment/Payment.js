@@ -16,7 +16,11 @@ class Payment extends Component {
 
     render() {
         const { data } = this.props;
-        let intoMoney = Math.floor(data.into_money / 22810);
+        let intoMoney = 0;
+        data.forEach((item) => {
+            intoMoney += item.into_money;
+        });
+        intoMoney = Math.floor(intoMoney / 22810);
         return (
             <div className="payment">
                 <div className="title-box">

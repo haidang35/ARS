@@ -317,7 +317,9 @@ class BookingDetails extends Form {
                                                         Note
                                                     </label>
                                                     <textarea
-                                                        style={{overflow:"hidden"}}
+                                                        style={{
+                                                            overflow: "hidden",
+                                                        }}
                                                         id="first-name-vertical"
                                                         className="form-control"
                                                         name="note"
@@ -333,7 +335,10 @@ class BookingDetails extends Form {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="row" style={{marginTop:"55px"}}>
+                                        <div
+                                            className="row"
+                                            style={{ marginTop: "55px" }}
+                                        >
                                             <div className="col-12">
                                                 <h5>Thông tin chuyến bay</h5>
                                             </div>
@@ -493,7 +498,7 @@ class BookingDetails extends Form {
                             </div>
                         </div>
                     </div>
-          
+
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">Thông tin hành khách</h4>
@@ -508,6 +513,7 @@ class BookingDetails extends Form {
                                                 <th>Tên hành khách</th>
                                                 <th>Giới tính</th>
                                                 <th>Ngày sinh</th>
+                                                <th>Chỗ ngồi đã đặt trước </th>
                                                 <th>Giá vé </th>
                                             </tr>
                                         </thead>
@@ -528,6 +534,12 @@ class BookingDetails extends Form {
                                                             )}
                                                         </td>
                                                         <td>
+                                                            {item.booking_seat
+                                                                .length > 0
+                                                                ? item.booking_seat
+                                                                : "Không"}
+                                                        </td>
+                                                        <td>
                                                             {formatCurrency(
                                                                 ticket.price +
                                                                     ticket.tax
@@ -537,7 +549,7 @@ class BookingDetails extends Form {
                                                 );
                                             })}
                                             <tr>
-                                                <td colSpan="4">Tổng tiền</td>
+                                                <td colSpan="5">Tổng tiền</td>
                                                 <td colSpan="1">
                                                     {formatCurrency(
                                                         booking.into_money

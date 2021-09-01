@@ -53,7 +53,11 @@ class Home extends Component {
                                 component={ChooseFlight}
                             />
                             <Route
-                                path={"/reservations/ticket/:id"}
+                                path={"/reservation/ticket/oneway"}
+                                component={Reservations}
+                            />
+                            <Route
+                                path={"/reservation/ticket/round-trip"}
                                 component={Reservations}
                             />
                             <Route

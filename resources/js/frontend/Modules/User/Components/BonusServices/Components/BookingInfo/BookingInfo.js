@@ -16,106 +16,163 @@ class BookingInfo extends Component {
     }
 
     render() {
-        const { bookingInfo, passengerChoosedSeat } = this.props;
-        let passengers = [];
-        if (Object.keys(bookingInfo).length > 0) {
-            passengers = bookingInfo.passengers;
+        const { bookingInfo, passengerChoosedSeat, chooseSeatFlight } =
+            this.props;
+        let flightsChoosed = [];
+        if (flightsChoosed.length == 0) {
+            flightsChoosed.push(chooseSeatFlight);
         }
-
+        flightsChoosed.forEach((item) => {
+            if (chooseSeatFlight.id !== item.id) {
+                flightsChoosed.push(chooseSeatFlight);
+            }
+        });
+        const passengerChoosedInfo = Object.assign(
+            {},
+            passengerChoosedSeat.data
+        );
+        const tickets = bookingInfo.ticket;
         return (
             <div>
                 <div className="booking-info-service">
-                    <div className="passenger-list">
-                        {/* <div className="title-box">
-                            <Typography variant="h6">Hà Nội </Typography>
-                            <span> - </span>
-                            <Typography variant="h6"> Đà Nẵng</Typography>
-                        </div> */}
-                        <div className="passengers-box">
-                            {passengers.map((item) => {
-                                return (
-                                    <div
-                                        key={item.id}
-                                        className={`passenger-item ${
-                                            passengerChoosedSeat.id === item.id
-                                                ? `passenger-item-active`
-                                                : ``
-                                        }`}
-                                        onClick={() =>
-                                            this.props.setPassengerSeat(item)
-                                        }
-                                    >
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <Typography
-                                                    className="passenger-name"
-                                                    variant="body1"
-                                                >
-                                                    {item.passenger_name}
-                                                </Typography>
-                                                {item.seat_code !== "" ? (
-                                                    <Typography
-                                                        className="seat-status seat-status-active"
-                                                        variant="body1"
-                                                    >
-                                                        <ImCheckmark className="checked-icon" />
-                                                        Đã thêm chỗ ngồi
-                                                    </Typography>
-                                                ) : (
-                                                    <Typography
-                                                        className="seat-status"
-                                                        variant="body1"
-                                                    >
-                                                        Chọn chỗ ngồi của bạn
-                                                        <IoIosArrowForward className="icon-arrow" />
-                                                    </Typography>
-                                                )}
-                                            </div>
-                                            {item.seat_code !== "" ? (
-                                                <div className="col-md-6">
-                                                    <div className="seat-selected-info">
-                                                        <MdAirlineSeatReclineNormal className="seat-icon" />
-                                                        <div>
+                    {tickets.map((item) => {
+                        return (
+                            <div className="passenger-list">
+                                <div className="title-box">
+                                    <Typography variant="h6">
+                                        {`${item.flight.departure.city} - ${item.flight.destination.city}`}
+                                    </Typography>
+                                    <Typography variant="h6"></Typography>
+                                </div>
+                                <div className="passengers-box">
+                                    {bookingInfo.passengers.map((psg) => {
+                                        return (
+                                            <div
+                                                key={psg.id}
+                                                className={`passenger-item ${
+                                                    passengerChoosedInfo.id ===
+                                                        psg.id &&
+                                                    passengerChoosedSeat.ticket
+                                                        .id === item.id
+                                                        ? `passenger-item-active`
+                                                        : ``
+                                                }`}
+                                                onClick={() =>
+                                                    this.props.setPassengerSeat(
+                                                        psg,
+                                                        item
+                                                    )
+                                                }
+                                            >
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <Typography
+                                                            className="passenger-name"
+                                                            variant="body1"
+                                                        >
+                                                            {psg.passenger_name}
+                                                        </Typography>
+                                                        {(chooseSeatFlight ==
+                                                            0 &&
+                                                            psg.seat_code !==
+                                                                "" &&
+                                                            passengerChoosedSeat
+                                                                .ticket.id ===
+                                                                item.id) ||
+                                                        (chooseSeatFlight ===
+                                                            1 &&
+                                                            psg.seat_code_return !==
+                                                                "" &&
+                                                            passengerChoosedSeat
+                                                                .ticket.id ===
+                                                                item.id) ? (
                                                             <Typography
+                                                                className="seat-status seat-status-active"
                                                                 variant="body1"
-                                                                className="seat-name"
                                                             >
-                                                                {item.seat_code}
+                                                                <ImCheckmark className="checked-icon" />
+                                                                Đã thêm chỗ ngồi
                                                             </Typography>
+                                                        ) : (
                                                             <Typography
+                                                                className="seat-status"
                                                                 variant="body1"
-                                                                className="seat-price"
                                                             >
-                                                                {`+${formatCurrency(
-                                                                    item.price
-                                                                )}`}
+                                                                Chọn chỗ ngồi
+                                                                của bạn
+                                                                <IoIosArrowForward className="icon-arrow" />
                                                             </Typography>
-                                                        </div>
-
-                                                        <IoCloseSharp
-                                                            className="close-icon"
-                                                            onClick={
-                                                                passengerChoosedSeat.id ===
-                                                                item.id
-                                                                    ? () =>
-                                                                          this.props.setSeatCodePassenger(
-                                                                              "",
-                                                                              item.price
-                                                                          )
-                                                                    : {}
-                                                            }
-                                                        />
+                                                        )}
                                                     </div>
+                                                    {(chooseSeatFlight === 0 &&
+                                                        psg.seat_code !== "" &&
+                                                        passengerChoosedSeat
+                                                            .ticket.id ===
+                                                            item.id) ||
+                                                    (chooseSeatFlight === 1 &&
+                                                        psg.seat_code_return !==
+                                                            "" &&
+                                                        passengerChoosedSeat
+                                                            .ticket.id ===
+                                                            item.id) ? (
+                                                        <div className="col-md-6">
+                                                            <div className="seat-selected-info">
+                                                                <MdAirlineSeatReclineNormal className="seat-icon" />
+                                                                <div>
+                                                                    <Typography
+                                                                        variant="body1"
+                                                                        className="seat-name"
+                                                                    >
+                                                                        {chooseSeatFlight ===
+                                                                        1
+                                                                            ? psg.seat_code_return
+                                                                            : psg.seat_code}
+                                                                    </Typography>
+                                                                    <Typography
+                                                                        variant="body1"
+                                                                        className="seat-price"
+                                                                    >
+                                                                        {`+${
+                                                                            chooseSeatFlight ===
+                                                                            1
+                                                                                ? formatCurrency(
+                                                                                      psg.price_return
+                                                                                  )
+                                                                                : formatCurrency(
+                                                                                      psg.price
+                                                                                  )
+                                                                        }`}
+                                                                    </Typography>
+                                                                </div>
+
+                                                                <IoCloseSharp
+                                                                    className="close-icon"
+                                                                    onClick={
+                                                                        passengerChoosedSeat
+                                                                            .ticket
+                                                                            .id ===
+                                                                        item.id
+                                                                            ? () =>
+                                                                                  this.props.setSeatCodePassenger(
+                                                                                      "",
+                                                                                      psg.price
+                                                                                  )
+                                                                            : {}
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        ""
+                                                    )}
                                                 </div>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         );

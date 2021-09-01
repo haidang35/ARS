@@ -1,0 +1,64 @@
+@import "../../../../../../Shared/Style/variables";
+
+.search-flight-box {
+    background-image: url("https://www.azernews.az/media/pictures/flight-at-sunset.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+    .title-box {
+        .title {
+            font-size: 35px;
+            font-weight: 600;
+            color: #ffff;
+        }
+    }
+
+    .select-search-info {
+        .check-radio {}
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-top: 2rem;
+        height: 80px;
+        border-radius: 35px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        background-color: #ffff;
+        overflow: hidden;
+
+        .search-icon {
+            font-size: 3rem;
+            margin-left: 1rem;
+            color: $background-color;
+        }
+
+        .search-input {
+            width: 80%;
+            height: 100%;
+            outline: none;
+            border: none;
+            font-size: 19px;
+            font-weight: 500;
+            background: none;
+            padding-left: 1rem;
+        }
+
+        .btn-search-home {
+            margin-left: 2.3rem;
+            padding: 1.5rem 3rem;
+            font-size: 19px;
+            color: #ffff;
+            background: $background-linear-btn;
+
+        }
+    }
+}

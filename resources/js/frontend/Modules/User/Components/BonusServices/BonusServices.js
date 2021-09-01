@@ -8,14 +8,16 @@ import UserService from "../../Shared/UserService/UserService";
 import CheckoutBar from "./Components/CheckoutBar/CheckoutBar";
 import { Redirect } from "react-router-dom";
 import { Backdrop, CircularProgress } from "@material-ui/core";
+import FlightSeatReserve from "./Components/FlightSeatReserve/FlightSeatReserve";
 
 class BonusServices extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flightInfo: {},
+            bonusService: 0,
+            flightsInfo: [],
             seatsReserved: [],
-            bookingInfo: {},
+            bookingInfo: "",
             onContinue: false,
             updateData: true,
             redirect: false,
@@ -36,6 +38,7 @@ class BonusServices extends Component {
         window.Echo.channel("SeatFlight").listen(
             "ChooseSeatFlightEvent",
             (event) => {
+                console.log("event", event.message);
                 let { seatsReserved } = this.state;
                 for (let i = 0; i < seatsReserved.length; i++) {
                     if (
@@ -61,18 +64,24 @@ class BonusServices extends Component {
 
     getFlightSeatReserved = () => {
         const bookingInfo = this.props.location.state;
-        UserService.getFlightSeats(bookingInfo.ticket_id).then((res) => {
-            this.setState({
-                seatsReserved: res.data,
+        bookingInfo.ticket.forEach((item) => {
+            UserService.getFlightSeats(item.id).then((res) => {
+                this.setState({
+                    seatsReserved: res.data,
+                });
             });
         });
     };
 
     getSeatsFlightInfo = () => {
-        const data = this.props.location.state;
-        UserService.getSeatAndPriceFlightInfo(data.ticket_id).then((res) => {
-            this.setState({
-                flightInfo: res.data,
+        const bookingInfo = this.props.location.state;
+        let { flightsInfo } = this.state;
+        bookingInfo.ticket.forEach((item) => {
+            UserService.getSeatAndPriceFlightInfo(item.id).then((res) => {
+                flightsInfo.push(res.data);
+                this.setState({
+                    flightsInfo,
+                });
             });
         });
     };
@@ -97,7 +106,7 @@ class BonusServices extends Component {
             const data = {
                 booking_date: this.bookingInfoUpdated.booking_date,
                 trip_type: this.bookingInfoUpdated.trip_type,
-                ticket_id: this.bookingInfoUpdated.ticket_id,
+                ticket_id: this.state.bookingInfo.ticket,
                 vocative: this.bookingInfoUpdated.vocative,
                 contact_name: this.bookingInfoUpdated.contact_name,
                 contact_email: this.bookingInfoUpdated.contact_email,
@@ -112,7 +121,6 @@ class BonusServices extends Component {
             };
             UserService.bookingFlightTicket(data)
                 .then((res) => {
-                    console.log(res.data);
                     this.setState({
                         bookingInfo: res.data,
                         redirect: true,
@@ -126,14 +134,21 @@ class BonusServices extends Component {
         }
     };
 
+    onChangeBonusService = (value) => {
+        this.setState({
+            bonusService: value,
+        });
+    };
+
     render() {
         const {
-            flightInfo,
+            flightsInfo,
             seatsReserved,
             bookingInfo,
             onContinue,
             updateData,
             redirect,
+            bonusService,
         } = this.state;
         if (redirect) {
             return (
@@ -151,9 +166,14 @@ class BonusServices extends Component {
                 <div className="bonus-services">
                     <div className="wrap-container">
                         <StepListBar step={3} />
+                        <FlightSeatReserve
+                            bonusService={bonusService}
+                            onChangeBonusService={this.onChangeBonusService}
+                        />
                         <FlightSeatSelection
+                            onOpen={bonusService == 1}
                             updateData={updateData}
-                            flightInfo={flightInfo}
+                            flightsInfo={flightsInfo}
                             bookingInfo={bookingInfo}
                             seatsReserved={seatsReserved}
                             updateBookingInfo={this.updateBookingInfo}

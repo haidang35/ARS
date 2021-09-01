@@ -9,6 +9,10 @@ import HeaderBookingTicket from "./Components/HeaderBookingTicket/HeaderBookingT
 import UserService from "../../../User/Shared/UserService/UserService";
 import SearchFlightBar from "../SearchFlightBar/SearchFlightBar";
 import ChatBox from "../ChatBox/ChatBox";
+import CheckoutBar from "../BonusServices/Components/CheckoutBar/CheckoutBar";
+import CheckoutStepBar from "../CheckoutStepBar/CheckoutStepBar";
+import { forEach } from "lodash";
+import { Redirect } from "react-router-dom";
 
 class ChooseFlight extends Component {
     constructor(props) {
@@ -29,6 +33,9 @@ class ChooseFlight extends Component {
             airlineList: [],
             tripType: "",
             filterTripType: 1,
+            ticketsChoosed: [],
+            intoMoney: 0,
+            reserveTicket: false,
         };
     }
 
@@ -122,7 +129,6 @@ class ChooseFlight extends Component {
                     flightsDataReturn: res.data,
                     flightsDataReturnOrg: res.data,
                 });
-                console.log("returnnnnnn", res.data);
             })
             .catch((err) => {});
     };
@@ -182,9 +188,7 @@ class ChooseFlight extends Component {
             if (
                 newDate.getDate() == data.date.getDate() &&
                 newDate.getMonth() == data.date.getMonth() &&
-                newDate.getFullYear() == data.date.getFullYear() &&
-                newDate.getDate() >= now.getDate() &&
-                newDate.getMonth() == now.getMonth()
+                newDate.getFullYear() == data.date.getFullYear()
             ) {
                 flightsData.push(item);
             }
@@ -239,7 +243,6 @@ class ChooseFlight extends Component {
             flightsDataReturnOrg,
             returnDate: data.date,
         });
-        console.log("FL", this.state.flightsDataReturn);
     };
 
     sortFlight = (value) => {
@@ -621,6 +624,34 @@ class ChooseFlight extends Component {
         });
     };
 
+    chooseTicketsForRoundtrip = (data) => {
+        let { ticketsChoosed, intoMoney, tripType } = this.state;
+        let checkExisted = false;
+        for (let i = 0; i < ticketsChoosed.length; i++) {
+            if (ticketsChoosed[i].id === data.id) {
+                intoMoney -= data.price + data.tax;
+                checkExisted = true;
+                ticketsChoosed.splice(i, 1);
+            }
+        }
+        if (!checkExisted) {
+            intoMoney += data.price + data.tax;
+            ticketsChoosed.push(data);
+        }
+
+        this.setState({
+            ticketsChoosed,
+            intoMoney,
+        });
+    };
+
+    onReserveTicket = () => {
+        this.setState({
+            reserveTicket: true,
+        });
+        window.scrollTo(0, 0);
+    };
+
     render() {
         const {
             departureDate,
@@ -637,7 +668,28 @@ class ChooseFlight extends Component {
             flightListDateReturn,
             flightListDateReturnOrg,
             tripType,
+            ticketsChoosed,
+            reserveTicket,
         } = this.state;
+        if (reserveTicket && tripType == 1) {
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/reservation/ticket/oneway",
+                        state: { tripType, ticketsChoosed },
+                    }}
+                />
+            );
+        } else if (reserveTicket && tripType == 2) {
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/reservation/ticket/round-trip",
+                        state: { tripType, ticketsChoosed },
+                    }}
+                />
+            );
+        }
         return (
             <div>
                 <SubNavbar />
@@ -685,6 +737,11 @@ class ChooseFlight extends Component {
                                         />
                                         <BookingTicketList
                                             flightList={flightsData}
+                                            tripType={tripType}
+                                            chooseTicket={
+                                                this.chooseTicketsForRoundtrip
+                                            }
+                                            ticketsChoosed={ticketsChoosed}
                                         />
                                     </div>
                                     {this.state.tripType == 2 ? (
@@ -711,6 +768,12 @@ class ChooseFlight extends Component {
                                                 flightList={
                                                     this.state.flightsDataReturn
                                                 }
+                                                tripType={tripType}
+                                                chooseTicket={
+                                                    this
+                                                        .chooseTicketsForRoundtrip
+                                                }
+                                                ticketsChoosed={ticketsChoosed}
                                             />
                                         </div>
                                     ) : (
@@ -722,6 +785,10 @@ class ChooseFlight extends Component {
                     </div>
                 </div>
                 <ChatBox />
+                <CheckoutStepBar
+                    intoMoney={this.state.intoMoney}
+                    onContinue={this.onReserveTicket}
+                />
             </div>
         );
     }

@@ -83,10 +83,11 @@ Route::get('flights/seats-reserved/{id}', [FlightController::class, "getSeatRese
 // Ticket
 Route::get('tickets', [TicketController::class,  "getAllTicket"]);
 Route::get('tickets/{id}', [TicketController::class, "getTicketDetails"]);
+Route::get('tickets/{firstId}/{secondId}', [TicketController::class, "getTicketRoundtripDetails"]);
 Route::patch('tickets/update/{id}', [TicketController::class, "updateTicketInfo"]);
 Route::post('tickets', [TicketController::class, "addNewTicket"]);
 Route::delete('tickets/{id}', [TicketController::class, "deleteTicket"]);
-Route::get('tickets/location/{destinationId}', [TicketController::class, "getTicketHasDepartureLocation"]);
+Route::get('tickets-location/{destinationId}', [TicketController::class, "getTicketHasDepartureLocation"]);
 Route::get('discount-tickets', [TicketController::class, "getDiscountTickets"]);
 
 // Booking

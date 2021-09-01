@@ -82,17 +82,23 @@
                 margin-top: 1rem;
             }
 
-            .total-price {
-                font-size: 22px;
-                font-weight: bold;
-                color: $background;
-                margin-top: 1rem;
 
-            }
 
             .right {
                 float: right;
             }
+        }
+
+        .total-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: $background;
+            margin-top: 1rem;
+
+        }
+
+        .right {
+            float: right;
         }
     }
 }

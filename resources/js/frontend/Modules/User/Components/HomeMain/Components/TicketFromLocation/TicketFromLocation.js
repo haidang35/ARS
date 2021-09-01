@@ -23,6 +23,10 @@ class TicketFromLocation extends Component {
 
     render() {
         const { ticketList, location } = this.props;
+        console.log(
+            "🚀 ~ file: TicketFromLocation.js ~ line 26 ~ TicketFromLocation ~ render ~ ticketList",
+            ticketList
+        );
         let ticketListLocation = [];
         if (Array.isArray(ticketList) && ticketList.length >= 3) {
             for (let i = 0; i < 3; i++) {
