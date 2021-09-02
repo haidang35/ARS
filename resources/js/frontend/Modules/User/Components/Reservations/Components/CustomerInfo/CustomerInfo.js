@@ -221,7 +221,7 @@ class CustomerInfo extends Component {
                 <div className="customer-info">
                     <div className="title-box">
                         <Typography variant="h4" className="title">
-                            Thông tin khách hàng
+                            Customer information
                         </Typography>
                     </div>
                     <div className="content">
@@ -232,7 +232,7 @@ class CustomerInfo extends Component {
                                         variant="h6"
                                         className="sub-title"
                                     >
-                                        Khách hàng
+                                        Passenger
                                     </Typography>
                                 </div>
                                 <div className="col-md-2">
@@ -240,7 +240,7 @@ class CustomerInfo extends Component {
                                         variant="h6"
                                         className="sub-title"
                                     >
-                                        Giới tính
+                                        Genger
                                     </Typography>
                                 </div>
                                 <div className="col-md-3">
@@ -248,7 +248,7 @@ class CustomerInfo extends Component {
                                         variant="h6"
                                         className="sub-title"
                                     >
-                                        Họ và tên
+                                        Full name
                                     </Typography>
                                 </div>
                                 <div className="col-md-3">
@@ -256,7 +256,7 @@ class CustomerInfo extends Component {
                                         variant="h6"
                                         className="sub-title"
                                     >
-                                        Ngày sinh
+                                        Birthday
                                     </Typography>
                                 </div>
                                 <div className="col-md-2">
@@ -264,7 +264,7 @@ class CustomerInfo extends Component {
                                         variant="h6"
                                         className="sub-title"
                                     >
-                                        CMND/CCCD
+                                        Identity number
                                     </Typography>
                                 </div>
                             </div>
@@ -279,7 +279,7 @@ class CustomerInfo extends Component {
                                                     variant="body1"
                                                     className="sub-content-title"
                                                 >
-                                                    Người lớn
+                                                    Adult
                                                 </Typography>
                                             </div>
                                             <div className="col-md-2">
@@ -297,10 +297,10 @@ class CustomerInfo extends Component {
                                                     }
                                                 >
                                                     <option value={"Nam"}>
-                                                        Nam
+                                                        Male
                                                     </option>
                                                     <option value={"Nữ"}>
-                                                        Nữ
+                                                        Female
                                                     </option>
                                                 </select>
                                             </div>
@@ -323,7 +323,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập họ và tên hành khách"
+                                                            "Please fill the full name"
                                                         }
                                                     />
                                                 ) : (
@@ -349,7 +349,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập ngày sinh"
+                                                            "Please fill birthday"
                                                         }
                                                     />
                                                 ) : (
@@ -377,7 +377,7 @@ class CustomerInfo extends Component {
                                                     "*" && !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập CMND/CCCD"
+                                                            "Please fill the identity number"
                                                         }
                                                     />
                                                 ) : (
@@ -392,7 +392,7 @@ class CustomerInfo extends Component {
                                                         variant="body1"
                                                         className="sub-content-title"
                                                     >
-                                                        Hành lý
+                                                        Baggage
                                                     </Typography>
                                                 </div>
                                                 <div className="col-md-10">
@@ -401,12 +401,12 @@ class CustomerInfo extends Component {
                                                         className="form-control form-select"
                                                     >
                                                         <option>
-                                                            {`Tổng cộng ${
+                                                            {`Total ${
                                                                 data[0]
                                                                     .checkin_bag +
                                                                 data[0]
                                                                     .carbin_bag
-                                                            }kg hành lý`}
+                                                            }kg baggage`}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -424,7 +424,7 @@ class CustomerInfo extends Component {
                                                     variant="body1"
                                                     className="sub-content-title"
                                                 >
-                                                    Trẻ em
+                                                    Children
                                                 </Typography>
                                             </div>
                                             <div className="col-md-2">
@@ -442,10 +442,10 @@ class CustomerInfo extends Component {
                                                     }
                                                 >
                                                     <option value={"Nam"}>
-                                                        Nam
+                                                        Male
                                                     </option>
                                                     <option value={"Nữ"}>
-                                                        Nữ
+                                                        Female
                                                     </option>
                                                 </select>
                                             </div>
@@ -468,7 +468,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập họ và tên"
+                                                            "Please fill the full name"
                                                         }
                                                     />
                                                 ) : (
@@ -494,7 +494,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập ngày sinh"
+                                                            "Please fill birthday"
                                                         }
                                                     />
                                                 ) : (
@@ -509,7 +509,7 @@ class CustomerInfo extends Component {
                                                         variant="body1"
                                                         className="sub-content-title"
                                                     >
-                                                        Hành lý
+                                                        Baggage
                                                     </Typography>
                                                 </div>
                                                 <div className="col-md-10">
@@ -518,10 +518,10 @@ class CustomerInfo extends Component {
                                                         className="form-control form-select"
                                                     >
                                                         <option>
-                                                            {`Tổng cộng ${
+                                                            {`Total ${
                                                                 data.checkin_bag +
                                                                 data.carbin_bag
-                                                            }kg hành lý`}
+                                                            }kg baggage`}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -539,7 +539,7 @@ class CustomerInfo extends Component {
                                                     variant="body1"
                                                     className="sub-content-title"
                                                 >
-                                                    Em bé
+                                                    Infant
                                                 </Typography>
                                             </div>
                                             <div className="col-md-2">
@@ -557,10 +557,10 @@ class CustomerInfo extends Component {
                                                     }
                                                 >
                                                     <option value={"Nam"}>
-                                                        Nam
+                                                        Male
                                                     </option>
                                                     <option value={"Nữ"}>
-                                                        Nữ
+                                                        Female
                                                     </option>
                                                 </select>
                                             </div>
@@ -583,7 +583,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập họ và tên"
+                                                            "Please fill the full name"
                                                         }
                                                     />
                                                 ) : (
@@ -609,7 +609,7 @@ class CustomerInfo extends Component {
                                                 !isValid ? (
                                                     <FormError
                                                         err={
-                                                            "Vui lòng nhập ngày sinh"
+                                                            "Please fill birthday"
                                                         }
                                                     />
                                                 ) : (
@@ -624,7 +624,7 @@ class CustomerInfo extends Component {
                                                         variant="body1"
                                                         className="sub-content-title"
                                                     >
-                                                        Hành lý
+                                                        Baggage
                                                     </Typography>
                                                 </div>
                                                 <div className="col-md-10">
@@ -633,10 +633,10 @@ class CustomerInfo extends Component {
                                                         className="form-control form-select"
                                                     >
                                                         <option>
-                                                            {`Tổng cộng ${
+                                                            {`Total ${
                                                                 data.checkin_bag +
                                                                 data.carbin_bag
-                                                            }kg hành lý`}
+                                                            }kg baggae`}
                                                         </option>
                                                     </select>
                                                 </div>

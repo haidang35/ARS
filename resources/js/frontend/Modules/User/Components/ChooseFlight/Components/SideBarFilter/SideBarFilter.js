@@ -173,7 +173,7 @@ class SideBarFilter extends Component {
                         <div className="title-bar">
                             <AiFillFilter className="icon-filter" />
                             <Typography className="title">
-                                Sắp xếp theo chuyến bay
+                                Sort by flight
                             </Typography>
                         </div>
                         <div className="content">
@@ -194,7 +194,7 @@ class SideBarFilter extends Component {
                                             className="radio-check"
                                         />
                                     }
-                                    label="Giá chuyến bay (Từ thấp đến cao)"
+                                    label="Flight price (From low to high) "
                                 />
                                 <FormControlLabel
                                     value="price"
@@ -208,7 +208,7 @@ class SideBarFilter extends Component {
                                             className="radio-check"
                                         />
                                     }
-                                    label="Giá chuyến bay (Từ cao đến thấp)"
+                                    label="Flight price (From high to low) "
                                 />
 
                                 <FormControlLabel
@@ -223,7 +223,7 @@ class SideBarFilter extends Component {
                                             value={sortFlight}
                                         />
                                     }
-                                    label="Giờ khởi hành"
+                                    label="Depart hour"
                                 />
                                 <FormControlLabel
                                     value="price"
@@ -237,7 +237,7 @@ class SideBarFilter extends Component {
                                             value={sortFlight}
                                         />
                                     }
-                                    label="Thời gian bay"
+                                    label="Flight time"
                                 />
                             </RadioGroup>
                         </div>
@@ -245,9 +245,7 @@ class SideBarFilter extends Component {
                     <div className="view-mode-filter">
                         <div className="title-bar">
                             <AiFillFilter className="icon-filter" />
-                            <Typography className="title">
-                                Chế độ hiển thị
-                            </Typography>
+                            <Typography className="title">View mode</Typography>
                         </div>
                         <div className="content">
                             <FormControlLabel
@@ -261,7 +259,7 @@ class SideBarFilter extends Component {
                                         }
                                     />
                                 }
-                                label="Giá vé cơ bản cho người lớn"
+                                label="Basic fare for adults "
                             />
                             <FormControlLabel
                                 control={
@@ -274,7 +272,7 @@ class SideBarFilter extends Component {
                                         }
                                     />
                                 }
-                                label="Giá vé bao gồm thuế và phí"
+                                label="Ticket price includes taxes and fees "
                             />
                         </div>
                     </div>
@@ -282,7 +280,7 @@ class SideBarFilter extends Component {
                         <div className="title-bar">
                             <AiFillFilter className="icon-filter" />
                             <Typography className="title">
-                                Lọc theo chuyến bay
+                                Filter by flight
                             </Typography>
                         </div>
                         <div className="content">
@@ -305,7 +303,7 @@ class SideBarFilter extends Component {
                                                     className="radio-check"
                                                 />
                                             }
-                                            label="Chiều đi"
+                                            label="Depart"
                                         />
                                         <FormControlLabel
                                             value="price"
@@ -323,7 +321,7 @@ class SideBarFilter extends Component {
                                                     className="radio-check"
                                                 />
                                             }
-                                            label="Chiều về"
+                                            label="Return"
                                         />
                                     </div>
                                 ) : (
@@ -331,7 +329,7 @@ class SideBarFilter extends Component {
                                 )}
 
                                 <Typography className="title-filter">
-                                    Chọn hãng hàng không
+                                    Select airline
                                 </Typography>
 
                                 <div className="filter-box">
@@ -346,7 +344,7 @@ class SideBarFilter extends Component {
                                                 }
                                             />
                                         }
-                                        label="Chọn tất cả hãng hàng không"
+                                        label="Select all airlines "
                                     />
                                     {airlines.map((item) => {
                                         return (
@@ -375,11 +373,11 @@ class SideBarFilter extends Component {
                             </div>
                             <div className="filter-time">
                                 <Typography className="title-filter">
-                                    Chọn theo giờ bay
+                                    Filter by flight time
                                 </Typography>
                                 <div className="filter-slider">
                                     <Typography className="title">
-                                        Giờ khởi hành
+                                        Depart hour
                                     </Typography>
                                     <AirbnbSlider
                                         min={0}
@@ -413,7 +411,7 @@ class SideBarFilter extends Component {
                                 </div>
                                 <div className="filter-slider">
                                     <Typography className="title">
-                                        Giờ hạ cánh
+                                        Arrival hour
                                     </Typography>
                                     <AirbnbSlider
                                         min={0}

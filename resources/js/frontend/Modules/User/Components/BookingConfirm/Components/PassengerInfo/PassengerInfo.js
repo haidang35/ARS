@@ -42,7 +42,7 @@ class PassengerInfo extends Component {
             <div className="passenger-info">
                 <div className="title-box">
                     <Typography variant="h6" className="title">
-                        Thông tin hành khách và giá vé
+                        Passenger information and fares
                     </Typography>
                 </div>
                 <div className="content">
@@ -51,11 +51,11 @@ class PassengerInfo extends Component {
                             <thead>
                                 <tr>
                                     <th className="title-item">STT</th>
-                                    <th className="title-item">Chuyến bay</th>
-                                    <th className="title-item">Hành khách</th>
-                                    <th className="title-item">Giới tính</th>
-                                    <th className="title-item">Năm sinh</th>
-                                    <th className="title-item">Giá vé</th>
+                                    <th className="title-item">Flight</th>
+                                    <th className="title-item">Passenger</th>
+                                    <th className="title-item">Gender</th>
+                                    <th className="title-item">Birthday</th>
+                                    <th className="title-item">Ticket price</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,7 +130,7 @@ class PassengerInfo extends Component {
                                         colSpan="5"
                                         className="content-item-total"
                                     >
-                                        Tổng chi phí
+                                        Total cost
                                     </td>
                                     <td className="content-item-total">
                                         {formatCurrency(bookings[0].into_money)}

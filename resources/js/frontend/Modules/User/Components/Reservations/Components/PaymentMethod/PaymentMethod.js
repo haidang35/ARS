@@ -50,7 +50,7 @@ class PaymentMethod extends Component {
                 <div className="payment-method">
                     <div className="title-box">
                         <Typography variant="h4" className="title">
-                            Phương thức thanh toán
+                            Payment methods
                         </Typography>
                     </div>
                     <div className="content">
@@ -64,7 +64,7 @@ class PaymentMethod extends Component {
                         >
                             <BiCheckCircle className="icon-check" />
                             <Typography className="title" variant="h5">
-                                Thanh toán tại văn phòng
+                                Pay at the office
                             </Typography>
                         </div>
                         <div
@@ -77,7 +77,7 @@ class PaymentMethod extends Component {
                         >
                             <BiCheckCircle className="icon-check" />
                             <Typography className="title" variant="h5">
-                                Giữ chỗ miễn phí và thanh toán qua chuyển khoản
+                                Free reservation and payment via bank transfer
                             </Typography>
                         </div>
                         <div
@@ -94,7 +94,7 @@ class PaymentMethod extends Component {
                                 variant="h5"
                                 style={{ marginRight: "2rem" }}
                             >
-                                Cổng thanh toán online paypal quốc tế
+                                International Paypal online payment gateway{" "}
                             </Typography>
                         </div>
                     </div>
@@ -106,7 +106,7 @@ class PaymentMethod extends Component {
                             variant="outlined"
                             color="primary"
                         >
-                            Quay lại
+                            Back
                         </Button>
 
                         <Button
@@ -115,7 +115,7 @@ class PaymentMethod extends Component {
                             variant="outlined"
                             color="primary"
                         >
-                            Đặt vé
+                            Continue
                         </Button>
                     </div>
                 </div>

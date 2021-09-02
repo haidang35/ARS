@@ -12,25 +12,25 @@ export const getDayOfWeek = (date) => {
     let day = "";
     switch (newDate.getDay()) {
         case 0:
-            day = "CN";
+            day = "Sun";
             break;
         case 1:
-            day = "Thứ 2";
+            day = "Mon";
             break;
         case 2:
-            day = "Thứ 3";
+            day = "Tue";
             break;
         case 3:
-            day = "Thứ 4";
+            day = "Wed";
             break;
         case 4:
-            day = "Thứ 5";
+            day = "Thur";
             break;
         case 5:
-            day = "Thứ 6";
+            day = "Fri";
             break;
         case 6:
-            day = "Thứ 7";
+            day = "Sat";
             break;
         default:
             break;

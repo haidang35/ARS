@@ -16,7 +16,7 @@ class PaymentNoticeBox extends Component {
                 <div className="payment-notice-box">
                     <div className="title-box">
                         <Typography variant="h6" className="title">
-                            Thanh toán qua chuyển khoản
+                            Payment via bank transfer
                         </Typography>
                     </div>
                     <div className="content">
@@ -39,18 +39,18 @@ class PaymentNoticeBox extends Component {
                                                 </div>
                                                 <div className="col-md-6">
                                                     <Typography variant="h6">
-                                                        Chi nhánh Hà Nội
+                                                        Agency Hà Nội
                                                     </Typography>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <Typography variant="h6">
-                                                        Chủ tài khoản: FlightHi
-                                                        Company
+                                                        Account holder :
+                                                        FlightHi Company
                                                     </Typography>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <Typography variant="h6">
-                                                        Số tài khoản:
+                                                        Account number:
                                                         1377555666888
                                                     </Typography>
                                                 </div>

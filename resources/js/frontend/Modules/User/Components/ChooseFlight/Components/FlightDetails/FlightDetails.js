@@ -26,7 +26,7 @@ class FlightDetails extends Component {
                         <div className="title-bar">
                             <Typography className="title">
                                 <BsInfoCircleFill className="icon-info" />
-                                Chi tiết chuyến bay
+                                Flight details
                             </Typography>
                         </div>
 
@@ -50,15 +50,15 @@ class FlightDetails extends Component {
                                                 ` (${data.flight.departure.airport_code})`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Sân bay ${data.flight.departure.airport_name}`}
+                                            {`Airport ${data.flight.departure.airport_name}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Cất cánh ${getTime(
+                                            {`Take off ${getTime(
                                                 data.flight.departure_datetime
                                             )}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Ngày ${dateConvert(
+                                            {`Date ${dateConvert(
                                                 data.flight.departure_datetime
                                             )}`}
                                         </Typography>
@@ -71,15 +71,15 @@ class FlightDetails extends Component {
                                                 ` (${data.flight.destination.airport_code})`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Sân bay ${data.flight.destination.airport_name}`}
+                                            {`Airport ${data.flight.destination.airport_name}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Hạ cánh ${getTime(
+                                            {`Landing ${getTime(
                                                 data.flight.arrival_datetime
                                             )}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Ngày ${dateConvert(
+                                            {`Date ${dateConvert(
                                                 data.flight.arrival_datetime
                                             )}`}
                                         </Typography>
@@ -88,16 +88,16 @@ class FlightDetails extends Component {
                                 <div className="col-md-3">
                                     <div className="list-info">
                                         <Typography className="info-item">
-                                            {`Chuyến bay ${data.flight.flight_code}`}
+                                            {`Flight ${data.flight.flight_code}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Hạng ghế ngồi ${data.available_class}`}
+                                            {`Class ${data.available_class}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Loại vé: ${data.ticket_type}`}
+                                            {`Ticket: ${data.ticket_type}`}
                                         </Typography>
                                         <Typography className="info-item">
-                                            {`Máy bay ${data.flight.aircraft}`}
+                                            {`Aircraft ${data.flight.aircraft}`}
                                         </Typography>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@ class FlightDetails extends Component {
                         <div className="title-bar">
                             <Typography className="title">
                                 <BsInfoCircleFill className="icon-info" />
-                                Chi tiết giá vé
+                                Ticket details
                             </Typography>
                         </div>
                         <div className="content">
@@ -116,11 +116,11 @@ class FlightDetails extends Component {
                                 <table className="table table-lg">
                                     <thead>
                                         <tr>
-                                            <th>Hành khách</th>
-                                            <th>Số lượng</th>
-                                            <th>Giá vé</th>
-                                            <th>Thuế và phí</th>
-                                            <th>Tổng tiền</th>
+                                            <th>Passenger</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Taxes and fees</th>
+                                            <th>Total money</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,11 +135,11 @@ class FlightDetails extends Component {
                                                         <td>
                                                             {item.passenger_type ==
                                                             1
-                                                                ? "Người lớn"
+                                                                ? "Adult"
                                                                 : item.passenger_type ==
                                                                   2
-                                                                ? "Trẻ em"
-                                                                : "Em bé"}
+                                                                ? "Children"
+                                                                : "Infant"}
                                                         </td>
                                                         <td>{item.quantity}</td>
                                                         <td>
@@ -165,7 +165,7 @@ class FlightDetails extends Component {
 
                                         <tr>
                                             <td colSpan="4">
-                                                Tổng giá vé (VND)
+                                                Total fare (VND)
                                             </td>
                                             <td>
                                                 {" "}
@@ -183,7 +183,7 @@ class FlightDetails extends Component {
                         <div className="title-bar">
                             <Typography className="title">
                                 <BsInfoCircleFill className="icon-info" />
-                                Điều kiện hành lý
+                                Baggage conditions
                             </Typography>
                         </div>
                         <div className="content">
@@ -191,7 +191,7 @@ class FlightDetails extends Component {
                                 <div className="row">
                                     <div className="col-sm-3">
                                         <Typography className="text">
-                                            Hành lý xách tay
+                                            Carbin baggage
                                         </Typography>
                                     </div>
                                     <div className="col-sm-3">
@@ -205,7 +205,7 @@ class FlightDetails extends Component {
                                 <div className="row">
                                     <div className="col-sm-3">
                                         <Typography className="text">
-                                            Hành lý ký gửi
+                                            Checkin baggage
                                         </Typography>
                                     </div>
                                     <div className="col-sm-3">
@@ -221,36 +221,34 @@ class FlightDetails extends Component {
                         <div className="title-bar">
                             <Typography className="title">
                                 <BsInfoCircleFill className="icon-info" />
-                                Điều kiện về vé
+                                Ticket conditions
                             </Typography>
                         </div>
                         <div className="content">
                             <div className="note">
                                 <Typography>
-                                    *Lưu ý quan trọng: Quý khách vui lòng check
-                                    lại thông tin chuyến bay trước ngày bay 24
-                                    tiếng và thực hiện đúng thứ tự hành trình
-                                    bay trên vé, nếu chặng nào không bay vui
-                                    lòng báo lại Vemaybay.vn để được hỗ trợ
-                                    tránh trường hợp booking bị hủy chỗ .
+                                    *Important Note: Please check return flight
+                                    information before flight date 24 sound and
+                                    follow the correct journey order fly on the
+                                    ticket, if any leg does not fly happily
+                                    Please report back to Vemaybay.vn for
+                                    support Avoid booking cancellation.
                                 </Typography>
                             </div>
                             <div className="note-change">
                                 <div className="row">
                                     <div className="col-sm-3">
-                                        <Typography>
-                                            Thay đổi chuyến bay
-                                        </Typography>
+                                        <Typography>Flight change</Typography>
                                     </div>
                                     <div className="col-sm-9">
                                         <Typography>
-                                            - Trước giờ khởi hành 12 tiếng: Thu
-                                            phí 297.000VNĐ/chiều/khách + Chênh
-                                            lệch giá vé (nếu có)
+                                            - 12 hours before departure time:
+                                            Thu fee 297,000VND/way/pax +
+                                            difference fare difference (if any)
                                         </Typography>
                                         <Typography>
-                                            - Trong vòng 12 tiếng và sau giờ
-                                            khởi hành: Không áp dụng
+                                            - Within 12 hours and after hours
+                                            Departure: Not applicable
                                         </Typography>
                                     </div>
                                 </div>

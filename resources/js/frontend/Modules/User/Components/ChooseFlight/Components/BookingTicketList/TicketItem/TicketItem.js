@@ -94,7 +94,7 @@ class TicketItem extends Component {
                                                     variant="h6"
                                                     className="detail"
                                                 >
-                                                    Chi tiết
+                                                    View details
                                                     {this.state
                                                         .onViewDetails ? (
                                                         <IoMdArrowDropup className="view-detail-icon" />
@@ -148,8 +148,8 @@ class TicketItem extends Component {
                                         color="primary"
                                     >
                                         {checkTicketChoosed()
-                                            ? " Hủy chọn"
-                                            : "Chọn chuyến bay"}
+                                            ? " Cancel select"
+                                            : "Choose flight"}
                                     </Button>
                                     {/* </Link> */}
                                 </div>

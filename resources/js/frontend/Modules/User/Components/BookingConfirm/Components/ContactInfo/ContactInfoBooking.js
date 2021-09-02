@@ -17,7 +17,7 @@ class ContactInfoBooking extends Component {
                 <div className="contact-info-booking">
                     <div className="title-box">
                         <Typography variant="h6" className="title">
-                            Thông tin liên hệ
+                            Contact information
                         </Typography>
                     </div>
                     <div className="content">
@@ -28,7 +28,7 @@ class ContactInfoBooking extends Component {
                                         variant="h6"
                                         className="title-item"
                                     >
-                                        Họ và tên:
+                                        Full name:
                                     </Typography>
                                     <Typography className="content-item">
                                         {booking.contact_name}
@@ -40,7 +40,7 @@ class ContactInfoBooking extends Component {
                                         variant="h6"
                                         className="title-item"
                                     >
-                                        Điện thoại:
+                                        Phone number:
                                     </Typography>
                                     <Typography className="content-item">
                                         {booking.contact_phone}
@@ -64,7 +64,7 @@ class ContactInfoBooking extends Component {
                                         variant="h6"
                                         className="title-item"
                                     >
-                                        Yêu cầu đặc biệt:
+                                        Special requirements :
                                     </Typography>
                                     <Typography className="content-item">
                                         {booking.note}
@@ -77,7 +77,7 @@ class ContactInfoBooking extends Component {
                                         variant="h6"
                                         className="title-item"
                                     >
-                                        Địa chỉ
+                                        Address
                                     </Typography>
                                     <Typography className="content-item">
                                         {booking.address}
@@ -90,15 +90,15 @@ class ContactInfoBooking extends Component {
                                         variant="h6"
                                         className="title-item"
                                     >
-                                        Phương thức thanh toán:
+                                        Payment method
                                     </Typography>
                                     <Typography className="content-item">
                                         {booking.payment_method == 1
-                                            ? "Thanh toán tại đại lý"
+                                            ? "Payment at the agent "
                                             : booking.payment_method == 2
-                                            ? "Thanh toán qua chuyển khoản"
+                                            ? "Payment via bank transfer "
                                             : booking.payment_method == 3
-                                            ? "Thanh toán qua Paypal"
+                                            ? "Payment via Paypal "
                                             : ""}
                                     </Typography>
                                 </div>

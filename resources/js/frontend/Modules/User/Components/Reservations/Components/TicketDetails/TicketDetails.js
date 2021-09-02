@@ -46,7 +46,7 @@ class TicketDetails extends Component {
                 <div className="ticket-details">
                     <div className="title-box">
                         <Typography variant="h4" className="title">
-                            Chi tiết giá vé
+                            Ticket price details
                         </Typography>
                     </div>
                     <div className="content">
@@ -114,7 +114,7 @@ class TicketDetails extends Component {
                                                               variant="h6"
                                                               className="title left-title"
                                                           >
-                                                              Tóm tắt giá vé
+                                                              Ticket price brief
                                                           </Typography>
                                                       </div>
                                                       <div className="col-md-6">
@@ -122,7 +122,7 @@ class TicketDetails extends Component {
                                                               variant="h6"
                                                               className="title total-title"
                                                           >
-                                                              Tổng
+                                                              Total
                                                           </Typography>
                                                       </div>
                                                       <div className="passenger-list-price">
@@ -146,13 +146,13 @@ class TicketDetails extends Component {
                                                                                   >
                                                                                       {psg.passenger_type ==
                                                                                       1
-                                                                                          ? "Người lớn"
+                                                                                          ? "Adult"
                                                                                           : psg.passenger_type ==
                                                                                             2
-                                                                                          ? "Trẻ em"
+                                                                                          ? "Children"
                                                                                           : psg.passenger_type ==
                                                                                             3
-                                                                                          ? "Em bé"
+                                                                                          ? "Infant"
                                                                                           : ""}
                                                                                   </Typography>
                                                                               </div>
@@ -190,8 +190,8 @@ class TicketDetails extends Component {
                                                                           variant="h5"
                                                                           className="add-fee"
                                                                       >
-                                                                          Ghế
-                                                                          ngồi
+                                                                          Seat
+                                                                          fee
                                                                       </Typography>
                                                                   </div>
                                                                   <div className="col-md-6">
@@ -223,7 +223,7 @@ class TicketDetails extends Component {
                                     variant="h4"
                                     className="total-price"
                                 >
-                                    Tổng chi phí
+                                    Total cost
                                 </Typography>
                             </div>
                             <div className="col-md-6">

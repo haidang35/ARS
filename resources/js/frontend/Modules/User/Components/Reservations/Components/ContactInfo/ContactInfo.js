@@ -53,14 +53,14 @@ class ContactInfo extends Form {
                 <div className="contact-info">
                     <div className="title-box">
                         <Typography variant="h4" className="title">
-                            Thông tin liên hệ
+                            Contact info
                         </Typography>
                     </div>
                     <div className="content">
                         <div className="row">
                             <div className="col-sm-4">
                                 <label className="label-info">
-                                    Quý danh{" "}
+                                    Vocative{" "}
                                     <span className="required-label">*</span>
                                 </label>
 
@@ -81,7 +81,7 @@ class ContactInfo extends Form {
                             </div>
                             <div className="col-sm-4">
                                 <label className="label-info">
-                                    Họ và tên{" "}
+                                    Full name{" "}
                                     <span className="required-label">*</span>
                                 </label>
 
@@ -90,21 +90,21 @@ class ContactInfo extends Form {
                                     required
                                     name="nameContact"
                                     className="form-control"
-                                    placeholder="Họ và tên"
+                                    placeholder="Full name"
                                     value={nameContact.value}
                                     onChange={(ev) =>
                                         this._setValue(ev, "nameContact")
                                     }
                                 />
                                 {nameContact.err == "*" && dirty ? (
-                                    <FormError err="Vui lòng nhập tên liên hệ" />
+                                    <FormError err="Full name cannot be empty" />
                                 ) : (
                                     ""
                                 )}
                             </div>
                             <div className="col-sm-4">
                                 <label className="label-info">
-                                    Điện thoại{" "}
+                                    Phone number{" "}
                                     <span className="required-label">*</span>
                                 </label>
 
@@ -114,16 +114,16 @@ class ContactInfo extends Form {
                                     pattern={REGEX_TEL}
                                     name="phone"
                                     className="form-control"
-                                    placeholder="Số điện thoại"
+                                    placeholder="Phone number"
                                     value={phone.value}
                                     onChange={(ev) =>
                                         this._setValue(ev, "phone")
                                     }
                                 />
                                 {phone.err == "*" && dirty ? (
-                                    <FormError err="Vui lòng nhập số điện thoại" />
+                                    <FormError err="Phone number cannot be empty" />
                                 ) : phone.err.length > 0 && dirty ? (
-                                    <FormError err="Số điện thoại không đúng" />
+                                    <FormError err="Incorrect phone number " />
                                 ) : (
                                     ""
                                 )}
@@ -149,9 +149,9 @@ class ContactInfo extends Form {
                                         }
                                     />
                                     {email.err == "*" && dirty ? (
-                                        <FormError err="Vui lòng nhập email" />
+                                        <FormError err="Email cannot be empty" />
                                     ) : email.err.length > 0 && dirty ? (
-                                        <FormError err="Sai định dạng email" />
+                                        <FormError err="Wrong email format " />
                                     ) : (
                                         ""
                                     )}
@@ -160,13 +160,13 @@ class ContactInfo extends Form {
                             <div className="col-sm-4">
                                 <FormGroup style={{ marginTop: "0.7rem" }}>
                                     <label className="label-info">
-                                        Địa chỉ{" "}
+                                        Address{" "}
                                     </label>
 
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Địa chỉ"
+                                        placeholder="Address"
                                         name="address"
                                         value={address.value}
                                         onChange={(ev) =>
@@ -177,14 +177,12 @@ class ContactInfo extends Form {
                             </div>
                             <div className="col-sm-4">
                                 <FormGroup style={{ marginTop: "0.7rem" }}>
-                                    <label className="label-info">
-                                        Ghi chú{" "}
-                                    </label>
+                                    <label className="label-info">Note </label>
                                     <textarea
                                         type="text"
                                         name="note"
                                         className="form-control"
-                                        placeholder="Ghi chú đặc biệt"
+                                        placeholder="Note"
                                         value={note.value}
                                         onChange={(ev) =>
                                             this._setValue(ev, "note")

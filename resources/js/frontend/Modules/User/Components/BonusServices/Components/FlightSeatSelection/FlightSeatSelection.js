@@ -253,7 +253,7 @@ class FlightSeatSelection extends Component {
                                             className="title"
                                             variant="h6"
                                         >
-                                            Chọn chỗ ngồi{" "}
+                                            Select seat{" "}
                                             {`${flightsInfo[chooseSeatFlight].departure.city} - ${flightsInfo[chooseSeatFlight].destination.city} `}
                                         </Typography>
                                     </div>

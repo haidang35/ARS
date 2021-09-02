@@ -47,7 +47,7 @@ class FlightSeatReserve extends Component {
                                             className="select-seat-title"
                                             variant="h5"
                                         >
-                                            Chọn chỗ ngồi ưa thích
+                                            Choose your favorite seat
                                         </Typography>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@ class FlightSeatReserve extends Component {
                                                 variant="body1"
                                                 className="desc-title"
                                             >
-                                                Lựa chọn chỗ ngồi cá nhân
+                                                Individual seat selection
                                             </Typography>
                                         </div>
                                         <div className="desc-item">
@@ -68,7 +68,7 @@ class FlightSeatReserve extends Component {
                                                 variant="body1"
                                                 className="desc-title"
                                             >
-                                                Ghế ngồi tiêu chuẩn
+                                                Standard seats
                                             </Typography>
                                         </div>
                                         <div className="desc-item">
@@ -77,7 +77,7 @@ class FlightSeatReserve extends Component {
                                                 variant="body1"
                                                 className="desc-title"
                                             >
-                                                Ghế ngồi rộng chân
+                                                Wide seat
                                             </Typography>
                                         </div>
                                     </div>

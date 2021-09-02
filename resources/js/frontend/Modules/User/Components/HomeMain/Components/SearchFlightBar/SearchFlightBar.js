@@ -57,7 +57,7 @@ class SearchFlightBar extends Component {
                     <div className="wrap-container">
                         <div className="title-box">
                             <Typography className="title" variant="h5">
-                                Tìm kiếm thông tin chuyến bay
+                                Search flight's information
                             </Typography>
                         </div>
                         <div className="select-search-info">
@@ -72,20 +72,7 @@ class SearchFlightBar extends Component {
                                     />
                                 }
                                 style={{ color: "#ffff" }}
-                                label="Chuyến bay"
-                            />
-                            <FormControlLabel
-                                value="searchType"
-                                control={
-                                    <GreenRadio
-                                        checked={searchType == 2}
-                                        value={2}
-                                        onChange={this.handleChangeSearchType}
-                                        className="radio-check"
-                                    />
-                                }
-                                style={{ color: "#ffff" }}
-                                label="Mã đặt vé"
+                                label="Flight"
                             />
                         </div>
                         <div className="search-bar">
@@ -103,7 +90,7 @@ class SearchFlightBar extends Component {
                                     variant="contained"
                                     className="btn-search-home"
                                 >
-                                    Tìm kiếm
+                                    Search
                                 </Button>
                             </div>
                         </div>

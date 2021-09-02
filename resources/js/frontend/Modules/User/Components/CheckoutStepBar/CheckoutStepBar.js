@@ -23,7 +23,7 @@ class CheckoutStepBar extends Component {
                                     variant="contained"
                                     color="inherit"
                                 >
-                                    Quay lại
+                                    Go back
                                 </Button>
                             </div>
                             {intoMoney > 0 ? (
@@ -33,7 +33,7 @@ class CheckoutStepBar extends Component {
                                             className="price-total"
                                             variant="h6"
                                         >
-                                            {`Tổng tiền ${formatCurrency(
+                                            {`Total money ${formatCurrency(
                                                 intoMoney
                                             )}`}
                                         </Typography>
@@ -41,7 +41,8 @@ class CheckoutStepBar extends Component {
                                             className="price-info"
                                             variant="body1"
                                         >
-                                            Đã bao gồm thuế, phí và phụ phí
+                                            Taxes, fees and surcharges are
+                                            included
                                         </Typography>
                                     </div>
                                 </div>
@@ -56,7 +57,7 @@ class CheckoutStepBar extends Component {
                                     variant="contained"
                                     color="inherit"
                                 >
-                                    Tiếp tục
+                                    Continue
                                 </Button>
                             </div>
                         </div>

@@ -33,13 +33,13 @@ class SupportInfo extends Component {
 
                                     <div className="content">
                                         <Typography variant="h6">
-                                            Chúng tôi luôn sẵn sàng hỗ trợ
+                                            Ready when you are
                                         </Typography>
                                         <Typography variant="body1">
-                                            Xem những nơi bạn có thể đến du lịch
-                                            ngay bây giờ và tìm những ưu đãi tốt
-                                            nhất cho hàng nghìn chuyến bay,
-                                            khách sạn và các lựa chọn thuê xe
+                                            See where you can travel to right
+                                            now and find the best deals across
+                                            thousands of flights, hotels and car
+                                            hire options
                                         </Typography>
                                     </div>
                                 </div>
@@ -58,14 +58,13 @@ class SupportInfo extends Component {
 
                                     <div className="content">
                                         <Typography variant="h6">
-                                            An tâm lên kế hoạch
+                                            Plan with confidence
                                         </Typography>
                                         <Typography variant="body1">
-                                            Đi trước một bước với vé máy bay
-                                            linh hoạt, chính sách hủy miễn phí
-                                            khi đặt phòng khách sạn cũng như
-                                            thuê xe hơi, và phòng ở sạch sẽ nhất
-                                            ở khắp mọi nơi.
+                                            Stay one step ahead with flexible
+                                            flight tickets, free hotel and car
+                                            cancellation and the cleanest rooms
+                                            around.
                                         </Typography>
                                     </div>
                                 </div>
@@ -84,15 +83,14 @@ class SupportInfo extends Component {
 
                                     <div className="content">
                                         <Typography variant="h6">
-                                            Đơn giản như đan rổ
+                                            Keep it simple
                                         </Typography>
                                         <Typography variant="body1">
-                                            Với tiêu chí 2 không của chúng tôi
-                                            là không phí ngầm và không lừa đảo,
-                                            bạn chẳng phải lo mất tiền oan vì
-                                            mọi khoản chi đều rõ như ban ngày cả
-                                            rồi. Hãy cứ ung dung chờ ngày đi
-                                            thôi.
+                                            No hidden fees. No hidden charges.
+                                            No funny business. With us, you’ll
+                                            always know exactly where your money
+                                            goes. So you can relax before your
+                                            trip even begins.
                                         </Typography>
                                     </div>
                                 </div>

@@ -23,10 +23,6 @@ class TicketFromLocation extends Component {
 
     render() {
         const { ticketList, location } = this.props;
-        console.log(
-            "🚀 ~ file: TicketFromLocation.js ~ line 26 ~ TicketFromLocation ~ render ~ ticketList",
-            ticketList
-        );
         let ticketListLocation = [];
         if (Array.isArray(ticketList) && ticketList.length >= 3) {
             for (let i = 0; i < 3; i++) {
@@ -39,22 +35,21 @@ class TicketFromLocation extends Component {
                     <div className="ticket-from-location">
                         <div className="wrap-container">
                             <Typography variant="h4">
-                                {`Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
+                                {`The best flight deals from Hanoi ${location.city}`}
                             </Typography>
                             <div>
                                 <Typography
                                     variant="body1"
                                     className="float-left"
                                 >
-                                    {` Xem vé máy bay giá rẻ nhất khởi hành trong vòng 90
-                            ngày tới. Vé máy bay giá rẻ khi khởi hành từ ${location.city}`}
+                                    {` Get back out there for less with the lowest fares we’ve found this week.`}
                                 </Typography>
                                 <Link to="discount-tickets">
                                     <Typography
                                         variant="body1"
                                         className="float-right view-more"
                                     >
-                                        Xem thêm các ưu đãi khác
+                                        See more deals
                                     </Typography>
                                 </Link>
                             </div>
@@ -149,7 +144,8 @@ class TicketFromLocation extends Component {
                                                                 className="title"
                                                             >
                                                                 <RiErrorWarningLine className="icon" />
-                                                                Hạn chế vừa phải
+                                                                Moderate
+                                                                restrictions
                                                             </Typography>
                                                         </div>
 
@@ -157,7 +153,7 @@ class TicketFromLocation extends Component {
                                                             variant="body1"
                                                             className="price"
                                                         >
-                                                            {`Giá từ ${formatCurrency(
+                                                            {`From ${formatCurrency(
                                                                 item.price +
                                                                     item.tax
                                                             )}`}

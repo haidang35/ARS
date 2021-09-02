@@ -20,35 +20,36 @@ class SeatPriceInfo extends Component {
                     <div className="price-info-box business-info">
                         <MdAirlineSeatReclineExtra className="seat-icon" />
                         <Typography className="seat-title" variant="h6">
-                            Hàng ghế thương gia
+                            Business row seats
                         </Typography>
                         <Typography className="seat-price" variant="h6">
                             {`+${formatCurrency(businessPrice)}`}
                         </Typography>
                         <Typography className="seat-desc" variant="body1">
-                            Giảm thiểu rung lắc khi cất/hạ cánh.
+                            Minimizes shaking during take-off/landing.
                         </Typography>
                         <Typography className="seat-desc" variant="body1">
-                            Di chuyển thuận tiện khi lên hoặc xuống máy bay.
+                            Convenient transportation when boarding or
+                            disembarking the plane.
                         </Typography>
                     </div>
                     <div className="price-info-box deluxe-info">
                         <MdAirlineSeatReclineExtra className="seat-icon" />
                         <Typography className="seat-title" variant="h6">
-                            Hàng ghế phổ thông đặc biệt
+                            Special economy seats
                         </Typography>
                         <Typography className="seat-price" variant="h6">
                             {`+${formatCurrency(deluxePrice)}`}
                         </Typography>
                         <Typography className="seat-desc" variant="body1">
-                            Khu vực ghế trung tâm, có độ yên tĩnh cao, các điều
-                            kiện tiêu chuẩn và thoải mái
+                            Central seating area, high quietness, standard
+                            conditions and comfort
                         </Typography>
                     </div>
                     <div className="price-info-box economy-info">
                         <MdAirlineSeatReclineExtra className="seat-icon" />
                         <Typography className="seat-title" variant="h6">
-                            Hàng ghế tiêu chuẩn
+                            Standard row of seats{" "}
                         </Typography>
                         <Typography className="seat-price" variant="h6">
                             {`+${formatCurrency(economyPrice)}`}
@@ -57,13 +58,13 @@ class SeatPriceInfo extends Component {
                     <div className="price-info-box exit-info">
                         <MdAirlineSeatReclineExtra className="seat-icon" />
                         <Typography className="seat-title" variant="h6">
-                            Hàng ghế gần lối thoát hiểm
+                            The row of seats near the emergency exit
                         </Typography>
                         <Typography className="seat-price" variant="h6">
                             {`+${formatCurrency(exitPrice)}`}
                         </Typography>
                         <Typography className="seat-desc" variant="body1">
-                            Ghế ngồi rộng chân
+                            Wide seat
                         </Typography>
                     </div>
                 </div>

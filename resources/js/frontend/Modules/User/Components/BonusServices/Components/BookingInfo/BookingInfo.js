@@ -111,15 +111,14 @@ class BookingInfo extends Component {
                                                                 variant="body1"
                                                             >
                                                                 <ImCheckmark className="checked-icon" />
-                                                                Đã thêm chỗ ngồi
+                                                                Seats added
                                                             </Typography>
                                                         ) : (
                                                             <Typography
                                                                 className="seat-status"
                                                                 variant="body1"
                                                             >
-                                                                Chọn chỗ ngồi
-                                                                của bạn
+                                                                Choose your seat
                                                                 <IoIosArrowForward className="icon-arrow" />
                                                             </Typography>
                                                         )}

@@ -80,7 +80,7 @@ class BookingConfirm extends Component {
                             <div className="confirm-notice">
                                 <div className="title-box">
                                     <Typography variant="h4" className="title">
-                                        Thông báo tình trạng đặt vé
+                                        Notice of booking status
                                     </Typography>
                                 </div>
                                 <div className="content">
@@ -96,7 +96,7 @@ class BookingConfirm extends Component {
                                             className="notice-title"
                                             variant="h6"
                                         >
-                                            {`Quý khách đã đặt chỗ thành công, mã đặt vé của quý khách là: `}
+                                            {`You have successfully booked, your booking code is: `}
                                             <span
                                                 style={{
                                                     color: "#7b61f2",
@@ -112,21 +112,21 @@ class BookingConfirm extends Component {
                                             variant="h6"
                                             className="notice-alert"
                                         >
-                                            Vui lòng thanh toán trước{" "}
+                                            Please pay before{" "}
                                             <span className="time">
                                                 {" "}
                                                 {getTime(bookingTime)}{" "}
                                             </span>
-                                            hôm nay, sau thời gian này nếu quý
-                                            khách hàng chưa thanh toán yêu cầu
-                                            đặt vé sẽ bị hủy
+                                            today, after this time if you
+                                            Customer has not paid the request
+                                            booking will be canceled
                                         </Typography>
                                     ) : (
                                         <Typography
                                             variant="h6"
                                             className="notice-payment-success"
                                         >
-                                            Quý khách đã thanh toán thành công
+                                            You have successfully paid
                                         </Typography>
                                     )}
                                 </div>

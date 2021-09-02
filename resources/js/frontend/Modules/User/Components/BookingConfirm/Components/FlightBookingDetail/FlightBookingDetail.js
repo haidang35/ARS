@@ -19,7 +19,7 @@ class FlightBookingDetail extends Component {
             <div className="flight-booking-detail">
                 <div className="title-box">
                     <Typography variant="h6" className="title">
-                        Chi tiết chuyến bay
+                        Flight details
                     </Typography>
                 </div>
                 <div className="content">
@@ -39,15 +39,15 @@ class FlightBookingDetail extends Component {
                                         ` (${departure.airport_code})`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Sân bay ${departure.airport_name}`}
+                                    {`Airport ${departure.airport_name}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Cất cánh ${getTime(
+                                    {`Depart ${getTime(
                                         flight.departure_datetime
                                     )}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Ngày ${dateConvert(
+                                    {`Date ${dateConvert(
                                         flight.departure_datetime
                                     )}`}
                                 </Typography>
@@ -60,15 +60,15 @@ class FlightBookingDetail extends Component {
                                         ` (${destination.airport_code})`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Sân bay ${destination.airport_name}`}
+                                    {`Airport ${destination.airport_name}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Hạ cánh ${getTime(
+                                    {`Arrival ${getTime(
                                         flight.arrival_datetime
                                     )}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Ngày ${dateConvert(
+                                    {`Date ${dateConvert(
                                         flight.arrival_datetime
                                     )}`}
                                 </Typography>
@@ -77,16 +77,16 @@ class FlightBookingDetail extends Component {
                         <div className="col-md-3">
                             <div className="list-info">
                                 <Typography className="info-item">
-                                    {`Chuyến bay: ${flight.flight_code}`}
+                                    {`Flight: ${flight.flight_code}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Hạng ghế ngồi: ${ticket.available_class}`}
+                                    {`Class: ${ticket.available_class}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Loại vé: ${ticket.ticket_type}`}
+                                    {`Ticket type: ${ticket.ticket_type}`}
                                 </Typography>
                                 <Typography className="info-item">
-                                    {`Máy bay ${flight.aircraft}`}
+                                    {`Aircraft ${flight.aircraft}`}
                                 </Typography>
                             </div>
                         </div>

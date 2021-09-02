@@ -231,8 +231,7 @@ class BookingHeader extends Component {
             }
         } else {
             this.setState({
-                message:
-                    "Xin vui lòng nhập đầy đủ thông tin tìm kiếm chuyến bay !!",
+                message: "Please enter full flight search information !!",
             });
         }
     };
@@ -249,7 +248,7 @@ class BookingHeader extends Component {
                             <div className="col-sm-6">
                                 <div className="header-left">
                                     <Typography variant="h2" className="title">
-                                        Chọn nơi mà bạn muốn đến ...
+                                        WHERE WOULD YOU LIKE TO GO ?
                                     </Typography>
                                     <div className="form-check">
                                         <FormControlLabel
@@ -270,7 +269,7 @@ class BookingHeader extends Component {
                                                     }
                                                 />
                                             }
-                                            label="Một chiều"
+                                            label="One way"
                                         />
                                         <FormControlLabel
                                             control={
@@ -290,7 +289,7 @@ class BookingHeader extends Component {
                                                     }
                                                 />
                                             }
-                                            label="Khứ hồi"
+                                            label="Round trip"
                                         />
 
                                         <div className="form-input">
@@ -300,8 +299,8 @@ class BookingHeader extends Component {
                                                     this.handleChangeDeparture
                                                 }
                                                 id="standard-required"
-                                                label="Điểm đi"
-                                                defaultValue="Nhập thành phố/mã sân bay"
+                                                label="From"
+                                                defaultValue="City, airport"
                                                 className="input-field"
                                                 disabled
                                                 value={
@@ -314,8 +313,8 @@ class BookingHeader extends Component {
                                                     this.handleChangeDestination
                                                 }
                                                 id="standard-required"
-                                                label="Điểm đến"
-                                                defaultValue="Nhập thành phố/mã sân bay"
+                                                label="To"
+                                                defaultValue="City, airport"
                                                 className="input-field"
                                                 disabled
                                                 value={
@@ -333,7 +332,7 @@ class BookingHeader extends Component {
                                                 disablePast
                                                 margin="normal"
                                                 id="date-picker-inline"
-                                                label="Ngày đi"
+                                                label="Departure"
                                                 value={this.state.startDate}
                                                 onChange={
                                                     this.handleChangeStartDate
@@ -351,7 +350,7 @@ class BookingHeader extends Component {
                                                 format="dd/MM/yyyy"
                                                 margin="normal"
                                                 id="date-picker-inline"
-                                                label="Ngày về"
+                                                label="Return"
                                                 disabled={
                                                     this.state.tripType == 2
                                                         ? false
@@ -372,7 +371,7 @@ class BookingHeader extends Component {
                                                 <div className="col-sm-4">
                                                     <div className="choose-quantity">
                                                         <label className="title-passenger">
-                                                            Người lớn
+                                                            Adults
                                                         </label>
                                                         <div className="content">
                                                             <RemoveCircleOutline
@@ -405,7 +404,7 @@ class BookingHeader extends Component {
                                                 <div className="col-sm-4">
                                                     <div className="choose-quantity">
                                                         <label className="title-passenger">
-                                                            Trẻ em
+                                                            Children
                                                         </label>
                                                         <div className="content">
                                                             <RemoveCircleOutline
@@ -438,7 +437,7 @@ class BookingHeader extends Component {
                                                 <div className="col-sm-4">
                                                     <div className="choose-quantity">
                                                         <label className="title-passenger">
-                                                            Em bé
+                                                            Infants
                                                         </label>
                                                         <div className="content">
                                                             <RemoveCircleOutline
@@ -480,7 +479,7 @@ class BookingHeader extends Component {
                                         className="btn-search-form"
                                         startIcon={<Search />}
                                     >
-                                        Tìm kiếm chuyến bay
+                                        Search flights
                                     </Button>
                                 </div>
                             </div>
@@ -491,16 +490,16 @@ class BookingHeader extends Component {
                                     handleClose={this.handleChangeDeparture}
                                     data={this.state.destinationList}
                                     onChoose={this.onChooseDeparture}
-                                    title={"Chọn điểm khởi hành"}
-                                    inputLabel={"Nhập điểm khởi hành"}
+                                    title={"Select departure"}
+                                    inputLabel={"City, airport code"}
                                 />
                                 <ListDestination
                                     onOpen={this.state.changeDestination}
                                     handleClose={this.handleChangeDestination}
                                     data={this.state.destinationList}
                                     onChoose={this.onChooseDestination}
-                                    title={"Chọn điểm đến"}
-                                    inputLabel={"Nhập điểm đến"}
+                                    title={"Select destination"}
+                                    inputLabel={"City, airport code"}
                                 />
                             </div>
                         </div>

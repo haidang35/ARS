@@ -274,8 +274,7 @@ class SearchFlightBar extends Component {
             }
         } else {
             this.setState({
-                message:
-                    "Xin vui lòng nhập đầy đủ thông tin tìm kiếm chuyến bay !!",
+                message: "Please enter full flight search information  !!",
             });
         }
     };
@@ -299,7 +298,7 @@ class SearchFlightBar extends Component {
                                     />
                                 }
                                 style={{ color: "#ffff" }}
-                                label="Một chiều"
+                                label="One way"
                             />
                             <FormControlLabel
                                 value="price"
@@ -312,7 +311,7 @@ class SearchFlightBar extends Component {
                                     />
                                 }
                                 style={{ color: "#ffff" }}
-                                label="Khứ hồi"
+                                label="Round trip"
                             />
                         </div>
                         <div className="col-md-4">
@@ -321,8 +320,8 @@ class SearchFlightBar extends Component {
                                     required
                                     onClick={this.handleChangeDeparture}
                                     id="standard-required"
-                                    label="Điểm đi"
-                                    defaultValue="Nhập thành phố/mã sân bay"
+                                    label="Departure"
+                                    defaultValue="City, airport code"
                                     className="input-field"
                                     disabled
                                     value={this.state.departure.city}
@@ -341,8 +340,8 @@ class SearchFlightBar extends Component {
                                         handleClose={this.handleChangeDeparture}
                                         data={this.state.destinationList}
                                         onChoose={this.onChooseDeparture}
-                                        title={"Chọn điểm khởi hành"}
-                                        inputLabel={"Nhập điểm khởi hành"}
+                                        title={"Destination"}
+                                        inputLabel={"City, airport code"}
                                     />
                                 </div>
                             </div>
@@ -353,8 +352,8 @@ class SearchFlightBar extends Component {
                                     required
                                     onClick={this.handleChangeDestination}
                                     id="standard-required"
-                                    label="Điểm đến"
-                                    defaultValue="Nhập thành phố/mã sân bay"
+                                    label="Destination"
+                                    defaultValue="City, airport code"
                                     className="input-field"
                                     disabled
                                     value={this.state.destination.city}
@@ -375,8 +374,8 @@ class SearchFlightBar extends Component {
                                         }
                                         data={this.state.destinationList}
                                         onChoose={this.onChooseDestination}
-                                        title={"Chọn điểm đến"}
-                                        inputLabel={"Nhập điểm đến"}
+                                        title={"Select destination"}
+                                        inputLabel={"Enter destination"}
                                     />
                                 </div>
                             </div>
@@ -387,7 +386,7 @@ class SearchFlightBar extends Component {
                                     <div className="col-sm-4">
                                         <div className="choose-quantity">
                                             <label className="title-passenger">
-                                                Người lớn
+                                                Adults
                                             </label>
                                             <div className="content">
                                                 <RemoveCircleOutline
@@ -417,7 +416,7 @@ class SearchFlightBar extends Component {
                                     <div className="col-sm-4">
                                         <div className="choose-quantity">
                                             <label className="title-passenger">
-                                                Trẻ em
+                                                Children
                                             </label>
                                             <div className="content">
                                                 <RemoveCircleOutline
@@ -447,7 +446,7 @@ class SearchFlightBar extends Component {
                                     <div className="col-sm-4">
                                         <div className="choose-quantity">
                                             <label className="title-passenger">
-                                                Em bé
+                                                Infants
                                             </label>
                                             <div className="content">
                                                 <RemoveCircleOutline
@@ -488,7 +487,7 @@ class SearchFlightBar extends Component {
                                             format="dd/MM/yyyy"
                                             margin="normal"
                                             id="date-picker-inline"
-                                            label="Ngày đi"
+                                            label="Depart"
                                             disablePast
                                             value={startDate}
                                             onChange={
@@ -507,7 +506,7 @@ class SearchFlightBar extends Component {
                                             format="dd/MM/yyyy"
                                             margin="normal"
                                             id="date-picker-inline"
-                                            label="Ngày về"
+                                            label="Return"
                                             disablePast
                                             disabled={
                                                 tripType == 2 ? false : true
@@ -534,7 +533,7 @@ class SearchFlightBar extends Component {
                                 className="btn-search-form"
                                 startIcon={<Search />}
                             >
-                                Tìm kiếm chuyến bay
+                                Search flights
                             </Button>
                         </div>
                     </div>

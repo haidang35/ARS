@@ -43,7 +43,7 @@ class FlightChoosed extends Component {
                 <div className="flight-choosed">
                     <div className="title-box">
                         <Typography variant="h4" className="title">
-                            Chuyến bay đã lựa chọn
+                            Selected flight
                         </Typography>
                     </div>
                     <div className="content">
@@ -109,7 +109,7 @@ class FlightChoosed extends Component {
                                                                     variant="h6"
                                                                     className="detail"
                                                                 >
-                                                                    Chi tiết
+                                                                    Details
                                                                     {this.state
                                                                         .onViewDetails ? (
                                                                         <IoMdArrowDropup className="view-detail-icon" />
@@ -154,7 +154,7 @@ class FlightChoosed extends Component {
                                                         color="primary"
                                                         onClick={this.goBack}
                                                     >
-                                                        Thay đổi chuyến bay
+                                                        Change flight{" "}
                                                     </Button>
                                                 </div>
                                             </div>
