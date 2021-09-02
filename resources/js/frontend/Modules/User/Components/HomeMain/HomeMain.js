@@ -9,6 +9,7 @@ import SupportInfo from "./Components/SupportInfo/SupportInfo";
 import UserService from "../../Shared/UserService/UserService";
 import TicketFromLocation from "./Components/TicketFromLocation/TicketFromLocation";
 import SearchFlightBar from "./Components/SearchFlightBar/SearchFlightBar";
+import Footer from "../../Shared/Components/Footer/Footer";
 const publicIp = require("public-ip");
 
 class HomeMain extends Component {
@@ -142,6 +143,7 @@ class HomeMain extends Component {
                 />
                 <SupportInfo />
                 <ChatBox />
+                <Footer />
             </div>
         );
     }

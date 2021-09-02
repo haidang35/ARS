@@ -30,6 +30,8 @@ class FlightSeatSelection extends Component {
             seatReserveFeeReturn: 0,
             chooseSeatFlight: 0,
             ticketChoosed: {},
+            onChooseSeatStart: false,
+            onChooseSeatReturn: false,
         };
     }
 
@@ -89,6 +91,8 @@ class FlightSeatSelection extends Component {
         let seatCodeRemove = "";
         let { passengers } = bookingInfo;
         let intoMoney = bookingInfo.into_money;
+        let seatFeeStart = 0;
+        let seatFeeReturn = 0;
         if (chooseSeatFlight == 0) {
             passengers.forEach((item) => {
                 if (item.id === passengerChooseSeat.data.id) {
@@ -99,6 +103,7 @@ class FlightSeatSelection extends Component {
                     ) {
                         seatCodeRemove = item["seat_code"];
                         intoMoney -= item["price"];
+                        seatReserveFee -= item["price"];
                     } else if (seatCode == "") {
                         seatCodeRemove = item["seat_code"];
                     }
@@ -106,8 +111,10 @@ class FlightSeatSelection extends Component {
                     item["price"] = price;
                     if (seatCode !== "") {
                         intoMoney += price;
+                        seatReserveFee += price;
                     } else {
                         intoMoney -= price;
+                        seatReserveFee -= price;
                     }
                     UserService.chooseSeatFlight(ticketChoosed.flight_id, {
                         seat_code: seatCode,
@@ -115,12 +122,7 @@ class FlightSeatSelection extends Component {
                     }).then((res) => {
                         console.log("choose seat success");
                     });
-
-                    if (item["seat_code"] !== "") {
-                        seatReserveFee += item["price"];
-                    } else {
-                        seatReserveFee -= item["price"];
-                    }
+                    this.setState({ onChooseSeatStart: true });
                 }
             });
         } else if (chooseSeatFlight == 1) {
@@ -133,6 +135,7 @@ class FlightSeatSelection extends Component {
                     ) {
                         seatCodeRemove = item["seat_code_return"];
                         intoMoney -= item["price_return"];
+                        seatReserveFeeReturn -= item["price_return"];
                     } else if (seatCode == "") {
                         seatCodeRemove = item["seat_code_return"];
                     }
@@ -140,8 +143,13 @@ class FlightSeatSelection extends Component {
                     item["price_return"] = price;
                     if (seatCode !== "") {
                         intoMoney += price;
+                        seatReserveFeeReturn += item["price_return"];
                     } else {
+                        console.log("price", price);
+                        console.log("intomoney", intoMoney);
                         intoMoney -= price;
+                        console.log("after", intoMoney);
+                        seatReserveFeeReturn -= item["price_return"];
                     }
                     UserService.chooseSeatFlight(ticketChoosed.flight_id, {
                         seat_code: seatCode,
@@ -149,14 +157,12 @@ class FlightSeatSelection extends Component {
                     }).then((res) => {
                         console.log("choose seat success");
                     });
-                    if (item["seat_code_return"] !== "") {
-                        seatReserveFeeReturn += item["price_return"];
-                    } else {
-                        seatReserveFeeReturn -= item["price_return"];
-                    }
+                    this.setState({ onChooseSeatReturn: true });
                 }
             });
         }
+        seatReserveFee += seatFeeStart;
+        seatReserveFeeReturn += seatFeeReturn;
         bookingInfo.ticket[0]["seatFee"] = seatReserveFee;
         if (bookingInfo.trip_type == 2) {
             bookingInfo.ticket[1]["seatFee"] = seatReserveFeeReturn;
@@ -166,7 +172,12 @@ class FlightSeatSelection extends Component {
         bookingInfo.into_money = intoMoney;
         bookingInfo.passengers = passengers;
         this.props.updateBookingInfo(bookingInfo);
-        this.setState({ bookingInfo, seatReserveFee, seatReserveFeeReturn });
+        this.setState({
+            bookingInfo,
+            seatReserveFee,
+            seatReserveFeeReturn,
+            onChooseSeat: true,
+        });
     };
 
     render() {
@@ -178,9 +189,11 @@ class FlightSeatSelection extends Component {
             chooseSeatFlight,
             ticketChoosed,
             seatReserveFeeReturn,
+            onChooseSeatStart,
+            onChooseSeatReturn,
         } = this.state;
         seatsReserved = seatsReserved.filter((item) => {
-            return item.flight_id == ticketChoosed.id;
+            return item.flight_id == ticketChoosed.flight.id;
         });
         let ticket = {};
         let businessSeatPrice = 0;
@@ -229,6 +242,8 @@ class FlightSeatSelection extends Component {
                                     setSeatCodePassenger={
                                         this.setSeatCodeForPassengerChoosed
                                     }
+                                    onChooseSeatStart={onChooseSeatStart}
+                                    onChooseSeatReturn={onChooseSeatReturn}
                                 />
                             </div>
                             <div className="col-md-6">
@@ -265,6 +280,9 @@ class FlightSeatSelection extends Component {
                                                     }
                                                 />
                                                 <FirstEconomySeat
+                                                    ticketChoosed={
+                                                        chooseSeatFlight
+                                                    }
                                                     seats={firstEconomySeats}
                                                     rowNumberFrom={
                                                         businessSeats / 6 + 1
@@ -284,6 +302,9 @@ class FlightSeatSelection extends Component {
                                                     }
                                                 />
                                                 <EconomySeat
+                                                    ticketChoosed={
+                                                        chooseSeatFlight
+                                                    }
                                                     seats={30}
                                                     rowNumberFrom={
                                                         businessSeats / 6 +
@@ -326,6 +347,9 @@ class FlightSeatSelection extends Component {
                                                     }
                                                 />
                                                 <EmergencyExitSeat
+                                                    ticketChoosed={
+                                                        chooseSeatFlight
+                                                    }
                                                     seats={6}
                                                     rowNumberFrom={
                                                         businessSeats / 6 +

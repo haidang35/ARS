@@ -37,8 +37,8 @@ class AddNewFlight extends Form {
                 departure_id: "",
                 destination_id: "",
                 capacity: 200,
-                seats_reserved: "",
-                seats_available: "",
+                seats_reserved: 0,
+                seats_available: 200,
             }),
             business_seats: 18,
             economy_seats: 146,
@@ -133,12 +133,16 @@ class AddNewFlight extends Form {
         let { form } = this.state;
         if (action === 0) {
             form["capacity"].value = form["capacity"].value - 6;
+            form["seats_available"].value = form["seats_available"].value - 6;
+
             this.setState({
                 business_seats: business_seats - 6,
                 form,
             });
         } else if (action === 1) {
             form["capacity"].value = form["capacity"].value + 6;
+            form["seats_available"].value = form["seats_available"].value + 6;
+
             this.setState({
                 business_seats: business_seats + 6,
                 form,
@@ -151,12 +155,15 @@ class AddNewFlight extends Form {
         let { form } = this.state;
         if (action === 0) {
             form["capacity"].value = form["capacity"].value - 6;
+            form["seats_available"].value = form["seats_available"].value - 6;
             this.setState({
                 economy_seats: economy_seats - 6,
                 form,
             });
         } else if (action === 1) {
             form["capacity"].value = form["capacity"].value + 6;
+            form["seats_available"].value = form["seats_available"].value + 6;
+
             this.setState({
                 economy_seats: economy_seats + 6,
                 form,
@@ -169,12 +176,16 @@ class AddNewFlight extends Form {
         let { form } = this.state;
         if (action === 0) {
             form["capacity"].value = form["capacity"].value - 6;
+            form["seats_available"].value = form["seats_available"].value - 6;
+
             this.setState({
                 first_economy_seats: first_economy_seats - 6,
                 form,
             });
         } else if (action === 1) {
             form["capacity"].value = form["capacity"].value + 6;
+            form["seats_available"].value = form["seats_available"].value + 6;
+
             this.setState({
                 first_economy_seats: first_economy_seats + 6,
                 form,
@@ -187,12 +198,16 @@ class AddNewFlight extends Form {
         let { form } = this.state;
         if (action === 0) {
             form["capacity"].value = form["capacity"].value - 6;
+            form["seats_available"].value = form["seats_available"].value - 6;
+
             this.setState({
                 exit_seats: exit_seats - 6,
                 form,
             });
         } else if (action === 1) {
             form["capacity"].value = form["capacity"].value + 6;
+            form["seats_available"].value = form["seats_available"].value + 6;
+
             this.setState({
                 exit_seats: exit_seats + 6,
                 form,
@@ -214,7 +229,6 @@ class AddNewFlight extends Form {
             departure_id,
             destination_id,
             capacity,
-
             seats_reserved,
             seats_available,
             dirty,

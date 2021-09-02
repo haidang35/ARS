@@ -17,8 +17,14 @@ class EmergencyExitSeat extends Component {
     };
 
     render() {
-        const { seats, price, rowNumberFrom, seatsReserved, passengers } =
-            this.props;
+        const {
+            seats,
+            price,
+            rowNumberFrom,
+            seatsReserved,
+            passengers,
+            ticketChoosed,
+        } = this.props;
         let passengerList = [];
         if (Array.isArray(passengers)) {
             passengerList = passengers;
@@ -59,9 +65,15 @@ class EmergencyExitSeat extends Component {
 
         const checkSeatChoosed = (seatCurrent) => {
             let result = false;
-            passengerList.forEach((item) => {
-                if (item.seat_code === seatCurrent) {
-                    result = true;
+            passengers.forEach((item) => {
+                if (ticketChoosed === 0) {
+                    if (item.seat_code === seatCurrent) {
+                        result = true;
+                    }
+                } else if (ticketChoosed === 1) {
+                    if (item.seat_code_return === seatCurrent) {
+                        result = true;
+                    }
                 }
             });
             return result;

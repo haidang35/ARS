@@ -23,6 +23,7 @@ class BookingConfirm extends Component {
         super(props);
         this.state = {
             bookingsInfo: [],
+            updateData: false,
         };
     }
 
@@ -43,8 +44,7 @@ class BookingConfirm extends Component {
 
     onPaymentBooking = () => {
         const data = this.props.location.state;
-        const bookingId = data.id;
-        UserService.paymentBooking(bookingId, { payment_status: 1 }).then(
+        UserService.paymentBooking(data[0].id, { payment_status: 1 }).then(
             (res) => {
                 this.getBookingInfo();
             }
@@ -52,7 +52,7 @@ class BookingConfirm extends Component {
     };
 
     render() {
-        const { bookingsInfo } = this.state;
+        const { bookingsInfo, updateData } = this.state;
         let bookingTime = "";
         let paymentMethod = 0;
         let checkHasBookingInfo = false;
@@ -61,7 +61,7 @@ class BookingConfirm extends Component {
             checkHasBookingInfo = true;
             paymentMethod = bookingsInfo[0].payment_method;
             bookingTime = new Date(bookingsInfo[0].booking_date);
-            bookingTime.setHours(bookingTime.getHours() + 2);
+            bookingTime.setHours(bookingTime.getHours() + 5);
         }
         bookingsInfo.forEach((item) => {
             if (item.payment_status == 0) {

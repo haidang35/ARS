@@ -16,8 +16,14 @@ class BookingInfo extends Component {
     }
 
     render() {
-        const { bookingInfo, passengerChoosedSeat, chooseSeatFlight } =
-            this.props;
+        const {
+            bookingInfo,
+            passengerChoosedSeat,
+            chooseSeatFlight,
+            onChooseSeatStart,
+            onChooseSeatReturn,
+        } = this.props;
+
         let flightsChoosed = [];
         if (flightsChoosed.length == 0) {
             flightsChoosed.push(chooseSeatFlight);
@@ -37,7 +43,7 @@ class BookingInfo extends Component {
                 <div className="booking-info-service">
                     {tickets.map((item) => {
                         return (
-                            <div className="passenger-list">
+                            <div key={item.id} className="passenger-list">
                                 <div className="title-box">
                                     <Typography variant="h6">
                                         {`${item.flight.departure.city} - ${item.flight.destination.city}`}
@@ -85,6 +91,20 @@ class BookingInfo extends Component {
                                                                 "" &&
                                                             passengerChoosedSeat
                                                                 .ticket.id ===
+                                                                item.id) ||
+                                                        (chooseSeatFlight ==
+                                                            1 &&
+                                                            psg.seat_code !==
+                                                                "" &&
+                                                            passengerChoosedSeat
+                                                                .ticket.id !==
+                                                                item.id) ||
+                                                        (chooseSeatFlight ==
+                                                            0 &&
+                                                            psg.seat_code_return !==
+                                                                "" &&
+                                                            passengerChoosedSeat
+                                                                .ticket.id !==
                                                                 item.id) ? (
                                                             <Typography
                                                                 className="seat-status seat-status-active"
@@ -151,12 +171,23 @@ class BookingInfo extends Component {
                                                                         passengerChoosedSeat
                                                                             .ticket
                                                                             .id ===
-                                                                        item.id
-                                                                            ? () =>
-                                                                                  this.props.setSeatCodePassenger(
-                                                                                      "",
-                                                                                      psg.price
-                                                                                  )
+                                                                            item.id &&
+                                                                        passengerChoosedSeat
+                                                                            .data
+                                                                            .id ===
+                                                                            psg.id
+                                                                            ? chooseSeatFlight ==
+                                                                              0
+                                                                                ? () =>
+                                                                                      this.props.setSeatCodePassenger(
+                                                                                          "",
+                                                                                          psg.price
+                                                                                      )
+                                                                                : () =>
+                                                                                      this.props.setSeatCodePassenger(
+                                                                                          "",
+                                                                                          psg.price_return
+                                                                                      )
                                                                             : {}
                                                                     }
                                                                 />

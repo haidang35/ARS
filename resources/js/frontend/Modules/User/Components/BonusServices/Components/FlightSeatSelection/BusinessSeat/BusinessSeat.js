@@ -17,15 +17,9 @@ class BusinessSeat extends Component {
     };
 
     render() {
-        const {
-            seats,
-            price,
-            rowNumberFrom,
-            seatsReserved,
-            passengers,
-            ticketChoosed,
-        } = this.props;
-
+        const { seats, price, rowNumberFrom, passengers, ticketChoosed } =
+            this.props;
+        const { seatsReserved } = this.props;
         let seatsRow = [];
         let seatRowNumber = rowNumberFrom;
 
