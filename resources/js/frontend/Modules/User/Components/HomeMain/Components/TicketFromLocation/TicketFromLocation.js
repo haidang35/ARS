@@ -35,7 +35,7 @@ class TicketFromLocation extends Component {
                     <div className="ticket-from-location">
                         <div className="wrap-container">
                             <Typography variant="h4">
-                                {`The best flight deals from Hanoi ${location.city}`}
+                                {`The best flight deals from ${location.city}`}
                             </Typography>
                             <div>
                                 <Typography

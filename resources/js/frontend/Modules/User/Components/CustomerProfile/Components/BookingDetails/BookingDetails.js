@@ -9,13 +9,17 @@ import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess
 import PaymentNoticeBox from "../../../BookingConfirm/Components/PaymentNoticeBox/PaymentNoticeBox";
 import Payment from "../../../BookingConfirm/Components/Payment/Payment";
 import UserService from "../../../../Shared/UserService/UserService";
+import {
+    dateConvert,
+    getTime,
+} from "../../../../../../Helpers/DateTime/ConvertDateTime";
 
 class BookingDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             message: "",
-            bookingData: {},
+            bookingData: [],
         };
     }
 
@@ -25,10 +29,10 @@ class BookingDetails extends Component {
 
     getBookingInfo = () => {
         let data = this.props.location.state;
+        let { bookingData } = this.state;
         UserService.getBookingInfo(data.id).then((res) => {
-            this.setState({
-                bookingData: res.data,
-            });
+            bookingData.push(res.data);
+            this.setState({ bookingData });
         });
     };
 
@@ -46,50 +50,83 @@ class BookingDetails extends Component {
 
     render() {
         let data = this.props.location.state;
-        const { bookingData } = this.state;
-        const flight = Object.assign({}, bookingData.flight);
-        const ticket = Object.assign({}, bookingData.ticket);
-        const departure = Object.assign({}, flight.departure);
-        const destination = Object.assign({}, flight.destination);
+        let { bookingData } = this.state;
+        let flight = "";
+        let ticket = "";
+        let departure = "";
+        let destination = "";
+        let hasData = false;
+        let bookingTime = "";
+        let checkPayment = false;
+        let paymentMethod = 0;
+        if (bookingData.length > 0) {
+            hasData = true;
+            flight = Object.assign({}, bookingData[0].flight);
+            ticket = Object.assign({}, bookingData[0].ticket);
+            departure = Object.assign({}, flight.departure);
+            destination = Object.assign({}, flight.destination);
+            bookingTime = new Date(bookingData[0].booking_date);
+            bookingTime.setHours(bookingTime.getHours() + 5);
+            paymentMethod = bookingData[0].payment_method;
+        }
+
+        bookingData.forEach((item) => {
+            if (item.payment_status == 1) {
+                checkPayment = true;
+            }
+        });
+
         return (
             <div>
-                <div className="booking-details">
-                    {bookingData.status == 1 ? (
-                        <AlertWarning message="Yêu cầu đặt vé đang chờ xác nhận" />
-                    ) : bookingData.status == 2 ? (
-                        <AlertSuccess message="Bạn đã đặt vé máy bay thành công" />
-                    ) : (
-                        ""
-                    )}
-                    <AlertSuccess message={this.state.message} />
+                {hasData ? (
+                    <div className="booking-details">
+                        {bookingData[0].payment_status == 0 ? (
+                            <AlertWarning
+                                message={`Please make your payment by ${getTime(
+                                    bookingTime
+                                )}`}
+                            />
+                        ) : bookingData[0].payment_status == 1 ? (
+                            <AlertSuccess message="Thanks for your payment." />
+                        ) : (
+                            ""
+                        )}
+                        <AlertSuccess message={this.state.message} />
 
-                    {bookingData.payment_status === 0 &&
-                    bookingData.payment_method == 2 ? (
-                        <PaymentNoticeBox data={bookingData} />
-                    ) : bookingData.payment_status === 0 &&
-                      bookingData.payment_method == 3 &&
-                      !this.state.paymentStatus ? (
-                        <Payment
-                            data={bookingData}
-                            onPaymentBooking={this.onPaymentBooking}
+                        {paymentMethod === 3 && !checkPayment ? (
+                            <Payment
+                                data={bookingData}
+                                onPaymentBooking={this.onPaymentBooking}
+                            />
+                        ) : paymentMethod === 2 && !checkPayment ? (
+                            <PaymentNoticeBox data={bookingData} />
+                        ) : (
+                            ""
+                        )}
+
+                        {bookingData.map((item) => {
+                            return (
+                                <FlightBookingDetail
+                                    key={item.id}
+                                    flight={item.flight}
+                                    ticket={item.ticket}
+                                    destination={item.flight.destination}
+                                    departure={item.flight.departure}
+                                />
+                            );
+                        })}
+
+                        <PassengerInfo
+                            passengers={bookingData[0].passenger}
+                            ticket={bookingData[0].ticket}
+                            bookings={bookingData}
                         />
-                    ) : (
-                        ""
-                    )}
 
-                    <FlightBookingDetail
-                        flight={flight}
-                        departure={departure}
-                        destination={destination}
-                        ticket={ticket}
-                    />
-                    <PassengerInfo
-                        passengers={data.passenger}
-                        ticket={ticket}
-                        booking={bookingData}
-                    />
-                    <ContactInfoBooking booking={bookingData} />
-                </div>
+                        <ContactInfoBooking booking={bookingData[0]} />
+                    </div>
+                ) : (
+                    ""
+                )}
             </div>
         );
     }

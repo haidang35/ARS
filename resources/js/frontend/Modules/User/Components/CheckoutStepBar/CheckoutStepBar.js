@@ -11,7 +11,7 @@ class CheckoutStepBar extends Component {
     }
 
     render() {
-        const { intoMoney } = this.props;
+        const { intoMoney, step } = this.props;
         return (
             <div>
                 <div className="checkout-step-bar">

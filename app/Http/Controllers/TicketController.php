@@ -7,6 +7,7 @@ use App\Models\Departure;
 use App\Models\Destination;
 use App\Models\Flight;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -95,12 +96,18 @@ class TicketController extends Controller
     public function getTicketHasDepartureLocation($destinationId)
     {
         $tickets = Ticket::all();
+        $ticketList = [];
+        $now = new Carbon();
         foreach ($tickets as $item) {
             $flight = Flight::where("departure_id", $destinationId)->with("Airline")->with("Departure")->find($item["flight_id"]);
-            $flight["destination"] = Destination::with("Image")->find($flight["destination_id"]);
-            $item["flight"] = $flight;
+            $departureTime = new Carbon($flight["departure_datetime"]);
+            if ($departureTime->isFuture()) {
+                $flight["destination"] = Destination::with("Image")->find($flight["destination_id"]);
+                $item["flight"] = $flight;
+                $ticketList[] = $item;
+            }
         }
-        return response()->json($tickets);
+        return response()->json($ticketList);
     }
 
     public function getDiscountTickets()

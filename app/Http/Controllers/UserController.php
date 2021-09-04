@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Notifications\OffersNotification;
 use Carbon\Carbon;
 use DateTime;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -197,7 +198,7 @@ class UserController extends Controller
             ];
 
             $email = $booking["contact_email"];
-            // Mail::to($email)->send(new ConfirmMail($offer));
+            Mail::to($email)->send(new ConfirmMail($offer));
         }
 
         return response()->json($bookingList);
@@ -271,22 +272,6 @@ class UserController extends Controller
         return $booking;
     }
 
-    // public function sendNotification()
-    // {
-    //     $users = User::where("roleId", 1)->get();
-    //     $offerData = [
-    //         'name' => 'BOGO',
-    //         'body' => 'You received an offer.',
-    //         'thanks' => 'Thank you',
-    //         'offerText' => 'Check out the offer',
-    //         'offerUrl' => url('/'),
-    //         'offer_id' => 007
-    //     ];
-    //     foreach ($users as $item) {
-    //         Notification::send($item, new OffersNotification($offerData));
-    //     }
-    //     return "Success";
-    // }
 
     public function sendNotification($title, $content, $data)
     {
@@ -319,7 +304,16 @@ class UserController extends Controller
         $bookingInfo["ticket"] = $ticket;
         $bookingInfo["flight"] = $flight;
         $bookingInfo["passenger"] = $passengers;
-        return response()->json($bookingInfo);
+        $bookingTime = new Carbon($bookingInfo["booking_date"]);
+        if ($bookingTime->addHour(5)->isPast()) {
+            foreach ($passengers as $item) {
+                $item->delete();
+            }
+            $bookingInfo->delete();
+            return response()->isServerError();
+        } else {
+            return response()->json($bookingInfo);
+        }
     }
 
     public function getSeatsFlightInfo($id)

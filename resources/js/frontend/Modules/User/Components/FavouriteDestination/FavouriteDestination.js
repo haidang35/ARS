@@ -75,15 +75,11 @@ class FavouriteDestination extends Component {
                                     <Typography
                                         variant="body1"
                                         className="from-title"
-                                    >
-                                        Từ
-                                    </Typography>
+                                    ></Typography>
                                     <Typography
                                         variant="h5"
                                         className="price-title"
-                                    >
-                                        5000000 VND
-                                    </Typography>
+                                    ></Typography>
                                 </div>
                             </div>
                         </div>
@@ -117,15 +113,11 @@ class FavouriteDestination extends Component {
                                     <Typography
                                         variant="body1"
                                         className="from-title"
-                                    >
-                                        Từ
-                                    </Typography>
+                                    ></Typography>
                                     <Typography
                                         variant="h5"
                                         className="price-title"
-                                    >
-                                        5000000 VND
-                                    </Typography>
+                                    ></Typography>
                                 </div>
                             </div>
                         </div>
@@ -159,15 +151,11 @@ class FavouriteDestination extends Component {
                                     <Typography
                                         variant="body1"
                                         className="from-title"
-                                    >
-                                        Từ
-                                    </Typography>
+                                    ></Typography>
                                     <Typography
                                         variant="h5"
                                         className="price-title"
-                                    >
-                                        5000000 VND
-                                    </Typography>
+                                    ></Typography>
                                 </div>
                             </div>
                         </div>
@@ -208,15 +196,11 @@ class FavouriteDestination extends Component {
                                             <Typography
                                                 variant="body1"
                                                 className="from-title"
-                                            >
-                                                Từ
-                                            </Typography>
+                                            ></Typography>
                                             <Typography
                                                 variant="h5"
                                                 className="price-title"
-                                            >
-                                                5000000 VND
-                                            </Typography>
+                                            ></Typography>
                                         </div>
                                     </div>
                                 </div>
@@ -255,15 +239,11 @@ class FavouriteDestination extends Component {
                                             <Typography
                                                 variant="body1"
                                                 className="from-title"
-                                            >
-                                                Từ
-                                            </Typography>
+                                            ></Typography>
                                             <Typography
                                                 variant="h5"
                                                 className="price-title"
-                                            >
-                                                5000000 VND
-                                            </Typography>
+                                            ></Typography>
                                         </div>
                                     </div>
                                 </div>

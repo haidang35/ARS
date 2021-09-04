@@ -8,6 +8,7 @@ import AlertModal from "../../../../../../Shared/Components/Modal/AlertModal";
 import UserService from "../../../../Shared/UserService/UserService";
 import AlertSuccess from "../../../../../../Shared/Components/Alert/AlertSuccess";
 import AlertDanger from "../../../../../../Shared/Components/Alert/AlertDanger";
+import "./BookingList.scss";
 
 class BookingList extends Component {
     constructor(props) {
@@ -78,7 +79,6 @@ class BookingList extends Component {
                                                 <th>Mã chuyến bay</th>
                                                 <th>Tổng cộng</th>
                                                 <th>Trạng thái thanh toán</th>
-                                                <th>Trạng thái</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -114,47 +114,34 @@ class BookingList extends Component {
                                                                 ? "Chưa thanh toán"
                                                                 : "Đã thanh toán"}
                                                         </td>
-                                                        <td className="text-bold-500">
-                                                            {item.status ==
-                                                            1 ? (
-                                                                <button className="btn btn-warning rounded-pill">
-                                                                    Đang chờ xác
-                                                                    nhận
-                                                                </button>
-                                                            ) : item.status ==
-                                                              2 ? (
-                                                                <button className="btn btn-success rounded-pill">
-                                                                    Đã xác nhận
-                                                                </button>
-                                                            ) : (
-                                                                <button className="btn btn-danger rounded-pill">
-                                                                    Đã bị hủy
-                                                                </button>
-                                                            )}
-                                                        </td>
+
                                                         <td>
-                                                            <Link
-                                                                to={{
-                                                                    pathname:
-                                                                        "/customer-info/booking-details",
-                                                                    state: item,
-                                                                }}
-                                                            >
-                                                                <button className="btn btn-primary">
-                                                                    Xem chi tiết
+                                                            <div className="btn-box-control">
+                                                                <Link
+                                                                    to={{
+                                                                        pathname:
+                                                                            "/customer-info/booking-details",
+                                                                        state: item,
+                                                                    }}
+                                                                >
+                                                                    <button className="btn btn-primary">
+                                                                        Xem chi
+                                                                        tiết
+                                                                    </button>
+                                                                </Link>
+                                                                <button
+                                                                    className="btn btn-danger"
+                                                                    style={{
+                                                                        marginTop:
+                                                                            "1rem",
+                                                                    }}
+                                                                    data-toggle="modal"
+                                                                    data-target={`#alertModal${item.id}`}
+                                                                >
+                                                                    Hủy đặt vé
                                                                 </button>
-                                                            </Link>
-                                                            <button
-                                                                className="btn btn-danger"
-                                                                style={{
-                                                                    marginTop:
-                                                                        "1rem",
-                                                                }}
-                                                                data-toggle="modal"
-                                                                data-target={`#alertModal${item.id}`}
-                                                            >
-                                                                Hủy đặt vé
-                                                            </button>
+                                                            </div>
+
                                                             <AlertModal
                                                                 id={item.id}
                                                                 title={

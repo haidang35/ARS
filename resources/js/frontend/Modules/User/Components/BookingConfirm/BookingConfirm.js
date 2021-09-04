@@ -56,7 +56,7 @@ class BookingConfirm extends Component {
         let bookingTime = "";
         let paymentMethod = 0;
         let checkHasBookingInfo = false;
-        let checkPayment = GiTrumpet;
+        let checkPayment = false;
         if (bookingsInfo.length > 0) {
             checkHasBookingInfo = true;
             paymentMethod = bookingsInfo[0].payment_method;
@@ -64,8 +64,8 @@ class BookingConfirm extends Component {
             bookingTime.setHours(bookingTime.getHours() + 5);
         }
         bookingsInfo.forEach((item) => {
-            if (item.payment_status == 0) {
-                checkPayment = false;
+            if (item.payment_status == 1) {
+                checkPayment = true;
             }
         });
 
@@ -121,13 +121,15 @@ class BookingConfirm extends Component {
                                             Customer has not paid the request
                                             booking will be canceled
                                         </Typography>
-                                    ) : (
+                                    ) : checkPayment ? (
                                         <Typography
                                             variant="h6"
                                             className="notice-payment-success"
                                         >
                                             You have successfully paid
                                         </Typography>
+                                    ) : (
+                                        ""
                                     )}
                                 </div>
                             </div>

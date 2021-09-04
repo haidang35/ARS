@@ -12,10 +12,6 @@ class CheckoutBar extends Component {
 
     render() {
         const { data } = this.props;
-        console.log(
-            "🚀 ~ file: CheckoutBar.js ~ line 15 ~ CheckoutBar ~ render ~ data",
-            data
-        );
         let intoMoney = 0;
 
         return (
@@ -25,6 +21,9 @@ class CheckoutBar extends Component {
                         <div className="row">
                             <div className="col-md-3">
                                 <Button
+                                    onClick={() => {
+                                        this.props.history.goBack();
+                                    }}
                                     className="btn-back"
                                     variant="contained"
                                     color="inherit"

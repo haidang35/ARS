@@ -85,7 +85,7 @@ class AddNewTicket extends Form {
                     classFlight = "Deluxe Economy";
                     break;
                 case 3:
-                    classFLight = "Economy";
+                    classFlight = "Economy";
                     break;
                 case 4:
                     classFlight = "Economy";

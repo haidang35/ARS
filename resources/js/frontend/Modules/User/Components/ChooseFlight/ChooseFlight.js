@@ -635,8 +635,20 @@ class ChooseFlight extends Component {
             }
         }
         if (!checkExisted) {
-            intoMoney += data.price + data.tax;
-            ticketsChoosed.push(data);
+            if (
+                (tripType === 1 && ticketsChoosed.length === 0) ||
+                (tripType == 2 && ticketsChoosed.length === 0)
+            ) {
+                intoMoney += data.price + data.tax;
+                ticketsChoosed.push(data);
+            } else if (
+                tripType === 2 &&
+                ticketsChoosed.length === 1 &&
+                this.checkChooseTicketReturn(data)
+            ) {
+                intoMoney += data.price + data.tax;
+                ticketsChoosed.push(data);
+            }
         }
 
         this.setState({
@@ -650,6 +662,17 @@ class ChooseFlight extends Component {
             reserveTicket: true,
         });
         window.scrollTo(0, 0);
+    };
+
+    checkChooseTicketReturn = (data) => {
+        const { flightsData } = this.state;
+        let result = true;
+        flightsData.forEach((item) => {
+            if (data.id === item.id) {
+                result = false;
+            }
+        });
+        return result;
     };
 
     render() {
@@ -671,7 +694,7 @@ class ChooseFlight extends Component {
             ticketsChoosed,
             reserveTicket,
         } = this.state;
-        if (reserveTicket && tripType == 1) {
+        if (reserveTicket && tripType == 1 && ticketsChoosed.length == 1) {
             return (
                 <Redirect
                     to={{
@@ -680,7 +703,11 @@ class ChooseFlight extends Component {
                     }}
                 />
             );
-        } else if (reserveTicket && tripType == 2) {
+        } else if (
+            reserveTicket &&
+            tripType == 2 &&
+            ticketsChoosed.length == 2
+        ) {
             return (
                 <Redirect
                     to={{
@@ -786,6 +813,7 @@ class ChooseFlight extends Component {
                 </div>
                 <ChatBox />
                 <CheckoutStepBar
+                    step={1}
                     intoMoney={this.state.intoMoney}
                     onContinue={this.onReserveTicket}
                 />

@@ -171,6 +171,7 @@ class FlightSeatSelection extends Component {
         bookingInfo.ticket.into_money = intoMoney;
         bookingInfo.into_money = intoMoney;
         bookingInfo.passengers = passengers;
+        bookingInfo["seat_fee"] = seatReserveFee;
         this.props.updateBookingInfo(bookingInfo);
         this.setState({
             bookingInfo,

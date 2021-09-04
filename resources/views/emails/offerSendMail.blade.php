@@ -361,14 +361,16 @@
                                                     style="line-height: 1.5; font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; color: #555555; mso-line-height-alt: 18px;">
                                                     <p
                                                         style="margin: 0; font-size: 15px; line-height: 1.5; text-align: center; word-break: break-word; mso-line-height-alt: 23px; margin-top: 0; margin-bottom: 0;">
-                                                        <span style="font-size: 15px;">Chuyến bay của bạn khởi hành từ
-                                                            sân bay <span
-                                                                style="color: #800080;"><strong>{{ $offer['data']['flight']['departure']['city'] }}</strong></span>
-                                                            trên chuyên cơ <span
-                                                                style="color: #0b1560;"><strong>{{ $offer['data']['flight']['aircraft'] }}</strong></span>
-                                                            của hãng hàng không <span
+                                                        <span style="font-size: 15px;">Your flight departs from
+                                                            airport <span
+                                                                style="color: #800080;"><strong>{{ $offer['data']['flight']['departure']['airport_name'] . ' - ' . $offer['data']['flight']['departure']['city'] }}</strong></span>
+                                                            on <span
                                                                 style="color: #0b1560;"><strong>{{ $offer['data']['flight']['airline']['airline_name'] }}</strong></span>
-                                                            lúc <span
+
+                                                            <span
+                                                                style="color: #0b1560;"><strong>{{ $offer['data']['flight']['aircraft'] }}</strong></span>
+
+                                                            at <span
                                                                 style="color: #0b1560;"><strong></strong>{{ date_format(new Carbon\Carbon($offer['data']['flight']['departure_datetime']), ' H:i ') }}</span></span>
                                                     </p>
                                                 </div>

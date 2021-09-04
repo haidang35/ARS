@@ -17,6 +17,7 @@ class PassengerInfo extends Component {
     render() {
         const { passengers, ticket, bookings } = this.props;
         let passengerList = [];
+        let seatFee = 0;
         let flightStart = {};
         let flightReturn = {};
         let ticketStart = {};
@@ -24,6 +25,9 @@ class PassengerInfo extends Component {
         if (Array.isArray(passengers)) {
             passengerList = passengers;
         }
+        bookings.forEach((item) => {
+            seatFee = item.into_money - (item.ticket.price + item.ticket.tax);
+        });
         let checkHasData = false;
         const tripType = JSON.parse(window.localStorage.getItem("tripType"));
         if (bookings.length > 0) {
@@ -124,6 +128,18 @@ class PassengerInfo extends Component {
                                           );
                                       })
                                     : ""}
+
+                                <tr>
+                                    <td
+                                        colSpan="5"
+                                        className="content-item-seat-fee"
+                                    >
+                                        Seat fee
+                                    </td>
+                                    <td className="content-item-seat-fee">
+                                        {formatCurrency(seatFee)}
+                                    </td>
+                                </tr>
 
                                 <tr>
                                     <td

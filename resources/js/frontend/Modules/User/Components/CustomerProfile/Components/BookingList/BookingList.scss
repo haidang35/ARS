@@ -1,1 +1,8 @@
-.user-booking-list {}
+.user-booking-list {
+    .btn-box-control {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+}

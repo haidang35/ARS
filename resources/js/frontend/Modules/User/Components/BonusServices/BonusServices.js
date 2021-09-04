@@ -118,6 +118,7 @@ class BonusServices extends Component {
                 into_money: this.bookingInfoUpdated.into_money,
                 passengers: this.bookingInfoUpdated.passengers,
                 user_id: this.bookingInfoUpdated.user_id,
+                seat_fee: this.bookingInfoUpdated.seat_fee,
             };
             UserService.bookingFlightTicket(data)
                 .then((res) => {

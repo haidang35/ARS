@@ -201,9 +201,7 @@ class SubNavbar extends Component {
                                     <Typography
                                         variant="h6"
                                         className="hello-title"
-                                    >
-                                        Xin chào,
-                                    </Typography>
+                                    ></Typography>
                                     <Button
                                         onClick={this.handleClick}
                                         color="inherit"

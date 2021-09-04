@@ -197,7 +197,7 @@ class Navbar extends Component {
                                         variant="h6"
                                         className="hello-title"
                                     >
-                                        Xin chào,
+                                        Hello,
                                     </Typography>
                                     <Button
                                         onClick={this.handleClick}
