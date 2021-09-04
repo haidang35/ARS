@@ -193,12 +193,12 @@ class Destination extends Component {
                                     <table className="table table-lg">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Tỉnh/Thành phố</th>
-                                                <th>Mã sân bay</th>
-                                                <th>Sân bay</th>
-                                                <th>Mã quốc gia</th>
-                                                <th>Quốc gia</th>
+                                                <th>ID</th>
+                                                <th>Province/City</th>
+                                                <th>Airport code</th>
+                                                <th>Airport</th>
+                                                <th>Country code</th>
+                                                <th>Country</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -278,6 +278,7 @@ class Destination extends Component {
                                         count={
                                             this.state.destinationList.length
                                         }
+                                        rowsPerPageOptions={[10, 20, 50, 100]}
                                         page={page}
                                         onPageChange={this.handleChangePage}
                                         rowsPerPage={rowsPerPage}

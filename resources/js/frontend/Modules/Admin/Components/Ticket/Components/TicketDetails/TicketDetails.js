@@ -140,9 +140,7 @@ class TicketDetails extends Form {
                                 </div>
                             )}
                         </div>
-                        <h4 className="card-title">
-                            Thông tin chi tiết của vé máy bay
-                        </h4>
+                        <h4 className="card-title">Ticke details</h4>
                     </div>
 
                     <section id="multiple-column-form">
@@ -155,7 +153,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="first-name-column">
-                                                            Chuyến bay
+                                                            Flight
                                                         </label>
                                                         <select
                                                             type="text"
@@ -194,7 +192,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="first-name-column">
-                                                            Hành trình
+                                                            Route
                                                         </label>
                                                         <input
                                                             type="text"
@@ -217,7 +215,7 @@ class TicketDetails extends Form {
                                                         }}
                                                     >
                                                         <label htmlFor="first-name-column">
-                                                            Loại vé máy bay
+                                                            Ticket type
                                                         </label>
                                                         <input
                                                             type="text"
@@ -254,7 +252,7 @@ class TicketDetails extends Form {
                                                         }}
                                                     >
                                                         <label htmlFor="first-name-column">
-                                                            Hãng hàng không
+                                                            Airline
                                                         </label>
                                                         <input
                                                             type="text"
@@ -292,7 +290,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="last-name-column">
-                                                            Hạng ghế có sẵn
+                                                            Class available
                                                         </label>
                                                         <input
                                                             type="text"
@@ -325,7 +323,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="city-column">
-                                                            Trạng thái
+                                                            Status
                                                         </label>
                                                         <input
                                                             type="text"
@@ -361,7 +359,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="country-floating">
-                                                            Hành lý xách tay
+                                                            Carbin baggage
                                                         </label>
                                                         <input
                                                             type="text"
@@ -394,7 +392,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="company-column">
-                                                            Hành lý ký gửi
+                                                            Checkin baggage
                                                         </label>
                                                         <input
                                                             type="text"
@@ -432,7 +430,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="first-name-column">
-                                                            Giá vé
+                                                            Price
                                                         </label>
                                                         <input
                                                             type="text"
@@ -463,7 +461,7 @@ class TicketDetails extends Form {
                                                 <div className="col-md-6 col-12">
                                                     <div>
                                                         <label htmlFor="company-column">
-                                                            Thuế phí
+                                                            Taxs
                                                         </label>
                                                         <input
                                                             type="text"
@@ -483,7 +481,7 @@ class TicketDetails extends Form {
                                                         dirty ? (
                                                             <FormError
                                                                 err={
-                                                                    "Tax cannot be empty"
+                                                                    "Taxs cannot be empty"
                                                                 }
                                                             />
                                                         ) : (

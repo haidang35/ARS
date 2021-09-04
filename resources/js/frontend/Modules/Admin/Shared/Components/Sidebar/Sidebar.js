@@ -62,7 +62,7 @@ class SideBar extends Component {
                         <div className="d-flex justify-content-between">
                             <div className="logo">
                                 <Link to="" style={{ textDecoration: "none" }}>
-                                    ARS Manage
+                                    FlightHi Admin
                                 </Link>
                             </div>
                             <div className="toggler">

@@ -103,7 +103,7 @@ class AddNewAirline extends Form {
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
-                                            Tên hãng hàng không
+                                            Airline name
                                         </label>
                                         <input
                                             type="text"
@@ -126,7 +126,7 @@ class AddNewAirline extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
-                                            Mã hãng hàng không
+                                            Airline code
                                         </label>
                                         <input
                                             type="text"
@@ -146,7 +146,7 @@ class AddNewAirline extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Quốc gia
+                                            Country
                                         </label>
                                         <input
                                             type="text"

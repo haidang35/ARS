@@ -154,7 +154,7 @@ class Notification extends Component {
                                         <div className="col-md-10">
                                             {noticeList.length === 0 ? (
                                                 <Typography variant="h6">
-                                                    Không có thông báo mới nào
+                                                    There is no notice.
                                                 </Typography>
                                             ) : (
                                                 ""

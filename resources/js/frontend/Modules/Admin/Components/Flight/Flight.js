@@ -385,7 +385,7 @@ class Flight extends Form {
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">
-                                Danh sách các chuyến bay
+                                Flight List
                                 <button
                                     style={{ float: "right" }}
                                     onClick={this.onAddFlight}
@@ -431,7 +431,7 @@ class Flight extends Form {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Chọn điểm khởi hành
+                                                Choose departure
                                             </option>
                                             {destinationList.map((item) => {
                                                 return (
@@ -455,7 +455,7 @@ class Flight extends Form {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Chọn điểm đến
+                                                Choose destination
                                             </option>
                                             {destinationList.map((item) => {
                                                 return (
@@ -479,7 +479,7 @@ class Flight extends Form {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Chọn hãng hàng không
+                                                Choose airline
                                             </option>
                                             {airlineList.map((item) => {
                                                 return (
@@ -518,17 +518,13 @@ class Flight extends Form {
                                                     this.handleChangeScope
                                                 }
                                             >
-                                                <option value="">
-                                                    Chọn thời gian
-                                                </option>
-                                                <option value={1}>
-                                                    Hôm nay
-                                                </option>
+                                                <option value="">Time</option>
+                                                <option value={1}>Today</option>
                                                 <option value={2}>
-                                                    Ngày mai
+                                                    Tomorrow
                                                 </option>
                                                 <option value={3}>
-                                                    Tuần này
+                                                    This week
                                                 </option>
                                             </select>
                                         </div>
@@ -604,17 +600,17 @@ class Flight extends Form {
                                     <table className="table table-lg">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Tên chuyến bay</th>
-                                                <th>Thời gian khởi hành</th>
-                                                <th>Thời gian hạ cánh</th>
-                                                <th>Điểm khởi hành</th>
-                                                <th>Điểm đến</th>
-                                                <th>Loại máy bay</th>
-                                                <th>Hãng hàng không</th>
-                                                <th>Sức chứa</th>
-                                                <th>Chỗ ngồi đã được đặt</th>
-                                                <th>Chỗ ngồi trống</th>
+                                                <th>ID</th>
+                                                <th>Flight</th>
+                                                <th>Depart</th>
+                                                <th>Landing time</th>
+                                                <th>Departure</th>
+                                                <th>Destination</th>
+                                                <th>Aircraft</th>
+                                                <th>Airline</th>
+                                                <th>Capacity</th>
+                                                <th>Seat reserved</th>
+                                                <th>Seat available</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -716,6 +712,7 @@ class Flight extends Form {
                                     <TablePagination
                                         component="div"
                                         count={this.state.flightList.length}
+                                        rowsPerPageOptions={[10, 20, 50, 100]}
                                         page={page}
                                         onPageChange={this.handleChangePage}
                                         rowsPerPage={rowsPerPage}

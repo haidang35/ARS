@@ -92,7 +92,7 @@ class BookingDetails extends Form {
             };
             BookingService.updateBooking(id, data).then((res) => {
                 this.setState({
-                    message: "Cập nhập thông tin khách hàng thành công !",
+                    message: "Update customer's info successful !",
                 });
             });
             this.onCancelEditInfo();
@@ -146,9 +146,7 @@ class BookingDetails extends Form {
                                     </div>
                                 )}
                             </div>
-                            <h4 className="card-title">
-                                Thông tin đặt vé máy bay của hành khách
-                            </h4>
+                            <h4 className="card-title">Booking Details</h4>
                         </div>
 
                         <div className="card-content">
@@ -160,9 +158,7 @@ class BookingDetails extends Form {
                                                 message={this.state.message}
                                             />
                                             <div className="col-12">
-                                                <h5>
-                                                    Thông tin khách hàng đặt vé
-                                                </h5>
+                                                <h5>Customer's info</h5>
                                             </div>
                                             <div className="col-md-4">
                                                 <div className="form-input-group">
@@ -184,10 +180,10 @@ class BookingDetails extends Form {
                                                         }
                                                     >
                                                         <option value="Anh">
-                                                            Anh
+                                                            Mr
                                                         </option>
                                                         <option value="Chị">
-                                                            Chị
+                                                            Mrs
                                                         </option>
                                                     </select>
                                                 </div>
@@ -340,7 +336,7 @@ class BookingDetails extends Form {
                                             style={{ marginTop: "55px" }}
                                         >
                                             <div className="col-12">
-                                                <h5>Thông tin chuyến bay</h5>
+                                                <h5>Flight Infomation</h5>
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="form-input-group">
@@ -501,7 +497,7 @@ class BookingDetails extends Form {
 
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Thông tin hành khách</h4>
+                            <h4 className="card-title">Passenger List</h4>
                         </div>
                         <div className="card-content">
                             <div className="card-body">
@@ -509,12 +505,12 @@ class BookingDetails extends Form {
                                     <table className="table table-lg">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Tên hành khách</th>
-                                                <th>Giới tính</th>
-                                                <th>Ngày sinh</th>
-                                                <th>Chỗ ngồi đã đặt trước </th>
-                                                <th>Giá vé </th>
+                                                <th>ID</th>
+                                                <th>Passenger Name</th>
+                                                <th>Gender</th>
+                                                <th>Birthday</th>
+                                                <th>Seat reserved </th>
+                                                <th>Price </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -537,7 +533,7 @@ class BookingDetails extends Form {
                                                             {item.booking_seat
                                                                 .length > 0
                                                                 ? item.booking_seat
-                                                                : "Không"}
+                                                                : "None"}
                                                         </td>
                                                         <td>
                                                             {formatCurrency(
@@ -549,7 +545,7 @@ class BookingDetails extends Form {
                                                 );
                                             })}
                                             <tr>
-                                                <td colSpan="5">Tổng tiền</td>
+                                                <td colSpan="5">Total price</td>
                                                 <td colSpan="1">
                                                     {formatCurrency(
                                                         booking.into_money

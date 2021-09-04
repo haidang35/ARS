@@ -65,7 +65,7 @@ class FlightSeatSetting extends Form {
                             <div className="seat-map">
                                 <div className="title-box">
                                     <Typography className="title" variant="h6">
-                                        Thiết lập sơ đồ hàng ghế
+                                        Seats setting
                                     </Typography>
                                 </div>
                                 <div className="seats-diagram">
@@ -206,9 +206,7 @@ class FlightSeatSetting extends Form {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi hạng thương gia
-                                        </label>
+                                        <label>Business class seats</label>
                                         <input
                                             required
                                             name="businessSeat"
@@ -219,7 +217,7 @@ class FlightSeatSetting extends Form {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Business price</label>
                                         <input
                                             type="text"
                                             required
@@ -237,7 +235,7 @@ class FlightSeatSetting extends Form {
                                         {businessPrice.err === "*" && dirty ? (
                                             <FormError
                                                 err={
-                                                    "Không được để trống giá vé"
+                                                    "Business price cannot be empty"
                                                 }
                                             />
                                         ) : dirty ? (
@@ -251,9 +249,7 @@ class FlightSeatSetting extends Form {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi ưu tiên phía trước
-                                        </label>
+                                        <label>Deluxe class seats</label>
                                         <input
                                             type="text"
                                             required
@@ -265,7 +261,7 @@ class FlightSeatSetting extends Form {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Deluxe price</label>
                                         <input
                                             type="text"
                                             required
@@ -283,9 +279,7 @@ class FlightSeatSetting extends Form {
                                         {firstEconomyPrice.err === "*" &&
                                         dirty ? (
                                             <FormError
-                                                err={
-                                                    "Không được để trống giá vé"
-                                                }
+                                                err={"Price cannot be empty"}
                                             />
                                         ) : dirty ? (
                                             <FormError
@@ -299,9 +293,7 @@ class FlightSeatSetting extends Form {
 
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi hạng thông thường
-                                        </label>
+                                        <label>Economy class seats</label>
                                         <input
                                             required
                                             name="flight_code"
@@ -312,7 +304,7 @@ class FlightSeatSetting extends Form {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Economy price</label>
                                         <input
                                             type="text"
                                             required
@@ -329,9 +321,7 @@ class FlightSeatSetting extends Form {
                                         ></input>
                                         {economyPrice.err === "*" && dirty ? (
                                             <FormError
-                                                err={
-                                                    "Không được để trống giá vé"
-                                                }
+                                                err={"Price cannot be empty"}
                                             />
                                         ) : dirty ? (
                                             <FormError err={economyPrice.err} />
@@ -342,9 +332,7 @@ class FlightSeatSetting extends Form {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi gần cửa thoát hiểm
-                                        </label>
+                                        <label>Emergency exit seats</label>
                                         <input
                                             type="text"
                                             required
@@ -356,7 +344,7 @@ class FlightSeatSetting extends Form {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Special Economy Price</label>
                                         <input
                                             type="text"
                                             required
@@ -370,9 +358,7 @@ class FlightSeatSetting extends Form {
                                         ></input>
                                         {exitPrice.err === "*" && dirty ? (
                                             <FormError
-                                                err={
-                                                    "Không được để trống giá vé"
-                                                }
+                                                err={"Price cannot be empty"}
                                             />
                                         ) : dirty ? (
                                             <FormError err={exitPrice.err} />
@@ -394,7 +380,7 @@ class FlightSeatSetting extends Form {
                                         variant="h6"
                                         className="set-title"
                                     >
-                                        Thêm hàng ghế hạng thương gia
+                                        Add new business seats row
                                     </Typography>
                                 </div>
                                 {businessSeats > 18 ? (
@@ -409,7 +395,7 @@ class FlightSeatSetting extends Form {
                                             variant="h6"
                                             className="set-title"
                                         >
-                                            Xóa đi một hàng ghế hạng thương gia
+                                            Remove a business seats row
                                         </Typography>
                                     </div>
                                 ) : (
@@ -427,7 +413,7 @@ class FlightSeatSetting extends Form {
                                         variant="h6"
                                         className="set-title"
                                     >
-                                        Thêm hàng ghế đầu ưu tiên
+                                        Add a deluxe seats row
                                     </Typography>
                                 </div>
                                 {firstEconomySeats > 18 ? (
@@ -442,7 +428,7 @@ class FlightSeatSetting extends Form {
                                             variant="h6"
                                             className="set-title"
                                         >
-                                            Xóa đi một hàng ghế đầu ưu tiên
+                                            Remove a deluxe seats row
                                         </Typography>
                                     </div>
                                 ) : (
@@ -460,7 +446,7 @@ class FlightSeatSetting extends Form {
                                         variant="h6"
                                         className="set-title"
                                     >
-                                        Thêm hàng ghế hạng thông thường
+                                        Add new a economy seats row
                                     </Typography>
                                 </div>
                                 {economySeats > 146 ? (
@@ -475,8 +461,7 @@ class FlightSeatSetting extends Form {
                                             variant="h6"
                                             className="set-title"
                                         >
-                                            Xóa đi một hàng ghế hạng thông
-                                            thường
+                                            Remove a economy seats row
                                         </Typography>
                                     </div>
                                 ) : (

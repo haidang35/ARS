@@ -133,7 +133,7 @@ class AddNewTicket extends Form {
                 <div className="card">
                     <div className="card-header">
                         <h4 className="card-title">
-                            Thêm vé máy bay
+                            Add new ticket
                             <div className="float-right">
                                 <div>
                                     <button
@@ -162,7 +162,7 @@ class AddNewTicket extends Form {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Chuyến bay</label>
+                                                <label>Flight</label>
                                                 <select
                                                     name="flight_id"
                                                     required
@@ -200,7 +200,7 @@ class AddNewTicket extends Form {
                                         </div>
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Hạng ghế có sẵn</label>
+                                                <label>Class available</label>
                                                 <select
                                                     required
                                                     className="form-control form-select"
@@ -215,7 +215,7 @@ class AddNewTicket extends Form {
                                                     }
                                                 >
                                                     <option value="">
-                                                        Chọn hạng ghế
+                                                        Choose class
                                                     </option>
                                                     {classesFlight.map(
                                                         (item) => {
@@ -230,16 +230,16 @@ class AddNewTicket extends Form {
                                                                 >
                                                                     {item.class ===
                                                                     1
-                                                                        ? "Hạng thương gia"
+                                                                        ? "Business"
                                                                         : item.class ===
                                                                           2
-                                                                        ? "Hạng phổ thông ưu tiên"
+                                                                        ? "Deluxe"
                                                                         : item.class ===
                                                                           3
-                                                                        ? "Hạng phổ thông"
+                                                                        ? "Economy"
                                                                         : item.class ===
                                                                           4
-                                                                        ? "Hạng phổ thông đặc biệt"
+                                                                        ? "Special Economy"
                                                                         : ""}
                                                                 </option>
                                                             );
@@ -261,7 +261,7 @@ class AddNewTicket extends Form {
                                     >
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Loại vé</label>
+                                                <label>Ticket type</label>
                                                 <input
                                                     type="text"
                                                     name="ticket_type"
@@ -286,7 +286,7 @@ class AddNewTicket extends Form {
 
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Trạng thái</label>
+                                                <label>Status</label>
                                                 <select
                                                     name="status"
                                                     required
@@ -300,13 +300,13 @@ class AddNewTicket extends Form {
                                                     }
                                                 >
                                                     <option value="">
-                                                        Chọn trạng thái
+                                                        Choose status
                                                     </option>
                                                     <option value={1}>
-                                                        Khởi hành đúng giờ
+                                                        On time
                                                     </option>
                                                     <option value={2}>
-                                                        Bị delay
+                                                        Delay
                                                     </option>
                                                 </select>
                                                 {dirty && status.err === "*" ? (
@@ -323,7 +323,7 @@ class AddNewTicket extends Form {
                                     >
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Hành lý xách tay</label>
+                                                <label>Carbin baggage</label>
                                                 <input
                                                     required
                                                     name="carbin_bag"
@@ -346,7 +346,7 @@ class AddNewTicket extends Form {
                                         </div>
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Hành lý ký gửi</label>
+                                                <label>Checkin baggage</label>
                                                 <input
                                                     required
                                                     name="checkin_bag"
@@ -374,7 +374,7 @@ class AddNewTicket extends Form {
                                     >
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Giá vé</label>
+                                                <label>Price</label>
                                                 <input
                                                     required
                                                     name="price"
@@ -390,7 +390,7 @@ class AddNewTicket extends Form {
                                         </div>
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>Thuế phí</label>
+                                                <label>Tax</label>
                                                 <input
                                                     required
                                                     name="tax"
@@ -417,9 +417,7 @@ class AddNewTicket extends Form {
                                     >
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>
-                                                    Phí đặt ghế hạng thương gia
-                                                </label>
+                                                <label>Business seat tax</label>
                                                 <input
                                                     required
                                                     name="business_seat_fee"
@@ -445,10 +443,7 @@ class AddNewTicket extends Form {
                                         </div>
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>
-                                                    Phí đặt ghế hạng phổ thông
-                                                    đặc biệt
-                                                </label>
+                                                <label>Deluxe seat tax</label>
                                                 <input
                                                     required
                                                     name="deluxe_seat_fee"
@@ -478,9 +473,7 @@ class AddNewTicket extends Form {
                                     >
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>
-                                                    Phí đặt chỗ hạng phổ thông
-                                                </label>
+                                                <label>Economy seat fee</label>
                                                 <input
                                                     required
                                                     name="economy_seat_fee"
@@ -505,10 +498,7 @@ class AddNewTicket extends Form {
                                         </div>
                                         <div className="col-sm-6">
                                             <div>
-                                                <label>
-                                                    Thuế đặt ghế gần cửa thoát
-                                                    hiểm
-                                                </label>
+                                                <label>Special seat fee</label>
                                                 <input
                                                     required
                                                     name="exit_seat_fee"

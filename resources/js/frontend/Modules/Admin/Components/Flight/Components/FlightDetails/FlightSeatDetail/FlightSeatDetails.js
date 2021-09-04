@@ -32,7 +32,7 @@ class FlightSeatDetails extends Component {
                             <div className="seat-map">
                                 <div className="title-box">
                                     <Typography className="title" variant="h6">
-                                        Sơ đồ ghế ngồi
+                                        Flight seats
                                     </Typography>
                                 </div>
                                 <div className="seats-diagram">
@@ -173,9 +173,7 @@ class FlightSeatDetails extends Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi hạng thương gia
-                                        </label>
+                                        <label>Business seats</label>
                                         <input
                                             required
                                             name="businessSeat"
@@ -186,7 +184,7 @@ class FlightSeatDetails extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Business class price</label>
                                         <input
                                             type="text"
                                             required
@@ -199,9 +197,7 @@ class FlightSeatDetails extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi ưu tiên phía trước
-                                        </label>
+                                        <label>Deluxe class seats</label>
                                         <input
                                             type="text"
                                             required
@@ -213,7 +209,7 @@ class FlightSeatDetails extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Deluxe class price</label>
                                         <input
                                             type="text"
                                             required
@@ -227,9 +223,7 @@ class FlightSeatDetails extends Component {
 
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi hạng thông thường
-                                        </label>
+                                        <label>Economy seats</label>
                                         <input
                                             required
                                             name="flight_code"
@@ -240,7 +234,7 @@ class FlightSeatDetails extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Economy class price</label>
                                         <input
                                             type="text"
                                             required
@@ -253,9 +247,7 @@ class FlightSeatDetails extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>
-                                            Số ghế ngồi gần cửa thoát hiểm
-                                        </label>
+                                        <label>Emergency exit seats</label>
                                         <input
                                             type="text"
                                             required
@@ -267,7 +259,7 @@ class FlightSeatDetails extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div style={{ marginTop: "1rem" }}>
-                                        <label>Giá vé</label>
+                                        <label>Speacial economy price</label>
                                         <input
                                             type="text"
                                             required

@@ -12,17 +12,42 @@ import {
     URL_IMAGE_AIRLINE,
     URL_IMAGE_DESTINATION,
 } from "../../../../../../Constances/const";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { goTo } from "../../../../../../Helpers/Redirect/Redirect";
 
 class TicketFromLocation extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            redirect: false,
+            ticketsChoosed: [],
+        };
     }
+
+    onReservationTicket = (ticket) => {
+        let { ticketsChoosed } = this.state;
+        ticketsChoosed.push(ticket);
+        this.setState({
+            ticketsChoosed,
+            redirect: true,
+        });
+        window.scrollTo(0, 0);
+    };
 
     render() {
         const { ticketList, location } = this.props;
+        const { redirect, ticketsChoosed } = this.state;
+        const tripType = 1;
+        if (redirect) {
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/reservation/ticket/oneway",
+                        state: { tripType, ticketsChoosed },
+                    }}
+                />
+            );
+        }
         let ticketListLocation = [];
         if (Array.isArray(ticketList) && ticketList.length >= 3) {
             for (let i = 0; i < 3; i++) {
@@ -62,17 +87,8 @@ class TicketFromLocation extends Component {
                                                 key={item.id}
                                                 className="col-md-4"
                                                 onClick={() =>
-                                                    goTo(
-                                                        `search-flight?departure=${
-                                                            item.flight
-                                                                .departure.id
-                                                        }&destination=${
-                                                            item.flight
-                                                                .destination.id
-                                                        }&time=${getDate(
-                                                            item.flight
-                                                                .departure_datetime
-                                                        )}`
+                                                    this.onReservationTicket(
+                                                        item
                                                     )
                                                 }
                                             >

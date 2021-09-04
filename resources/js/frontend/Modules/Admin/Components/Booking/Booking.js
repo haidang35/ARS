@@ -356,9 +356,7 @@ class Booking extends Component {
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">
-                                Danh sách khách hàng đặt vé máy bay
-                            </h4>
+                            <h4 className="card-title">Booking List</h4>
                         </div>
                         <div className="card-content">
                             <div className="row">
@@ -388,7 +386,7 @@ class Booking extends Component {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Chọn điểm khởi hành
+                                                Choose departure
                                             </option>
                                             {destinationList.map((item) => {
                                                 return (
@@ -412,7 +410,7 @@ class Booking extends Component {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Chọn điểm đến
+                                                Choose destination
                                             </option>
                                             {destinationList.map((item) => {
                                                 return (
@@ -436,7 +434,7 @@ class Booking extends Component {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Chọn hãng hàng không
+                                                Choose airline
                                             </option>
                                             {airlineList.map((item) => {
                                                 return (
@@ -476,16 +474,14 @@ class Booking extends Component {
                                                 }
                                             >
                                                 <option value="">
-                                                    Chọn thời gian
+                                                    Choose time
                                                 </option>
-                                                <option value={1}>
-                                                    Hôm nay
-                                                </option>
+                                                <option value={1}>Today</option>
                                                 <option value={2}>
-                                                    Ngày mai
+                                                    Tomorrow
                                                 </option>
                                                 <option value={3}>
-                                                    Tuần này
+                                                    This week
                                                 </option>
                                             </select>
                                         </div>
@@ -503,7 +499,7 @@ class Booking extends Component {
                                                         }}
                                                         margin="normal"
                                                         id="date-picker-dialog"
-                                                        label="Chọn ngày khởi hành"
+                                                        label="Choose depart"
                                                         format="dd/MM/yyyy"
                                                         value={
                                                             this.state
@@ -547,13 +543,13 @@ class Booking extends Component {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Lọc theo tổng tiền
+                                                Filter by price
                                             </option>
                                             <option value={1}>
-                                                Từ thấp tới cao
+                                                From low to high
                                             </option>
                                             <option value={2}>
-                                                Từ cao tới thấp
+                                                From high to low
                                             </option>
                                         </select>
                                     </div>
@@ -569,14 +565,10 @@ class Booking extends Component {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Trạng thái thanh toán
+                                                Payment status
                                             </option>
-                                            <option value={1}>
-                                                Đã thanh toán
-                                            </option>
-                                            <option value={2}>
-                                                Chưa thanh toán
-                                            </option>
+                                            <option value={1}>Paid</option>
+                                            <option value={2}>Unpaid</option>
                                         </select>
                                     </div>
                                 </div>
@@ -589,15 +581,13 @@ class Booking extends Component {
                                             onChange={this.handleChangeScope}
                                         >
                                             <option value="">
-                                                Trạng thái xác nhận
+                                                Booking status
                                             </option>
                                             <option value={1}>
-                                                Chưa xác nhận
+                                                Unconfirmed
                                             </option>
-                                            <option value={2}>
-                                                Đã xác nhận
-                                            </option>
-                                            <option value={3}>Đã hủy</option>
+                                            <option value={2}>confirmed</option>
+                                            <option value={3}>Cancelled</option>
                                         </select>
                                     </div>
                                 </div>
@@ -609,15 +599,15 @@ class Booking extends Component {
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Khách hàng</th>
-                                                <th>Số điện thoại</th>
-                                                <th>Hành trình</th>
-                                                <th>Ngày đặt vé </th>
-                                                <th>Số lượng hành khách </th>
-                                                <th>Chuyến bay </th>
-                                                <th>Hãng hàng không </th>
-                                                <th>Tổng tiền</th>
-                                                <th>Trạng thái thanh toán</th>
+                                                <th>Customer</th>
+                                                <th>Phone number</th>
+                                                <th>Route</th>
+                                                <th>Booking date </th>
+                                                <th>Number of passengers </th>
+                                                <th>Flight </th>
+                                                <th>Airline </th>
+                                                <th>Total money</th>
+                                                <th>Payment status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -677,8 +667,8 @@ class Booking extends Component {
                                                         <td>
                                                             {item.payment_status ==
                                                             0
-                                                                ? "Chưa thanh toán"
-                                                                : "Đã thanh toán"}
+                                                                ? "Unpaid"
+                                                                : "Paid"}
                                                         </td>
 
                                                         <td>

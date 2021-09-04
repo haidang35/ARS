@@ -51,6 +51,9 @@ const CssTextField = withStyles({
             backgroundColor: "white",
             borderRadius: "5px",
         },
+        "& .MuiInputBase-input.Mui-disabled": {
+            color: "#292828",
+        },
     },
 })(TextField);
 
@@ -321,7 +324,7 @@ class SearchFlightBar extends Component {
                                     onClick={this.handleChangeDeparture}
                                     id="standard-required"
                                     label="Departure"
-                                    defaultValue="City, airport code"
+                                    defaultValue="Choose city"
                                     className="input-field"
                                     disabled
                                     value={this.state.departure.city}
@@ -353,7 +356,7 @@ class SearchFlightBar extends Component {
                                     onClick={this.handleChangeDestination}
                                     id="standard-required"
                                     label="Destination"
-                                    defaultValue="City, airport code"
+                                    defaultValue="Choose city"
                                     className="input-field"
                                     disabled
                                     value={this.state.destination.city}

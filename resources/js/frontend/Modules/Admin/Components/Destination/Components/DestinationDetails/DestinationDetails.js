@@ -186,7 +186,7 @@ class DestinationDetails extends Form {
                             className="card-title"
                             style={{ marginLeft: "20px" }}
                         >
-                            Thông tin chi tiết của điểm đến
+                            Destination details
                             <div className="float-right">
                                 {!onEdit ? (
                                     <button
@@ -246,7 +246,7 @@ class DestinationDetails extends Form {
                                                     >
                                                         <div>
                                                             <label htmlFor="first-name-column">
-                                                                Thành phố
+                                                                City
                                                             </label>
                                                             <input
                                                                 type="text"
@@ -289,7 +289,7 @@ class DestinationDetails extends Form {
                                                     >
                                                         <div>
                                                             <label htmlFor="first-name-column">
-                                                                Tỉnh
+                                                                Province
                                                             </label>
                                                             <input
                                                                 type="text"
@@ -329,7 +329,7 @@ class DestinationDetails extends Form {
                                                     >
                                                         <div>
                                                             <label htmlFor="last-name-column">
-                                                                Mã sân bay
+                                                                Airport code
                                                             </label>
                                                             <input
                                                                 type="text"
@@ -372,7 +372,7 @@ class DestinationDetails extends Form {
                                                     >
                                                         <div>
                                                             <label htmlFor="city-column">
-                                                                Sân bay
+                                                                Airport
                                                             </label>
                                                             <input
                                                                 type="text"
@@ -423,7 +423,7 @@ class DestinationDetails extends Form {
                                                     >
                                                         <div>
                                                             <label htmlFor="country-floating">
-                                                                Quốc gia
+                                                                Country
                                                             </label>
                                                             <input
                                                                 type="text"
@@ -466,7 +466,7 @@ class DestinationDetails extends Form {
                                                     >
                                                         <div>
                                                             <label htmlFor="company-column">
-                                                                Mã quốc gia
+                                                                Country code
                                                             </label>
                                                             <input
                                                                 type="text"
@@ -520,7 +520,7 @@ class DestinationDetails extends Form {
                                     data-toggle="modal"
                                     data-target={`#addImageDestination${id}`}
                                 >
-                                    Thêm ảnh
+                                    Add new image
                                 </button>
                             </div>
                             <h3 className="card-title">Image List</h3>

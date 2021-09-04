@@ -447,7 +447,7 @@ class Ticket extends Form {
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">
-                                Danh sách vé máy bay
+                                Ticket List
                                 <button
                                     style={{
                                         marginRight: "20px",
@@ -500,7 +500,7 @@ class Ticket extends Form {
                                                 }
                                             >
                                                 <option value="">
-                                                    Chọn điểm khởi hành
+                                                    Choose departure
                                                 </option>
                                                 {destinationList.map((item) => {
                                                     return (
@@ -528,7 +528,7 @@ class Ticket extends Form {
                                                 }
                                             >
                                                 <option value="">
-                                                    Chọn điểm đến
+                                                    Choose destination
                                                 </option>
                                                 {destinationList.map((item) => {
                                                     return (
@@ -554,7 +554,7 @@ class Ticket extends Form {
                                                 }
                                             >
                                                 <option value="">
-                                                    Chọn hãng hàng không
+                                                    Choose airline
                                                 </option>
                                                 {airlineList.map((item) => {
                                                     return (
@@ -596,16 +596,16 @@ class Ticket extends Form {
                                                     }
                                                 >
                                                     <option value="">
-                                                        Chọn thời gian
+                                                        Choose time
                                                     </option>
                                                     <option value={1}>
-                                                        Hôm nay
+                                                        Today
                                                     </option>
                                                     <option value={2}>
-                                                        Ngày mai
+                                                        Tomorrow
                                                     </option>
                                                     <option value={3}>
-                                                        Tuần này
+                                                        This week
                                                     </option>
                                                 </select>
                                             </div>
@@ -623,7 +623,7 @@ class Ticket extends Form {
                                                             }}
                                                             margin="normal"
                                                             id="date-picker-dialog"
-                                                            label="Chọn ngày khởi hành"
+                                                            label="Choose depart"
                                                             format="dd/MM/yyyy"
                                                             value={
                                                                 scopeDatePicker
@@ -670,13 +670,13 @@ class Ticket extends Form {
                                                 }
                                             >
                                                 <option value="">
-                                                    Lọc theo giá vé
+                                                    Filter ticket price
                                                 </option>
                                                 <option value={1}>
-                                                    Từ thấp tới cao
+                                                    From low to high
                                                 </option>
                                                 <option value={2}>
-                                                    Từ cao tới thấp
+                                                    From high to low
                                                 </option>
                                             </select>
                                         </div>
@@ -692,13 +692,13 @@ class Ticket extends Form {
                                                 }
                                             >
                                                 <option value="">
-                                                    Lọc theo hạng ghế
+                                                    Filter class
                                                 </option>
                                                 <option value={1}>
-                                                    Economy ( Hạng phổ thông )
+                                                    Economy class
                                                 </option>
                                                 <option value={2}>
-                                                    Business ( Hạng thương gia )
+                                                    Business class
                                                 </option>
                                             </select>
                                         </div>
@@ -714,14 +714,12 @@ class Ticket extends Form {
                                                 }
                                             >
                                                 <option value="">
-                                                    Lọc theo trạng thái
+                                                    Filter by status
                                                 </option>
                                                 <option value={1}>
-                                                    Khởi hành đúng giờ
+                                                    On time
                                                 </option>
-                                                <option value={2}>
-                                                    Bị delay
-                                                </option>
+                                                <option value={2}>Delay</option>
                                             </select>
                                         </div>
                                     </div>
@@ -732,17 +730,17 @@ class Ticket extends Form {
                                             <thead>
                                                 <tr>
                                                     <th>STT</th>
-                                                    <th>Chuyến bay</th>
-                                                    <th>Hành trình</th>
-                                                    <th>Thời gian khởi hành</th>
-                                                    <th>Thời gian hạ cánh</th>
-                                                    <th>Hãng hàng không</th>
-                                                    <th>Loại vé</th>
-                                                    <th>Hạng ghế có sẵn</th>
-                                                    <th>Trạng thái</th>
+                                                    <th>Flight</th>
+                                                    <th>Route</th>
+                                                    <th>Depart</th>
+                                                    <th>Landing time</th>
+                                                    <th>Airline</th>
+                                                    <th>Ticket type</th>
+                                                    <th>Seat available</th>
+                                                    <th>Status</th>
 
-                                                    <th>Giá vé</th>
-                                                    <th>Thuế</th>
+                                                    <th>Price</th>
+                                                    <th>Tax</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -891,6 +889,9 @@ class Ticket extends Form {
                                         <TablePagination
                                             component="div"
                                             count={this.state.ticketList.length}
+                                            rowsPerPageOptions={[
+                                                10, 20, 50, 100,
+                                            ]}
                                             page={page}
                                             onPageChange={this.handleChangePage}
                                             rowsPerPage={rowsPerPage}

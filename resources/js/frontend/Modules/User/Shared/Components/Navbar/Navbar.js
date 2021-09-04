@@ -99,7 +99,7 @@ class Navbar extends Component {
         const isLogged = !!AuthService.userId;
         let userInfo = {};
         if (isLogged) {
-            userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            userInfo = JSON.parse(localStorage.getItem("userInfo" || ""));
         }
         return (
             <div className="user-nav">
@@ -207,7 +207,13 @@ class Navbar extends Component {
                                             <AccountCircleIcon className="icon-user" />
                                         }
                                     >
-                                        {isLogged ? userInfo.name : ""}
+                                        {isLogged &&
+                                        typeof userInfo === "object" &&
+                                        userInfo !== null &&
+                                        userInfo !== undefined &&
+                                        Object.keys(userInfo).length > 0
+                                            ? userInfo.name
+                                            : ""}
                                     </Button>
                                     <StyledMenu
                                         id="customized-menu"

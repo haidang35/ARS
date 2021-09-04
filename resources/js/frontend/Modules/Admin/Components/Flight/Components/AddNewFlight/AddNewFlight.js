@@ -249,7 +249,7 @@ class AddNewFlight extends Form {
                             className="card-title"
                             style={{ marginLeft: "20px" }}
                         >
-                            Thêm chuyến bay
+                            Add new flight
                             <div className="float-right">
                                 <button
                                     className="btn btn-success"
@@ -278,7 +278,7 @@ class AddNewFlight extends Form {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div>
-                                            <label>Điểm khởi hành</label>
+                                            <label>Departure</label>
                                             <select
                                                 name="departure_id"
                                                 required
@@ -291,9 +291,7 @@ class AddNewFlight extends Form {
                                                     )
                                                 }
                                             >
-                                                <option>
-                                                    Select departure city
-                                                </option>
+                                                <option>Select city</option>
                                                 {destinationList.map((item) => {
                                                     return (
                                                         <option
@@ -318,7 +316,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingLeft: "20px" }}
                                     >
                                         <div>
-                                            <label>Điểm đến</label>
+                                            <label>Destination</label>
 
                                             <select
                                                 type="text"
@@ -333,9 +331,7 @@ class AddNewFlight extends Form {
                                                     )
                                                 }
                                             >
-                                                <option>
-                                                    Select destination city
-                                                </option>
+                                                <option>Select city</option>
                                                 {destinationList.map((item) => {
                                                     return (
                                                         <option
@@ -373,7 +369,7 @@ class AddNewFlight extends Form {
                                                             }}
                                                             margin="normal"
                                                             id="date-picker-dialog"
-                                                            label="Chọn ngày khởi hành"
+                                                            label="Choose depart"
                                                             name="departure_datetime"
                                                             format="dd/MM/yyyy"
                                                             value={
@@ -397,7 +393,7 @@ class AddNewFlight extends Form {
                                                             margin="normal"
                                                             id="time-picker"
                                                             name="departure_datetime"
-                                                            label="Giờ khởi hành"
+                                                            label="Depart hour"
                                                             value={
                                                                 departure_datetime.value
                                                             }
@@ -429,7 +425,7 @@ class AddNewFlight extends Form {
                                                             }}
                                                             margin="normal"
                                                             id="date-picker-dialog"
-                                                            label="Chọn ngày đến"
+                                                            label="Choose landing time"
                                                             name="destination_datetime"
                                                             format="dd/MM/yyyy"
                                                             value={
@@ -453,7 +449,7 @@ class AddNewFlight extends Form {
                                                             margin="normal"
                                                             id="time-picker"
                                                             name="destination_datetime"
-                                                            label="Thời gian hạ cánh"
+                                                            label="Landing time"
                                                             value={
                                                                 arrival_datetime.value
                                                             }
@@ -481,7 +477,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingRight: "20px" }}
                                     >
                                         <div>
-                                            <label>Tên hãng hàng không</label>
+                                            <label>Airline</label>
                                             <select
                                                 required
                                                 name="airline_id"
@@ -494,9 +490,7 @@ class AddNewFlight extends Form {
                                                     )
                                                 }
                                             >
-                                                <option>
-                                                    Select airline name
-                                                </option>
+                                                <option>Select airline</option>
                                                 {airlineList.map((item) => {
                                                     return (
                                                         <option
@@ -520,7 +514,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingLeft: "20px" }}
                                     >
                                         <div>
-                                            <label>Mã chuyến bay</label>
+                                            <label>Flight code</label>
                                             <input
                                                 required
                                                 name="flight_code"
@@ -551,7 +545,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingRightt: "20px" }}
                                     >
                                         <div>
-                                            <label>Loại máy bay</label>
+                                            <label>Aircraft</label>
                                             <input
                                                 required
                                                 name="aircraft"
@@ -576,7 +570,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingLeft: "20px" }}
                                     >
                                         <div>
-                                            <label>Sức chứa</label>
+                                            <label>Capacity</label>
                                             <input
                                                 required
                                                 name="capacity"
@@ -606,7 +600,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingRight: "20px" }}
                                     >
                                         <div>
-                                            <label>Chỗ ngồi đã đặt trước</label>
+                                            <label>Seat reserved</label>
                                             <input
                                                 required
                                                 name="seats_reserved"
@@ -632,7 +626,7 @@ class AddNewFlight extends Form {
                                         style={{ paddingLeft: "20px" }}
                                     >
                                         <div>
-                                            <label>Chỗ ngồi trống</label>
+                                            <label>Seat available</label>
                                             <input
                                                 required
                                                 name="seats_available"

@@ -187,7 +187,7 @@ class FlightDetails extends Form {
                             className="card-title"
                             style={{ marginLeft: "10px" }}
                         >
-                            Chi tiết chuyến bay
+                            Flight Details
                             <div
                                 className="float-right"
                                 style={{ marginRight: "10px" }}
@@ -246,7 +246,7 @@ class FlightDetails extends Form {
                                                         color: "rgba(35,28,99,.7)",
                                                     }}
                                                 >
-                                                    Khởi hành
+                                                    Start
                                                 </label>
                                                 <div className="input-form">
                                                     <div className="input-group input-group-sm mb-3">
@@ -254,7 +254,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Điểm khởi hành
+                                                            Departure
                                                         </span>
                                                         <select
                                                             type="text"
@@ -298,7 +298,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Thời gian khởi hành
+                                                            Depart
                                                         </span>
                                                         <input
                                                             type="text"
@@ -353,7 +353,7 @@ class FlightDetails extends Form {
                                                         color: "rgba(35,28,99,.7)",
                                                     }}
                                                 >
-                                                    Điểm đến
+                                                    Destination
                                                 </label>
                                                 <div className="input-form">
                                                     <div className="input-group input-group-sm mb-3">
@@ -361,7 +361,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Điểm đến
+                                                            Destination
                                                         </span>
                                                         <select
                                                             type="text"
@@ -405,7 +405,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Thời gian đến
+                                                            Landing time
                                                         </span>
                                                         <input
                                                             type="text"
@@ -459,7 +459,7 @@ class FlightDetails extends Form {
                                                         color: "rgba(35,28,99,.7)",
                                                     }}
                                                 >
-                                                    Chuyến bay
+                                                    Flight
                                                 </label>
                                                 <div className="input-form">
                                                     <div className="input-group input-group-sm mb-3">
@@ -467,7 +467,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Tên hãng
+                                                            Airline
                                                         </span>
                                                         <select
                                                             required
@@ -511,7 +511,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Mã chuyến
+                                                            Flight code
                                                         </span>
                                                         <input
                                                             type="text"
@@ -547,7 +547,7 @@ class FlightDetails extends Form {
                                                             className="input-group-text"
                                                             id="inputGroup-sizing-sm"
                                                         >
-                                                            Loại máy bay
+                                                            Aircraft
                                                         </span>
                                                         <input
                                                             type="text"
@@ -600,7 +600,7 @@ class FlightDetails extends Form {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label htmlFor="first-name-column">
-                                                            Sức chứa
+                                                            Capacity
                                                         </label>
                                                         <input
                                                             type="text"
@@ -618,8 +618,7 @@ class FlightDetails extends Form {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label htmlFor="country-floating">
-                                                            Chỗ ngồi đã đặt
-                                                            trước
+                                                            Seat reserved
                                                         </label>
                                                         <input
                                                             type="text"
@@ -637,7 +636,7 @@ class FlightDetails extends Form {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label htmlFor="country-floating">
-                                                            Chỗ ngồi trống
+                                                            Seat available
                                                         </label>
                                                         <input
                                                             type="text"

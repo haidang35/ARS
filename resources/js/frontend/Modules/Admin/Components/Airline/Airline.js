@@ -128,7 +128,7 @@ class Airline extends Component {
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">
-                                Danh sách các hãng hàng không đang hợp tác
+                                Airline list
                                 <div className="float-right">
                                     <button
                                         className="btn btn-primary"
@@ -179,11 +179,11 @@ class Airline extends Component {
                                     <table className="table table-lg">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
+                                                <th>ID</th>
                                                 <th>Logo</th>
-                                                <th>Tên hãng hàng không</th>
-                                                <th>Mã hãng hàng không</th>
-                                                <th>Quốc gia</th>
+                                                <th>Airline name</th>
+                                                <th>Airline code</th>
+                                                <th>Country</th>
                                                 <th>Website</th>
                                                 <th>Hotline</th>
                                                 <th></th>
@@ -261,6 +261,7 @@ class Airline extends Component {
                                     <TablePagination
                                         component="div"
                                         count={this.state.airlineList.length}
+                                        rowsPerPageOptions={[10, 20, 50, 100]}
                                         page={page}
                                         onPageChange={this.handleChangePage}
                                         rowsPerPage={rowsPerPage}

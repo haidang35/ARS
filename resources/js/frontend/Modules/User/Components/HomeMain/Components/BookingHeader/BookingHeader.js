@@ -55,6 +55,9 @@ const CssTextField = withStyles({
             backgroundColor: "white",
             borderRadius: "5px",
         },
+        "& .MuiInputBase-input.Mui-disabled": {
+            color: "#292828",
+        },
     },
 })(TextField);
 
@@ -300,7 +303,7 @@ class BookingHeader extends Component {
                                                 }
                                                 id="standard-required"
                                                 label="From"
-                                                defaultValue="City, airport"
+                                                defaultValue="Choose city"
                                                 className="input-field"
                                                 disabled
                                                 value={
@@ -314,7 +317,7 @@ class BookingHeader extends Component {
                                                 }
                                                 id="standard-required"
                                                 label="To"
-                                                defaultValue="City, airport"
+                                                defaultValue="Choose city"
                                                 className="input-field"
                                                 disabled
                                                 value={

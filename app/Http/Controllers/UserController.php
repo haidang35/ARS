@@ -185,13 +185,13 @@ class UserController extends Controller
             ]);
             $booking["passengers"] = $passengersBooking;
             $booking["into_money"] = $into_money;
-            $this->sendNotification("Có yêu cầu đặt vé mới", $booking["contact_name"] . " đã đặt vé máy bay từ " . $flight["departure"]["city"] . " đến " . $flight["destination"]["city"], $booking["id"]);
+            $this->sendNotification("There is a new booking request ", $booking["contact_name"] . " booked flight tickets from  " . $flight["departure"]["city"] . " to " . $flight["destination"]["city"], $booking["id"]);
             $departureTime = new DateTime($booking["flight"]["departure_datetime"]);
             $arrivalTime = new DateTime($booking["flight"]["arrival_datetime"]);
             $time = $arrivalTime->diff($departureTime);
             $bookingList[] = $booking;
             $offer = [
-                'title' => 'Thông báo xác nhận yêu cầu đặt vé từ quý khách',
+                'title' => 'Notice of confirmation of booking request from you ',
                 'url' => 'http://127.0.0.1:8000/booking-info/' . $booking["booking_code"],
                 'data' => $booking,
                 "time" => $time->format('%h') . " Hours " . $time->format('%i') . " Minutes"

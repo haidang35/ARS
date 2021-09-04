@@ -99,7 +99,7 @@ class AddNewDestination extends Form {
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
-                                            Thành phố
+                                            City
                                         </label>
                                         <input
                                             type="text"
@@ -119,7 +119,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">
-                                            Tỉnh
+                                            Province
                                         </label>
                                         <input
                                             type="text"
@@ -133,7 +133,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Mã sân bay
+                                            Airport code
                                         </label>
                                         <input
                                             type="text"
@@ -156,7 +156,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Tên sân bay
+                                            Airport
                                         </label>
                                         <input
                                             name="airport_name"
@@ -179,7 +179,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Mã quốc gia
+                                            Country code
                                         </label>
                                         <input
                                             name="country_code"
@@ -202,7 +202,7 @@ class AddNewDestination extends Form {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">
-                                            Quốc gia
+                                            Country
                                         </label>
                                         <input
                                             name="country"
