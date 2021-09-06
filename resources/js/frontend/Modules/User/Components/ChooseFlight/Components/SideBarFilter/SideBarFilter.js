@@ -12,6 +12,7 @@ import { AiFillFilter } from "react-icons/ai";
 import { RadioGroup } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { data } from "jquery";
 
 const GreenRadio = withStyles({
     root: {
@@ -124,16 +125,17 @@ class SideBarFilter extends Component {
 
     getAirlineCurrentList = (dataOrg) => {
         let airlines = [];
-        for (let i = 0; i < dataOrg.length; i++) {
-            if (airlines.length > 0) {
-                for (let j = 0; j < airlines.length; j++) {
-                    if (dataOrg[i].flight.airline.id !== airlines[j].id) {
-                        airlines.push(dataOrg[i].flight.airline);
+        if (dataOrg.length > 0) {
+            airlines.push(dataOrg[0].flight.airline);
+            dataOrg.forEach((item) => {
+                let result = true;
+                airlines.forEach((ar) => {
+                    if (item.flight.airline.id === ar.id) {
+                        result = false;
                     }
-                }
-            } else {
-                airlines.push(dataOrg[0].flight.airline);
-            }
+                });
+                result ? airlines.push(item.flight.airline) : "";
+            });
         }
         this.setState({ airlines });
     };
@@ -164,6 +166,7 @@ class SideBarFilter extends Component {
             airlines,
             filterTripType,
         } = this.state;
+        console.log("airline List", airlines);
 
         const { tripType } = this.props;
         return (
@@ -328,9 +331,13 @@ class SideBarFilter extends Component {
                                     ""
                                 )}
 
-                                <Typography className="title-filter">
+                                <Typography
+                                    variant="h6"
+                                    className="title-filter"
+                                >
                                     Select airline
                                 </Typography>
+                                <br />
 
                                 <div className="filter-box">
                                     <FormControlLabel
@@ -411,7 +418,7 @@ class SideBarFilter extends Component {
                                 </div>
                                 <div className="filter-slider">
                                     <Typography className="title">
-                                        Arrival hour
+                                        Landing hour
                                     </Typography>
                                     <AirbnbSlider
                                         min={0}

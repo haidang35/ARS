@@ -41,7 +41,7 @@ class ModalNotice extends Component {
                             color="primary"
                             autoFocus
                         >
-                            Đồng ý
+                            Accept
                         </Button>
                     </DialogActions>
                 </Dialog>

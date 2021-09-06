@@ -199,9 +199,7 @@ class ChooseFlight extends Component {
             if (
                 newDate.getDate() == data.date.getDate() &&
                 newDate.getMonth() == data.date.getMonth() &&
-                newDate.getFullYear() == data.date.getFullYear() &&
-                newDate.getDate() >= now.getDate() &&
-                newDate.getMonth() == now.getMonth()
+                newDate.getFullYear() == data.date.getFullYear()
             ) {
                 flightsDataOrg.push(item);
             }
@@ -636,14 +634,14 @@ class ChooseFlight extends Component {
         }
         if (!checkExisted) {
             if (
-                (tripType === 1 && ticketsChoosed.length === 0) ||
+                (tripType == 1 && ticketsChoosed.length === 0) ||
                 (tripType == 2 && ticketsChoosed.length === 0)
             ) {
                 intoMoney += data.price + data.tax;
                 ticketsChoosed.push(data);
             } else if (
-                tripType === 2 &&
-                ticketsChoosed.length === 1 &&
+                tripType == 2 &&
+                ticketsChoosed.length == 1 &&
                 this.checkChooseTicketReturn(data)
             ) {
                 intoMoney += data.price + data.tax;

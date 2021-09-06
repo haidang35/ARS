@@ -41,7 +41,7 @@ class BookingDetails extends Component {
         UserService.paymentBooking(data.id, { payment_status: 1 }).then(
             (res) => {
                 this.setState({
-                    message: "Bạn đã thanh toán thành công",
+                    message: "You paid successfull !!",
                 });
                 this.getBookingInfo();
             }

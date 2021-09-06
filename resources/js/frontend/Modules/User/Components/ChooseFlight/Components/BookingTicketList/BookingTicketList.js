@@ -53,12 +53,11 @@ class BookingTicketList extends Component {
                                 <LinearProgress />
                             </div>
                             <Typography variant="h6">
-                                Hiện tại, không có chuyến bay vào phù hợp với
-                                yêu cầu của quý khách.
+                                There are currently no incoming flights matching
+                                your request.
                             </Typography>
                             <Typography variant="h6">
-                                Quý khách có thể thay đổi thời gian để tìm
-                                chuyến bay phù hợp
+                                Please change the time to find the right flight
                             </Typography>
                         </div>
                     ) : (

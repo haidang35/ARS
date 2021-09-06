@@ -351,6 +351,7 @@ class Booking extends Component {
                 bookingList = this.onScopeStatus(bookingList);
             }
         }
+        let loop = 1;
         return (
             <div>
                 <div className="col-sm-12">
@@ -616,7 +617,7 @@ class Booking extends Component {
                                                 return (
                                                     <tr key={item.id}>
                                                         <td className="text-bold-500">
-                                                            {item.id}
+                                                            {loop++}
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.contact_name}

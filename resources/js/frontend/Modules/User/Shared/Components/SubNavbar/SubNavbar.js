@@ -123,7 +123,7 @@ class SubNavbar extends Component {
                                 }}
                                 style={{ cursor: "pointer", color: "#ffff" }}
                             >
-                                Flight Booking
+                                Flight Hi
                             </Typography>
 
                             <div className="list-menu">

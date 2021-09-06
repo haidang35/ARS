@@ -36,13 +36,13 @@ class BookingList extends Component {
         UserService.cancelBooking(id)
             .then((res) => {
                 this.setState({
-                    message: `Hủy đặt vé chuyến bay ${res.data.flight.departure.city} - ${res.data.flight.destination.city} thành công`,
+                    message: `Cancel booking ${res.data.flight.departure.city} - ${res.data.flight.destination.city} successfull`,
                 });
                 this.getMyBookingFlight();
             })
             .catch((err) => {
                 this.setState({
-                    errMessage: `Hủy đặt vé thất bại, vui lòng thử lại sau`,
+                    errMessage: `Cancel booking failed, try again please`,
                 });
             });
     };
@@ -63,7 +63,7 @@ class BookingList extends Component {
                 <div className="user-booking-list">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Lịch sử đặt vé</h4>
+                            <h4 className="card-title">Booking History</h4>
                         </div>
                         <div className="card-content">
                             <div className="card-body">
@@ -73,12 +73,12 @@ class BookingList extends Component {
                                     <table className="table table-lg">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Ngày đặt</th>
-                                                <th>Điểm đến - điểm đi</th>
-                                                <th>Mã chuyến bay</th>
-                                                <th>Tổng cộng</th>
-                                                <th>Trạng thái thanh toán</th>
+                                                <th>ID</th>
+                                                <th>Booking date</th>
+                                                <th>Route</th>
+                                                <th>Flight</th>
+                                                <th>Total</th>
+                                                <th>Payment status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -111,8 +111,8 @@ class BookingList extends Component {
                                                         <td>
                                                             {item.payment_status ===
                                                             0
-                                                                ? "Chưa thanh toán"
-                                                                : "Đã thanh toán"}
+                                                                ? "Unpaid"
+                                                                : "Paid"}
                                                         </td>
 
                                                         <td>
@@ -125,8 +125,8 @@ class BookingList extends Component {
                                                                     }}
                                                                 >
                                                                     <button className="btn btn-primary">
-                                                                        Xem chi
-                                                                        tiết
+                                                                        View
+                                                                        details
                                                                     </button>
                                                                 </Link>
                                                                 <button
@@ -138,16 +138,16 @@ class BookingList extends Component {
                                                                     data-toggle="modal"
                                                                     data-target={`#alertModal${item.id}`}
                                                                 >
-                                                                    Hủy đặt vé
+                                                                    Cancel
                                                                 </button>
                                                             </div>
 
                                                             <AlertModal
                                                                 id={item.id}
                                                                 title={
-                                                                    "Thông báo"
+                                                                    "Warning"
                                                                 }
-                                                                message={`Bạn có chắc chắn muốn hủy đặt vé ${item.flight.departure.city} - ${item.flight.destination.city}`}
+                                                                message={`Are you sure delete booking ${item.flight.departure.city} - ${item.flight.destination.city}`}
                                                                 onConfirm={
                                                                     this
                                                                         .cancelBooking

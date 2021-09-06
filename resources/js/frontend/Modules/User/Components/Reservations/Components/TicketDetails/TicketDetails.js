@@ -114,7 +114,7 @@ class TicketDetails extends Component {
                                                               variant="h6"
                                                               className="title left-title"
                                                           >
-                                                              Ticket price brief
+                                                              Ticket price
                                                           </Typography>
                                                       </div>
                                                       <div className="col-md-6">
@@ -223,7 +223,7 @@ class TicketDetails extends Component {
                                     variant="h4"
                                     className="total-price"
                                 >
-                                    Total cost
+                                    Total money
                                 </Typography>
                             </div>
                             <div className="col-md-6">

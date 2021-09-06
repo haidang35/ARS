@@ -75,7 +75,7 @@ class BookingConfirm extends Component {
                 <SearchFlightBar />
                 <div className="booking-confirm">
                     <div className="wrap-container">
-                        <StepListBar step={3} />
+                        <StepListBar step={4} />
                         <div className="main-content">
                             <div className="confirm-notice">
                                 <div className="title-box">

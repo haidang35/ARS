@@ -98,13 +98,13 @@ class CustomerInfo extends Form {
                                         onClick={this.onEditInfo}
                                         className="btn btn-primary"
                                     >
-                                        Sửa thông tin
+                                        Edit info
                                     </button>
                                 ) : (
                                     ""
                                 )}
                             </div>
-                            <h4 className="card-title">Thông tin khách hàng</h4>
+                            <h4 className="card-title">Customer's Info</h4>
                         </div>
                         <div className="card-content">
                             {this.state.message.length > 0 ? (
@@ -123,7 +123,7 @@ class CustomerInfo extends Form {
                                                 style={{ marginLeft: "0" }}
                                             >
                                                 <label htmlFor="first-name-icon">
-                                                    Họ và tên
+                                                    Full name
                                                 </label>
                                                 <div className="position-relative">
                                                     <input
@@ -206,7 +206,7 @@ class CustomerInfo extends Form {
                                                 style={{ marginLeft: "0" }}
                                             >
                                                 <label htmlFor="mobile-id-icon">
-                                                    Số điện thoại
+                                                    Phone number
                                                 </label>
                                                 <div className="position-relative">
                                                     <input

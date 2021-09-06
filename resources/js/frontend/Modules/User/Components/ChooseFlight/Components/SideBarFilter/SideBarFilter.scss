@@ -21,6 +21,7 @@
             .icon-filter {
                 font-size: 20px;
                 margin-right: 6px;
+
             }
 
             .title {
@@ -112,6 +113,8 @@
 
                 .filter-box {
                     margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
                 }
             }
 
