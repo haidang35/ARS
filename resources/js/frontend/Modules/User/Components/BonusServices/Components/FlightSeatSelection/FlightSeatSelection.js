@@ -148,9 +148,9 @@ class FlightSeatSelection extends Component {
                         console.log("price", price);
                         console.log("intomoney", intoMoney);
                         intoMoney -= price;
-                        console.log("after", intoMoney);
                         seatReserveFeeReturn -= item["price_return"];
                     }
+
                     UserService.chooseSeatFlight(ticketChoosed.flight_id, {
                         seat_code: seatCode,
                         seat_code_remove: seatCodeRemove,
@@ -193,9 +193,11 @@ class FlightSeatSelection extends Component {
             onChooseSeatStart,
             onChooseSeatReturn,
         } = this.state;
+        const flightChoosed = Object.assign({}, ticketChoosed.flight);
         seatsReserved = seatsReserved.filter((item) => {
-            return item.flight_id == ticketChoosed.flight.id;
+            return item.flight_id == flightChoosed.id;
         });
+
         let ticket = {};
         let businessSeatPrice = 0;
         let economySeatPrice = 0;

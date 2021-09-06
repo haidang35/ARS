@@ -332,14 +332,13 @@ class UserController extends Controller
         return response()->json($flightSeats);
     }
 
-    public function chooseFlightSeat($ticketId, Request $request)
+    public function chooseFlightSeat($flightId, Request $request)
     {
         $seatCode = $request->seat_code;
         $seatCodeRemoce = $request->seat_code_remove;
-        $ticket = Ticket::find($ticketId);
-        $flight = Flight::with("FlightSeat")->find($ticket["flight_id"]);
+        $flight = Flight::with("FlightSeat")->find($flightId);
         $message = [
-            "ticket" => $ticket,
+            "flight" => $flight,
             "seat_code" => $seatCode,
             "seat_code_remove" => $seatCodeRemoce
         ];

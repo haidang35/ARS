@@ -32,6 +32,10 @@ class FlightSeatReserve extends Component {
                                             className="check-box"
                                             value={1}
                                             onChange={this.handleChangeService}
+                                            style={{
+                                                width: "50px",
+                                                height: "50px",
+                                            }}
                                         />
                                     }
                                     label=""

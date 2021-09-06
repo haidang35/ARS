@@ -323,6 +323,9 @@ class Booking extends Component {
                         .indexOf(searchValue.toLowerCase()) !== -1 ||
                     item.flight.flight_code
                         .toLowerCase()
+                        .indexOf(searchValue.toLowerCase()) !== -1 ||
+                    item.booking_code
+                        .toLowerCase()
                         .indexOf(searchValue.toLowerCase()) !== -1
                 );
             });
@@ -600,6 +603,7 @@ class Booking extends Component {
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
+                                                <th>Booking Code</th>
                                                 <th>Customer</th>
                                                 <th>Phone number</th>
                                                 <th>Route</th>
@@ -618,6 +622,9 @@ class Booking extends Component {
                                                     <tr key={item.id}>
                                                         <td className="text-bold-500">
                                                             {loop++}
+                                                        </td>
+                                                        <td className="text-bold-500">
+                                                            {item.booking_code}
                                                         </td>
                                                         <td className="text-bold-500">
                                                             {item.contact_name}

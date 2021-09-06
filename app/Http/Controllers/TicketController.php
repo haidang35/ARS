@@ -96,10 +96,10 @@ class TicketController extends Controller
     public function getTicketHasDepartureLocation($destinationId)
     {
         $ticketList = [];
-        $flights = Flight::with("Departure")->with("Airline")->departure($destinationId)->get();
+        $flights = Flight::withCount("ticket")->with("Departure")->with("Airline")->departure($destinationId)->get();
         foreach ($flights as $item) {
             $departureTime = new Carbon($item["departure_datetime"]);
-            if ($departureTime->isFuture()) {
+            if ($departureTime->isFuture() && (int)$item["ticket_count"] > 0) {
                 $ticket = Ticket::where("flight_id", $item["id"])->first();
                 $item["destination"] = Destination::with("Image")->find($item["destination_id"]);
                 $ticket["flight"] = $item;

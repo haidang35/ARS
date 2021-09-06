@@ -80,7 +80,7 @@ class ChatBox extends Component {
             const userId = AuthService.adminId;
             if (
                 event.message.user_received == userId &&
-                event.message.user_id === userReceived
+                event.message.user_id == userReceived
             ) {
                 messages.push(event.message);
             }

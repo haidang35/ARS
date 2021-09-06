@@ -308,6 +308,18 @@ class Ticket extends Form {
                     -1
                 );
             });
+        } else if (scopeClass == 3) {
+            ticketList = ticketData.filter((item) => {
+                return (
+                    item.available_class.toLowerCase().indexOf("deluxe") !== -1
+                );
+            });
+        } else if (scopeClass == 4) {
+            ticketList = ticketData.filter((item) => {
+                return (
+                    item.available_class.toLowerCase().indexOf("special") !== -1
+                );
+            });
         }
         return ticketList;
     };
@@ -700,6 +712,12 @@ class Ticket extends Form {
                                                 <option value={2}>
                                                     Business class
                                                 </option>
+                                                <option value={3}>
+                                                    Deluxe class
+                                                </option>
+                                                <option value={4}>
+                                                    Special Economy class
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -736,7 +754,7 @@ class Ticket extends Form {
                                                     <th>Landing time</th>
                                                     <th>Airline</th>
                                                     <th>Ticket type</th>
-                                                    <th>Seat available</th>
+                                                    <th>Class available</th>
                                                     <th>Status</th>
 
                                                     <th>Price</th>

@@ -38,7 +38,6 @@ class BonusServices extends Component {
         window.Echo.channel("SeatFlight").listen(
             "ChooseSeatFlightEvent",
             (event) => {
-                console.log("event", event.message);
                 let { seatsReserved } = this.state;
                 for (let i = 0; i < seatsReserved.length; i++) {
                     if (
@@ -49,7 +48,7 @@ class BonusServices extends Component {
                     }
                 }
                 const id = Math.floor(Math.random() * 1000000);
-                const flight_id = event.message.ticket.flight_id;
+                const flight_id = event.message.flight.id;
                 const seat_code_reserved = event.message.seat_code;
                 seatsReserved.push({ id, flight_id, seat_code_reserved });
                 this.setState({ seatsReserved });
