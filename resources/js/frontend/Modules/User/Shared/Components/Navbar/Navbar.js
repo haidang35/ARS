@@ -237,7 +237,7 @@ class Navbar extends Component {
                                                     />
                                                 </ListItemIcon>
                                                 <ListItemText
-                                                    primary="Thông tin khách hàng"
+                                                    primary="Customer Profile"
                                                     style={{
                                                         marginLeft: "-18px",
                                                     }}
@@ -249,7 +249,7 @@ class Navbar extends Component {
                                                 <ExitToAppIcon fontSize="medium" />
                                             </ListItemIcon>
                                             <ListItemText
-                                                primary="Đăng xuất"
+                                                primary="Logout"
                                                 style={{
                                                     marginLeft: "-18px",
                                                 }}
