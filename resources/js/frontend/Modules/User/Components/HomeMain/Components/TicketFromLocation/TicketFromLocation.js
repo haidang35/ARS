@@ -169,10 +169,10 @@ class TicketFromLocation extends Component {
                                                             variant="body1"
                                                             className="price"
                                                         >
-                                                            {`From ${formatCurrency(
+                                                            {`From ${
                                                                 item.price +
-                                                                    item.tax
-                                                            )}`}
+                                                                item.tax
+                                                            }`}
                                                         </Typography>
                                                     </div>
                                                 </div>

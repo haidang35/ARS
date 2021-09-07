@@ -128,17 +128,6 @@ class TicketItem extends Component {
                                     <Typography className="price">
                                         {formatCurrency(data.total_price)}
                                     </Typography>
-                                    {/* <Link
-                                        to={
-                                            tripType == 1
-                                                ? `/reservations/ticket/${data.id}`
-                                                : false
-                                        }
-                                        style={{
-                                            textDecoration: "none",
-                                            width: "100%",
-                                        }}
-                                    > */}
                                     <Button
                                         onClick={() =>
                                             this.onChooseFlight(data)
