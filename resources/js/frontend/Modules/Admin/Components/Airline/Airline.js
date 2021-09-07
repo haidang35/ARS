@@ -10,6 +10,7 @@ import AlertSuccess from "../../../../Shared/Components/Alert/AlertSuccess";
 import AlertDanger from "../../../../Shared/Components/Alert/AlertDanger";
 import { TablePagination } from "@material-ui/core";
 import AlertModal from "../../../../Shared/Components/Modal/AlertModal";
+import { URL_IMAGE_AIRLINE } from "../../../../Constances/const";
 class Airline extends Component {
     constructor(props) {
         super(props);
@@ -198,7 +199,7 @@ class Airline extends Component {
                                                         </td>
                                                         <td className="text-bold-500">
                                                             <img
-                                                                src={`http://127.0.0.1:8000/images/airline/${item.logo}`}
+                                                                src={`${URL_IMAGE_AIRLINE}${item.logo}`}
                                                                 style={{
                                                                     width: "120px",
                                                                 }}
