@@ -1,8 +1,10 @@
-export const BASE_URL = "http://127.0.0.1:8000/api/";
-export const URL_IMAGE_AIRLINE = "http://127.0.0.1:8000/images/airline/";
+export const BASE_URL = "http://flighthi.herokuapp.com/api/";
+export const URL_IMAGE_AIRLINE =
+    "http://flighthi.herokuapp.com/images/airline/";
 export const URL_IMAGE_DESTINATION =
-    "http://127.0.0.1:8000/images/destination/";
-export const URL_IMAGE_SUPPORT = "http://127.0.0.1:8000/images/support/";
+    "http://flighthi.herokuapp.com/images/destination/";
+export const URL_IMAGE_SUPPORT =
+    "http://flighthi.herokuapp.com/images/support/";
 export const URL_GET_IP_LOCATION = "http://ip-api.com/json/";
 
 export const REGEX_TEL = "^0\\d{9,11}$";
