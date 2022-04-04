@@ -61,7 +61,6 @@ class HomeMain extends Component {
         if (Object.keys(departure).length > 0) {
             UserService.getTicketsWithLocationDeparture(departure.id).then(
                 (res) => {
-                    console.log("resssssss", res.data);
                     this.setState({
                         ticketsWithLocation: res.data,
                     });
